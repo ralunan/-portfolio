@@ -25,16 +25,24 @@ body {
 }
 
 #site-nav a {
+    display: inline-block;
     color: white;
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.04em;
-    opacity: 0.85;
-    transition: opacity 0.2s ease;
+    padding: 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 #site-nav a:hover {
-    opacity: 1;
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 body[data-route="home"] #site-nav {
@@ -89,6 +97,17 @@ body[data-route="home"] #site-nav {
     text-align: center;
     max-width: 640px;
     width: 100%;
+}
+
+.screen-content--wide {
+    max-width: 1100px;
+    text-align: left;
+}
+
+.screen-content--about {
+    max-width: 1300px;
+    width: 100%;
+    text-align: left;
 }
 
 /* ---------- home ---------- */
@@ -241,11 +260,102 @@ body[data-route="home"] #site-nav {
     transform: translateY(-2px);
 }
 
+/* ---------- about ---------- */
+
+.about-heading {
+    font-size: 1.75rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.about-columns {
+    columns: 260px 4;
+    column-gap: 24px;
+}
+
+.about-columns p {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    line-height: 1.55;
+    font-size: 0.88rem;
+    opacity: 0.92;
+}
+
+@media (max-width: 480px) {
+    .about-columns { columns: 1; }
+}
+
+/* ---------- resume ---------- */
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) 1fr;
+    gap: 24px;
+    width: 100%;
+    align-items: start;
+}
+
+.resume-name-block {
+    margin-bottom: 28px;
+}
+
+.resume-name-block p {
+    line-height: 1.5;
+}
+
+.resume-name-block p:first-child {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.resume-name-block p:not(:first-child) {
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+.resume-block {
+    margin-bottom: 28px;
+    break-inside: avoid;
+}
+
+.resume-block h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.resume-block p {
+    line-height: 1.6;
+    white-space: pre-line;
+    font-size: 0.95rem;
+    opacity: 0.92;
+}
+
+.resume-role-line {
+    font-weight: 600;
+    opacity: 1;
+}
+
+.resume-column--experience {
+    column-count: 2;
+    column-gap: 24px;
+}
+
+.resume-block--continued {
+    break-before: column;
+    -webkit-column-break-before: always;
+    margin-top: 0;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 768px) {
     .home-title { font-size: 2rem; }
     .placeholder-heading, .projects-heading { font-size: 1.75rem; }
+    .resume-grid { grid-template-columns: 1fr; }
+    .resume-column--experience { column-count: 1; }
 }
 
 @media (max-width: 480px) {
