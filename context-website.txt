@@ -1,0 +1,25 @@
+Create a UX portfolio featuring my projects from Walmart International. We will focus on importing the content and getting a starting draft of the webpage, when complete, we can focus on visuals and interactions.
+
+Ronald Alunan
+San Francisco
+UX Design
+
+Website should not be scrollable, instead, each screen should be full-screen. Navigation, will happen by a screen by screen - transitioning from the previous to the next in an animation. Content containers should, fly in and fly out when transitioning to a new page. Animation pattern should be consistent with all elements on this website unless specified
+
+SITE STRUCTURE
+
+*homepage contains my name, and a welcome message to my portfolio. There are three clickable links to my 3 pages.
+
+Homepage
+resume
+about me
+projects
+
+
+PROJECTS
+*projects can be accessed via projects folder containing content related to each individual folder. There will be a text document that contains all my content, with different headers that relate to each individual project.
+*Context + problem statement will be on its on page introducing the project with supporting images. Then following pages will be have following supporting headers, with images.
+*images will be labeled numerically according to the heading order, so "1_x" - "2_x" etc.
+*all content containers will animate to the next page, following the fly in and fly out structure.
+*supporting images with have different animations when transitioning to the next page
+*when all pages are finished, a button appears sending the user back to the project pages for continued browsing

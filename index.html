@@ -4,12 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ronald Alunan - UX Design Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    <div class="container">
-        <h1 style="font-weight: bold;">Hello! My name is Ronald Alunan and welcome to my portfolio.</h1>
+<body data-route="home">
+    <nav id="site-nav"><a href="#/">RA &mdash; Home</a></nav>
+
+    <div id="app">
+        <section id="screen-home" class="screen" data-screen="home">
+            <div class="screen-content">
+                <h1 class="home-title">Hi, I'm <strong>Ronald Alunan</strong>.<br>Welcome to my UX design portfolio.</h1>
+                <nav class="home-nav">
+                    <a href="#/resume">Resume</a>
+                    <a href="#/about">About Me</a>
+                    <a href="#/projects">Projects</a>
+                </nav>
+            </div>
+        </section>
+
+        <section id="screen-resume" class="screen" data-screen="resume">
+            <div class="screen-content">
+                <h1 class="placeholder-heading">Resume</h1>
+                <p class="placeholder-note">Content coming soon.</p>
+            </div>
+        </section>
+
+        <section id="screen-about" class="screen" data-screen="about">
+            <div class="screen-content">
+                <h1 class="placeholder-heading">About Me</h1>
+                <p class="placeholder-note">Content coming soon.</p>
+            </div>
+        </section>
+
+        <section id="screen-projects" class="screen" data-screen="projects">
+            <div class="screen-content">
+                <h1 class="projects-heading">Projects</h1>
+                <div id="projects-list" class="project-card-list"></div>
+            </div>
+        </section>
+
+        <section id="screen-project" class="screen" data-screen="project">
+            <div class="screen-content"></div>
+        </section>
     </div>
-    <script src="script.js"></script>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

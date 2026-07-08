@@ -1,0 +1,32 @@
+## Context
+When I joined Walmart’s International design team, “there was no established user research group lacking customer insights for our Canada(CA) and Mexico(MX) markets.” This gap limited our ability to make informed product decisions and weakened our customer‑first mindset.
+
+Recognizing the impact this had on our design quality and strategic alignment, I initiated and led a foundational research effort to uncover actionable customer insights for both markets. Partnering closely with a data scientist, I synthesized app and web feedback, categorized themes, and surfaced patterns that had previously gone unnoticed.
+
+This work became the first structured customer insight initiative for Walmart International and directly informed the upcoming product and design roadmap.
+
+
+## Problem statement
+How might we establish and scale UX Research within Walmart International so teams can make customer‑centered decisions using reliable insights, even in markets where formal research practices do not yet exist?
+
+
+## Research goals
+Understand pain points unique to CA and MX customers
+Identify cross‑market themes that could inform global product strategy
+Build a repeatable insight‑gathering framework for future teams
+
+## Methods Used
+Feedback mining (app + web)
+
+Thematic analysis
+
+Cross‑market comparison
+
+Data partnership for quantitative validation
+
+## Impact
+Insights adopted into the next‑year roadmap
+
+Sparked leadership interest in formalizing UX Research
+
+Provided a scalable model for future international markets
