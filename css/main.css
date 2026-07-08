@@ -110,6 +110,12 @@ body[data-route="home"] #site-nav {
     text-align: left;
 }
 
+.screen-content--project {
+    max-width: 1400px;
+    width: 100%;
+    text-align: left;
+}
+
 /* ---------- home ---------- */
 
 .home-title {
@@ -197,6 +203,37 @@ body[data-route="home"] #site-nav {
 
 /* ---------- project detail page ---------- */
 
+.project-page-grid {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    justify-content: center;
+    gap: 40px;
+    align-items: start;
+}
+
+.project-page-text {
+    max-width: 500px;
+}
+
+.project-page-images {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project-page-image {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    animation: image-pop 0.6s ease 0.1s both;
+}
+
+@media (max-width: 768px) {
+    .project-page-grid { grid-template-columns: 1fr; }
+}
+
 .project-page-eyebrow {
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -238,6 +275,23 @@ body[data-route="home"] #site-nav {
     to   { transform: scale(1); opacity: 1; }
 }
 
+.project-page-actions-grid {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 24px;
+}
+
+.project-page-actions-grid .project-page-actions {
+    grid-column: 2;
+}
+
+@media (max-width: 768px) {
+    .project-page-actions-grid { grid-template-columns: 1fr; }
+    .project-page-actions-grid .project-page-actions { grid-column: 1; }
+}
+
 .project-page-actions {
     display: flex;
     justify-content: flex-end;
@@ -268,12 +322,26 @@ body[data-route="home"] #site-nav {
     margin-bottom: 20px;
 }
 
-.about-columns {
-    columns: 260px 4;
+.about-grid {
+    display: grid;
+    grid-template-columns: minmax(200px, 260px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.about-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.about-text-columns {
+    column-count: 2;
     column-gap: 24px;
 }
 
-.about-columns p {
+.about-text-columns p {
     break-inside: avoid;
     margin-bottom: 16px;
     line-height: 1.55;
@@ -282,7 +350,9 @@ body[data-route="home"] #site-nav {
 }
 
 @media (max-width: 480px) {
-    .about-columns { columns: 1; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { max-width: 180px; }
+    .about-text-columns { column-count: 1; }
 }
 
 /* ---------- resume ---------- */

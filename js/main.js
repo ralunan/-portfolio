@@ -7,6 +7,12 @@ let currentScreenEl = null;
 let transitioning = false;
 let queued = false;
 
+function imageAltFromFilename(filename) {
+    const withoutExt = filename.replace(/\.[a-z0-9]+$/i, '');
+    const withoutPrefix = withoutExt.replace(/^\d+_/, '');
+    return withoutPrefix.replace(/[-_]+/g, ' ').trim();
+}
+
 function escapeHtml(str) {
     return str.replace(/[&<>"']/g, (ch) => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -171,14 +177,29 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
         </div>
     `).join('');
 
+    const pageImages = (project.images || []).filter((filename) => filename.startsWith(`${imagePrefix}_`));
+    const imagesHtml = pageImages.length
+        ? pageImages.map((filename) => `
+            <img class="project-page-image" src="${encodeURI(project.folder + filename)}" alt="${escapeHtml(imageAltFromFilename(filename))}">
+        `).join('')
+        : `<div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>`;
+
     container.innerHTML = `
-        <div class="project-page-eyebrow">${escapeHtml(project.title)} &middot; Page ${pageIndex + 1} of ${totalPages}</div>
-        ${blocksHtml}
-        <div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>
-        <div class="project-page-actions">
-            ${isLast
-                ? `<button type="button" data-action="back-to-projects">Back to Projects</button>`
-                : `<button type="button" data-action="next-page">Next</button>`}
+        <div class="project-page-grid">
+            <div class="project-page-text">
+                <div class="project-page-eyebrow">${escapeHtml(project.title)} &middot; Page ${pageIndex + 1} of ${totalPages}</div>
+                ${blocksHtml}
+            </div>
+            <div class="project-page-images">
+                ${imagesHtml}
+            </div>
+        </div>
+        <div class="project-page-actions-grid">
+            <div class="project-page-actions">
+                ${isLast
+                    ? `<button type="button" data-action="back-to-projects">Back to Projects</button>`
+                    : `<button type="button" data-action="next-page">Next</button>`}
+            </div>
         </div>
     `;
 
@@ -275,8 +296,11 @@ async function renderAbout(screenEl) {
 
     container.innerHTML = `
         <h1 class="about-heading">About Me</h1>
-        <div class="about-columns">
-            ${paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join('')}
+        <div class="about-grid">
+            <img class="about-photo" src="ron_profile2.jpg" alt="Portrait of Ronald Alunan">
+            <div class="about-text-columns">
+                ${paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join('')}
+            </div>
         </div>
     `;
 }
