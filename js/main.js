@@ -206,60 +206,83 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
     const isLast = pageIndex === totalPages - 1;
     const imagePrefix = pageIndex + 1;
 
-    const blocksHtml = page.blocks.map((block) => `
-        <div class="project-page-block">
-            <h2>${escapeHtml(block.heading)}</h2>
-            ${renderBlockBody(block.body)}
-        </div>
-    `).join('');
+    // A block with no body (e.g. a heading written for image-only pages) renders
+    // no text at all — just the eyebrow and images, per context-website.txt's
+    // "description headers above the images" pattern for content-free pages.
+    const blocksHtml = page.blocks
+        .filter((block) => block.body.trim().length > 0)
+        .map((block) => `
+            <div class="project-page-block">
+                <h2>${escapeHtml(block.heading)}</h2>
+                ${renderBlockBody(block.body)}
+            </div>
+        `).join('');
 
-    // Each images[] entry is either a plain filename or { file, caption } when
-    // it needs a title rendered above it.
+    // Each images[] entry is either a plain filename or { file, caption, column }
+    // when it needs a title above it and/or belongs in the left text column
+    // instead of the default right image column (e.g. splitting 2 images one
+    // per column so both render at the same, even scale).
     const normalizedImages = (project.images || []).map((entry) =>
-        typeof entry === 'string' ? { file: entry, caption: null } : entry);
+        typeof entry === 'string' ? { file: entry, caption: null, column: null } : entry);
     const pageImages = normalizedImages.filter((img) => img.file.startsWith(`${imagePrefix}_`));
+    const rightImages = pageImages.filter((img) => img.column !== 'left');
+    const leftImages = pageImages.filter((img) => img.column === 'left');
     // Filmstrip (floated thumbnail row) vs. stacked full-width is normally
-    // decided by image count, but a project can force it per page via
-    // filmstripPages (e.g. 2 dense-text images that still want the small,
+    // decided by right-column image count, but a project can force it per page
+    // via filmstripPages (e.g. 2 dense-text images that still want the small,
     // floated treatment rather than stacking full-width).
     const isFilmstrip = project.filmstripPages
         ? project.filmstripPages.includes(imagePrefix)
-        : pageImages.length >= 3;
+        : rightImages.length >= 3;
     // Whether images enlarge on click is an explicit per-page opt-in, since it
     // depends on content (dense text vs. illustration), not image count.
     const isEnlargeable = (project.enlargeablePages || []).includes(imagePrefix);
-    // Filmstrip rows read best with the hint centered over the middle image;
-    // stacked full-width images read best with it over the first one.
-    const hintIndex = isFilmstrip ? Math.floor(pageImages.length / 2) : 0;
-    // Filmstrip items share the fixed 500px image column, so their width is
-    // computed from how many images are on the page rather than a flat cap —
-    // 2 images on a page get to be much bigger than 3 images would.
+    // An image entry can set hint:true to explicitly claim the "click to
+    // enlarge" hint. Otherwise it defaults to the middle image for a filmstrip
+    // row, or the first uncaptioned image for a stacked page (so it doesn't
+    // collide with a caption's title) — falling back to the first image.
+    const hintTarget = pageImages.find((img) => img.hint) || (isFilmstrip
+        ? rightImages[Math.floor(rightImages.length / 2)]
+        : (pageImages.find((img) => !img.caption) || pageImages[0]));
+    // Filmstrip items share the fixed 500px column they sit in, so their width
+    // is computed from how many images share that column rather than a flat
+    // cap — 2 images in a column get to be much bigger than 3 would. Left and
+    // right columns are sized independently since their counts can differ.
     const FILMSTRIP_COLUMN_WIDTH = 500;
     const FILMSTRIP_GAP = 16;
-    const filmstripItemWidth = isFilmstrip
-        ? Math.floor((FILMSTRIP_COLUMN_WIDTH - FILMSTRIP_GAP * (pageImages.length - 1)) / pageImages.length)
-        : null;
-    const imagesHtml = pageImages.length
-        ? pageImages.map((img, i) => `
-            <div class="project-image-item">
-                ${i === hintIndex && isEnlargeable ? `<div class="image-hint"><span>Click images to enlarge!</span></div>` : ''}
-                ${img.caption ? `<div class="project-image-caption">${escapeHtml(img.caption)}</div>` : ''}
-                <img class="project-page-image${isEnlargeable ? ' project-page-image--enlargeable' : ''}" src="${encodeURI(project.folder + img.file)}" alt="${escapeHtml(img.caption || imageAltFromFilename(img.file))}">
-            </div>
-        `).join('')
-        : `<div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>`;
+    const filmstripWidth = (count) =>
+        Math.floor((FILMSTRIP_COLUMN_WIDTH - FILMSTRIP_GAP * (count - 1)) / count);
+
+    const imageItemHtml = (img) => `
+        <div class="project-image-item"${img.width ? ` style="max-width: ${img.width}px"` : ''}>
+            ${img === hintTarget && isEnlargeable ? `<div class="image-hint"><span>Click images to enlarge!</span></div>` : ''}
+            ${img.caption ? `<div class="project-image-caption">${escapeHtml(img.caption)}</div>` : ''}
+            <img class="project-page-image${isEnlargeable ? ' project-page-image--enlargeable' : ''}" src="${encodeURI(project.folder + img.file)}" alt="${escapeHtml(img.caption || imageAltFromFilename(img.file))}">
+        </div>
+    `;
+    // Multiple images sharing a column float inline (top-aligned, right to
+    // left) rather than stacking, same treatment either column uses.
+    const imageColumnHtml = (images) => {
+        if (!images.length) return '';
+        const floats = isFilmstrip && images.length > 1;
+        const style = floats ? ` style="--filmstrip-item-width: ${filmstripWidth(images.length)}px"` : '';
+        return `<div class="project-page-images${floats ? ' project-page-images--filmstrip' : ''}"${style}>${images.map(imageItemHtml).join('')}</div>`;
+    };
+    const leftImagesHtml = imageColumnHtml(leftImages);
+    const rightImagesHtml = rightImages.length
+        ? imageColumnHtml(rightImages)
+        : (leftImages.length ? '' : `<div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>`);
 
     const backHref = pageIndex === 0 ? '#/projects' : `#/projects/${slug}/${pageIndex}`;
 
     container.innerHTML = `
+        <div class="project-page-eyebrow">${escapeHtml(project.title)} &middot; Page ${pageIndex + 1} of ${totalPages}</div>
         <div class="project-page-grid">
             <div class="project-page-text">
-                <div class="project-page-eyebrow">${escapeHtml(project.title)} &middot; Page ${pageIndex + 1} of ${totalPages}</div>
                 ${blocksHtml}
+                ${leftImagesHtml}
             </div>
-            <div class="project-page-images${isFilmstrip ? ' project-page-images--filmstrip' : ''}"${isFilmstrip ? ` style="--filmstrip-item-width: ${filmstripItemWidth}px"` : ''}>
-                ${imagesHtml}
-            </div>
+            ${rightImagesHtml}
         </div>
         <div class="project-page-actions-grid">
             <div class="project-page-back">

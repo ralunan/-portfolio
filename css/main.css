@@ -88,6 +88,14 @@ body[data-route="home"] #site-nav {
     overflow-y: auto;
 }
 
+/* Project pages vary a lot in content height page to page. Centering them
+   like other screens would make the eyebrow/pagination line jump to a
+   different vertical position on every page — anchor to the top instead so
+   it stays put regardless of how much content sits below it. */
+#screen-project {
+    align-items: flex-start;
+}
+
 .screen--active,
 .screen--entering,
 .screen--exiting {
@@ -132,6 +140,7 @@ body[data-route="home"] #site-nav {
 .screen-content--project {
     max-width: 1400px;
     width: 100%;
+    margin: 0 auto;
     text-align: left;
 }
 
@@ -271,6 +280,9 @@ body[data-route="home"] #site-nav {
     letter-spacing: 0.04em;
     opacity: 0.8;
     margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .project-page-image {
@@ -349,7 +361,8 @@ body[data-route="home"] #site-nav {
     letter-spacing: 0.12em;
     font-size: 0.8rem;
     opacity: 0.7;
-    margin-bottom: 12px;
+    padding-top: 90px;
+    margin-bottom: 40px;
 }
 
 .project-page-block {
@@ -405,6 +418,7 @@ body[data-route="home"] #site-nav {
     justify-content: center;
     gap: 40px;
     margin-top: 24px;
+    padding-top: 40px;
 }
 
 .project-page-actions-grid .project-page-actions {

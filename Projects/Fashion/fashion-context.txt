@@ -1,0 +1,18 @@
+## Context
+After my time with Walmart International, I joined the US Fashion team — a fast-paced, concept-forward environment focused on exploring new visual directions rather than shipping a single locked-down solution. I contributed across a wide range of surfaces: social commerce, the accounts page, the item page, item tiles, AI-assisted search, and fashion carousels. Because much of this work touched sensitive product strategy, what's shown here is limited to the visual explorations I'm able to share publicly.
+
+This was also where I developed a new skill: using AI-assisted, "vibe-coded" prototyping to generate and iterate on design concepts at a pace traditional tools couldn't match. Rather than mocking up one direction at a time, I could rapidly explore dozens of visual concepts — testing tone, layout, and interaction patterns against Walmart's existing visual language while still pushing into new creative territory for fashion. The team operated like a semi-independent design studio: fast concept generation, clear creative direction, and design leading product rather than the other way around.
+
+## Item Tiles
+
+## Accounts
+
+## AI-Assisted Search
+Search results don't have to be a static grid — I explored how AI could reshape fashion discovery around intent instead of category. One direction organized results by occasion rather than product type, asking what the customer was doing rather than what they were shopping for. Another replaced the product grid with an editorial, magazine-style lookbook built around a seasonal theme. A third let AI decode the exact silhouette, fabric, and palette a customer searched for, then surfaced style alternates that carried the same visual DNA at different price points.
+
+Each direction used the same rapid, AI-assisted prototyping process — generating and testing several distinct concepts quickly, rather than refining a single direction in isolation.
+
+## Fashion Carousels
+I designed a progressive carousel system to help customers who search for something like "dress" but don't immediately find the right one. Rather than leaving them at a dead end, the page reveals a sequence of curated carousels as they keep browsing — starting narrow (matching looks, trending brands) and broadening out to more inspirational framings (style archetypes, build-a-look, occasion-based outfits) the longer they search without converting.
+
+Each carousel concept — including AI-curated lookbooks and a "decode the vibe" style-matching experience — was generated and iterated using AI-assisted prototyping, letting me test many creative directions quickly and share them as potential paths forward for the team.

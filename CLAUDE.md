@@ -24,19 +24,30 @@ No lint/build/test commands exist for this project.
 
 Project text files support a second-level `#Sub-heading` (single hash) inside a section's body, parsed by `renderBlockBody()` — used e.g. in "Methods Used" to break one section into labeled sub-blocks without creating new pages.
 
-**Project page-building rule:** within a project's text file, the `Context` and `Problem statement` sections always merge into page 1; every other `##` section becomes its own subsequent page, in file order (`buildProjectPages()` in `js/main.js`).
+**Project page-building rule:** within a project's text file, the `Context` and `Problem statement` sections always merge into page 1; every other `##` section becomes its own subsequent page, in file order (`buildProjectPages()` in `js/main.js`). A `##` section with an empty body (nothing before the next `##`) renders **no text at all** for that page — just the eyebrow and its images — for pages meant to be image-only with description headers above the images (see `Item Tiles`/`Accounts` in `Projects/Fashion/fashion-context.txt` for the pattern).
 
-**Project registry (`js/projects.js`)** — since static hosting can't list directories, each project is manually registered with metadata only (never content):
-- `images`: filenames prefixed with the page number they belong to (`1_foo.png`, `2_bar.svg`, per `context-website.txt`'s numbering convention). The renderer matches images to pages by this prefix.
-- `enlargeablePages`: page numbers where images get click-to-enlarge (lightbox + cursor + a floating "Click images to enlarge!" hint). This is a per-page editorial call based on image *content* (dense text/screenshots vs. illustrative cover art), not image count — keep it explicit rather than inferring it.
-- `filmstripPages`: page numbers where images float into a thumbnail row instead of stacking full-width. Also explicit rather than purely count-based, since a page's chosen layout depends on image aspect ratio/count together (see the inline comments above `PROJECTS` in `js/projects.js` for current reasoning per page).
+**Project registry (`js/projects.js`)** — since static hosting can't list directories, each project is manually registered with metadata only (never content). `images` is a list where each entry is either a plain filename or an object with:
+- `caption`: a title rendered above that image.
+- `column: 'left'`: renders the image in the left text column instead of the default right image column (e.g. to pair one image per column at an even scale, or to fill a column that has no body text).
+- `width`: caps that image at N px instead of the default 500 — used to shrink several stacked/floated images so a page fits without scrolling.
+- `hint: true`: explicitly makes this image the one carrying the floating "Click images to enlarge!" hint, overriding the automatic default (middle image for a filmstrip row, first uncaptioned image otherwise — captioned images are skipped by default so the hint doesn't collide with the caption).
+
+Each filename is prefixed with the page number it belongs to (`1_foo.png`, `2_bar.svg`, per `context-website.txt`'s numbering convention); the renderer matches images to pages by this prefix, independently for images bound for the left vs. right column.
+
+Two more project-level fields, both explicit rather than inferred, since the right call depends on image *content* (dense screenshot vs. illustration vs. wide diagram), not just count or page number:
+- `enlargeablePages`: page numbers where images get click-to-enlarge (lightbox + cursor + the hint).
+- `filmstripPages`: page numbers where images float inline (top-aligned, right to left) instead of stacking full-width — applies independently to the left and right column of that page, each sized to fit however many images share that specific column (`filmstripWidth()` in `renderProjectDetail`). If omitted for a project, this falls back to "3+ images in the right column" per page.
 
 Adding a new project = one folder under `Projects/`, one `## `-formatted `.txt` file, optional numbered images, and one entry in `PROJECTS`.
 
 **Established visual system** (`css/main.css`), reused across resume/about/project pages — match these rather than introducing new values:
 - Two-column layouts use `500px 500px` (or a `fit-content`/computed variant) grid columns with `justify-content: center` and `40px` gaps.
 - Image groups use `16px` gaps.
-- Buttons and the persistent nav/commit-counter badges share one "glass pill" style: `border-radius: 999px`, `rgba(255,255,255,0.15)` background, `1px solid rgba(255,255,255,0.3)` border, `backdrop-filter: blur(12px)`.
-- Filmstrip image width is computed per page in JS (`filmstripItemWidth` in `renderProjectDetail`) from the 500px column width divided across however many images share that page, not hardcoded — a page with 2 images should render noticeably larger thumbnails than a page with 3.
+- Buttons and the persistent nav/commit-counter/add-project-modal-CTA all share one "glass pill" style: `border-radius: 999px`, `rgba(255,255,255,0.15)` background, `1px solid rgba(255,255,255,0.3)` border, `backdrop-filter: blur(12px)`.
+- The project page's eyebrow (project title + "Page X of Y") sits *above* `.project-page-grid`, not inside either column — it needs to be outside both so the two columns' actual content (text/images) starts at the same top position regardless of caption/heading differences between them.
+- `#screen-project` uses `align-items: flex-start` (top-anchored) instead of the `center` every other screen uses, so the eyebrow stays at a fixed vertical position across pages of wildly different content height — don't remove this without expecting the eyebrow to jump around page to page.
 
-**Lightbox and commit counter are global, outside `#app`:** `#lightbox` and `#commit-counter` in `index.html` persist across route changes (the router only swaps `.screen` contents inside `#app`). The commit counter fetches the real commit count from the GitHub REST API (`api.github.com/repos/ralunan/-portfolio/commits`, using the `Link` header's `rel="last"` page number rather than paginating) — it is not a manually maintained value.
+**Global widgets, outside `#app`, persisting across route changes** (the router only swaps `.screen` contents inside `#app`):
+- `#lightbox` (`setupLightbox()`) — click-to-enlarge overlay for any `.project-page-image--enlargeable`, native resolution with scroll (not shrunk to fit) via `safe center` alignment.
+- `#add-project-modal` (`setupAddProjectModal()`) — opened by the dashed "+" placeholder tile on the Projects index.
+- `#commit-counter` (`updateCommitCounter()`) — fetches the real commit count from the GitHub REST API (`api.github.com/repos/ralunan/-portfolio/commits`, using the `Link` header's `rel="last"` page number rather than paginating). Not a manually maintained value.

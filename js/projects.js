@@ -3,10 +3,13 @@
 // content is fetched live from `file` at render time, never duplicated here.
 //
 // `images` lists supporting images for this project. Each entry is either a
-// plain filename, or { file, caption } when a title should render above the
-// image. Filenames are prefixed with the page number they belong to (per
-// context-website.txt's "1_x, 2_x" convention) so the renderer can group them
-// by page automatically.
+// plain filename, or an object with any of: `caption` (title rendered above
+// the image), `column: 'left'` (renders in the text column instead of the
+// default right image column), `width` (caps the image at N px instead of
+// the default 500, e.g. to fit several stacked images without scrolling),
+// `hint: true` (explicitly claims the "click to enlarge" hint). Filenames
+// are prefixed with the page number they belong to (per context-website.txt's
+// "1_x, 2_x" convention) so the renderer can group them by page automatically.
 //
 // `enlargeablePages` explicitly lists which page numbers get the
 // click-to-enlarge treatment (cursor, lightbox, "click to enlarge" hint).
@@ -61,6 +64,33 @@ export const PROJECTS = [
         // portrait screenshots), so every page stacks full-width by default
         // (no filmstripPages needed) but every page benefits from zoom.
         enlargeablePages: [1, 2, 3, 4],
+    },
+    {
+        slug: 'fashion',
+        title: 'Fashion Visual Explorations',
+        folder: 'Projects/Fashion/',
+        file: 'fashion-context.txt',
+        images: [
+            '1_fashion-entrypoint.png',
+            '1_fashion-entrypoint1.png',
+            { file: '2_fashion-tiles.png', caption: 'Item Tile Layout Exploration', column: 'left' },
+            { file: '2_fashion-tiles2.png', caption: 'Item Tile CTA Placement Testing', hint: true },
+            { file: '3_accounts.png', caption: 'Fashion Profile — Loading States', column: 'left', width: 260 },
+            { file: '3_accounts1.png', caption: 'Fashion Profile — Existing Flow Audit', column: 'left', width: 260 },
+            { file: '3_accounts2.png', caption: 'Fashion Profile — Push Notification Concept', width: 260 },
+            { file: '3_accounts3.png', caption: 'Fashion Profile — Style Quiz Concept', width: 260 },
+            '4_fashion.png',
+            '4_fashion1.png',
+            '4_fashion2.png',
+            '5_fashion2.png',
+            '5_fashion1.png',
+        ],
+        // Pages 1 and 3 use portrait/mobile-screen boards that float side by
+        // side in each column instead of stacking. Every other page is a wide,
+        // dense Figma board (flow diagrams, redlines, concept decks) that reads
+        // better stacked full-width, even where a page has 3+ images.
+        filmstripPages: [1, 3],
+        enlargeablePages: [1, 2, 3, 4, 5],
     },
 ];
 
