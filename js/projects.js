@@ -2,9 +2,11 @@
 // project is registered here with just its metadata — the actual written
 // content is fetched live from `file` at render time, never duplicated here.
 //
-// `images` lists supporting image filenames for this project. Each filename
-// is prefixed with the page number it belongs to (per context-website.txt's
-// "1_x, 2_x" convention) so the renderer can group them by page automatically.
+// `images` lists supporting images for this project. Each entry is either a
+// plain filename, or { file, caption } when a title should render above the
+// image. Filenames are prefixed with the page number they belong to (per
+// context-website.txt's "1_x, 2_x" convention) so the renderer can group them
+// by page automatically.
 //
 // `enlargeablePages` explicitly lists which page numbers get the
 // click-to-enlarge treatment (cursor, lightbox, "click to enlarge" hint).
@@ -42,6 +44,23 @@ export const PROJECTS = [
         ],
         enlargeablePages: [2, 3, 4],
         filmstripPages: [2, 3],
+    },
+    {
+        slug: 'cashi',
+        title: 'Connecting Cashi to Walmart Checkout',
+        folder: 'Projects/Cashi/',
+        file: 'context-cashi.txt',
+        images: [
+            '1_cashi.png',
+            { file: '2_cashi.png', caption: 'Phase 1 Components' },
+            { file: '2_cashi2.png', caption: 'Phase 2 Components' },
+            '3_cashi.png',
+            '4_Cashi.png',
+        ],
+        // All Cashi images are wide, dense Figma flow/redline boards (no
+        // portrait screenshots), so every page stacks full-width by default
+        // (no filmstripPages needed) but every page benefits from zoom.
+        enlargeablePages: [1, 2, 3, 4],
     },
 ];
 

@@ -1,0 +1,22 @@
+## Context
+Cashi is a Walmart‑developed digital wallet that lets customers use a line of credit to pay for their orders. In Mexico, many customers pay cash on delivery or in-store, since credit cards aren't common and connecting existing bank or payment accounts is often difficult — a gap that limits their buying power and frequently causes friction at checkout. Cashi was built to bridge that digital payment gap, giving customers a way to pay that didn't depend on a traditional credit card.
+
+Phase 1 of the project integrated Cashi into the eCommerce experience by inviting customers to apply and join. I came on as the designer for Phase 2, helping existing Cashi users connect their accounts to Walmart.
+
+## Problem statement
+We needed to identify every touch-point across the customer journey where it made sense to invite users to connect their Cashi account, while accounting for all the states a user could be in — member or not, already connected or not, approved or denied. That meant understanding what the system could detect at any given point in the journey: whether a user had signed up, been denied, or had yet to connect Cashi to their Walmart account. Once connected, the experience needed to clearly surface their available Cashi credit, so users understood they had more buying power.
+
+Given the complexity of this user flow, the designs needed to be well organized so every use case was easy to trace and communicate.
+
+## Project start
+I started by understanding the current flows and processes already in place, collaborating with the two teams responsible for bringing Cashi to the MX market to get full context on how the system worked. From there, I audited the existing component library built for the Cashi experience, so we could reuse what already existed and reduce development time rather than designing from scratch.
+
+Partnering with accessibility and content teams, we focused on maximizing clarity for users as content was finalized and localized. Once the components were finalized, I placed them at the points in the journey where they'd make the most sense for the user.
+
+## UX Dive
+The flow below shows the happy path — the ideal version of the experience. When a customer wants to view more payment options, they land on the Cashi component, which opens a modal explaining the benefits of Cashi. If they apply and are accepted, we invite them to connect their Cashi account directly from the item page. Once they've reviewed the benefits and linked their account, they see a success message, and their Cashi benefit appears as a payment option through cart and checkout.
+
+There are many branching paths and account states beyond this — but the happy path captures the core intent of the design.
+
+## Impact
+Designing across mobile web, desktop web, and app, then organizing every use case clearly, made it easy to communicate the work to product partners — showing exactly where components appeared across all user states. That clarity helped translate a genuinely complex design into something stakeholders could align on quickly, with Figma serving as the single source of truth for every change.

@@ -213,7 +213,11 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
         </div>
     `).join('');
 
-    const pageImages = (project.images || []).filter((filename) => filename.startsWith(`${imagePrefix}_`));
+    // Each images[] entry is either a plain filename or { file, caption } when
+    // it needs a title rendered above it.
+    const normalizedImages = (project.images || []).map((entry) =>
+        typeof entry === 'string' ? { file: entry, caption: null } : entry);
+    const pageImages = normalizedImages.filter((img) => img.file.startsWith(`${imagePrefix}_`));
     // Filmstrip (floated thumbnail row) vs. stacked full-width is normally
     // decided by image count, but a project can force it per page via
     // filmstripPages (e.g. 2 dense-text images that still want the small,
@@ -236,10 +240,11 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
         ? Math.floor((FILMSTRIP_COLUMN_WIDTH - FILMSTRIP_GAP * (pageImages.length - 1)) / pageImages.length)
         : null;
     const imagesHtml = pageImages.length
-        ? pageImages.map((filename, i) => `
+        ? pageImages.map((img, i) => `
             <div class="project-image-item">
                 ${i === hintIndex && isEnlargeable ? `<div class="image-hint"><span>Click images to enlarge!</span></div>` : ''}
-                <img class="project-page-image${isEnlargeable ? ' project-page-image--enlargeable' : ''}" src="${encodeURI(project.folder + filename)}" alt="${escapeHtml(imageAltFromFilename(filename))}">
+                ${img.caption ? `<div class="project-image-caption">${escapeHtml(img.caption)}</div>` : ''}
+                <img class="project-page-image${isEnlargeable ? ' project-page-image--enlargeable' : ''}" src="${encodeURI(project.folder + img.file)}" alt="${escapeHtml(img.caption || imageAltFromFilename(img.file))}">
             </div>
         `).join('')
         : `<div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>`;

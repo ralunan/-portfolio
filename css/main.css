@@ -265,6 +265,14 @@ body[data-route="home"] #site-nav {
     max-width: 500px;
 }
 
+.project-image-caption {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
 .project-page-image {
     width: 100%;
     display: block;
@@ -562,15 +570,22 @@ body[data-route="home"] #site-nav {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     cursor: zoom-out;
+    overflow: auto;
 }
 
 .lightbox--active {
     display: flex;
+    /* "safe" keeps small images centered but falls back to start-aligned
+       (rather than clipping the top/left) once an image is too big to fit,
+       so it stays fully scrollable instead of losing its overflow edge. */
+    align-items: safe center;
+    justify-content: safe center;
 }
 
 .lightbox-img {
-    max-width: 90vw;
-    max-height: 90vh;
+    /* No max-width/height: dense diagrams render at native resolution so
+       detail isn't lost to a forced downscale — the lightbox scrolls instead. */
+    min-width: min(90vw, 320px);
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     cursor: default;
