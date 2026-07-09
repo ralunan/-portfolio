@@ -144,18 +144,51 @@ body[data-route="home"] #site-nav {
     text-align: left;
 }
 
-/* ---------- home ---------- */
+/* ---------- home ----------
+   A deliberately bolder "cover" treatment than the rest of the site: a
+   single confident accent color (amber) on a near-black ground, instead of
+   the soft purple gradient used everywhere else — inspired by Persona UI
+   designer Masayoshi Sutoh's philosophy of one strong color carrying a
+   whole package's identity, and UI as an "assertive hero" rather than a
+   quiet background element. */
+
+#screen-home {
+    --home-accent: #ffb627;
+    background:
+        radial-gradient(circle at 28% 22%, rgba(255, 182, 39, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(255, 182, 39, 0.1) 0%, transparent 50%),
+        #0c0a08;
+}
+
+.home-kicker {
+    color: var(--home-accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
 
 .home-title {
-    font-size: 3rem;
-    font-weight: 300;
-    line-height: 1.4;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 48px;
 }
 
-.home-title strong {
-    font-weight: 700;
+.home-title-line {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 4px;
+}
+
+.home-title-name {
+    display: block;
+    font-size: clamp(3.5rem, 11vw, 7.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--home-accent);
+    text-shadow: 0 0 60px rgba(255, 182, 39, 0.35);
 }
 
 .home-nav {
@@ -166,19 +199,20 @@ body[data-route="home"] #site-nav {
 }
 
 .home-nav a {
-    color: white;
+    color: #1a1206;
+    background: var(--home-accent);
     text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 14px 28px;
-    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 14px 32px;
     border-radius: 999px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 8px 24px rgba(255, 182, 39, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .home-nav a:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(255, 182, 39, 0.4);
 }
 
 /* ---------- generic placeholder screens ---------- */
