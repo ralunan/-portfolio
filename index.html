@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body data-route="home">
+    <script>
+        (function () {
+            if (localStorage.getItem('theme') === 'light') document.body.dataset.theme = 'light';
+        })();
+    </script>
     <nav id="site-nav"><a href="#/">RA &mdash; Home</a></nav>
+    <button type="button" id="theme-toggle">Light Mode</button>
     <div id="commit-counter">Total Commits &mdash;</div>
 
     <div id="app">

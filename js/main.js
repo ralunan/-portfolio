@@ -518,6 +518,31 @@ function setupAddProjectModal() {
     });
 }
 
+const THEME_STORAGE_KEY = 'theme';
+
+function setupThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    function syncLabel() {
+        toggle.textContent = document.body.dataset.theme === 'light' ? 'Dark Mode' : 'Light Mode';
+    }
+
+    syncLabel();
+
+    toggle.addEventListener('click', () => {
+        const isLight = document.body.dataset.theme === 'light';
+        if (isLight) {
+            delete document.body.dataset.theme;
+            localStorage.removeItem(THEME_STORAGE_KEY);
+        } else {
+            document.body.dataset.theme = 'light';
+            localStorage.setItem(THEME_STORAGE_KEY, 'light');
+        }
+        syncLabel();
+    });
+}
+
 const GITHUB_REPO = 'ralunan/-portfolio';
 
 async function updateCommitCounter() {
@@ -545,6 +570,7 @@ async function updateCommitCounter() {
 
 setupLightbox();
 setupAddProjectModal();
+setupThemeToggle();
 updateCommitCounter();
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('DOMContentLoaded', handleRouteChange);

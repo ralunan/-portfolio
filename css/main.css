@@ -11,9 +11,94 @@ html, body {
 
 body {
     --accent: #ffb627;
+    --glass-border: rgba(255, 182, 39, 0.35);
+    --glass-border-hover: rgba(255, 182, 39, 0.6);
+    --card-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+    --card-shadow-hover: 14px 14px 0 rgba(0, 0, 0, 0.4);
+    --card-transform-hover: translate(-4px, -4px);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
     color: white;
+}
+
+/* Light theme = the original design before the amber/dark redesign, kept
+   behind a toggle (js/main.js sets body[data-theme]) rather than deleted, so
+   visitors can compare or you can fall back to it at any time. Most of it
+   reduces to redefining the shared variables above; a few elements whose
+   *structure* changed (home hero, per-screen glows, project cards) need
+   explicit overrides since they're not just color swaps. */
+body[data-theme="light"] {
+    --accent: white;
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-border-hover: rgba(255, 255, 255, 0.5);
+    --card-shadow: none;
+    --card-shadow-hover: none;
+    --card-transform-hover: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body[data-theme="light"] #screen-home,
+body[data-theme="light"] #screen-resume,
+body[data-theme="light"] #screen-about,
+body[data-theme="light"] #screen-projects,
+body[data-theme="light"] #screen-project {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+body[data-theme="light"] .home-kicker {
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 300;
+    font-size: 1.05rem;
+    opacity: 0.9;
+}
+
+body[data-theme="light"] .home-title-name {
+    font-size: clamp(2.25rem, 6vw, 3rem);
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body[data-theme="light"] .home-title-name br {
+    display: none;
+}
+
+body[data-theme="light"] .home-nav a {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-shadow: none;
+}
+
+body[data-theme="light"] .home-nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    transform: none;
+    box-shadow: none;
+}
+
+body[data-theme="light"] .placeholder-heading,
+body[data-theme="light"] .projects-heading,
+body[data-theme="light"] .about-heading {
+    font-weight: 300;
+}
+
+body[data-theme="light"] .project-page-block h2,
+body[data-theme="light"] .project-page-subblock h3 {
+    font-weight: 600;
+}
+
+body[data-theme="light"] .project-card-title {
+    font-weight: 400;
+}
+
+body[data-theme="light"] .project-image-caption {
+    font-weight: 600;
+}
+
+body[data-theme="light"] .resume-block h2 {
+    font-weight: 400;
+    opacity: 0.7;
 }
 
 /* ---------- persistent nav ---------- */
@@ -34,7 +119,7 @@ body {
     padding: 16px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -43,7 +128,7 @@ body {
 
 #site-nav a:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 182, 39, 0.6);
+    border-color: var(--glass-border-hover);
 }
 
 body[data-route="home"] #site-nav {
@@ -63,10 +148,37 @@ body[data-route="home"] #site-nav {
     padding: 16px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font: inherit;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    padding: 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+#theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: var(--glass-border-hover);
 }
 
 /* ---------- screens ---------- */
@@ -285,21 +397,22 @@ body[data-route="home"] #site-nav {
     color: white;
     text-decoration: none;
     padding: 28px;
-    border: 1.5px solid rgba(255, 182, 39, 0.4);
+    border: 1.5px solid var(--glass-border);
     border-radius: 16px;
     text-align: center;
     /* Hard, unblurred offset shadow (no blur radius) instead of a soft glow —
        referencing the panel-shadow style from the Persona 3 fan site, which
-       reads more like a graphic-novel panel than a typical drop shadow. */
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+       reads more like a graphic-novel panel than a typical drop shadow.
+       (Light theme reverts this to no shadow at all, its original look.) */
+    box-shadow: var(--card-shadow);
     transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .project-card:hover {
     background: rgba(255, 255, 255, 0.12);
     border-color: var(--accent);
-    transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0 rgba(0, 0, 0, 0.4);
+    transform: var(--card-transform-hover);
+    box-shadow: var(--card-shadow-hover);
 }
 
 .project-card-title {
@@ -522,7 +635,7 @@ body[data-route="home"] #site-nav {
     font: inherit;
     color: white;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -536,7 +649,7 @@ body[data-route="home"] #site-nav {
 .project-page-actions button:hover,
 .project-page-back button:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 182, 39, 0.6);
+    border-color: var(--glass-border-hover);
     transform: translateY(-2px);
 }
 
@@ -690,7 +803,7 @@ body[data-route="home"] #site-nav {
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.15);
     color: white;
     font-size: 1.5rem;
@@ -727,7 +840,7 @@ body[data-route="home"] #site-nav {
     max-width: 480px;
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: 16px;
@@ -748,7 +861,7 @@ body[data-route="home"] #site-nav {
     padding: 12px 26px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: white;
@@ -759,7 +872,7 @@ body[data-route="home"] #site-nav {
 
 .modal-cta:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 182, 39, 0.6);
+    border-color: var(--glass-border-hover);
     transform: translateY(-2px);
 }
 
@@ -770,7 +883,7 @@ body[data-route="home"] #site-nav {
     width: 36px;
     height: 36px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 182, 39, 0.35);
+    border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.15);
     color: white;
     font-size: 1.3rem;
@@ -796,4 +909,8 @@ body[data-route="home"] #site-nav {
     .home-title { font-size: 1.5rem; }
     .screen { padding: 64px 18px 40px; }
     .project-card { width: 100%; max-width: 250px; height: auto; aspect-ratio: 1 / 1; }
+    /* Three fixed pills (home, theme toggle, commit counter) no longer fit
+       in one row at phone widths — drop the toggle to its own row below. */
+    #theme-toggle { top: 76px; padding: 10px 16px; font-size: 0.75rem; }
+    #site-nav a, #commit-counter { padding: 12px; font-size: 0.75rem; }
 }
