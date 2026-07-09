@@ -1,32 +1,32 @@
 ## Context
-When I joined Walmart’s International design team, “there was no established user research group lacking customer insights for our Canada(CA) and Mexico(MX) markets.” This gap limited our ability to make informed product decisions and weakened our customer‑first mindset.
+When I joined Walmart’s International design team, there was no established user research practice for our Canada (CA) and Mexico (MX) markets — leaving teams without direct access to customer insights. This gap limited our ability to make informed product decisions and weakened our customer‑first mindset.
 
-Recognizing the impact this had on our design quality and strategic alignment, I initiated and led a foundational research effort to uncover actionable customer insights for both markets. Partnering closely with a data scientist, I synthesized app and web feedback, categorized themes, and surfaced patterns that had previously gone unnoticed.
+Recognizing the impact this had on design quality and strategic alignment, I initiated and led a foundational research effort to uncover actionable customer insights for both markets. Partnering closely with a data scientist, I synthesized app and web feedback, surfaced recurring themes, and identified patterns that had previously gone unnoticed.
 
-This work became the first structured customer insight initiative for Walmart International and directly informed the upcoming product and design roadmap.
+This became the first structured customer insight initiative for Walmart International, directly informing the upcoming product and design roadmap.
 
 
 ## Problem statement
-How might we establish and scale UX Research within Walmart International so teams can make customer‑centered decisions using reliable insights, even in markets where formal research practices do not yet exist?
+How might we establish and scale UX Research within Walmart International so teams can make customer‑centered decisions using reliable insights, even in markets where formal research practices don’t yet exist?
 
 
 ## Research goals
-Understand pain points unique to CA and MX customers
-Identify cross‑market themes that could inform global product strategy
-Build a repeatable insight‑gathering framework for future teams
+This research ran for 2-3 months, with the goal of understanding pain points unique to CA and MX customers and documenting customer patterns, identifying cross‑market themes that could inform global product strategy, and building a repeatable insight‑gathering framework for future teams.
 
 ## Methods Used
-Feedback mining (app + web)
+#Feedback mining (app + web)
+On a semi‑daily basis, I reviewed app and web feedback provided by the data scientist, organizing key data points into a Figma document mapped across the customer journey.
 
-Thematic analysis
+#Cross‑market comparison
+Feedback was segmented by market — Mexico and Canada — to surface pain points unique to each, and to identify opportunities to scale shared design solutions across markets for efficiency.
 
-Cross‑market comparison
-
-Data partnership for quantitative validation
+#Data partnership for quantitative validation
+Partnered with the data scientist to validate qualitative themes against available metrics, confirming which customer comments reflected broader, measurable patterns.
 
 ## Impact
-Insights adopted into the next‑year roadmap
+Insights were presented to the product and design teams, directly shaping the CA and MX product roadmaps. The work was also shared with senior leadership — presented annually to the business team at STERCO — where the research helped tell the story of why the organization needed to prioritize third‑party sellers (3PS). Improving the marketplace experience became a core Y24 goal, informed by this and other research.
 
-Sparked leadership interest in formalizing UX Research
+For CA, the leading insight was the need to improve visibility and trust around third‑party sellers and the marketplace experience overall. For MX, it was clearer system communication around checkout errors, order handling, and delivery updates. In both markets, these findings connected to measurable metrics — cart abandonment and NPS — reinforcing the research as a driver of quantifiable outcomes, not just qualitative insight.
 
-Provided a scalable model for future international markets
+Beyond the immediate roadmap impact, this work sparked leadership interest in formalizing UX Research as its own discipline within Walmart International. A dedicated UX Research department was adopted soon after, and I helped shape its earliest days by sharing the methodology and framework I’d built as a starting point for research across the international org. I continued partnering with the team throughout my time at Walmart, producing research videos that brought the customer voice directly to leadership and reinforced a customer‑first mindset across the organization.
+

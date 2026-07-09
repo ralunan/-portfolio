@@ -8,6 +8,7 @@
 </head>
 <body data-route="home">
     <nav id="site-nav"><a href="#/">RA &mdash; Home</a></nav>
+    <div id="commit-counter">Total Commits &mdash;</div>
 
     <div id="app">
         <section id="screen-home" class="screen" data-screen="home">
@@ -39,6 +40,11 @@
         <section id="screen-project" class="screen" data-screen="project">
             <div class="screen-content screen-content--project"></div>
         </section>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+        <img class="lightbox-img" src="" alt="">
     </div>
 
     <script type="module" src="js/main.js"></script>

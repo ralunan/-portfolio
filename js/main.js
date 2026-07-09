@@ -13,6 +13,36 @@ function imageAltFromFilename(filename) {
     return withoutPrefix.replace(/[-_]+/g, ' ').trim();
 }
 
+// A body can optionally use "#Sub-heading" lines (single hash) to break its
+// text into labeled sub-sections, distinct from the "## Heading" page markers.
+const SUBHEADING_LINE_PATTERN = /^#(?!#)\s*(.+)$/;
+
+function renderBlockBody(body) {
+    const lines = body.split('\n');
+    if (!lines.some((line) => SUBHEADING_LINE_PATTERN.test(line))) {
+        return `<p>${escapeHtml(body)}</p>`;
+    }
+
+    const subsections = [];
+    let current = null;
+    lines.forEach((line) => {
+        const match = line.match(SUBHEADING_LINE_PATTERN);
+        if (match) {
+            current = { heading: match[1].trim(), bodyLines: [] };
+            subsections.push(current);
+        } else if (current) {
+            current.bodyLines.push(line);
+        }
+    });
+
+    return subsections.map((section) => `
+        <div class="project-page-subblock">
+            <h3>${escapeHtml(section.heading)}</h3>
+            <p>${escapeHtml(section.bodyLines.join('\n').trim())}</p>
+        </div>
+    `).join('');
+}
+
 function escapeHtml(str) {
     return str.replace(/[&<>"']/g, (ch) => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -173,16 +203,42 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
     const blocksHtml = page.blocks.map((block) => `
         <div class="project-page-block">
             <h2>${escapeHtml(block.heading)}</h2>
-            <p>${escapeHtml(block.body)}</p>
+            ${renderBlockBody(block.body)}
         </div>
     `).join('');
 
     const pageImages = (project.images || []).filter((filename) => filename.startsWith(`${imagePrefix}_`));
+    // Filmstrip (floated thumbnail row) vs. stacked full-width is normally
+    // decided by image count, but a project can force it per page via
+    // filmstripPages (e.g. 2 dense-text images that still want the small,
+    // floated treatment rather than stacking full-width).
+    const isFilmstrip = project.filmstripPages
+        ? project.filmstripPages.includes(imagePrefix)
+        : pageImages.length >= 3;
+    // Whether images enlarge on click is an explicit per-page opt-in, since it
+    // depends on content (dense text vs. illustration), not image count.
+    const isEnlargeable = (project.enlargeablePages || []).includes(imagePrefix);
+    // Filmstrip rows read best with the hint centered over the middle image;
+    // stacked full-width images read best with it over the first one.
+    const hintIndex = isFilmstrip ? Math.floor(pageImages.length / 2) : 0;
+    // Filmstrip items share the fixed 500px image column, so their width is
+    // computed from how many images are on the page rather than a flat cap —
+    // 2 images on a page get to be much bigger than 3 images would.
+    const FILMSTRIP_COLUMN_WIDTH = 500;
+    const FILMSTRIP_GAP = 16;
+    const filmstripItemWidth = isFilmstrip
+        ? Math.floor((FILMSTRIP_COLUMN_WIDTH - FILMSTRIP_GAP * (pageImages.length - 1)) / pageImages.length)
+        : null;
     const imagesHtml = pageImages.length
-        ? pageImages.map((filename) => `
-            <img class="project-page-image" src="${encodeURI(project.folder + filename)}" alt="${escapeHtml(imageAltFromFilename(filename))}">
+        ? pageImages.map((filename, i) => `
+            <div class="project-image-item">
+                ${i === hintIndex && isEnlargeable ? `<div class="image-hint"><span>Click images to enlarge!</span></div>` : ''}
+                <img class="project-page-image${isEnlargeable ? ' project-page-image--enlargeable' : ''}" src="${encodeURI(project.folder + filename)}" alt="${escapeHtml(imageAltFromFilename(filename))}">
+            </div>
         `).join('')
         : `<div class="project-image-placeholder">Supporting images (${imagePrefix}_x) go here</div>`;
+
+    const backHref = pageIndex === 0 ? '#/projects' : `#/projects/${slug}/${pageIndex}`;
 
     container.innerHTML = `
         <div class="project-page-grid">
@@ -190,11 +246,14 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
                 <div class="project-page-eyebrow">${escapeHtml(project.title)} &middot; Page ${pageIndex + 1} of ${totalPages}</div>
                 ${blocksHtml}
             </div>
-            <div class="project-page-images">
+            <div class="project-page-images${isFilmstrip ? ' project-page-images--filmstrip' : ''}"${isFilmstrip ? ` style="--filmstrip-item-width: ${filmstripItemWidth}px"` : ''}>
                 ${imagesHtml}
             </div>
         </div>
         <div class="project-page-actions-grid">
+            <div class="project-page-back">
+                <button type="button" data-action="back-page">Back</button>
+            </div>
             <div class="project-page-actions">
                 ${isLast
                     ? `<button type="button" data-action="back-to-projects">Back to Projects</button>`
@@ -203,8 +262,14 @@ async function renderProjectDetail(screenEl, slug, pageParam) {
         </div>
     `;
 
-    container.querySelector('[data-action]').addEventListener('click', () => {
-        location.hash = isLast ? '#/projects' : `#/projects/${slug}/${pageIndex + 2}`;
+    container.querySelectorAll('[data-action]').forEach((button) => {
+        button.addEventListener('click', () => {
+            if (button.dataset.action === 'back-page') {
+                location.hash = backHref;
+            } else {
+                location.hash = isLast ? '#/projects' : `#/projects/${slug}/${pageIndex + 2}`;
+            }
+        });
     });
 }
 
@@ -364,5 +429,62 @@ async function handleRouteChange() {
     }
 }
 
+function setupLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+
+    function open(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('lightbox--active');
+    }
+
+    function close() {
+        lightbox.classList.remove('lightbox--active');
+        lightboxImg.src = '';
+    }
+
+    document.getElementById('app').addEventListener('click', (event) => {
+        const image = event.target.closest('.project-page-image--enlargeable');
+        if (image) open(image.src, image.alt);
+    });
+
+    lightbox.addEventListener('click', (event) => {
+        if (event.target === lightboxImg) return;
+        close();
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') close();
+    });
+}
+
+const GITHUB_REPO = 'ralunan/-portfolio';
+
+async function updateCommitCounter() {
+    const el = document.getElementById('commit-counter');
+    if (!el) return;
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits?per_page=1`);
+        if (!response.ok) throw new Error(`GitHub API error (${response.status})`);
+
+        const link = response.headers.get('Link');
+        let count;
+        if (link) {
+            const match = link.match(/[?&]page=(\d+)>;\s*rel="last"/);
+            count = match ? parseInt(match[1], 10) : null;
+        } else {
+            count = (await response.json()).length;
+        }
+
+        el.textContent = count ? `Total Commits ${count}` : 'Total Commits —';
+    } catch (err) {
+        el.textContent = 'Total Commits —';
+    }
+}
+
+setupLightbox();
+updateCommitCounter();
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('DOMContentLoaded', handleRouteChange);
