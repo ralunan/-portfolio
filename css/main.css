@@ -10,8 +10,9 @@ html, body {
 }
 
 body {
+    --accent: #ffb627;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
     color: white;
 }
 
@@ -33,7 +34,7 @@ body {
     padding: 16px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -42,7 +43,7 @@ body {
 
 #site-nav a:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 182, 39, 0.6);
 }
 
 body[data-route="home"] #site-nav {
@@ -62,7 +63,7 @@ body[data-route="home"] #site-nav {
     padding: 16px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -94,6 +95,36 @@ body[data-route="home"] #site-nav {
    it stays put regardless of how much content sits below it. */
 #screen-project {
     align-items: flex-start;
+}
+
+/* Each interior screen gets its own faint radial glow — same warm-amber
+   family and base dark gradient as home, just far lower opacity and a
+   different position/hue per screen — so navigating between screens feels
+   like a gentle color shift rather than a hard jump from home's bright
+   "cover" glow to a flat, plain interior. Kept subtle so it never competes
+   with content. */
+#screen-resume {
+    background:
+        radial-gradient(circle at 12% 15%, rgba(255, 157, 61, 0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
+}
+
+#screen-about {
+    background:
+        radial-gradient(circle at 88% 20%, rgba(255, 203, 82, 0.12) 0%, transparent 50%),
+        linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
+}
+
+#screen-projects {
+    background:
+        radial-gradient(circle at 50% 8%, rgba(255, 182, 39, 0.13) 0%, transparent 50%),
+        linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
+}
+
+#screen-project {
+    background:
+        radial-gradient(circle at 90% 90%, rgba(255, 157, 61, 0.1) 0%, transparent 50%),
+        linear-gradient(160deg, #16110a 0%, #0c0a08 55%, #08070a 100%);
 }
 
 .screen--active,
@@ -153,7 +184,6 @@ body[data-route="home"] #site-nav {
    quiet background element. */
 
 #screen-home {
-    --home-accent: #ffb627;
     background:
         radial-gradient(circle at 28% 22%, rgba(255, 182, 39, 0.22) 0%, transparent 45%),
         radial-gradient(circle at 80% 85%, rgba(255, 182, 39, 0.1) 0%, transparent 50%),
@@ -161,7 +191,7 @@ body[data-route="home"] #site-nav {
 }
 
 .home-kicker {
-    color: var(--home-accent);
+    color: var(--accent);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.3em;
@@ -187,7 +217,7 @@ body[data-route="home"] #site-nav {
     font-weight: 800;
     line-height: 0.95;
     letter-spacing: -0.02em;
-    color: var(--home-accent);
+    color: var(--accent);
     text-shadow: 0 0 60px rgba(255, 182, 39, 0.35);
 }
 
@@ -200,7 +230,7 @@ body[data-route="home"] #site-nav {
 
 .home-nav a {
     color: #1a1206;
-    background: var(--home-accent);
+    background: var(--accent);
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 700;
@@ -219,7 +249,8 @@ body[data-route="home"] #site-nav {
 
 .placeholder-heading {
     font-size: 2.25rem;
-    font-weight: 300;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 16px;
 }
 
@@ -232,7 +263,8 @@ body[data-route="home"] #site-nav {
 
 .projects-heading {
     font-size: 2.25rem;
-    font-weight: 300;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 32px;
     text-align: center;
 }
@@ -253,20 +285,27 @@ body[data-route="home"] #site-nav {
     color: white;
     text-decoration: none;
     padding: 28px;
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border: 1.5px solid rgba(255, 182, 39, 0.4);
     border-radius: 16px;
     text-align: center;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    /* Hard, unblurred offset shadow (no blur radius) instead of a soft glow —
+       referencing the panel-shadow style from the Persona 3 fan site, which
+       reads more like a graphic-novel panel than a typical drop shadow. */
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .project-card:hover {
     background: rgba(255, 255, 255, 0.12);
-    border-color: white;
+    border-color: var(--accent);
+    transform: translate(-4px, -4px);
+    box-shadow: 14px 14px 0 rgba(0, 0, 0, 0.4);
 }
 
 .project-card-title {
     font-size: 1.3rem;
-    font-weight: 400;
+    font-weight: 700;
+    color: var(--accent);
 }
 
 .project-card--placeholder {
@@ -310,9 +349,9 @@ body[data-route="home"] #site-nav {
 
 .project-image-caption {
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--accent);
     letter-spacing: 0.04em;
-    opacity: 0.8;
     margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;
@@ -406,7 +445,8 @@ body[data-route="home"] #site-nav {
 
 .project-page-block h2 {
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 10px;
 }
 
@@ -426,7 +466,8 @@ body[data-route="home"] #site-nav {
 
 .project-page-subblock h3 {
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 4px;
 }
 
@@ -481,7 +522,7 @@ body[data-route="home"] #site-nav {
     font: inherit;
     color: white;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -495,7 +536,7 @@ body[data-route="home"] #site-nav {
 .project-page-actions button:hover,
 .project-page-back button:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 182, 39, 0.6);
     transform: translateY(-2px);
 }
 
@@ -503,7 +544,8 @@ body[data-route="home"] #site-nav {
 
 .about-heading {
     font-size: 1.75rem;
-    font-weight: 300;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 20px;
 }
 
@@ -561,6 +603,7 @@ body[data-route="home"] #site-nav {
 .resume-name-block p:first-child {
     font-size: 1.6rem;
     font-weight: 700;
+    color: var(--accent);
 }
 
 .resume-name-block p:not(:first-child) {
@@ -575,9 +618,10 @@ body[data-route="home"] #site-nav {
 
 .resume-block h2 {
     font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    opacity: 0.7;
     margin-bottom: 8px;
 }
 
@@ -646,7 +690,7 @@ body[data-route="home"] #site-nav {
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     background: rgba(255, 255, 255, 0.15);
     color: white;
     font-size: 1.5rem;
@@ -683,7 +727,7 @@ body[data-route="home"] #site-nav {
     max-width: 480px;
     width: 100%;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: 16px;
@@ -704,7 +748,7 @@ body[data-route="home"] #site-nav {
     padding: 12px 26px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     color: white;
@@ -715,7 +759,7 @@ body[data-route="home"] #site-nav {
 
 .modal-cta:hover {
     background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 182, 39, 0.6);
     transform: translateY(-2px);
 }
 
@@ -726,7 +770,7 @@ body[data-route="home"] #site-nav {
     width: 36px;
     height: 36px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 182, 39, 0.35);
     background: rgba(255, 255, 255, 0.15);
     color: white;
     font-size: 1.3rem;
