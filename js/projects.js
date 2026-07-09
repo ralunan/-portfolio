@@ -26,7 +26,7 @@
 export const PROJECTS = [
     {
         slug: 'ux-research',
-        title: 'UX Research',
+        title: 'Building UX Research at Walmart International',
         folder: 'Projects/UX Research/',
         file: 'Context-research.txt',
         images: [

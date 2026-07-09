@@ -13,7 +13,7 @@
     <div id="app">
         <section id="screen-home" class="screen" data-screen="home">
             <div class="screen-content">
-                <h1 class="home-title">Hi, I'm <strong>Ronald Alunan</strong>.<br>Welcome to my UX design portfolio.</h1>
+                <h1 class="home-title">Hi, I'm <strong>Ronald Alunan</strong>.<br>UX portfolio</h1>
                 <nav class="home-nav">
                     <a href="#/resume">Resume</a>
                     <a href="#/about">About Me</a>
@@ -31,8 +31,8 @@
         </section>
 
         <section id="screen-projects" class="screen" data-screen="projects">
-            <div class="screen-content">
-                <h1 class="projects-heading">Projects</h1>
+            <div class="screen-content screen-content--wide">
+                <h1 class="projects-heading">Walmart Projects</h1>
                 <div id="projects-list" class="project-card-list"></div>
             </div>
         </section>
@@ -45,6 +45,14 @@
     <div id="lightbox" class="lightbox">
         <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
         <img class="lightbox-img" src="" alt="">
+    </div>
+
+    <div id="add-project-modal" class="modal">
+        <div class="modal-content">
+            <button type="button" class="modal-close" aria-label="Close">&times;</button>
+            <p class="modal-text">Design is always needed! If you want to collaborate together on my next project, please contact me through LinkedIn or my contact info.</p>
+            <a class="modal-cta" href="#/resume">View Resume</a>
+        </div>
     </div>
 
     <script type="module" src="js/main.js"></script>

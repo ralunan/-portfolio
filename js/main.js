@@ -164,11 +164,17 @@ function parseHash() {
 
 function renderProjectsIndex(screenEl) {
     const list = screenEl.querySelector('#projects-list');
-    list.innerHTML = PROJECTS.map((project) => `
+    const cardsHtml = PROJECTS.map((project) => `
         <a class="project-card" href="#/projects/${project.slug}/1">
             <div class="project-card-title">${escapeHtml(project.title)}</div>
         </a>
     `).join('');
+    const placeholderHtml = `
+        <button type="button" class="project-card project-card--placeholder" data-action="open-add-project-modal" aria-label="More projects coming soon">
+            <span class="project-card-plus">+</span>
+        </button>
+    `;
+    list.innerHTML = cardsHtml + placeholderHtml;
 }
 
 async function renderProjectDetail(screenEl, slug, pageParam) {
@@ -459,6 +465,31 @@ function setupLightbox() {
     });
 }
 
+function setupAddProjectModal() {
+    const modal = document.getElementById('add-project-modal');
+    if (!modal) return;
+
+    function open() {
+        modal.classList.add('modal--active');
+    }
+
+    function close() {
+        modal.classList.remove('modal--active');
+    }
+
+    document.getElementById('app').addEventListener('click', (event) => {
+        if (event.target.closest('[data-action="open-add-project-modal"]')) open();
+    });
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal || event.target.closest('.modal-close') || event.target.closest('a')) close();
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') close();
+    });
+}
+
 const GITHUB_REPO = 'ralunan/-portfolio';
 
 async function updateCommitCounter() {
@@ -485,6 +516,7 @@ async function updateCommitCounter() {
 }
 
 setupLightbox();
+setupAddProjectModal();
 updateCommitCounter();
 window.addEventListener('hashchange', handleRouteChange);
 window.addEventListener('DOMContentLoaded', handleRouteChange);
