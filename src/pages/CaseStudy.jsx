@@ -65,7 +65,7 @@ export default function CaseStudy() {
                         <div>
                             <p className="eyebrow">Next case study</p>
                             <h2 className="next-title">{next.title}</h2>
-                            <span className="project-card-cta">View project <span aria-hidden="true">→</span></span>
+                            <span className="project-card-cta text-cta">View <em>project</em> <span aria-hidden="true">→</span></span>
                         </div>
                         <img src={next.coverSrc} alt="" loading="lazy" />
                     </Link>

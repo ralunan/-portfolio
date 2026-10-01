@@ -25,7 +25,7 @@ export default function Nav() {
                 <Link to="/" state={{ scrollTo: 'work' }} className={workActive ? 'active' : ''}>Work</Link>
                 <NavLink to="/about">About</NavLink>
                 <NavLink to="/resume">Resume</NavLink>
-                <a className="nav-cta" href={`mailto:${resume.email}`}>Contact</a>
+                <a className="nav-cta" href={`mailto:${resume.email}`}>Contact <span aria-hidden="true">→</span></a>
             </nav>
         </header>
     );

@@ -55,11 +55,13 @@ Every piece of text uses a role token, never a palette color directly. Contrast 
 | Links | `--link`, `--link-hover` | Kyoto Dusk, then Terracotta ink | 5.7 / 4.9:1 | Inline links in running text |
 | Emphasis (words) | `--emphasis` | Kyoto Dusk to Roasted Terracotta gradient | 5.7 to 3.2:1, heading sizes only | Every `<em>`: Instrument Serif italic |
 | Highlight (marker) | `--highlight-bg` | Vanilla Foam behind Charcoal type | 7.4:1 | `<mark>` for key phrases and metrics |
-| Positive | `--positive` | Matcha ink #69736b | 4.6:1 | Results, "available" status text |
+| Positive | `--positive` | Matcha ink #557a5c | 4.6:1 | Results, link hover |
 | Project accent text | `color-mix(accent 55%, --charcoal-deep)` | per project | 4.5:1+ | Tags, chapter and card numbers on case studies |
 
 Rules:
 - Raw Matcha Cream, Roasted Terracotta and Vanilla Foam are too light for text (2.1 to 3.2:1). Use them for fills, borders, glows and markers; for text use `--terracotta-ink` and `--matcha-ink`.
+- **Links and CTAs to the work are editorial text links**, not buttons (`.text-cta`, `.text-cta--lg`): Geist Semibold with one emphasized word, e.g. "See selected *work*", "Read the *case study*". In the header, the current page shows in the emphasis italic instead of a pill.
+- **Link hover is Matcha**: links grow slightly (scale 1.04) and turn `--positive` green, emphasized words included. No underlines. Scaling is skipped for reduced-motion users.
 - **Emphasis is one treatment everywhere**: any `<em>` is Instrument Serif italic filled with the `--emphasis` gradient (Kyoto Dusk into Roasted Terracotta). The global `em` rule in `styles.css` does this; never restyle `em` per component or give it another color. Use it in headings only (the Terracotta end is too light for body-size text), at most one emphasis per heading.
 - Primary buttons are Charcoal Brew with white type (9.9:1).
 
@@ -105,6 +107,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Work CTAs and the header become editorial text links with an emphasized word (option C). Hover grows the link slightly and turns it Matcha green instead of underlining (Ron). Matcha ink deepened to #557a5c so the hover reads as green.
 - **2026-10-01** All titles scaled down about 25% and collapsed onto six display tokens (Ron: titles felt too large in Geist). Max sizes now step down by 8px: hero 64 (was about 81 on desktop), case and footer titles 56 (were 84 and 88), page titles 48 (72), section titles 40 (52), smaller titles 32 and 28.
 - **2026-10-01** Geist becomes the brand typeface for display and body, replacing Inter and Inter Tight (Ron). Emphasis is always Instrument Serif italic with the Kyoto Dusk to Terracotta gradient, the same treatment everywhere (Ron).
 - **2026-10-01** Text color roles defined (Ron asked): Charcoal Brew headings, Kyoto Dusk subheadings, Terracotta-ink labels and highlights, Vanilla Foam marker, Matcha-ink positive. All roles pass WCAG AA on the page background.

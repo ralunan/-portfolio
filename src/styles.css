@@ -29,7 +29,7 @@
     --charcoal-deep: #2b262c;
     /* Text-safe versions of the light palette colors (4.5:1+ on --bg). */
     --terracotta-ink: #a65646;
-    --matcha-ink: #69736b;
+    --matcha-ink: #557a5c;
 
     /* Text roles. Pick a role, not a palette color. See DESIGN.md "Text colors". */
     --heading: var(--charcoal-brew);
@@ -368,32 +368,29 @@ mark {
 }
 
 .nav-links a {
-    padding: 8px 14px;
-    border-radius: var(--radius-pill);
+    display: inline-block;
+    padding: 8px 12px;
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
     color: var(--muted);
-    transition: color 0.2s ease, background 0.2s ease;
+    transition: color 0.2s ease, transform 0.3s var(--ease);
 }
 
-.nav-links a:hover,
+/* The current page reads as emphasis: the same italic and gradient as <em>. */
 .nav-links a.active {
-    color: var(--text);
-}
-
-.nav-links a.active {
-    background: var(--tint-active);
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    background: var(--emphasis);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .nav-links .nav-cta {
     color: var(--text);
-    border: 1px solid var(--line-strong);
-    margin-left: 6px;
-}
-
-.nav-links .nav-cta:hover {
-    background: var(--tint-hover);
 }
 
 /* ---------- home ---------- */
@@ -562,10 +559,59 @@ mark {
 }
 
 .project-card-cta {
-    display: inline-flex;
-    gap: 8px;
-    font-weight: 600;
     margin-top: 8px;
+}
+
+/* ---------- text CTAs (editorial links to the work) ---------- */
+
+.text-cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    transform-origin: left center;
+    transition: color 0.2s ease, transform 0.3s var(--ease);
+}
+
+.text-cta--lg {
+    font-size: 22px;
+    margin-right: 16px;
+}
+
+.text-cta em {
+    font-size: 1.2em;
+}
+
+/* Link hover: grow slightly and turn Matcha (positive), emphasis included. */
+.text-cta:hover,
+.project-card-link:hover .text-cta,
+.next-card:hover .text-cta,
+.nav-links a:hover {
+    color: var(--positive);
+    transform: scale(1.04);
+}
+
+.text-cta:hover em,
+.project-card-link:hover .text-cta em,
+.next-card:hover .text-cta em,
+.nav-links a.active:hover {
+    background: var(--positive);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text-cta:hover,
+    .project-card-link:hover .text-cta,
+    .next-card:hover .text-cta,
+    .nav-links a:hover {
+        transform: none;
+    }
 }
 
 .project-card-cta span {
