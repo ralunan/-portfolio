@@ -377,11 +377,9 @@ mark {
     transition: color 0.2s ease, transform 0.3s var(--ease);
 }
 
-/* Current page: a plain pill. Emphasis italic was tried here and was too hard to read. */
+/* Current page: darker text only, no pill or italic (both tried, both read oddly). */
 .nav-links a.active {
     color: var(--text);
-    background: var(--tint-active);
-    border-radius: var(--radius-pill);
 }
 
 .nav-links .nav-cta {
