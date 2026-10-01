@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Reveal from '../components/Reveal.jsx';
+import useHeroHandoff from '../components/useHeroHandoff.js';
 import { projects } from '../content.js';
 import profile from '../../ron_profile2.jpg';
 
@@ -39,28 +40,46 @@ const APPROACH = [
 const heroWords = ['Product', 'designer', 'turning', 'customer', 'insight', 'into', 'commerce', 'people'];
 
 export default function Home() {
+    const heroRef = useRef(null);
     const workRef = useRef(null);
+    const highlightsRef = useRef(null);
     const location = useLocation();
     const liveGradient = useLiveGradient();
+    const { goToWork, goTo } = useHeroHandoff(workRef);
+    const goToHighlights = () => {
+        const el = highlightsRef.current;
+        // Land just below the fixed nav.
+        if (el) goTo(() => Math.round(el.getBoundingClientRect().top + window.scrollY) - 96);
+    };
+
+    // As the hero scrolls away, its content lifts and fades while the
+    // gradient pushes in slightly, so it reads as one screen handing off.
+    const { scrollYProgress: heroExit } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+    const contentY = useTransform(heroExit, [0, 1], ['0%', '-35%']);
+    const contentOpacity = useTransform(heroExit, [0, 0.6], [1, 0]);
+    const gradientScale = useTransform(heroExit, [0, 1], [1, 1.15]);
 
     useEffect(() => {
-        if (location.state?.scrollTo === 'work') {
-            const id = setTimeout(() => workRef.current?.scrollIntoView({ behavior: 'smooth' }), 350);
+        // Deep links: #/highlights, or the nav's Work link from another page.
+        const target = location.pathname === '/highlights' ? goToHighlights : location.state?.scrollTo === 'work' ? goToWork : null;
+        if (target) {
+            const id = setTimeout(target, 350);
             return () => clearTimeout(id);
         }
-    }, [location.state, location.key]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname, location.state, location.key, goToWork]);
 
     return (
         <>
-            <section className="hero-light">
-                <div className="hero-gradient" aria-hidden="true">
+            <section className="hero-light" ref={heroRef}>
+                <motion.div className="hero-gradient" aria-hidden="true" style={{ scale: gradientScale }}>
                     {liveGradient && (
                         <Suspense fallback={null}>
                             <HeroGradient />
                         </Suspense>
                     )}
-                </div>
-                <div className="hero container">
+                </motion.div>
+                <motion.div className="hero container" style={{ y: contentY, opacity: contentOpacity }}>
                     <motion.p
                         className="eyebrow"
                         initial={{ opacity: 0, y: 12 }}
@@ -108,22 +127,19 @@ export default function Home() {
                         <button
                             type="button"
                             className="button button--primary"
-                            onClick={() => workRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={goToWork}
                         >
                             See selected work ↓
                         </button>
-                        <Link className="button" to="/about">About me</Link>
+                        {/* Quick read of the highlights; the About and Resume pages are a later step. */}
+                        <a className="button" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
+                            About me
+                        </a>
                     </motion.div>
-                </div>
-            </section>
-
-            <section className="stats container" aria-label="Highlights">
-                {STATS.map(([value, label], i) => (
-                    <Reveal key={value} className="stat" delay={i * 0.08}>
-                        <span className="stat-value">{value}</span>
-                        <span className="stat-label">{label}</span>
-                    </Reveal>
-                ))}
+                </motion.div>
+                <button type="button" className="scroll-cue" onClick={goToWork} aria-label="Scroll to selected work">
+                    <span />
+                </button>
             </section>
 
             <section className="work container" ref={workRef} id="work">
@@ -136,6 +152,15 @@ export default function Home() {
                         <ProjectCard key={project.slug} project={project} index={i} />
                     ))}
                 </div>
+            </section>
+
+            <section className="stats container" aria-label="Highlights" id="highlights" ref={highlightsRef}>
+                {STATS.map(([value, label], i) => (
+                    <Reveal key={value} className="stat" delay={i * 0.08}>
+                        <span className="stat-value">{value}</span>
+                        <span className="stat-label">{label}</span>
+                    </Reveal>
+                ))}
             </section>
 
             <section className="approach container">
