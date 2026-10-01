@@ -62,14 +62,16 @@ export default function Hero({ onSeeWork }) {
                             {word}{' '}
                         </motion.span>
                     ))}
-                    <motion.em
-                        className="hero-word"
+                    {/* The white box behind "trust." is a ::before on this span, so it
+                        sits under the em's gradient text (see .hero-highlight). */}
+                    <motion.span
+                        className="hero-word hero-highlight"
                         initial={{ opacity: 0, y: '0.6em' }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 + heroWords.length * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        trust.
-                    </motion.em>
+                        <em>trust.</em>
+                    </motion.span>
                 </h1>
                 <motion.p
                     className="hero-sub"
