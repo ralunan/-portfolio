@@ -340,3 +340,34 @@ PASS_B[20:] = [
 "...OGGGOOGGO....",
 "...OOOOOOOOO....",
 ]
+
+# Draft 14 (Ron): Step A unchanged. Pass A: legs together, near hand swung back, far hand
+# starting to show in front. Step B: far hand further forward and 1 px higher, near hand back,
+# far leg forward and near leg back with its heel lifted (toe-off) so the legs read as swapped.
+_T2c = "....OrpppppO...."
+PASS_A = SIDE[1:15] + [_T0, _T1, _T2c,
+    "..OsOPLPPPpOSSO.",
+    "...OOJJJJJJOSSO.",
+    "....OJJJJJJOOO..",
+    ".....OJJJO......",
+    ".....OJJjO......",
+    "....OGGGGO......",
+    "....OOOOOO......",
+]
+PASS_B = SIDE[1:15] + [_T0, _T1, _T2c] + _HANG + [
+    "....OOOJJJJO....",
+    ".....OJJJO......",
+    ".....OjjJO......",
+    "....OGGGGO......",
+    "....OOOOOO......",
+]
+SIDE_B = SIDE[:15] + [_T0,
+    "...OpPLPPPpO....",
+    ".OssOrpppppOPO..",
+    ".OssOPLPPPpOSSO.",
+    ".OOOOJJJJJJOSSO.",
+    "..OOOJJJJJOOOO..",
+    "...OjjOOJJO.....",
+    "..OGGGO.OJJO....",
+    "..OOOOO.OGGO....",
+]
