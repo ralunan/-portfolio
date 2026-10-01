@@ -124,16 +124,12 @@ export default function Home() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.9 }}
                     >
-                        <button
-                            type="button"
-                            className="button button--primary"
-                            onClick={goToWork}
-                        >
-                            See selected work ↓
+                        <button type="button" className="text-cta text-cta--lg" onClick={goToWork}>
+                            See selected <em>work</em> <span aria-hidden="true">↓</span>
                         </button>
                         {/* Quick read of the highlights; the About and Resume pages are a later step. */}
-                        <a className="button" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
-                            About me
+                        <a className="text-cta" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
+                            About me <span aria-hidden="true">→</span>
                         </a>
                     </motion.div>
                 </motion.div>
@@ -216,7 +212,7 @@ function ProjectCard({ project, index }) {
                     </div>
                     <h3 className="project-card-title">{project.title}</h3>
                     <p className="project-card-tagline">{project.tagline}</p>
-                    <span className="project-card-cta">Read case study <span aria-hidden="true">→</span></span>
+                    <span className="project-card-cta text-cta">Read the <em>case study</em> <span aria-hidden="true">→</span></span>
                 </div>
             </Link>
         </Reveal>

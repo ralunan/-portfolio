@@ -29,7 +29,7 @@
     --charcoal-deep: #2b262c;
     /* Text-safe versions of the light palette colors (4.5:1+ on --bg). */
     --terracotta-ink: #a65646;
-    --matcha-ink: #69736b;
+    --matcha-ink: #557a5c;
 
     /* Text roles. Pick a role, not a palette color. See DESIGN.md "Text colors". */
     --heading: var(--charcoal-brew);
@@ -37,7 +37,8 @@
     --label: var(--terracotta-ink);
     --link: var(--kyoto-dusk);
     --link-hover: var(--terracotta-ink);
-    --highlight: var(--terracotta-ink);
+    /* Emphasis: every <em> is Instrument Serif italic with this gradient. */
+    --emphasis: linear-gradient(120deg, var(--kyoto-dusk), var(--roasted-terracotta));
     --highlight-bg: var(--vanilla-foam);
     --positive: var(--matcha-ink);
     --vanilla-wash: #f8ecd8;
@@ -53,7 +54,6 @@
     --cotton-blush: #f6dcea;
     --orb-a: #f1dcba;
     --orb-b: #cbd8cd;
-    --hero-em-b: #da6b51;
 
     /* Neutrals, tints and overlays. */
     --white: #fff;
@@ -71,9 +71,14 @@
     --success-ring: rgba(155, 178, 158, 0.3);
 
     /* Type scale. Fixed UI sizes in px; display sizes are fluid. See DESIGN.md. */
-    --fs-hero: clamp(44px, 8vw, 104px);
-    --fs-page: clamp(40px, 6vw, 72px);
-    --fs-section: clamp(32px, 4.5vw, 52px);
+    /* Display scale for titles, largest to smallest: max 64/56/48/40/32/28px,
+       steps of 8px. Scaled down ~25% with the move to Geist (2026-10-01). */
+    --fs-hero: clamp(36px, 5vw, 64px);
+    --fs-display: clamp(32px, 4.4vw, 56px);
+    --fs-page: clamp(30px, 3.8vw, 48px);
+    --fs-section: clamp(28px, 3.2vw, 40px);
+    --fs-title: clamp(24px, 2.6vw, 32px);
+    --fs-title-sm: clamp(22px, 2.2vw, 28px);
 
     --radius-xs: 8px;
     --radius-sm: 12px;
@@ -83,8 +88,9 @@
     --max: 1200px;
     --gutter: clamp(16px, 4vw, 40px);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    /* Brand typeface (2026-10-01): Geist for display and body. */
+    --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --display: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
 }
 
@@ -132,6 +138,13 @@ em {
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0;
+    background: var(--emphasis);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-right: 0.08em;
 }
 
 h1,
@@ -142,11 +155,6 @@ h2 {
 h3,
 h4 {
     color: var(--subheading);
-}
-
-.page-title em,
-.section-title em {
-    color: var(--highlight);
 }
 
 mark {
@@ -360,32 +368,22 @@ mark {
 }
 
 .nav-links a {
-    padding: 8px 14px;
-    border-radius: var(--radius-pill);
+    display: inline-block;
+    padding: 8px 12px;
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
     color: var(--muted);
-    transition: color 0.2s ease, background 0.2s ease;
+    transition: color 0.2s ease, transform 0.3s var(--ease);
 }
 
-.nav-links a:hover,
+/* Current page: darker text only, no pill or italic (both tried, both read oddly). */
 .nav-links a.active {
     color: var(--text);
-}
-
-.nav-links a.active {
-    background: var(--tint-active);
 }
 
 .nav-links .nav-cta {
     color: var(--text);
-    border: 1px solid var(--line-strong);
-    margin-left: 6px;
-}
-
-.nav-links .nav-cta:hover {
-    background: var(--tint-hover);
 }
 
 /* ---------- home ---------- */
@@ -421,14 +419,6 @@ mark {
     white-space: pre;
 }
 
-.hero-title em {
-    background: linear-gradient(120deg, var(--ink-accent), var(--hero-em-b));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    padding-right: 0.08em;
-}
-
 .hero-sub {
     max-width: 560px;
     font-size: clamp(17px, 1.6vw, 20px);
@@ -439,7 +429,8 @@ mark {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    align-items: baseline;
+    gap: 12px 32px;
 }
 
 .stats {
@@ -460,7 +451,7 @@ mark {
 
 .stat-value {
     font-family: var(--display);
-    font-size: clamp(36px, 4vw, 52px);
+    font-size: var(--fs-section);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -551,7 +542,7 @@ mark {
 
 .project-card-title {
     font-family: var(--display);
-    font-size: clamp(26px, 2.8vw, 36px);
+    font-size: var(--fs-title-sm);
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.025em;
@@ -562,10 +553,65 @@ mark {
 }
 
 .project-card-cta {
-    display: inline-flex;
-    gap: 8px;
-    font-weight: 600;
     margin-top: 8px;
+}
+
+/* ---------- text CTAs (editorial links to the work) ---------- */
+
+.text-cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    transform-origin: left center;
+    transition: color 0.2s ease, transform 0.3s var(--ease);
+}
+
+.text-cta--lg {
+    font-size: 22px;
+    margin-right: 16px;
+}
+
+.text-cta em {
+    font-size: 1.2em;
+}
+
+/* Link hover and keyboard focus: grow slightly and turn Matcha (positive), emphasis included. */
+.text-cta:hover,
+.text-cta:focus-visible,
+.project-card-link:hover .text-cta,
+.project-card-link:focus-visible .text-cta,
+.next-card:hover .text-cta,
+.next-card:focus-visible .text-cta,
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    color: var(--positive);
+    transform: scale(1.04);
+}
+
+.text-cta:hover em,
+.text-cta:focus-visible em,
+.project-card-link:hover .text-cta em,
+.project-card-link:focus-visible .text-cta em,
+.next-card:hover .text-cta em,
+.next-card:focus-visible .text-cta em {
+    background: var(--positive);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text-cta:hover,
+    .project-card-link:hover .text-cta,
+    .next-card:hover .text-cta,
+    .nav-links a:hover {
+        transform: none;
+    }
 }
 
 .project-card-cta span {
@@ -639,7 +685,7 @@ mark {
 }
 
 .about-teaser-card .section-title {
-    font-size: clamp(28px, 3.4vw, 40px);
+    font-size: var(--fs-title);
     margin-bottom: 16px;
 }
 
@@ -690,7 +736,7 @@ mark {
 
 .case-title {
     font-family: var(--display);
-    font-size: clamp(40px, 6.5vw, 84px);
+    font-size: var(--fs-display);
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1.02;
@@ -820,7 +866,7 @@ mark {
 
 .chapter-label h2 {
     font-family: var(--display);
-    font-size: clamp(28px, 3vw, 38px);
+    font-size: var(--fs-title-sm);
     font-weight: 600;
     letter-spacing: -0.025em;
     line-height: 1.1;
@@ -971,7 +1017,7 @@ mark {
 
 .next-title {
     font-family: var(--display);
-    font-size: clamp(28px, 3.4vw, 44px);
+    font-size: var(--fs-title);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.08;
@@ -1244,7 +1290,7 @@ mark {
 
 .footer-title {
     font-family: var(--display);
-    font-size: clamp(40px, 7vw, 88px);
+    font-size: var(--fs-display);
     font-weight: 600;
     letter-spacing: -0.045em;
     line-height: 1;
@@ -1370,6 +1416,11 @@ mark {
         color: #111;
     }
 
+    em {
+        background: none;
+        color: inherit;
+    }
+
     .nav,
     .footer,
     .backdrop,
@@ -1472,7 +1523,7 @@ mark {
 
 /* Keep the whole hero inside one screen on shorter laptop displays. */
 .hero-light .hero-title {
-    font-size: min(clamp(44px, 8vw, 104px), 9vh);
+    font-size: min(var(--fs-hero), 9vh);
     max-width: 16ch;
     margin-bottom: min(32px, 3vh);
 }

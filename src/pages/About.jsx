@@ -53,7 +53,7 @@ export default function About() {
                     ))}
                 </ol>
                 <Reveal className="about-actions">
-                    <Link className="button button--primary" to="/" state={{ scrollTo: 'work' }}>See my work</Link>
+                    <Link className="text-cta text-cta--lg" to="/" state={{ scrollTo: 'work' }}>See my <em>work</em> <span aria-hidden="true">→</span></Link>
                     <Link className="button" to="/resume">View resume</Link>
                 </Reveal>
             </section>
