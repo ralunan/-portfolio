@@ -61,7 +61,7 @@ Every piece of text uses a role token, never a palette color directly. Contrast 
 Rules:
 - Raw Matcha Cream, Roasted Terracotta and Vanilla Foam are too light for text (2.1 to 3.2:1). Use them for fills, borders, glows and markers; for text use `--terracotta-ink` and `--matcha-ink`.
 - **Links and CTAs to the work are editorial text links**, not buttons (`.text-cta`, `.text-cta--lg`): Geist Semibold with one emphasized word, e.g. "See selected *work*", "Read the *case study*". The header is not emphasized: its current page is just darker Charcoal text, with no pill or italic (Ron: the italic was hard to read and a lone pill looked odd).
-- **Link hover is Matcha**: links grow slightly (scale 1.04) and turn `--positive` green, emphasized words included, on hover and on keyboard focus alike. No underlines. Scaling is skipped for reduced-motion users. Secondary links beside a main CTA use `.text-cta--quiet` (grey, weight 500). Arrows are always → and nudge right on hover.
+- **Link hover is Matcha**: links grow slightly (scale 1.04) and turn `--positive` green, emphasized words included, on hover and on keyboard focus alike. No underlines. Scaling is skipped for reduced-motion users.
 - **Emphasis is one treatment everywhere**: any `<em>` is Instrument Serif italic filled with the `--emphasis` gradient (Kyoto Dusk into Roasted Terracotta). The global `em` rule in `styles.css` does this; never restyle `em` per component or give it another color. Use it in headings only (the Terracotta end is too light for body-size text), at most one emphasis per heading.
 - Primary buttons are Charcoal Brew with white type (9.9:1).
 
@@ -107,7 +107,6 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
-- **2026-10-01** Hero "About me" is now a quiet text link (no pill) so it doesn't compete with "See selected *work* →". Text-CTA arrows point right and nudge right on hover. Clicking the hero CTA slides the hero out to the left and Selected Work in from the right; scrolling keeps the vertical hand-off (Ron).
 - **2026-10-01** Header pill removed too; the current page is marked by darker text only (Ron).
 - **2026-10-01** Header current page reverted to the plain pill; the italic hurt legibility there (Ron). Keyboard focus gets the same Matcha state as hover.
 - **2026-10-01** Work CTAs and the header become editorial text links with an emphasized word (option C). Hover grows the link slightly and turns it Matcha green instead of underlining (Ron). Matcha ink deepened to #557a5c so the hover reads as green.
