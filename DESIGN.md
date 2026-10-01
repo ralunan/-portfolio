@@ -73,7 +73,16 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 
 - Body: 17px / 1.65.
 - Fixed scale (px): **12, 13, 14, 15, 16, 17, 18, 21, 22, 26**. Labels and eyebrows 12–13 (eyebrows uppercase, 0.12em tracking); UI and buttons 14–15; body 16–18; small headings 21–26.
-- Fluid display tokens: `--fs-hero` clamp(44px, 8vw, 104px), `--fs-page` clamp(40px, 6vw, 72px), `--fs-section` clamp(32px, 4.5vw, 52px).
+- Display scale (fluid, max size on desktop). Every title uses one of these; never write a new `clamp()` for a title.
+
+| Token | Max | Used for |
+| --- | --- | --- |
+| `--fs-hero` | 64px | Home hero headline |
+| `--fs-display` | 56px | Case study titles, footer headline |
+| `--fs-page` | 48px | Page titles (About, Resume) |
+| `--fs-section` | 40px | Section titles, stat numbers |
+| `--fs-title` | 32px | Next-project title, About teaser title |
+| `--fs-title-sm` | 28px | Chapter titles, project card titles |
 - Headings: weight 600, tracking −0.03em (−0.045em at hero size), line-height ~1.08.
 
 ## Spacing
@@ -90,12 +99,13 @@ Easing `--ease` cubic-bezier(0.22, 1, 0.36, 1). Route changes go through `Page`;
 
 ## Known inconsistencies (to fix page by page)
 
-Run `npm run design:check` for the live list. At the time this file was written it reported 36 items, mainly: 11 one-off fluid font sizes that should collapse into a few `--fs-*` tokens, a 19px body size, off-scale spacing (13/22px button padding, 14px nav links, 128px, 88px), and radii of 10/14/36/2px. The hero section's own values are left for the homepage work. Fix these as each page is revised rather than in one sweep, so every change can be checked visually.
+Run `npm run design:check` for the live list. At the time this file was written it reported 36 items, mainly: one-off fluid font sizes that should collapse into a few `--fs-*` tokens (titles were consolidated on 2026-10-01; subtitle sizes remain), a 19px body size, off-scale spacing (13/22px button padding, 14px nav links, 128px, 88px), and radii of 10/14/36/2px. The hero section's own values are left for the homepage work. Fix these as each page is revised rather than in one sweep, so every change can be checked visually.
 
 ## Decisions log
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** All titles scaled down about 25% and collapsed onto six display tokens (Ron: titles felt too large in Geist). Max sizes now step down by 8px: hero 64 (was about 81 on desktop), case and footer titles 56 (were 84 and 88), page titles 48 (72), section titles 40 (52), smaller titles 32 and 28.
 - **2026-10-01** Geist becomes the brand typeface for display and body, replacing Inter and Inter Tight (Ron). Emphasis is always Instrument Serif italic with the Kyoto Dusk to Terracotta gradient, the same treatment everywhere (Ron).
 - **2026-10-01** Text color roles defined (Ron asked): Charcoal Brew headings, Kyoto Dusk subheadings, Terracotta-ink labels and highlights, Vanilla Foam marker, Matcha-ink positive. All roles pass WCAG AA on the page background.
 - **2026-10-01** Japanese palette becomes the site-wide color theme (Ron): Charcoal Brew type, Vanilla Foam background, Kyoto Dusk links and accent, palette colors as project accents. Cotton Candy kept for the home hero gradient only. Charcoal Brew stays out of the springy boxes.

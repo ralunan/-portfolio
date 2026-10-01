@@ -49,7 +49,7 @@ const COLOR = /#[0-9a-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi;
                     if (prop === 'font-size') {
                         const px = value.match(/^(\d+)px$/);
                         if (px && !FONT_SIZES.includes(+px[1])) flag(CSS, i + 1, 'font-size', `${value}  (not on the type scale)`);
-                        if (/clamp|min\(|max\(/.test(value)) flag(CSS, i + 1, 'font-size', `${value}  (fluid size: use a --fs-* token)`);
+                        if (/clamp|min\(|max\(/.test(value) && !/var\(--fs-/.test(value)) flag(CSS, i + 1, 'font-size', `${value}  (fluid size: use a --fs-* token)`);
                     }
                     if (prop === 'font-weight' && !FONT_WEIGHTS.includes(+value)) flag(CSS, i + 1, 'font-weight', value);
                     if (prop === 'border-radius' && !/^(var\(--radius[\w-]*\)|50%|0|inherit)$/.test(value.trim()))

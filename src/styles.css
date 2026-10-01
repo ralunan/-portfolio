@@ -71,9 +71,14 @@
     --success-ring: rgba(155, 178, 158, 0.3);
 
     /* Type scale. Fixed UI sizes in px; display sizes are fluid. See DESIGN.md. */
-    --fs-hero: clamp(44px, 8vw, 104px);
-    --fs-page: clamp(40px, 6vw, 72px);
-    --fs-section: clamp(32px, 4.5vw, 52px);
+    /* Display scale for titles, largest to smallest: max 64/56/48/40/32/28px,
+       steps of 8px. Scaled down ~25% with the move to Geist (2026-10-01). */
+    --fs-hero: clamp(36px, 5vw, 64px);
+    --fs-display: clamp(32px, 4.4vw, 56px);
+    --fs-page: clamp(30px, 3.8vw, 48px);
+    --fs-section: clamp(28px, 3.2vw, 40px);
+    --fs-title: clamp(24px, 2.6vw, 32px);
+    --fs-title-sm: clamp(22px, 2.2vw, 28px);
 
     --radius-xs: 8px;
     --radius-sm: 12px;
@@ -455,7 +460,7 @@ mark {
 
 .stat-value {
     font-family: var(--display);
-    font-size: clamp(36px, 4vw, 52px);
+    font-size: var(--fs-section);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -546,7 +551,7 @@ mark {
 
 .project-card-title {
     font-family: var(--display);
-    font-size: clamp(26px, 2.8vw, 36px);
+    font-size: var(--fs-title-sm);
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.025em;
@@ -634,7 +639,7 @@ mark {
 }
 
 .about-teaser-card .section-title {
-    font-size: clamp(28px, 3.4vw, 40px);
+    font-size: var(--fs-title);
     margin-bottom: 16px;
 }
 
@@ -685,7 +690,7 @@ mark {
 
 .case-title {
     font-family: var(--display);
-    font-size: clamp(40px, 6.5vw, 84px);
+    font-size: var(--fs-display);
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1.02;
@@ -815,7 +820,7 @@ mark {
 
 .chapter-label h2 {
     font-family: var(--display);
-    font-size: clamp(28px, 3vw, 38px);
+    font-size: var(--fs-title-sm);
     font-weight: 600;
     letter-spacing: -0.025em;
     line-height: 1.1;
@@ -966,7 +971,7 @@ mark {
 
 .next-title {
     font-family: var(--display);
-    font-size: clamp(28px, 3.4vw, 44px);
+    font-size: var(--fs-title);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.08;
@@ -1239,7 +1244,7 @@ mark {
 
 .footer-title {
     font-family: var(--display);
-    font-size: clamp(40px, 7vw, 88px);
+    font-size: var(--fs-display);
     font-weight: 600;
     letter-spacing: -0.045em;
     line-height: 1;
@@ -1472,7 +1477,7 @@ mark {
 
 /* Keep the whole hero inside one screen on shorter laptop displays. */
 .hero-light .hero-title {
-    font-size: min(clamp(44px, 8vw, 104px), 9vh);
+    font-size: min(var(--fs-hero), 9vh);
     max-width: 16ch;
     margin-bottom: min(32px, 3vh);
 }
