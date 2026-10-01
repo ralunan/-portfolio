@@ -6,11 +6,12 @@ The single source of truth for how the portfolio looks. Values live as CSS custo
 
 1. **Colors are tokens.** Outside `:root`, CSS uses `var(--…)`, never a raw hex, `rgb()` or `rgba()`. A new color is added to `:root` first, with a comment, and logged below. JS/JSX may only use hex values that already exist as tokens (the shader gradient and springy boxes need literal strings). The one exception is the per-project `accent` in `src/projects.js`, which feeds `--accent`.
 2. **Type sizes come from the scale.** Fixed sizes use the px scale below. Fluid display sizes use a `--fs-*` token; add one rather than writing a new `clamp()`.
-3. **Spacing comes from the scale.** Padding, margin and gap use the px steps below (fluid `clamp()` spacing is fine for section rhythm).
+3. **Spacing comes from the scale, in multiples of 4px.** Padding, margin and gap use the px steps below, every one divisible by 4, so there is no odd spacing (Ron, 2026-10-01). Fluid `clamp()` spacing is fine for section rhythm, but its min and max should also be multiples of 4 (the check doesn't verify fluid values yet, so review them by eye).
 4. **Radii are tokens.** `var(--radius-*)`, or `50%` for circles.
 5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.card` (card surface), `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
 6. **Light theme, dark type, everywhere.** No reversed (light-on-dark) text sections. The dark `--canvas` exists only behind work images.
-7. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
+7. **Body text is 16px (`--fs-body`).** Paragraphs inherit it from `body`; don't set another paragraph size. The only exception is the home hero's intro line at 18px (`--fs-hero-intro`). A new exception needs Ron's approval and a log line (Ron, 2026-10-01).
+8. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
 
 ## Color
 
@@ -73,7 +74,7 @@ Emphasis face: **Instrument Serif Italic** (`--serif`). The contrast between Gei
 
 Don't add other font families. Ron rejected serif headings and wider sans faces such as Instrument Sans.
 
-- Body: 17px / 1.65.
+- Body: `--fs-body` 16px / 1.65 on every screen size. The home hero's intro line is `--fs-hero-intro` 18px. See rule 7.
 - Fixed scale (px): **12, 13, 14, 15, 16, 17, 18, 21, 22, 26**. Labels and eyebrows 12–13 (eyebrows uppercase, 0.12em tracking); UI and buttons 14–15; body 16–18; small headings 21–26.
 - Display scale (fluid, max size on desktop). Every title uses one of these; never write a new `clamp()` for a title.
 
@@ -89,7 +90,7 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 
 ## Spacing
 
-Scale (px): **2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 120, 140, 160**. Page gutter is `--gutter` (16–40px fluid); max content width `--max` 1200px.
+Scale (px), all multiples of 4: **4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 120, 140, 160** (plus 1px for hairlines). (2, 6 and 10 were dropped on 2026-10-01; existing uses are flagged by the check and get fixed page by page.) Page gutter is `--gutter` (16–40px fluid); max content width `--max` 1200px.
 
 ## Radius and depth
 
@@ -109,6 +110,8 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Spacing rule: every padding, margin and gap is a multiple of 4px, so there is no odd spacing (Ron). 36 and 44 join the scale; 2, 6 and 10 leave it. Home hero headline-to-intro gap now steps with width: 24px (phones and below 1280), 28px (1280+), 36px (1440+), 44px (1920+) for page balance on large screens (Ron asked for 30/38/44; rounded to the 4px rule).
+- **2026-10-01** Body text drops to 16px site-wide (was 17px, 16px on phones), and the home hero's intro line to 18px (was 17–20px fluid) (Ron). Both are now tokens (`--fs-body`, `--fs-hero-intro`) and rule 7 makes 16px body a standing rule. Older paragraphs that still set their own size (About story 18px, case-study outcome cards 19px) are exceptions to fix page by page.
 - **2026-10-01** Card text rule (Ron): card body text stays within 3 lines. If copy can't be cut and runs to 4, all cards in the group grow to the same height so they stay uniform.
 - **2026-10-01** Highlight cards (Ron): labels left-aligned inside their text box, numbers stay centered and take `--subheading` (Kyoto Dusk, 6.1:1 on white; the card-title role, recommended by design-steward). A solid back card (`.card--stacked`, Kyoto Dusk by default) offset 8px replaces the hairline stroke, so the cards look stacked. Ron picked Kyoto Dusk for the back card over Roasted Terracotta and one palette color per card.
 - **2026-10-01** Highlight cards (Ron): number and label centered (labels later left-aligned, above), every number at the same height across the row, and every label in the same size text box (22 characters wide, three lines tall) so each card has the same spacing around its content. The card surface becomes the reusable `.card` component (see Radius and depth). Only the Highlights use it for now.

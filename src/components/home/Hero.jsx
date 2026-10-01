@@ -18,7 +18,7 @@ function useLiveGradient() {
     return enabled;
 }
 
-const heroWords = ['Product', 'designer', 'turning', 'customer', 'insight', 'into', 'commerce', 'people'];
+const heroWords = ['Product', 'designer', 'turning', 'research', 'into', 'creative', 'ideas', 'for', 'customer'];
 
 // Home screen 1: gradient + springy boxes behind the headline. Styles: styles/home/hero.css.
 export default function Hero({ onSeeWork }) {
@@ -62,9 +62,9 @@ export default function Hero({ onSeeWork }) {
                             {word}{' '}
                         </motion.span>
                     ))}
-                    {/* Hard return: "trust." always sits alone on the last line. */}
+                    {/* Hard return: "success." always sits alone on the last line. */}
                     <br />
-                    {/* The white box behind "trust." is a ::before on this span, so it
+                    {/* The white box behind "success." is a ::before on this span, so it
                         sits under the em's gradient text (see .hero-highlight). */}
                     <motion.span
                         className="hero-word hero-highlight"
@@ -72,7 +72,7 @@ export default function Hero({ onSeeWork }) {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 + heroWords.length * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                     >
-                        <em>trust.</em>
+                        <em>success.</em>
                     </motion.span>
                 </h1>
                 <motion.p
@@ -81,8 +81,9 @@ export default function Hero({ onSeeWork }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.75 }}
                 >
-                    I spent five years designing Walmart’s international eCommerce experience across Canada,
-                    Mexico and Chile, then brought AI-assisted prototyping to the US Fashion team.
+                    For five years at Walmart I led cross-market projects end to end and championed research.
+                    The simplest solutions often turn out to be the most productive, and they're what lead to
+                    real innovation.
                 </motion.p>
                 <motion.div
                     className="hero-actions"

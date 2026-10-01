@@ -11,7 +11,8 @@ const TOKENS = join(STYLES, 'tokens.css');
 
 // Scales from DESIGN.md. Keep the two in sync.
 const FONT_SIZES = [12, 13, 14, 15, 16, 17, 18, 21, 22, 26];
-const SPACING = [0, 1, 2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 120, 140, 160];
+// Multiples of 4 only (Ron, 2026-10-01); 1px is allowed for hairlines.
+const SPACING = [0, 1, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 120, 140, 160];
 const FONT_WEIGHTS = [400, 500, 600];
 
 const rootBlock = readFileSync(TOKENS, 'utf8').match(/:root\s*{([\s\S]*?)\n}/)[1];
