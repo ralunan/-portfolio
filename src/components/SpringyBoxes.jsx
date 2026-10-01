@@ -11,7 +11,6 @@ const COLORS = [
     '#9BB29E', // Matcha Cream
     '#DA6B51', // Roasted Terracotta
     '#F1DCBA', // Vanilla Foam
-    '#484149', // Charcoal Brew
 ];
 const COUNT = 35;
 // Seconds between reshuffles (the original demo used 3).
@@ -25,7 +24,7 @@ function random(i) {
     const r = Math.random();
     return {
         // Kept mostly to the right so the boxes don't sit behind the intro text.
-        position: [105 - Math.random() * 110, 80 - Math.random() * 160, i * 1.5],
+        position: [110 - Math.random() * 80, 80 - Math.random() * 160, i * 1.5],
         color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
         scale: [1 + r * 5, 1 + r * 5, 1],
         rotation: [0, 0, MathUtils.degToRad(Math.round(Math.random()) * 45)],
