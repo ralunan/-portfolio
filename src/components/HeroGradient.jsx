@@ -1,4 +1,5 @@
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
+import SpringyBoxes from './SpringyBoxes.jsx';
 
 // "Cotton Candy" preset from shadergradient.co. To try another look, design
 // one on shadergradient.co and copy its values here (or pass its share link
@@ -35,8 +36,11 @@ const COTTON_CANDY = {
 
 export default function HeroGradient() {
     return (
-        <ShaderGradientCanvas className="hero-gradient-canvas" pixelDensity={1} fov={45} pointerEvents="none">
-            <ShaderGradient control="props" {...COTTON_CANDY} />
-        </ShaderGradientCanvas>
+        <>
+            <ShaderGradientCanvas className="hero-gradient-canvas" pixelDensity={1} fov={45} pointerEvents="none">
+                <ShaderGradient control="props" {...COTTON_CANDY} />
+            </ShaderGradientCanvas>
+            <SpringyBoxes />
+        </>
     );
 }
