@@ -81,8 +81,9 @@ export default function Hero({ onSeeWork }) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.75 }}
                 >
-                    I spent five years designing Walmart’s international eCommerce experience across Canada,
-                    Mexico and Chile, then brought AI-assisted prototyping to the US Fashion team.
+                    For five years I designed Walmart eCommerce for the US, Canada, Mexico and Chile. I led
+                    projects end to end and championed research, turning what shoppers told us into checkouts
+                    they could rely on.
                 </motion.p>
                 <motion.div
                     className="hero-actions"
