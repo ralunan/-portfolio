@@ -218,27 +218,41 @@ function Highlights({ ref }) {
 // Scroll distance (in viewport heights) that each project holds the stage.
 const STAGE_STEP = 80;
 
-// Incoming cards rise from below tilted 5 degrees and spring level with a
-// small overshoot; outgoing cards lift away behind the highlights and fade.
-// Fades use the site easing (--ease).
-// `dir` is 1 when scrolling down, -1 when scrolling back up.
+// Cards alternate the side they enter from: the first from the left, the
+// second from the right, the third from the left again. An incoming card
+// slides in tilted 5 degrees and springs level with a small overshoot; the
+// outgoing card lifts away behind the highlights and fades. Scrolling back up
+// plays it in reverse. Motion runs at half the original speed so each change
+// is easy to follow. Fades use the site easing (--ease).
+// `custom` is { index, dir }: the new card's index, and 1 when scrolling
+// down or -1 when scrolling back up.
+const sideOf = (index) => (index % 2 === 0 ? -1 : 1);
+const STAGE_SPRING = { type: 'spring', stiffness: 42, damping: 7, mass: 1 };
+const STAGE_EASE = [0.22, 1, 0.36, 1];
+
 const stageCard = {
-    enter: (dir) => ({ y: dir > 0 ? 140 : -140, rotate: dir > 0 ? 5 : -5, opacity: 0 }),
+    enter: ({ index, dir }) =>
+        dir > 0
+            ? { x: sideOf(index) * 280, y: 0, rotate: sideOf(index) * 5, opacity: 0 }
+            : { x: 0, y: -180, rotate: -5, opacity: 0 },
     center: {
+        x: 0,
         y: 0,
         rotate: 0,
         opacity: 1,
         transition: {
-            y: { type: 'spring', stiffness: 170, damping: 14, mass: 1 },
-            rotate: { type: 'spring', stiffness: 170, damping: 14, mass: 1 },
-            opacity: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+            x: STAGE_SPRING,
+            y: STAGE_SPRING,
+            rotate: STAGE_SPRING,
+            opacity: { duration: 0.7, ease: STAGE_EASE },
         },
     },
-    exit: (dir) => ({
-        y: dir > 0 ? -180 : 180,
-        rotate: dir > 0 ? -5 : 5,
+    exit: ({ index, dir }) => ({
+        ...(dir > 0
+            ? { x: 0, y: -180, rotate: -5 }
+            : { x: sideOf(index + 1) * 280, y: 0, rotate: sideOf(index + 1) * 5 }),
         opacity: 0,
-        transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.9, ease: STAGE_EASE },
     }),
 };
 
@@ -272,11 +286,11 @@ function WorkStage({ sectionRef, highlightsRef }) {
                     </div>
                 </div>
                 <div className="work-stage-slot">
-                    <AnimatePresence initial={false} custom={state.dir}>
+                    <AnimatePresence initial={false} custom={state}>
                         <motion.div
                             key={project.slug}
                             className="container work-stage-card"
-                            custom={state.dir}
+                            custom={state}
                             variants={stageCard}
                             initial="enter"
                             animate="center"
