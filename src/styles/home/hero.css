@@ -112,6 +112,21 @@
     }
 }
 
+/* Wider screens: keep growing the left padding past the 202px cap so the
+   text moves toward the boxes instead of leaving a widening empty gap.
+   Each step starts where the previous one ends, so there is no jump. */
+@media (min-width: 1600px) {
+    .hero-light .hero {
+        padding-left: calc(168px + (100vw - 1600px) * 0.25);
+    }
+}
+
+@media (min-width: 2000px) {
+    .hero-light .hero {
+        padding-left: calc(268px + (100vw - 2000px) * 0.35);
+    }
+}
+
 /* Keep the whole hero inside one screen on shorter laptop displays. */
 .hero-light .hero-title {
     font-size: min(var(--fs-hero), 9vh);
