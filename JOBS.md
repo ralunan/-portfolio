@@ -82,4 +82,5 @@ Newest first. Status is as of the scan date. Postings are summarized, never copi
 
 Dated choices Ron makes about targeting (roles, locations, industries to favor or skip).
 
+- 2026-10-01: Phase is **learning**. The scout follows what Ron and the other agents build and keeps the coverage map current. Once Ron says the portfolio is finished it switches to **advising**: recommending ways to strengthen projects where a skill or kind of design work isn't shown.
 - 2026-10-01: Scout created. Sources are public listings plus posts Ron pastes in; no automated LinkedIn access.
