@@ -17,7 +17,11 @@ Every piece of copy should answer at least one of these. If it answers none, cut
 
 ## Voice
 
-Ron sounds like a senior designer talking to a peer: calm, specific, confident without selling.
+Ron sounds like a senior designer explaining his work to a smart friend: professional, warm and easy to follow. The site has a fun, animated feel, and the writing should carry the same personality (Ron, 2026-10-01).
+
+- **Easy to understand first.** A reader should get the design idea without knowing design terminology. Prefer everyday words; when a term matters, explain it in plain language right after.
+- **Introduce, then simplify.** It's fine to open on a complex topic. Name it, then unpack it step by step so the reader understands it by the end of the paragraph. For example: "Cashi had dozens of account states. In plain terms, every customer arrives in a different situation: some have Cashi, some don't, some were approved, some weren't."
+- **Professional, with personality.** Light, human touches are welcome (a vivid image, a short punchy line). Never jokey, never slang, never at the cost of clarity.
 
 - **Specific over impressive.** "Every account state: member or not, approved or denied, linked or not" beats "complex, multi-layered user flows".
 - **Show the judgment.** Say what was decided and why, and what was ruled out. Seniority shows in the reasoning, not in adjectives.
@@ -25,11 +29,13 @@ Ron sounds like a senior designer talking to a peer: calm, specific, confident w
 - **"I" for my decisions, "we" for team outcomes.** Name the partners (Product, Engineering, Research, Accessibility, Content, local market teams, data science). Collaboration is proven by naming who and how, not by saying "collaborative".
 - **Creativity is breadth plus a reframe.** Show how many directions were explored and the new way of seeing the problem ("organize results by occasion, not category"), then how the strongest one was chosen.
 - **Plain words, short sentences.** One idea per sentence. Most sentences under 25 words.
-- **Warm, not casual.** First person, contractions are fine, no jokes in case studies. The 404 page and footer can be lighter.
+- **Warm, not casual.** First person, contractions are fine. Case studies stay professional; the 404 page, footer and home page can be more playful.
 
 ### Words to avoid
 
 passionate, seamless, leverage, utilize, delightful, robust, cutting-edge, innovative, synergy, world-class, best-in-class, journey (except the literal customer journey), "helped to", "was responsible for", "various", "a lot of". No exclamation marks.
+
+Unexplained jargon: terms like *touchpoint*, *happy path*, *account states*, *use case*, *source of truth*, *component library*, *handoff* or *design system* can appear, but only with a plain-language explanation nearby the first time on a page.
 
 ## Honesty rules
 
@@ -81,4 +87,5 @@ Copy changes can break pages. Before proposing an edit, respect these (full deta
 Dated voice and content decisions Ron makes or approves.
 
 - 2026-10-01: Voice set to senior UX / product designer, written for hiring managers looking for creativity and collaboration (Ron).
+- 2026-10-01: Voice is professional but approachable, matching the site's fun, animated personality. Avoid unexplained jargon; introduce complex topics, then simplify them as the reader goes. The writer may also suggest improvements to voice and communication (Ron).
 - 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).
