@@ -107,6 +107,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Selected work on laptop and desktop pins the highlights and swaps one project card per scroll step: the outgoing card fades up behind the highlights, the next rises tilted 5° and springs level with a small bounce (Ron: one project at a time keeps focus, with a bit of fun). Tilt only while moving so resting cards stay readable. "Case studies from Walmart" drops to `--fs-title-sm` there so a card fits on 768px-tall laptops. Phones, short windows and reduced motion keep the stacked list.
 - **2026-10-01** Hero "About me" link removed so the hero has one clear action; About stays in the header (Ron). Highlights stats moved to the top of Selected work so visitors get a snapshot of his experience before the case studies (Ron). Spacing to be tuned in a later pass.
 - **2026-10-01** Hero "About me" loses its pill and becomes a text link with an arrow (Ron).
 - **2026-10-01** Header pill removed too; the current page is marked by darker text only (Ron).

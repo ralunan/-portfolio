@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
 import Reveal from '../components/Reveal.jsx';
 import useHeroHandoff from '../components/useHeroHandoff.js';
 import { projects } from '../content.js';
@@ -15,6 +15,20 @@ function useLiveGradient() {
     const [enabled, setEnabled] = useState(false);
     useEffect(() => {
         const query = window.matchMedia('(min-width: 641px) and (prefers-reduced-motion: no-preference)');
+        const update = () => setEnabled(query.matches);
+        update();
+        query.addEventListener('change', update);
+        return () => query.removeEventListener('change', update);
+    }, []);
+    return enabled;
+}
+
+// The pinned work stage is for laptop and desktop screens. Phones, short
+// windows and reduced-motion visitors get the plain stacked list instead.
+function useWorkStage() {
+    const [enabled, setEnabled] = useState(false);
+    useEffect(() => {
+        const query = window.matchMedia('(min-width: 961px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)');
         const update = () => setEnabled(query.matches);
         update();
         query.addEventListener('change', update);
@@ -45,6 +59,7 @@ export default function Home() {
     const highlightsRef = useRef(null);
     const location = useLocation();
     const liveGradient = useLiveGradient();
+    const workStage = useWorkStage();
     const { goToWork, goTo } = useHeroHandoff(workRef);
     const goToHighlights = () => {
         const el = highlightsRef.current;
@@ -134,26 +149,23 @@ export default function Home() {
                 </button>
             </section>
 
-            <section className="work container" ref={workRef} id="work">
-                {/* Highlights come first so the work below reads in context. */}
-                <div className="stats" role="region" aria-label="Highlights" id="highlights" ref={highlightsRef}>
-                    {STATS.map(([value, label], i) => (
-                        <Reveal key={value} className="stat" delay={i * 0.08}>
-                            <span className="stat-value">{value}</span>
-                            <span className="stat-label">{label}</span>
-                        </Reveal>
-                    ))}
-                </div>
-                <Reveal className="section-head">
-                    <p className="eyebrow">Selected work</p>
-                    <h2 className="section-title">Case studies from Walmart</h2>
-                </Reveal>
-                <div className="work-list">
-                    {projects.map((project, i) => (
-                        <ProjectCard key={project.slug} project={project} index={i} />
-                    ))}
-                </div>
-            </section>
+            {workStage ? (
+                <WorkStage sectionRef={workRef} highlightsRef={highlightsRef} />
+            ) : (
+                <section className="work container" ref={workRef} id="work">
+                    {/* Highlights come first so the work below reads in context. */}
+                    <Highlights ref={highlightsRef} />
+                    <Reveal className="section-head">
+                        <p className="eyebrow">Selected work</p>
+                        <h2 className="section-title">Case studies from Walmart</h2>
+                    </Reveal>
+                    <div className="work-list">
+                        {projects.map((project, i) => (
+                            <ProjectCard key={project.slug} project={project} index={i} />
+                        ))}
+                    </div>
+                </section>
+            )}
 
             <section className="approach container">
                 <Reveal className="section-head">
@@ -190,6 +202,95 @@ export default function Home() {
     );
 }
 
+function Highlights({ ref }) {
+    return (
+        <div className="stats" role="region" aria-label="Highlights" id="highlights" ref={ref}>
+            {STATS.map(([value, label], i) => (
+                <Reveal key={value} className="stat" delay={i * 0.08}>
+                    <span className="stat-value">{value}</span>
+                    <span className="stat-label">{label}</span>
+                </Reveal>
+            ))}
+        </div>
+    );
+}
+
+// Scroll distance (in viewport heights) that each project holds the stage.
+const STAGE_STEP = 80;
+
+// Incoming cards rise from below tilted 5 degrees and spring level with a
+// small overshoot; outgoing cards lift away behind the highlights and fade.
+// Fades use the site easing (--ease).
+// `dir` is 1 when scrolling down, -1 when scrolling back up.
+const stageCard = {
+    enter: (dir) => ({ y: dir > 0 ? 140 : -140, rotate: dir > 0 ? 5 : -5, opacity: 0 }),
+    center: {
+        y: 0,
+        rotate: 0,
+        opacity: 1,
+        transition: {
+            y: { type: 'spring', stiffness: 170, damping: 14, mass: 1 },
+            rotate: { type: 'spring', stiffness: 170, damping: 14, mass: 1 },
+            opacity: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+        },
+    },
+    exit: (dir) => ({
+        y: dir > 0 ? -180 : 180,
+        rotate: dir > 0 ? -5 : 5,
+        opacity: 0,
+        transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+    }),
+};
+
+// Laptop/desktop Selected Work: the highlights stay pinned at the top while
+// scrolling swaps one project card at a time underneath them.
+function WorkStage({ sectionRef, highlightsRef }) {
+    const [state, setState] = useState({ index: 0, dir: 1 });
+    const count = projects.length;
+    const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
+
+    useMotionValueEvent(scrollYProgress, 'change', (p) => {
+        const next = Math.min(count - 1, Math.max(0, Math.round(p * (count - 1))));
+        setState((prev) => (prev.index === next ? prev : { index: next, dir: next > prev.index ? 1 : -1 }));
+    });
+
+    const project = projects[state.index];
+
+    return (
+        <section
+            className="work work--stage"
+            ref={sectionRef}
+            id="work"
+            style={{ height: `calc(100vh + ${(count - 1) * STAGE_STEP}vh)` }}
+        >
+            <div className="work-stage">
+                <div className="container work-stage-head">
+                    <Highlights ref={highlightsRef} />
+                    <div className="work-stage-label">
+                        <p className="eyebrow">Selected work</p>
+                        <h2 className="work-stage-title">Case studies from Walmart</h2>
+                    </div>
+                </div>
+                <div className="work-stage-slot">
+                    <AnimatePresence initial={false} custom={state.dir}>
+                        <motion.div
+                            key={project.slug}
+                            className="container work-stage-card"
+                            custom={state.dir}
+                            variants={stageCard}
+                            initial="enter"
+                            animate="center"
+                            exit="exit"
+                        >
+                            <ProjectCardLink project={project} index={state.index} />
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
+        </section>
+    );
+}
+
 function ProjectCard({ project, index }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -197,20 +298,26 @@ function ProjectCard({ project, index }) {
 
     return (
         <Reveal as="article" className="project-card" style={{ '--accent': project.accent }}>
-            <Link to={`/work/${project.slug}`} className="project-card-link" ref={ref}>
-                <div className="project-card-media">
-                    <motion.img src={project.coverSrc} alt="" style={{ y }} loading={index ? 'lazy' : 'eager'} />
-                </div>
-                <div className="project-card-body">
-                    <span className="project-card-num">0{index + 1}</span>
-                    <div className="tags">
-                        {project.tags.map((tag) => <span key={tag} className="tag">{tag}</span>)}
-                    </div>
-                    <h3 className="project-card-title">{project.title}</h3>
-                    <p className="project-card-tagline">{project.tagline}</p>
-                    <span className="project-card-cta text-cta">Read the <em>case study</em> <span aria-hidden="true">→</span></span>
-                </div>
-            </Link>
+            <ProjectCardLink project={project} index={index} linkRef={ref} imageY={y} />
         </Reveal>
+    );
+}
+
+function ProjectCardLink({ project, index, linkRef, imageY }) {
+    return (
+        <Link to={`/work/${project.slug}`} className="project-card-link" ref={linkRef} style={{ '--accent': project.accent }}>
+            <div className="project-card-media">
+                <motion.img src={project.coverSrc} alt="" style={imageY ? { y: imageY } : undefined} loading={index ? 'lazy' : 'eager'} />
+            </div>
+            <div className="project-card-body">
+                <span className="project-card-num">0{index + 1}</span>
+                <div className="tags">
+                    {project.tags.map((tag) => <span key={tag} className="tag">{tag}</span>)}
+                </div>
+                <h3 className="project-card-title">{project.title}</h3>
+                <p className="project-card-tagline">{project.tagline}</p>
+                <span className="project-card-cta text-cta">Read the <em>case study</em> <span aria-hidden="true">→</span></span>
+            </div>
+        </Link>
     );
 }
