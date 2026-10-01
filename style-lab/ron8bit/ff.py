@@ -325,3 +325,18 @@ for _rows in (SIDE, SIDE_A, SIDE_B, PASS_A, PASS_B):
     for _y, _r in enumerate(_rows):
         if 'r' in _r and _r.count('r') > 1:
             _rows[_y] = _one_check(_r)
+
+# Draft 13 (Ron): pass frames open into a small V with both shoes grounded: front leg reaches
+# 1 px further left, back leg trails 1 px further right, narrower than the step frames.
+PASS_A[20:] = [
+".....OJJjO......",
+"....OJJOjjO.....",
+"...OGGGOOGGO....",
+"...OOOOOOOOO....",
+]
+PASS_B[20:] = [
+".....OjJJO......",
+"....OjjOJJO.....",
+"...OGGGOOGGO....",
+"...OOOOOOOOO....",
+]
