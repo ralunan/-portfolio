@@ -315,3 +315,13 @@ for _rows in (FRONT, BLINK, HAPPY, BACK, WALK_L, WALK_R):
 for _rows in (FRONT, BLINK, HAPPY, BACK):
     _rows[21] = "...OOJJOOJJOO..."
 TALK[20] = "..OSOJJJJJJOO......."
+
+# Draft 12 (Ron): side views keep only the front Terracotta check (toward the walking
+# direction); the other two checks become flannel shade so he no longer reads as facing forward.
+def _one_check(row):
+    i = row.index('r')
+    return row[:i + 1] + row[i + 1:].replace('r', 'p')
+for _rows in (SIDE, SIDE_A, SIDE_B, PASS_A, PASS_B):
+    for _y, _r in enumerate(_rows):
+        if 'r' in _r and _r.count('r') > 1:
+            _rows[_y] = _one_check(_r)

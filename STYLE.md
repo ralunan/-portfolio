@@ -57,7 +57,8 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v11.html` | Ron's 8-bit persona | proposed | Draft 11 (Ron): side walk is a real stride (step, pass, step, pass), legs cross under the body on each pass where the body rises 1 px; hands 2 px; preview `style-lab/previews/2026-10-01-ron8bit-side-walk-stride.gif` at 1 s per frame. Replaces draft 10. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v12.html` | Ron's 8-bit persona | proposed | Draft 12 (Ron): side views keep only the front Terracotta flannel check, toward the walking direction. Replaces draft 11. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v11.html` | Ron's 8-bit persona | dropped | Draft 11 (Ron): side walk is a real stride (step, pass, step, pass), legs cross under the body on each pass where the body rises 1 px; hands 2 px; preview `style-lab/previews/2026-10-01-ron8bit-side-walk-stride.gif` at 1 s per frame. Replaces draft 10. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v10.html` | Ron's 8-bit persona | dropped | Draft 10 (Ron): walking bounce, body 1 px higher on step frames (feet stay grounded), back down when standing; side walk at 1 s per frame (Ron: 2 s too slow). Replaces draft 9. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v9.html` | Ron's 8-bit persona | dropped | Draft 9 (Ron): side view approved; side walk is now four frames (stand, step A, stand, step B) with arms and legs swinging. Replaces draft 8. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v8.html` | Ron's 8-bit persona | dropped | Draft 8 (Ron): front hair from draft 7 approved. Side view gets lower, rounder hair and a small ponytail with a Terracotta tie (side only). Replaces draft 7. |
