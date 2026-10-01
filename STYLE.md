@@ -57,7 +57,7 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v19.html` | Ron's 8-bit persona | proposed | Draft 19 (Ron): front walk. Step 1 his right leg forward with the bigger foot, left hand forward and bigger; Step 2 mirrored; both steps 1 px taller than standing. Side walk unchanged from draft 18. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v19.html` | Ron's 8-bit persona | approved | Draft 19 (Ron): front walk. Step 1 his right leg forward with the bigger foot, left hand forward and bigger; Step 2 mirrored; both steps 1 px taller than standing. Side walk unchanged from draft 18. Ron approved the character 2026-10-01 as the reference for future portfolio animation; implementation to be decided later. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v18.html` | Ron's 8-bit persona | dropped | Draft 18 (Ron): Pass A front hand loses its dark outline. Replaces draft 17. Ron: "i think were good". |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v17.html` | Ron's 8-bit persona | dropped | Draft 17 (Ron): Pass A near hand centered, leaning back; Pass B near hand centered, leaning forward, far hand one unoutlined pixel. Replaces draft 16. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v16.html` | Ron's 8-bit persona | dropped | Draft 16 (Ron): hands only. Pass A front hand half visible, back hand closer to the body; Step B far hand 1 px higher; Pass B a sliver of the far hand behind the body. Replaces draft 15. |
@@ -85,3 +85,4 @@ Dated style decisions Ron makes or approves.
 - **2026-10-01** Style agent created (Ron): flair and visual creativity unique to Ron, using only his design-system colors, prompted by him, tracking and creating video, images and animations. Never layout or design system changes.
 - **2026-10-01** Blocks as a metaphor (Ron): the animated blocks stand for building, each block a skill (building, creating, making sense of design, communication). Only in the hero for now; may join the storytelling later.
 - **2026-10-01** Scope widened (Ron): includes the animated springy blocks, to tweak together for visual appeal, and the Cotton Candy theme, which Ron may or may not use on the project pages.
+- **2026-10-01** 8-bit persona approved (Ron): draft 19 is the character reference (sprites in `style-lab/ron8bit/ff.py`; sheet `style-lab/assets/2026-10-01-ron8bit-character-sheet-v19.html`; side and front walk GIFs in `style-lab/previews/`). Saved for animating on the portfolio later, with chat-bubble annotations; where and how to implement it is still to be decided.
