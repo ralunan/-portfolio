@@ -127,11 +127,50 @@
     }
 }
 
-/* Keep the whole hero inside one screen on shorter laptop displays. */
+/* Keep the whole hero inside one screen on shorter laptop displays.
+   Line height is a little looser than other headings so the white box
+   behind "trust." clears the line above. */
 .hero-light .hero-title {
     font-size: min(var(--fs-hero), 9vh);
+    line-height: 1.12;
     max-width: 16ch;
     margin-bottom: min(32px, 3vh);
+}
+
+/* White box behind "trust.": wipes in left to right once the headline
+   has settled, to pull the eye to the key word. */
+.hero-highlight {
+    position: relative;
+    isolation: isolate;
+    /* Matches the box's left overhang below, so the box sits flush
+       with the headline's left edge instead of hanging outside it. */
+    margin-left: 0.2em;
+}
+
+.hero-highlight::before {
+    content: '';
+    position: absolute;
+    inset: 0.04em -0.06em 0.02em -0.2em;
+    z-index: -1;
+    background: var(--surface);
+    border-radius: var(--radius-xs);
+    transform: scaleX(0);
+    transform-origin: left center;
+    /* 1.8s = after "trust." lands (Hero.jsx: 0.2s + 0.05s per word + 0.6s). */
+    animation: hero-highlight-in 0.8s var(--ease) 1.8s forwards;
+}
+
+@keyframes hero-highlight-in {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-highlight::before {
+        animation: none;
+        transform: none;
+    }
 }
 
 .hero-light .hero-sub {
