@@ -371,3 +371,24 @@ SIDE_B = SIDE[:15] + [_T0,
     "..OGGGO.OJJO....",
     "..OOOOO.OGGO....",
 ]
+
+# Draft 15 (Ron): Pass A front hand 2x2 and a sliver of the back foot; Pass B hand further
+# forward, back foot now in front, other foot shifted 1 px right.
+PASS_A[17:24] = [
+    ".OssOPLPPPpOSSO.",
+    ".OssOJJJJJJOSSO.",
+    ".OOOOJJJJJJOOO..",
+    ".....OJJJO......",
+    ".....OJJjO......",
+    "....OGGGOGO.....",
+    "....OOOOOOO.....",
+]
+PASS_B[17:24] = [
+    "...OSSPPPPpO....",
+    "...OSSOJJJJO....",
+    "...OOOOJJJJO....",
+    ".....OJJJO......",
+    "....OjjOJJO.....",
+    "...OGGOOGGO.....",
+    "...OOOOOOOO.....",
+]
