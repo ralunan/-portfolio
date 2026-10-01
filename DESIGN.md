@@ -6,7 +6,7 @@ The single source of truth for how the portfolio looks. Values live as CSS custo
 
 1. **Colors are tokens.** Outside `:root`, CSS uses `var(--…)`, never a raw hex, `rgb()` or `rgba()`. A new color is added to `:root` first, with a comment, and logged below. JS/JSX may only use hex values that already exist as tokens (the shader gradient and springy boxes need literal strings). The one exception is the per-project `accent` in `src/projects.js`, which feeds `--accent`.
 2. **Type sizes come from the scale.** Fixed sizes use the px scale below. Fluid display sizes use a `--fs-*` token; add one rather than writing a new `clamp()`.
-3. **Spacing comes from the scale.** Padding, margin and gap use the px steps below (fluid `clamp()` spacing is fine for section rhythm).
+3. **Spacing comes from the scale, in multiples of 4px.** Padding, margin and gap use the px steps below, every one divisible by 4, so there is no odd spacing (Ron, 2026-10-01). Fluid `clamp()` spacing is fine for section rhythm, but its min and max should also be multiples of 4 (the check doesn't verify fluid values yet, so review them by eye).
 4. **Radii are tokens.** `var(--radius-*)`, or `50%` for circles.
 5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
 6. **Light theme, dark type, everywhere.** No reversed (light-on-dark) text sections. The dark `--canvas` exists only behind work images.
@@ -90,7 +90,7 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 
 ## Spacing
 
-Scale (px): **2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 120, 140, 160**. Page gutter is `--gutter` (16–40px fluid); max content width `--max` 1200px.
+Scale (px), all multiples of 4: **4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 120, 140, 160** (plus 1px for hairlines). (2, 6 and 10 were dropped on 2026-10-01; existing uses are flagged by the check and get fixed page by page.) Page gutter is `--gutter` (16–40px fluid); max content width `--max` 1200px.
 
 ## Radius and depth
 
@@ -108,6 +108,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Spacing rule: every padding, margin and gap is a multiple of 4px, so there is no odd spacing (Ron). 36 and 44 join the scale; 2, 6 and 10 leave it. Home hero headline-to-intro gap now steps with width: 24px (phones and below 1280), 28px (1280+), 36px (1440+), 44px (1920+) for page balance on large screens (Ron asked for 30/38/44; rounded to the 4px rule).
 - **2026-10-01** Body text drops to 16px site-wide (was 17px, 16px on phones), and the home hero's intro line to 18px (was 17–20px fluid) (Ron). Both are now tokens (`--fs-body`, `--fs-hero-intro`) and rule 7 makes 16px body a standing rule. Older paragraphs that still set their own size (About story 18px, case-study outcome cards 19px) are exceptions to fix page by page.
 - **2026-10-01** Home hero: "trust." gets a white (`--surface`) box with an `--radius-xs` corner that wipes in left to right (0.8s, `--ease`) after the headline settles, for readability over the gradient and to draw the eye (Ron). Hero headline line-height rises to 1.12 (hero only) so the box clears the line above. Reduced motion shows the box without the wipe. "trust." always sits alone on the last line (hard return), and the word is indented so its box sits flush with the headline's left edge, with even padding on both sides of the word (Ron). Hero-only treatment; `<mark>` stays the Vanilla Foam marker.
 - **2026-10-01** Home hero text padding keeps growing past 1600px and 2000px (168px at 1600, about 248px at 1920, about 464px at 2560; hero-only breakpoints at 1600 and 2000px), so the text sits closer to the boxes on wide screens instead of leaving a widening empty gap (Ron).

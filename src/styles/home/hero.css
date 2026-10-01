@@ -134,7 +134,26 @@
     font-size: min(var(--fs-hero), 9vh);
     line-height: 1.12;
     max-width: 16ch;
-    margin-bottom: min(32px, 3vh);
+    /* Gap to the intro line steps up with screen width (Ron, 2026-10-01). */
+    margin-bottom: 24px;
+}
+
+@media (min-width: 1280px) {
+    .hero-light .hero-title {
+        margin-bottom: 28px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .hero-light .hero-title {
+        margin-bottom: 36px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .hero-light .hero-title {
+        margin-bottom: 44px;
+    }
 }
 
 /* White box behind "success.": wipes in left to right once the headline
