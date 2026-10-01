@@ -194,3 +194,11 @@ BLINK = _face([".OsHHHSSSSSSHsO.", ".OsHOOSSSSOOHsO."])
 HAPPY = _face([".OsHHHSSSSOSHsO.", ".OsHOSOSSOSOHsO."])
 TALK = _talk()
 TALK[19] = TALK[19][:12] + "O." + TALK[19][14:]  # raised arm: no hand at the hip
+
+# Draft 5 (Ron): right side of the hair tapers in 1 px from the crest down to the ear.
+for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
+    _rows[5] = "OBHHOBBHHHOOBHO."
+    _rows[6] = "OHOOBHHHOOBBHHO."
+FRONT[7] = WALK_L[7] = WALK_R[7] = BLINK[7] = HAPPY[7] = "OHOHHHHHSSSHHHO."
+BACK[7] = "OHOHHHOOBBHHHHO."
+for _y in (5, 6, 7): TALK[_y] = FRONT[_y] + "...."
