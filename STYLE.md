@@ -57,7 +57,8 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v2.html` | Ron's 8-bit persona | proposed | Draft 2 (Ron): lighter trimmed beard, bigger curly and wavy hair, his identity. Replaces draft 1. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v3.html` | Ron's 8-bit persona | proposed | Draft 3 (Ron): legs 2 px shorter; hair 2 px taller, swept up and right with curl tips and waves. Replaces draft 2. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v2.html` | Ron's 8-bit persona | dropped | Draft 2 (Ron): lighter trimmed beard, bigger curly and wavy hair, his identity. Replaces draft 1; replaced by draft 3. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v1.html` (sprites in `style-lab/ron8bit/ff.py`) | Ron's 8-bit persona | dropped | Draft 1 character sheet: 16x24 Final Fantasy III/VI-scale sprite from Ron's profile photo; front, side, back, walk, expressions, talk pose with chat bubble. Japanese palette only. Replaced by draft 2. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-example-palette-drift.svg` | Example only | proposed | Sample to show the style agent's output: layered palette shapes with a slow drift loop. Not placed on any page. |
 

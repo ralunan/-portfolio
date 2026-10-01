@@ -130,3 +130,50 @@ def _talk():
     put(17, 12, 'p'); put(17, 13, 'O')                   # no hand at the hip on that side
     return [''.join(r) for r in rows]
 TALK = _talk()
+
+# Draft 3 (Ron): legs two pixels shorter, that room goes to taller, styled, wavy hair.
+_HAIR3 = [                # swept up and to the right, curl tips breaking the outline
+"........OO.OO...",
+".....OOOBBOHHO..",
+"...OOBBHHHHOHHO.",
+"..OBHHHOOBBHHHHO",
+".OBHHOOBBHHHOOHO",
+"OBHHOBBHHHOOBHHO",
+"OHOOBHHHOOBBHOHO",
+]
+FRONT = _HAIR3 + ["OHOHHHHSSSSHHOHO"] + FRONT[6:19] + FRONT[21:]
+BACK = _HAIR3 + ["OHOHHHOOBBHHHOHO"] + BACK[6:13] + BODY_BACK + FRONT[20:]
+SIDE = [
+".........OO.OO..",
+".......OOBBOHHO.",
+".....OOBHHHHOHHO",
+"....OBHHOOBBHHHO",
+"...OBHOOBBHHHOHO",
+"..OBHOBBHHHOOBHO",
+"..OHOBHHHOOBHHHO",
+"...OSSSHOOBHHHO.",
+] + SIDE[6:19] + SIDE[21:]
+SIDE_STEP = SIDE[:20] + [
+"....OJJJJJO.....",
+"...OJJO.OJJO....",
+".OGGGO..OGGO....",
+".OOOOO..OOOO....",
+]
+WALK_L = FRONT[:21] + ["...OGGOOOGGO....", "...OOOO..OOO....", "................"]
+WALK_R = FRONT[:21] + ["....OGGOOOGGO...", "....OOO..OOOO...", "................"]
+def _face(eyes):
+    f = list(FRONT); f[8], f[9] = eyes; return f
+BLINK = _face([".OsHSSSSSSSSHsO.", ".OsHOOSSSSOOHsO."])
+HAPPY = _face([".OsHSOSSSSOSHsO.", ".OsHOSOSSOSOHsO."])
+def _talk():
+    rows = [list(r + '....') for r in FRONT]
+    def put(y, x, c): rows[y + 2][x] = c                 # same hand as draft 2, two rows lower
+    for x in (15, 16): put(8, x, 'O')
+    for y in (9, 10):
+        put(y, 14, 'O'); put(y, 15, 'S'); put(y, 16, 'S'); put(y, 17, 'O')
+    put(11, 14, 'O'); put(11, 15, 'O'); put(11, 16, 'O')
+    for y in (12, 13, 14): put(y, 14, 'O'); put(y, 15, 'p'); put(y, 16, 'O')
+    put(15, 13, 'p'); put(15, 14, 'p'); put(15, 15, 'O'); put(16, 13, 'O'); put(16, 14, 'O')
+    put(17, 12, 'p'); put(17, 13, 'O')
+    return [''.join(r) for r in rows]
+TALK = _talk()
