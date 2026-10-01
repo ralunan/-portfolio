@@ -62,6 +62,8 @@ export default function Hero({ onSeeWork }) {
                             {word}{' '}
                         </motion.span>
                     ))}
+                    {/* Hard return: "trust." always sits alone on the last line. */}
+                    <br />
                     {/* The white box behind "trust." is a ::before on this span, so it
                         sits under the em's gradient text (see .hero-highlight). */}
                     <motion.span

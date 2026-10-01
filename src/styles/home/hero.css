@@ -147,7 +147,7 @@
 .hero-highlight::before {
     content: '';
     position: absolute;
-    inset: 0.04em -0.12em 0.02em -0.1em;
+    inset: 0.04em -0.06em 0.02em -0.2em;
     z-index: -1;
     background: var(--surface);
     border-radius: var(--radius-xs);
