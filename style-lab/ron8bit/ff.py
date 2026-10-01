@@ -177,3 +177,20 @@ def _talk():
     put(17, 12, 'p'); put(17, 13, 'O')
     return [''.join(r) for r in rows]
 TALK = _talk()
+
+# Draft 4 (Ron): fringe falls further over the forehead and the top of the left eye;
+# trousers rise one pixel into the torso (the hands row), so the flannel is shorter.
+def _set(rows, y, row):
+    rows[y] = row
+_set(FRONT, 7, "OHOHHHHHSSSHHOHO")
+_set(FRONT, 8, ".OsHHHSSSSOSHsO.")
+_set(FRONT, 19, "..OSOJJJJJJOSO..")
+_set(BACK, 19, "..OSOJJJJJJOSO..")
+_set(SIDE, 19, "....OJSOJJJO....")
+SIDE_STEP[19] = SIDE[19]
+for _w in (WALK_L, WALK_R):
+    for _y in (7, 8, 19): _w[_y] = FRONT[_y]
+BLINK = _face([".OsHHHSSSSSSHsO.", ".OsHOOSSSSOOHsO."])
+HAPPY = _face([".OsHHHSSSSOSHsO.", ".OsHOSOSSOSOHsO."])
+TALK = _talk()
+TALK[19] = TALK[19][:12] + "O." + TALK[19][14:]  # raised arm: no hand at the hip
