@@ -1,0 +1,89 @@
+/* Resume page (pages/Resume.jsx). Print styles are in print.css. */
+
+.resume {
+    padding-bottom: 140px;
+}
+
+.resume-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 40px 0 48px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--line);
+}
+
+.resume-head a {
+    color: var(--text);
+}
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(32px, 6vw, 80px);
+}
+
+.resume-heading {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--label);
+    margin-bottom: 24px;
+}
+
+.job {
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+}
+
+.job h3 {
+    font-family: var(--display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.job-role {
+    color: var(--ink-accent);
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.job ul {
+    padding-left: 18px;
+    color: var(--body);
+    font-size: 16px;
+}
+
+.job li {
+    margin-bottom: 8px;
+}
+
+.resume-list {
+    margin-bottom: 40px;
+}
+
+.resume-list ul {
+    list-style: none;
+}
+
+.resume-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--body);
+}
+
+@media (max-width: 960px) {
+    .resume-grid {
+        grid-template-columns: 1fr;
+    }
+}

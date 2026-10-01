@@ -1,0 +1,9 @@
+/* 404 page (pages/NotFound.jsx). */
+
+.not-found {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}

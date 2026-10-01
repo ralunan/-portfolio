@@ -1,0 +1,53 @@
+/* "How I work" cards (components/home/Approach.jsx). */
+
+.approach {
+    margin-bottom: 160px;
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.approach-card {
+    padding: 28px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+}
+
+.approach-num {
+    display: block;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink-accent);
+    margin-bottom: 40px;
+}
+
+.approach-card h3 {
+    font-family: var(--display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+}
+
+.approach-card p {
+    font-size: 15px;
+    color: var(--muted);
+}
+
+@media (max-width: 960px) {
+    .approach-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 32px;
+    }
+}
+
+@media (max-width: 640px) {
+    .approach-grid {
+        grid-template-columns: 1fr;
+    }
+}

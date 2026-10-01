@@ -1,0 +1,39 @@
+/* Site footer (components/Footer.jsx). */
+
+.footer {
+    border-top: 1px solid var(--line);
+    padding: 120px var(--gutter) 40px;
+    text-align: center;
+}
+
+.footer-inner {
+    max-width: var(--max);
+    margin: 0 auto 120px;
+}
+
+.footer-title {
+    font-family: var(--display);
+    font-size: var(--fs-display);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.footer-meta {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: var(--max);
+    margin: 0 auto;
+    font-size: 14px;
+    color: var(--faint);
+}
+
+@media (max-width: 640px) {
+    .footer-meta {
+        flex-direction: column;
+        align-items: center;
+    }
+}

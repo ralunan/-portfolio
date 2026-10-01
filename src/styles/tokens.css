@@ -1,0 +1,96 @@
+/* Design tokens: every color, font, radius, shadow and fluid size.
+   Documented in DESIGN.md. Add a token here before using a new value. */
+
+:root {
+    --bg: #fbf7f0; /* Vanilla Foam wash */
+    --surface: #ffffff;
+    --surface-2: #f6eee1;
+    --line: rgba(72, 65, 73, 0.1);
+    --line-strong: rgba(72, 65, 73, 0.2);
+    --text: #484149; /* Charcoal Brew */
+    --body: #554e56;
+    --muted: #6f6770;
+    --faint: #756d74;
+    --ink-accent: #5b5f8d; /* Kyoto Dusk */
+    /* Dark "Figma canvas" behind work images: several boards are transparent
+       PNGs with white labels that disappear on a light background. */
+    --canvas: var(--charcoal-deep);
+    --shadow: 0 1px 2px rgba(72, 65, 73, 0.05), 0 12px 32px -12px rgba(72, 65, 73, 0.16);
+    --brand-a: #5b5f8d;
+    --brand-b: #da6b51;
+    --accent: #5b5f8d;
+
+    /* Japanese palette: the site theme (2026-10-01). The springy boxes use the
+       first four; Charcoal Brew is too dark for the boxes but sets the type. */
+    --kyoto-dusk: #5b5f8d;
+    --matcha-cream: #9bb29e;
+    --roasted-terracotta: #da6b51;
+    --vanilla-foam: #f1dcba;
+    --charcoal-brew: #484149;
+    --charcoal-deep: #2b262c;
+    /* Text-safe versions of the light palette colors (4.5:1+ on --bg). */
+    --terracotta-ink: #a65646;
+    --matcha-ink: #557a5c;
+
+    /* Text roles. Pick a role, not a palette color. See DESIGN.md "Text colors". */
+    --heading: var(--charcoal-brew);
+    --subheading: var(--kyoto-dusk);
+    --label: var(--terracotta-ink);
+    --link: var(--kyoto-dusk);
+    --link-hover: var(--terracotta-ink);
+    /* Emphasis: every <em> is Instrument Serif italic with this gradient. */
+    --emphasis: linear-gradient(120deg, var(--kyoto-dusk), var(--roasted-terracotta));
+    --highlight-bg: var(--vanilla-foam);
+    --positive: var(--matcha-ink);
+    --vanilla-wash: #f8ecd8;
+    --matcha-wash: #e3ebe4;
+    --dusk-wash: #e6e7f0;
+
+    /* Cotton Candy pastels: home hero gradient only. */
+    --cotton-lilac: #ebedff;
+    --cotton-mist: #f3f2f8;
+    --cotton-sky: #dbf8ff;
+    --cotton-pink: #f6eefc;
+    --cotton-aqua: #e3f6fb;
+    --cotton-blush: #f6dcea;
+    --orb-a: #f1dcba;
+    --orb-b: #cbd8cd;
+
+    /* Neutrals, tints and overlays. */
+    --white: #fff;
+    --glass: rgba(255, 255, 255, 0.7);
+    --nav-glass: rgba(251, 247, 240, 0.8);
+    --tint-hover: rgba(72, 65, 73, 0.05);
+    --tint-active: rgba(72, 65, 73, 0.07);
+    --line-hover: rgba(72, 65, 73, 0.3);
+    --scrim: rgba(43, 38, 44, 0.78);
+    --overlay: rgba(30, 27, 31, 0.92);
+    --on-dark-muted: rgba(255, 255, 255, 0.7);
+    --on-dark-fill: rgba(255, 255, 255, 0.12);
+    --on-dark-line: rgba(255, 255, 255, 0.25);
+    --success: #7fa184;
+    --success-ring: rgba(155, 178, 158, 0.3);
+
+    /* Type scale. Fixed UI sizes in px; display sizes are fluid. See DESIGN.md. */
+    /* Display scale for titles, largest to smallest: max 64/56/48/40/32/28px,
+       steps of 8px. Scaled down ~25% with the move to Geist (2026-10-01). */
+    --fs-hero: clamp(36px, 5vw, 64px);
+    --fs-display: clamp(32px, 4.4vw, 56px);
+    --fs-page: clamp(30px, 3.8vw, 48px);
+    --fs-section: clamp(28px, 3.2vw, 40px);
+    --fs-title: clamp(24px, 2.6vw, 32px);
+    --fs-title-sm: clamp(22px, 2.2vw, 28px);
+
+    --radius-xs: 8px;
+    --radius-sm: 12px;
+    --radius: 20px;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --max: 1200px;
+    --gutter: clamp(16px, 4vw, 40px);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    /* Brand typeface (2026-10-01): Geist for display and body. */
+    --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --display: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --serif: 'Instrument Serif', Georgia, serif;
+}

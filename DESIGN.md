@@ -1,6 +1,6 @@
 # Design system
 
-The single source of truth for how the portfolio looks. Values live as CSS custom properties on `:root` in `src/styles.css`; this file explains them and records why they were chosen. `npm run design:check` flags any styling value that bypasses them.
+The single source of truth for how the portfolio looks. Values live as CSS custom properties on `:root` in `src/styles/tokens.css`; this file explains them and records why they were chosen. `npm run design:check` flags any styling value that bypasses them.
 
 ## Rules
 
@@ -62,7 +62,7 @@ Rules:
 - Raw Matcha Cream, Roasted Terracotta and Vanilla Foam are too light for text (2.1 to 3.2:1). Use them for fills, borders, glows and markers; for text use `--terracotta-ink` and `--matcha-ink`.
 - **Links and CTAs to the work are editorial text links**, not buttons (`.text-cta`, `.text-cta--lg`): Geist Semibold with one emphasized word, e.g. "See selected *work*", "Read the *case study*". The header is not emphasized: its current page is just darker Charcoal text, with no pill or italic (Ron: the italic was hard to read and a lone pill looked odd).
 - **Link hover is Matcha**: links grow slightly (scale 1.04) and turn `--positive` green, emphasized words included, on hover and on keyboard focus alike. No underlines. Scaling is skipped for reduced-motion users.
-- **Emphasis is one treatment everywhere**: any `<em>` is Instrument Serif italic filled with the `--emphasis` gradient (Kyoto Dusk into Roasted Terracotta). The global `em` rule in `styles.css` does this; never restyle `em` per component or give it another color. Use it in headings only (the Terracotta end is too light for body-size text), at most one emphasis per heading.
+- **Emphasis is one treatment everywhere**: any `<em>` is Instrument Serif italic filled with the `--emphasis` gradient (Kyoto Dusk into Roasted Terracotta). The global `em` rule in `src/styles/base.css` does this; never restyle `em` per component or give it another color. Use it in headings only (the Terracotta end is too light for body-size text), at most one emphasis per heading.
 - Primary buttons are Charcoal Brew with white type (9.9:1).
 
 ## Type
