@@ -5,17 +5,23 @@
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
+    gap: 16px;
     margin-bottom: 160px;
-    border-top: 1px solid var(--line);
-    padding-top: 32px;
 }
 
+/* Each highlight is a card in the project card's style (surface, border,
+   large radius, shadow; Ron), with equal padding on all four sides and its
+   content centered vertically. */
 .stat {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 8px;
-    padding-right: 24px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
 }
 
 .stat-value {
@@ -73,12 +79,11 @@
     margin-bottom: 28px;
 }
 
-/* Desktop (taller than a typical laptop): the highlights get about 20% more
-   height as padding around the stats. Type sizes stay the same. */
+/* Desktop (taller than a typical laptop): the highlight cards get more
+   padding, still equal on all sides. Type sizes stay the same. */
 @media (min-height: 901px) {
-    .work-stage-head .stats {
-        padding-top: 48px;
-        padding-bottom: 16px;
+    .work-stage-head .stat {
+        padding: 32px;
     }
 }
 
@@ -178,7 +183,6 @@
 @media (max-width: 960px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
-        row-gap: 32px;
     }
 }
 
