@@ -473,6 +473,79 @@ mark {
     margin-bottom: 120px;
 }
 
+/* Laptop/desktop Selected Work (WorkStage in Home.jsx): the section is
+   tall enough to scroll through each project, while its stage stays pinned.
+   The highlights sit at the top and project cards swap one at a time in the
+   slot below, fading out as they pass behind the label line. */
+.work--stage {
+    min-height: 0;
+    padding-top: 0;
+}
+
+.work-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.work-stage-head {
+    padding-top: 96px;
+}
+
+.work-stage-head .stats {
+    margin-bottom: 28px;
+}
+
+.work-stage-label .eyebrow {
+    margin-bottom: 8px;
+}
+
+/* One step below .section-title so a card still fits on a 768px-tall laptop. */
+.work-stage-title {
+    font-family: var(--display);
+    font-size: var(--fs-title-sm);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+}
+
+.work-stage-slot {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, var(--text) 24px);
+    mask-image: linear-gradient(to bottom, transparent, var(--text) 24px);
+}
+
+.work-stage-card {
+    position: absolute;
+    top: 32px;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+}
+
+.work-stage-card .project-card-link {
+    height: 100%;
+}
+
+.work-stage-card .project-card-media {
+    aspect-ratio: auto;
+    height: 100%;
+}
+
+.work-stage-card .project-card-media img {
+    inset: 0;
+    height: 100%;
+}
+
+.work-stage-card .project-card-body {
+    gap: 12px;
+    padding: 40px;
+}
+
 .work-list {
     display: flex;
     flex-direction: column;
