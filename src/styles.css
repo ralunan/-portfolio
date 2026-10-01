@@ -533,6 +533,14 @@ mark {
     flex: 0 1 564px;
     min-height: 0;
     overflow-x: clip;
+}
+
+/* Masks the cards: they fade out as they pass up behind the heading, and
+   the peeking next card is cut off at the window's bottom edge. It reaches
+   from the slot's top to the bottom of the window (--to-bottom is measured
+   in WorkStage); the cards themselves are positioned against the slot. */
+.work-stage-layer {
+    height: var(--to-bottom, 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent, var(--text) 24px);
     mask-image: linear-gradient(to bottom, transparent, var(--text) 24px);
 }
