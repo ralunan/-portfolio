@@ -28,8 +28,10 @@ export default function App() {
             </div>
             <Nav />
             <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
+                {/* "/highlights" is the home page scrolled to its stats, so it shares home's key and doesn't replay the page transition. */}
+                <Routes location={location} key={location.pathname === '/highlights' ? '/' : location.pathname}>
                     <Route path="/" element={<Page><Home /></Page>} />
+                    <Route path="/highlights" element={<Page><Home /></Page>} />
                     <Route path="/work/:slug" element={<Page><CaseStudy /></Page>} />
                     <Route path="/about" element={<Page><About /></Page>} />
                     <Route path="/resume" element={<Page><Resume /></Page>} />

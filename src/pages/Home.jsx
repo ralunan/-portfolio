@@ -42,9 +42,15 @@ const heroWords = ['Product', 'designer', 'turning', 'customer', 'insight', 'int
 export default function Home() {
     const heroRef = useRef(null);
     const workRef = useRef(null);
+    const highlightsRef = useRef(null);
     const location = useLocation();
     const liveGradient = useLiveGradient();
-    const goToWork = useHeroHandoff(workRef);
+    const { goToWork, goTo } = useHeroHandoff(workRef);
+    const goToHighlights = () => {
+        const el = highlightsRef.current;
+        // Land just below the fixed nav.
+        if (el) goTo(() => Math.round(el.getBoundingClientRect().top + window.scrollY) - 96);
+    };
 
     // As the hero scrolls away, its content lifts and fades while the
     // gradient pushes in slightly, so it reads as one screen handing off.
@@ -54,11 +60,14 @@ export default function Home() {
     const gradientScale = useTransform(heroExit, [0, 1], [1, 1.15]);
 
     useEffect(() => {
-        if (location.state?.scrollTo === 'work') {
-            const id = setTimeout(goToWork, 350);
+        // Deep links: #/highlights, or the nav's Work link from another page.
+        const target = location.pathname === '/highlights' ? goToHighlights : location.state?.scrollTo === 'work' ? goToWork : null;
+        if (target) {
+            const id = setTimeout(target, 350);
             return () => clearTimeout(id);
         }
-    }, [location.state, location.key, goToWork]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.pathname, location.state, location.key, goToWork]);
 
     return (
         <>
@@ -122,7 +131,10 @@ export default function Home() {
                         >
                             See selected work ↓
                         </button>
-                        <Link className="button" to="/about">About me</Link>
+                        {/* Quick read of the highlights; the About and Resume pages are a later step. */}
+                        <a className="button" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
+                            About me
+                        </a>
                     </motion.div>
                 </motion.div>
                 <button type="button" className="scroll-cue" onClick={goToWork} aria-label="Scroll to selected work">
@@ -142,7 +154,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="stats container" aria-label="Highlights">
+            <section className="stats container" aria-label="Highlights" id="highlights" ref={highlightsRef}>
                 {STATS.map(([value, label], i) => (
                     <Reveal key={value} className="stat" delay={i * 0.08}>
                         <span className="stat-value">{value}</span>

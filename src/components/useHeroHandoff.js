@@ -7,21 +7,23 @@ function prefersReducedMotion() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-// Scrolls the window to `top` with our own easing, so the hero hand-off has a
-// consistent, unhurried feel across browsers. Resolves when finished.
-function animateScrollTo(top) {
+// Scrolls the window to `target` with our own easing, so the hero hand-off has
+// a consistent, unhurried feel across browsers. `target` may be a function,
+// re-read every frame, so the landing spot stays right if layout shifts
+// mid-scroll (e.g. web fonts finishing loading). Resolves when finished.
+function animateScrollTo(target) {
+    const getTop = typeof target === 'function' ? target : () => target;
     return new Promise((resolve) => {
         const start = window.scrollY;
-        const distance = top - start;
-        if (prefersReducedMotion() || Math.abs(distance) < 2) {
-            window.scrollTo(0, top);
+        if (prefersReducedMotion() || Math.abs(getTop() - start) < 2) {
+            window.scrollTo(0, getTop());
             resolve();
             return;
         }
         const t0 = performance.now();
         const step = (now) => {
             const t = Math.min(1, (now - t0) / DURATION);
-            window.scrollTo(0, start + distance * easeInOutCubic(t));
+            window.scrollTo(0, start + (getTop() - start) * easeInOutCubic(t));
             if (t < 1) requestAnimationFrame(step);
             else resolve();
         };
@@ -53,7 +55,7 @@ export default function useHeroHandoff(workRef) {
         }, 350);
     }, []);
 
-    const goToWork = useCallback(() => go(workTop()), [go, workTop]);
+    const goToWork = useCallback(() => go(workTop), [go, workTop]);
 
     useEffect(() => {
         // -1: wants to go up, 1: wants to go down, 0: let the browser scroll.
@@ -111,5 +113,5 @@ export default function useHeroHandoff(workRef) {
         };
     }, [go, workTop]);
 
-    return goToWork;
+    return { goToWork, goTo: go };
 }

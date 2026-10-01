@@ -13,7 +13,7 @@ export default function Nav() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    const workActive = location.pathname === '/' || location.pathname.startsWith('/work');
+    const workActive = ['/', '/highlights'].includes(location.pathname) || location.pathname.startsWith('/work');
 
     return (
         <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
