@@ -107,6 +107,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Hero "About me" loses its pill and becomes a text link with an arrow (Ron).
 - **2026-10-01** Header pill removed too; the current page is marked by darker text only (Ron).
 - **2026-10-01** Header current page reverted to the plain pill; the italic hurt legibility there (Ron). Keyboard focus gets the same Matcha state as hover.
 - **2026-10-01** Work CTAs and the header become editorial text links with an emphasized word (option C). Hover grows the link slightly and turns it Matcha green instead of underlining (Ron). Matcha ink deepened to #557a5c so the hover reads as green.

@@ -128,8 +128,8 @@ export default function Home() {
                             See selected <em>work</em> <span aria-hidden="true">↓</span>
                         </button>
                         {/* Quick read of the highlights; the About and Resume pages are a later step. */}
-                        <a className="button" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
-                            About me
+                        <a className="text-cta" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
+                            About me <span aria-hidden="true">→</span>
                         </a>
                     </motion.div>
                 </motion.div>
