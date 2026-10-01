@@ -222,7 +222,7 @@ const STAGE_STEP = 80;
 // place relative to the active card:
 // - active: centered under the heading;
 // - next: peeking from the bottom edge of the window (top 5% visible),
-//   shifted 75px off center and tilted 10 degrees: right for the second
+//   shifted 75px off center and tilted 5 degrees: right for the second
 //   project, left for the third;
 // - later: hidden at the same spot until it becomes next;
 // - passed: lifted up behind the highlights and faded out.
@@ -231,7 +231,7 @@ const STAGE_STEP = 80;
 // scrolling back up plays it in reverse. Motion runs at half the original
 // speed so each change reads clearly. Fades use the site easing (--ease).
 const PEEK_SHIFT = 75;
-const PEEK_TILT = 10;
+const PEEK_TILT = 5;
 const PEEK_VISIBLE = 0.05;
 const sideOf = (index) => (index % 2 === 1 ? 1 : -1);
 const STAGE_SPRING = { type: 'spring', stiffness: 42, damping: 7, mass: 1 };
@@ -261,8 +261,9 @@ function WorkStage({ sectionRef, highlightsRef }) {
     // The peek position depends on where the card sits in the window, so
     // measure the slot: the distance from the card's resting top to the
     // window's bottom edge, minus the 5% of the card that should show. The
-    // 10 degree tilt lifts one top corner, so the card drops by that much
-    // more and only its leading corner shows, without covering the card above.
+    // tilt drops the trailing top corner, so the card is raised by that much
+    // more: the whole top edge shows, with the leading corner higher and
+    // tucked behind the active card.
     useLayoutEffect(() => {
         const slot = slotRef.current;
         if (!slot) return undefined;
@@ -274,9 +275,9 @@ function WorkStage({ sectionRef, highlightsRef }) {
             const cardH = card ? card.offsetHeight : 0;
             const cardW = card ? card.offsetWidth : 0;
             const tilt = (PEEK_TILT * Math.PI) / 180;
-            const cornerLift = (cardW / 2) * Math.sin(tilt) - (cardH / 2) * (1 - Math.cos(tilt));
+            const cornerDrop = (cardW / 2) * Math.sin(tilt) + (cardH / 2) * (1 - Math.cos(tilt));
             slot.style.setProperty('--to-bottom', `${toBottom}px`);
-            setPeekY(Math.round(toBottom - cardTop - cardH * PEEK_VISIBLE + cornerLift));
+            setPeekY(Math.round(toBottom - cardTop - cardH * PEEK_VISIBLE - cornerDrop));
         };
         measure();
         const observer = new ResizeObserver(measure);
