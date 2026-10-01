@@ -429,7 +429,8 @@ mark {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    align-items: baseline;
+    gap: 12px 32px;
 }
 
 .stats {
