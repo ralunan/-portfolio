@@ -530,13 +530,13 @@ mark {
    weight). The current number is larger and Terracotta. */
 .work-stage-count {
     font-family: var(--serif);
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 600;
     color: var(--muted);
 }
 
 .work-stage-count-num {
-    font-size: 26px;
+    font-size: var(--fs-title);
     color: var(--label);
 }
 
