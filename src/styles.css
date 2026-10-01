@@ -1378,6 +1378,17 @@ em {
     padding-bottom: 88px;
 }
 
+/* On desktop widths, anchor the hero text to the left edge of the screen
+   instead of the centered 1200px column, so it clears the boxes on the right. */
+@media (min-width: 1200px) {
+    .hero-light .hero {
+        max-width: none;
+        margin: 0;
+        padding-left: clamp(40px, 5vw, 96px);
+        padding-right: 0;
+    }
+}
+
 /* Keep the whole hero inside one screen on shorter laptop displays. */
 .hero-light .hero-title {
     font-size: min(clamp(44px, 8vw, 104px), 9vh);
