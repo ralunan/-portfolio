@@ -278,3 +278,40 @@ def _lift(rows):
     return rows[1:21] + [rows[20]] + rows[21:]
 SIDE_A = _lift(SIDE_A)
 SIDE_B = _lift(SIDE_B)
+
+# Draft 11 (Ron): real stride instead of jumping jacks. Side walk = contact A, passing A,
+# contact B, passing B: on passing frames the legs cross under the body and the body rises
+# 1 px (the bounce). Hands are bigger (2 px) everywhere.
+_T0, _T1 = ".....OWPPPO.....", "....OPLPPPpO...."
+_T2 = "....OrprprpO...."
+_HANG = ["....OSSPPPpO....", "....OSSOJJJO...."]          # near hand at the side, 2x2
+_HIPS_C = "..OOOJJJJJOOOO.."
+SIDE = SIDE[:18] + _HANG + SIDE[20:]                          # standing pose, bigger hand
+SIDE_A = SIDE[:15] + [_T0, _T1,                               # contact A: near arm + leg forward
+    "...OPrprprpOO...",
+    "..OSSOLPPPpOpO..",
+    "..OSSOJJJJJOSSO.",
+    _HIPS_C,
+    "...OJJOOjjO.....",
+    "..OGGGOOOGGO....",
+    "..OOOOO.OOOO....",
+]
+SIDE_B = SIDE[:15] + [_T0, _T1,                               # contact B: far arm + leg forward
+    "....OrprprpOPO..",
+    "..OpOPLPPPpOSSO.",
+    "..OSSOJJJJJOSSO.",
+    _HIPS_C,
+    "...OjjOOJJO.....",
+    "..OGGGOOOGGO....",
+    "..OOOOO.OOOO....",
+]
+_PASS_TOP = SIDE[1:15] + [_T0, _T1, _T2] + _HANG + ["....OOOJJJJO....", ".....OJJJO......"]
+PASS_A = _PASS_TOP + [".....OJJjO......", ".....OJJOGGO....", "....OGGGOOO....."]   # far leg swings through
+PASS_B = _PASS_TOP + ["....OJJjjO......", "...OGGOjjO......", ".....OGGGO......"]   # near leg swings through
+
+# bigger hands on the front-facing family: each hand is 2 px tall
+for _rows in (FRONT, BLINK, HAPPY, BACK, WALK_L, WALK_R):
+    _rows[20] = "..OSOJJJJJJOSO.."
+for _rows in (FRONT, BLINK, HAPPY, BACK):
+    _rows[21] = "...OOJJOOJJOO..."
+TALK[20] = "..OSOJJJJJJOO......."

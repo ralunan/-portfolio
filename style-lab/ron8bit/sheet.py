@@ -72,7 +72,7 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
 .notes {{ font-size:14px; color:var(--muted); line-height:1.65; margin:0; padding-left:18px; }}
 </style></head><body><div class="sheet">
 <header>
-  <div><p class="eyebrow">Character sheet · draft 10</p><h1>Ron, the <em>pixel</em> persona</h1></div>
+  <div><p class="eyebrow">Character sheet · draft 11</p><h1>Ron, the <em>pixel</em> persona</h1></div>
   <div class="meta">16 × 24 px sprite, Final Fantasy III / VI scale<br>Japanese palette only · shown at 8× and 12×</div>
 </header>
 <div class="grid">
@@ -80,8 +80,8 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
     <div class="hero">{cell(ff.FRONT, 'Front · 12×', 12)}{cell(ff.FRONT, '1× actual size', 1)}{cell(ff.FRONT, '3×', 3)}{cell(ff.FRONT, '6×', 6)}</div></section>
   <section class="panel wide"><h2>Turnaround</h2><p>Front, side and back, the four directions a walking sprite needs.</p>
     <div class="row">{cell(ff.FRONT,'Front')}{cell(ff.SIDE,'Left')}{cell(ff.BACK,'Back')}{cell(ff.SIDE,'Right',flip=True)}</div></section>
-  <section class="panel wide"><h2>Walk cycle</h2><p>Step frames for walking toward the viewer, and a four-frame side cycle: stand, step A, stand, step B, with the body 1 px higher on the steps.</p>
-    <div class="row">{cell(ff.WALK_L,'Step 1')}{cell(ff.FRONT,'Stand')}{cell(ff.WALK_R,'Step 2')}</div><div class="row" style="margin-top:28px">{cell(ff.SIDE,'Side stand')}{cell(ff.SIDE_A,'Side step A')}{cell(ff.SIDE,'Side stand')}{cell(ff.SIDE_B,'Side step B')}</div></section>
+  <section class="panel wide"><h2>Walk cycle</h2><p>Step frames for walking toward the viewer, and a four-frame side stride: step, pass, step, pass. The legs cross under the body on each pass, where the body rises 1 px.</p>
+    <div class="row">{cell(ff.WALK_L,'Step 1')}{cell(ff.FRONT,'Stand')}{cell(ff.WALK_R,'Step 2')}</div><div class="row" style="margin-top:28px">{cell(ff.SIDE_A,'Step A')}{cell(ff.PASS_A,'Pass A')}{cell(ff.SIDE_B,'Step B')}{cell(ff.PASS_B,'Pass B')}{cell(ff.SIDE,'Side rest')}</div></section>
   <section class="panel"><h2>Expressions</h2><p>Face swaps on the same body, for idle blinks and reactions.</p>
     <div class="row">{cell(ff.FRONT,'Neutral')}{cell(ff.BLINK,'Blink')}{cell(ff.HAPPY,'Happy')}</div></section>
   <section class="panel"><h2>Talk pose</h2><p>Hand raised, ready for a project note in a chat bubble.</p>{bubble}</section>
