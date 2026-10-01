@@ -2,6 +2,8 @@
 
 The single source of truth for how the portfolio reads. `DESIGN.md` governs how the site looks; this file governs what it says. The `content-writer` agent (`.claude/agents/content-writer.md`) reviews and drafts copy against it.
 
+**Scope (Ron, 2026-10-01):** content only, meaning the wording and logic of the entire portfolio. The writer can scan the whole site and recommend changes at the portfolio, project or component level, keeping Ron's voice consistent everywhere. It never makes layout or design system changes.
+
 ## Who we're writing for
 
 Hiring managers and design leads filling **senior UX / product designer** roles. They skim first, read second. In under a minute they want to know:
@@ -79,3 +81,4 @@ Copy changes can break pages. Before proposing an edit, respect these (full deta
 Dated voice and content decisions Ron makes or approves.
 
 - 2026-10-01: Voice set to senior UX / product designer, written for hiring managers looking for creativity and collaboration (Ron).
+- 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).
