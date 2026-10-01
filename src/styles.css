@@ -1384,7 +1384,7 @@ em {
     .hero-light .hero {
         max-width: none;
         margin: 0;
-        padding-left: clamp(40px, 5vw, 96px);
+        padding-left: clamp(84px, 10.5vw, 202px);
         padding-right: 0;
     }
 }
