@@ -429,6 +429,7 @@ mark {
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     gap: 12px;
 }
 
@@ -578,6 +579,44 @@ mark {
 
 .text-cta em {
     font-size: 1.2em;
+}
+
+/* Secondary text link next to a main CTA, e.g. "About me" in the hero. */
+.text-cta--quiet {
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.text-cta > span[aria-hidden] {
+    transition: transform 0.3s var(--ease);
+}
+
+.text-cta:hover > span[aria-hidden],
+.text-cta:focus-visible > span[aria-hidden] {
+    transform: translateX(6px);
+}
+
+/* Hero CTA: the hero slides out left, Selected Work slides in from the right. */
+.hero-light.is-sliding-out {
+    animation: slide-out-left 0.45s var(--ease) forwards;
+}
+
+.work.is-sliding-in {
+    animation: slide-in-right 0.8s var(--ease) both;
+}
+
+@keyframes slide-out-left {
+    to {
+        transform: translateX(-12vw);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(12vw);
+        opacity: 0;
+    }
 }
 
 /* Link hover and keyboard focus: grow slightly and turn Matcha (positive), emphasis included. */

@@ -46,6 +46,28 @@ export default function Home() {
     const location = useLocation();
     const liveGradient = useLiveGradient();
     const { goToWork, goTo } = useHeroHandoff(workRef);
+    // The hero CTA moves sideways: the hero slides out to the left, then Selected
+    // Work slides in from the right. Scrolling keeps the vertical hand-off.
+    const [slide, setSlide] = useState(null);
+    const goToWorkSideways = () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            goToWork();
+            return;
+        }
+        // Jump once the slide-out has played (with a fallback in case it never reports).
+        let done = false;
+        const arrive = () => {
+            if (done) return;
+            done = true;
+            const el = workRef.current;
+            if (el) window.scrollTo(0, Math.round(el.getBoundingClientRect().top + window.scrollY));
+            setSlide('in');
+            setTimeout(() => setSlide(null), 900);
+        };
+        heroRef.current?.addEventListener('animationend', arrive, { once: true });
+        setTimeout(arrive, 900);
+        setSlide('out');
+    };
     const goToHighlights = () => {
         const el = highlightsRef.current;
         // Land just below the fixed nav.
@@ -71,7 +93,7 @@ export default function Home() {
 
     return (
         <>
-            <section className="hero-light" ref={heroRef}>
+            <section className={`hero-light${slide === 'out' ? ' is-sliding-out' : ''}`} ref={heroRef}>
                 <motion.div className="hero-gradient" aria-hidden="true" style={{ scale: gradientScale }}>
                     {liveGradient && (
                         <Suspense fallback={null}>
@@ -124,11 +146,11 @@ export default function Home() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.9 }}
                     >
-                        <button type="button" className="text-cta text-cta--lg" onClick={goToWork}>
-                            See selected <em>work</em> <span aria-hidden="true">↓</span>
+                        <button type="button" className="text-cta text-cta--lg" onClick={goToWorkSideways}>
+                            See selected <em>work</em> <span aria-hidden="true">→</span>
                         </button>
                         {/* Quick read of the highlights; the About and Resume pages are a later step. */}
-                        <a className="button" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
+                        <a className="text-cta text-cta--quiet" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
                             About me
                         </a>
                     </motion.div>
@@ -138,7 +160,7 @@ export default function Home() {
                 </button>
             </section>
 
-            <section className="work container" ref={workRef} id="work">
+            <section className={`work container${slide === 'in' ? ' is-sliding-in' : ''}`} ref={workRef} id="work">
                 <Reveal className="section-head">
                     <p className="eyebrow">Selected work</p>
                     <h2 className="section-title">Case studies from Walmart</h2>
