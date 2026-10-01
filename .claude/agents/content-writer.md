@@ -28,7 +28,7 @@ Pick the mode from the request:
 - Voice: specific, leads with the point, shows judgment, names partners, plain words, nothing from the avoid list.
 - Honesty: every fact traces to a source. Never invent numbers, names, dates or outcomes. Where a fact would help and we don't have it, write `[Ron: …?]` and list the question.
 - Length and shape match the table in `CONTENT.md`.
-- Formatting rules hold: `## Context` and `## Problem statement` names kept, no chapters renamed, added, removed or reordered (images are numbered by chapter), resume line rules kept.
+- Formatting rules hold: `## Context` and `## Problem statement` names kept, any chapter rename, addition, removal or reorder flagged as a decision for Ron (images are numbered by chapter), resume line rules kept.
 
 ## Boundaries
 
