@@ -309,7 +309,9 @@ function WorkStage({ sectionRef, highlightsRef }) {
                                 aria-live="polite"
                                 aria-atomic="true"
                             >
-                                <span className="work-stage-count-num">{active + 1}</span> of {count}
+                                <span className="work-stage-count-num">{active + 1}</span>{' '}
+                                <span className="work-stage-count-of">of</span>{' '}
+                                <span className="work-stage-count-total">{count}</span>
                             </p>
                         </div>
                     </div>

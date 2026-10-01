@@ -588,6 +588,27 @@ mark {
     color: var(--terracotta-ink);
 }
 
+/* MOCKUP: B4 in Instrument Serif. a: all serif; b: numbers serif, "of" Geist. */
+.work-stage-count--b4a,
+.work-stage-count--b4b {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.work-stage-count--b4a .work-stage-count-num,
+.work-stage-count--b4b .work-stage-count-num {
+    font-size: 26px;
+    color: var(--terracotta-ink);
+}
+
+.work-stage-count--b4b .work-stage-count-of {
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .work-stage-count--c.tag {
     align-self: center;
     font-variant-numeric: tabular-nums;
