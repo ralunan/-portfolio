@@ -49,9 +49,29 @@ The springy blocks in the home hero are Ron's signature metaphor (Ron, 2026-10-0
 
 Use it where it genuinely fits, such as a section intro, a chapter that shows one of these skills, or the About story. A light touch is better than forcing it into every page. The blocks are on the hero only for now; Ron may add them to more pages as the portfolio grows, so copy that uses the metaphor should still read well without the visuals.
 
+## Each project shows a different strength
+
+Projects don't all need to show every skill. Each one leans into a different kind of design work, and together they show the full range of Ron's skill set (Ron, 2026-10-01). Copy for a project should put its lead skill up front and let the others play a supporting role.
+
+| Project | Lead skill (proposed, Ron to confirm) | Supporting |
+| --- | --- | --- |
+| Building UX Research | Research and strategy: turning customer feedback into roadmap decisions | Making sense of data, influencing leaders |
+| Cashi × Walmart | Making sense of complex flows: every customer situation, mapped and traceable | Design systems, cross-team collaboration |
+| Walmart Fashion | Creating: visual exploration and AI-assisted prototyping | Visual craft, speed |
+
+At the portfolio level the writer checks that the projects stay distinct (no two telling the same story) and points out a kind of design work none of them shows yet. Example: layout or interaction craft, or shipping with code, which this site itself demonstrates.
+
+## Learning from Ron and the job scout
+
+The writer doesn't only work from what's already on the site. It learns:
+
+- **It asks Ron.** When a story would land better with something the portfolio doesn't say yet (a result, a decision, how a partner was won over, what Ron would do differently), the writer asks. A few focused questions per run, the ones most likely to help land a job offer.
+- **Ron's answers are kept** in `CONTENT-NOTES.md`, so nothing he shares is lost between sessions. Those answers count as source facts for copy.
+- **It reads the job scout's findings** in `JOBS.md` (when present) to see what hiring teams ask for, and uses that to choose emphasis and questions. A job post is never a source of facts about Ron: a skill only goes into copy when his real work backs it up.
+
 ## Honesty rules
 
-- **Never invent facts, numbers, names or outcomes.** Every claim must trace to `resume.txt`, `aboutme.txt`, a project `.txt` file, `src/projects.js`, or something Ron said.
+- **Never invent facts, numbers, names or outcomes.** Every claim must trace to `resume.txt`, `aboutme.txt`, a project `.txt` file, `src/projects.js`, `CONTENT-NOTES.md`, or something Ron said.
 - **No metric? Describe the observable change**: a decision someone made, a team that adopted the work, a roadmap it shaped, time it saved.
 - **Gaps become questions, not filler.** When a section would be stronger with a fact we don't have (a launch date, an adoption number, a quote), write `[Ron: …?]` in the draft and list the question in the report.
 - Respect confidentiality the source already states (for example, Fashion shows only shareable explorations).
@@ -102,4 +122,5 @@ Dated voice and content decisions Ron makes or approves.
 - 2026-10-01: Voice is professional but approachable, matching the site's fun, animated personality. Avoid unexplained jargon; introduce complex topics, then simplify them as the reader goes. The writer may also suggest improvements to voice and communication (Ron).
 - 2026-10-01: Keep copy brief: one or two examples, not exhaustive lists (Ron, after the Cashi sample).
 - 2026-10-01: Building blocks are a storytelling metaphor for Ron's skills (building, creating, making sense, communication); the writer suggests it where it fits (Ron).
+- 2026-10-01: Each project leans into a different skill so together they show Ron's range; the writer asks Ron about ideas not yet in the portfolio, keeps his answers in CONTENT-NOTES.md, and learns from the job scout's JOBS.md (Ron).
 - 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).

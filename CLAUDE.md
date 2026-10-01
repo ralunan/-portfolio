@@ -81,4 +81,5 @@ Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, nu
 `CONTENT.md` holds the voice (senior UX / product designer, written for hiring managers), honesty rules, lengths for each piece of copy and where each lives. Every session that changes copy must:
 - follow `CONTENT.md`, and never invent facts, numbers or outcomes;
 - keep the `.txt` formatting rules above (no renaming or reordering `##` chapters without Ron's approval, since images are numbered by chapter);
-- before opening a PR that touches copy (`*.txt`, text in `src/projects.js`, components or pages), run the `content-writer` agent (`.claude/agents/content-writer.md`) and show Ron its before/after proposals; apply only what he approves.
+- before opening a PR that touches copy (`*.txt`, text in `src/projects.js`, components or pages), run the `content-writer` agent (`.claude/agents/content-writer.md`) and show Ron its before/after proposals; apply only what he approves;
+- when Ron answers one of the writer's questions, record the answer in `CONTENT-NOTES.md` (the writer can't edit files), so later sessions can use it.
