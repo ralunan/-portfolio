@@ -517,6 +517,39 @@ mark {
     margin-bottom: 8px;
 }
 
+/* Subhead and project counter share one line; the counter's right edge
+   lines up with the card's. */
+.work-stage-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+
+/* MOCKUP: three counter styles for Ron to pick from. */
+.work-stage-count--a.eyebrow {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.work-stage-count--b {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--faint);
+}
+
+.work-stage-count--b .work-stage-count-num {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
+}
+
+.work-stage-count--c.tag {
+    align-self: center;
+    font-variant-numeric: tabular-nums;
+}
+
 /* One step below .section-title so a card still fits on a 768px-tall laptop. */
 .work-stage-title {
     font-family: var(--display);
