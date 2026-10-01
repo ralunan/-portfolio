@@ -365,7 +365,7 @@ em {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
-    margin-bottom: 140px;
+    margin-bottom: 160px;
     border-top: 1px solid var(--line);
     padding-top: 32px;
 }
@@ -392,9 +392,13 @@ em {
     line-height: 1.5;
 }
 
+/* Selected Work is the home page's second full screen: the hero hands off
+   to its top edge (see useHeroHandoff), so it fills the viewport and clears
+   the fixed nav itself. */
 .work {
-    margin-bottom: 160px;
-    scroll-margin-top: 80px;
+    min-height: 100vh;
+    padding-top: 128px;
+    margin-bottom: 120px;
 }
 
 .work-list {
@@ -1323,7 +1327,7 @@ em {
     position: relative;
     margin-top: -96px;
     padding-top: 96px;
-    margin-bottom: 72px;
+    min-height: 100vh;
     overflow: hidden;
     isolation: isolate;
 }
@@ -1370,5 +1374,66 @@ em {
 }
 
 .hero-light .hero {
-    padding-bottom: 96px;
+    min-height: calc(100vh - 96px);
+    padding-bottom: 88px;
+}
+
+/* Keep the whole hero inside one screen on shorter laptop displays. */
+.hero-light .hero-title {
+    font-size: min(clamp(44px, 8vw, 104px), 9vh);
+    max-width: 16ch;
+    margin-bottom: min(32px, 3vh);
+}
+
+.hero-light .hero-sub {
+    max-width: 640px;
+    margin-bottom: min(40px, 4vh);
+}
+
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    width: 26px;
+    height: 42px;
+    margin-left: -13px;
+    border-radius: 999px;
+    border: 2px solid rgba(22, 23, 29, 0.35);
+    transition: border-color 0.2s ease;
+}
+
+.scroll-cue:hover {
+    border-color: rgba(22, 23, 29, 0.7);
+}
+
+.scroll-cue span {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: rgba(22, 23, 29, 0.6);
+    animation: scroll-cue 1.8s var(--ease) infinite;
+}
+
+@keyframes scroll-cue {
+    0% {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue span {
+        animation: none;
+    }
 }
