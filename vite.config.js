@@ -7,4 +7,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     base: './',
     plugins: [react()],
+    // The lazy-loaded shader gradient (three.js) is one large chunk by design.
+    build: { chunkSizeWarningLimit: 1300 },
 });

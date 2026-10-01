@@ -1,9 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Reveal from '../components/Reveal.jsx';
 import { projects } from '../content.js';
 import profile from '../../ron_profile2.jpg';
+
+// three.js is heavy, so the live gradient loads in its own chunk after the
+// page renders. Phones and reduced-motion visitors keep the static CSS
+// gradient underneath instead.
+const HeroGradient = lazy(() => import('../components/HeroGradient.jsx'));
+
+function useLiveGradient() {
+    const [enabled, setEnabled] = useState(false);
+    useEffect(() => {
+        const query = window.matchMedia('(min-width: 641px) and (prefers-reduced-motion: no-preference)');
+        const update = () => setEnabled(query.matches);
+        update();
+        query.addEventListener('change', update);
+        return () => query.removeEventListener('change', update);
+    }, []);
+    return enabled;
+}
 
 const STATS = [
     ['5 yrs', 'designing eCommerce at Walmart International'],
@@ -24,6 +41,7 @@ const heroWords = ['Product', 'designer', 'turning', 'customer', 'insight', 'int
 export default function Home() {
     const workRef = useRef(null);
     const location = useLocation();
+    const liveGradient = useLiveGradient();
 
     useEffect(() => {
         if (location.state?.scrollTo === 'work') {
@@ -34,60 +52,69 @@ export default function Home() {
 
     return (
         <>
-            <section className="hero container">
-                <motion.p
-                    className="eyebrow"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
-                >
-                    <span className="status-dot" /> Product designer · San Francisco
-                </motion.p>
-                <h1 className="hero-title">
-                    {heroWords.map((word, i) => (
-                        <motion.span
-                            key={word}
+            <section className="hero-light">
+                <div className="hero-gradient" aria-hidden="true">
+                    {liveGradient && (
+                        <Suspense fallback={null}>
+                            <HeroGradient />
+                        </Suspense>
+                    )}
+                </div>
+                <div className="hero container">
+                    <motion.p
+                        className="eyebrow"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 }}
+                    >
+                        <span className="status-dot" /> Product designer · San Francisco
+                    </motion.p>
+                    <h1 className="hero-title">
+                        {heroWords.map((word, i) => (
+                            <motion.span
+                                key={word}
+                                className="hero-word"
+                                initial={{ opacity: 0, y: '0.6em' }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 + i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                            >
+                                {word}{' '}
+                            </motion.span>
+                        ))}
+                        <motion.em
                             className="hero-word"
                             initial={{ opacity: 0, y: '0.6em' }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                            transition={{ delay: 0.2 + heroWords.length * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            {word}{' '}
-                        </motion.span>
-                    ))}
-                    <motion.em
-                        className="hero-word"
-                        initial={{ opacity: 0, y: '0.6em' }}
+                            trust.
+                        </motion.em>
+                    </h1>
+                    <motion.p
+                        className="hero-sub"
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 + heroWords.length * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        transition={{ delay: 0.75 }}
                     >
-                        trust.
-                    </motion.em>
-                </h1>
-                <motion.p
-                    className="hero-sub"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.75 }}
-                >
-                    I spent five years designing Walmart’s international eCommerce experience across Canada,
-                    Mexico and Chile, then brought AI-assisted prototyping to the US Fashion team.
-                </motion.p>
-                <motion.div
-                    className="hero-actions"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 }}
-                >
-                    <button
-                        type="button"
-                        className="button button--primary"
-                        onClick={() => workRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        I spent five years designing Walmart’s international eCommerce experience across Canada,
+                        Mexico and Chile, then brought AI-assisted prototyping to the US Fashion team.
+                    </motion.p>
+                    <motion.div
+                        className="hero-actions"
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.9 }}
                     >
-                        See selected work ↓
-                    </button>
-                    <Link className="button" to="/about">About me</Link>
-                </motion.div>
+                        <button
+                            type="button"
+                            className="button button--primary"
+                            onClick={() => workRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        >
+                            See selected work ↓
+                        </button>
+                        <Link className="button" to="/about">About me</Link>
+                    </motion.div>
+                </div>
             </section>
 
             <section className="stats container" aria-label="Highlights">
