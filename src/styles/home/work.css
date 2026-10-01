@@ -9,19 +9,16 @@
     margin-bottom: 160px;
 }
 
-/* Each highlight is a card in the project card's style (surface, border,
-   large radius, shadow; Ron), with equal padding on all four sides and its
-   content centered vertically. */
+/* Each highlight is a .card (components/card.css). Its content is
+   centered and starts at the top, so the numbers line up across the row,
+   and every label sits in the same size text box (three lines tall), so
+   each card has the same spacing around its content. */
 .stat {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     gap: 8px;
-    padding: 24px;
-    border-radius: var(--radius-lg);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    text-align: center;
 }
 
 .stat-value {
@@ -33,9 +30,11 @@
 }
 
 .stat-label {
+    width: 22ch;
+    max-width: 100%;
+    min-height: calc(3 * 1.5em);
     font-size: 14px;
     color: var(--muted);
-    max-width: 22ch;
     line-height: 1.5;
 }
 
@@ -83,7 +82,7 @@
    padding, still equal on all sides. Type sizes stay the same. */
 @media (min-height: 901px) {
     .work-stage-head .stat {
-        padding: 32px;
+        --card-pad: 32px;
     }
 }
 

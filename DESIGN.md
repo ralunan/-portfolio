@@ -8,7 +8,7 @@ The single source of truth for how the portfolio looks. Values live as CSS custo
 2. **Type sizes come from the scale.** Fixed sizes use the px scale below. Fluid display sizes use a `--fs-*` token; add one rather than writing a new `clamp()`.
 3. **Spacing comes from the scale.** Padding, margin and gap use the px steps below (fluid `clamp()` spacing is fine for section rhythm).
 4. **Radii are tokens.** `var(--radius-*)`, or `50%` for circles.
-5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
+5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.card` (card surface), `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
 6. **Light theme, dark type, everywhere.** No reversed (light-on-dark) text sections. The dark `--canvas` exists only behind work images.
 7. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
 
@@ -95,6 +95,8 @@ Scale (px): **2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 12
 
 `--radius-xs` 8px (focus rings, small chips) · `--radius-sm` 12px (thumbnails) · `--radius` 20px (cards) · `--radius-lg` 28px (large cards, heroes) · `--radius-pill` 999px (buttons, tags, nav links) · `50%` circles. One shadow: `--shadow`.
 
+**Card.** `.card` (`src/styles/components/card.css`) is the shared card surface, taken from the project card (Ron, 2026-10-01): `--surface` background, 1px `--line` border, `--radius-lg` corners, `--shadow`, and equal padding on all four sides. Padding is 24px by default; change it by setting `--card-pad` on the card itself (not on a parent), using a value from the spacing scale. Layout, alignment and hover come from the component using it, not from `.card`. Used by the home Highlights. The project card, How I work cards, case-study outcome cards and resume blocks share this look but not the class yet; move them onto `.card` only when Ron approves.
+
 ## Motion
 
 Easing `--ease` cubic-bezier(0.22, 1, 0.36, 1). Route changes go through `Page`; scroll-ins through `Reveal`. Motion respects `prefers-reduced-motion` via `MotionConfig`.
@@ -107,6 +109,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Highlight cards (Ron): number and label centered, every number at the same height across the row, and every label in the same size text box (22 characters wide, three lines tall) so each card has the same spacing around its content. The card surface becomes the reusable `.card` component (see Radius and depth). Only the Highlights use it for now.
 - **2026-10-01** Home Highlights become cards in the project card's style (Ron), so cards look consistent: `--surface` background, `--line` border, `--radius-lg` corners, `--shadow`, equal padding on all sides (24px; 32px on windows taller than 900px) and a 16px gap. The divider line above the highlights is removed. Replaces the extra top and bottom padding added for tall windows earlier. No hover, since the stats aren't links. Kept local to the highlights until Ron decides whether it becomes a shared card style.
 - **2026-10-01** Home hero: "trust." gets a white (`--surface`) box with an `--radius-xs` corner that wipes in left to right (0.8s, `--ease`) after the headline settles, for readability over the gradient and to draw the eye (Ron). Hero headline line-height rises to 1.12 (hero only) so the box clears the line above. Reduced motion shows the box without the wipe. "trust." always sits alone on the last line (hard return), and the word is indented so its box sits flush with the headline's left edge, with even padding on both sides of the word (Ron). Hero-only treatment; `<mark>` stays the Vanilla Foam marker.
 - **2026-10-01** Home hero text padding keeps growing past 1600px and 2000px (168px at 1600, about 248px at 1920, about 464px at 2560; hero-only breakpoints at 1600 and 2000px), so the text sits closer to the boxes on wide screens instead of leaving a widening empty gap (Ron).
