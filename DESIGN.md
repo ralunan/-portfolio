@@ -40,6 +40,29 @@ The site theme is Ron's Japanese palette (since 2026-10-01): **Kyoto Dusk** #5B5
 
 **Utility**: `--white`, `--glass`, `--nav-glass`, `--tint-hover`, `--tint-active`, `--scrim`, `--overlay`, `--on-dark-*` (lightbox), `--success-ring`.
 
+## Text colors
+
+Every piece of text uses a role token, never a palette color directly. Contrast is measured on the page background `--bg` #fbf7f0 (WCAG AA needs 4.5:1 for body-size text, 3:1 for large text).
+
+| Role | Token | Color | Contrast | Where it's used |
+| --- | --- | --- | --- | --- |
+| Headings (h1, h2) | `--heading` | Charcoal Brew #484149 | 9.2:1 | Page, section and chapter titles |
+| Subheadings (h3, h4) | `--subheading` | Kyoto Dusk #5B5F8D | 5.7:1 | Card titles, job titles, timeline places, sub-blocks |
+| Body | `--body` | #554e56 (Charcoal, lighter) | 7.5:1 | Paragraphs, lists |
+| Secondary | `--muted` | #6f6770 | 5.1:1 | Taglines, intros, meta values, nav links |
+| Caption | `--faint` | #756d74 | 4.7:1 | Meta labels, footer, image captions |
+| Labels / eyebrows | `--label` | Terracotta ink #a65646 | 4.9:1 | Uppercase section labels ("SELECTED WORK", "EXPERIENCE") |
+| Links | `--link`, `--link-hover` | Kyoto Dusk, then Terracotta ink | 5.7 / 4.9:1 | Inline links in running text |
+| Highlight (words) | `--highlight` | Terracotta ink #a65646 | 4.9:1 | Italic serif `<em>` in page and section titles |
+| Highlight (marker) | `--highlight-bg` | Vanilla Foam behind Charcoal type | 7.4:1 | `<mark>` for key phrases and metrics |
+| Positive | `--positive` | Matcha ink #69736b | 4.6:1 | Results, "available" status text |
+| Project accent text | `color-mix(accent 55%, --charcoal-deep)` | per project | 4.5:1+ | Tags, chapter and card numbers on case studies |
+
+Rules:
+- Raw Matcha Cream, Roasted Terracotta and Vanilla Foam are too light for text (2.1 to 3.2:1). Use them for fills, borders, glows and markers; for text use `--terracotta-ink` and `--matcha-ink`.
+- One highlight per heading at most. The home hero's italic word is the one place with a gradient (Kyoto Dusk into Terracotta).
+- Primary buttons are Charcoal Brew with white type (9.9:1).
+
 ## Type
 
 Fonts: **Inter** (UI and body, 400/500/600), **Inter Tight** (`--display`, headings), **Instrument Serif** italic (`--serif`, used for `<em>` accents in headings).
@@ -69,6 +92,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Text color roles defined (Ron asked): Charcoal Brew headings, Kyoto Dusk subheadings, Terracotta-ink labels and highlights, Vanilla Foam marker, Matcha-ink positive. All roles pass WCAG AA on the page background.
 - **2026-10-01** Japanese palette becomes the site-wide color theme (Ron): Charcoal Brew type, Vanilla Foam background, Kyoto Dusk links and accent, palette colors as project accents. Cotton Candy kept for the home hero gradient only. Charcoal Brew stays out of the springy boxes.
 - **2026-10-01** Design system and consistency check introduced. Raw colors in `styles.css` replaced with tokens (no visual change).
 - **2026-10-01** Charcoal Brew #484149 removed from the springy boxes. Too dark against the light hero (Ron).

@@ -9,7 +9,7 @@
     --text: #484149; /* Charcoal Brew */
     --body: #554e56;
     --muted: #6f6770;
-    --faint: #958d93;
+    --faint: #756d74;
     --ink-accent: #5b5f8d; /* Kyoto Dusk */
     /* Dark "Figma canvas" behind work images: several boards are transparent
        PNGs with white labels that disappear on a light background. */
@@ -27,6 +27,19 @@
     --vanilla-foam: #f1dcba;
     --charcoal-brew: #484149;
     --charcoal-deep: #2b262c;
+    /* Text-safe versions of the light palette colors (4.5:1+ on --bg). */
+    --terracotta-ink: #a65646;
+    --matcha-ink: #69736b;
+
+    /* Text roles. Pick a role, not a palette color. See DESIGN.md "Text colors". */
+    --heading: var(--charcoal-brew);
+    --subheading: var(--kyoto-dusk);
+    --label: var(--terracotta-ink);
+    --link: var(--kyoto-dusk);
+    --link-hover: var(--terracotta-ink);
+    --highlight: var(--terracotta-ink);
+    --highlight-bg: var(--vanilla-foam);
+    --positive: var(--matcha-ink);
     --vanilla-wash: #f8ecd8;
     --matcha-wash: #e3ebe4;
     --dusk-wash: #e6e7f0;
@@ -121,6 +134,27 @@ em {
     letter-spacing: 0;
 }
 
+h1,
+h2 {
+    color: var(--heading);
+}
+
+h3,
+h4 {
+    color: var(--subheading);
+}
+
+.page-title em,
+.section-title em {
+    color: var(--highlight);
+}
+
+mark {
+    background: var(--highlight-bg);
+    color: var(--heading);
+    padding: 0 0.15em;
+}
+
 ::selection {
     background: var(--accent);
     color: var(--white);
@@ -156,7 +190,7 @@ em {
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--label);
     margin-bottom: 16px;
 }
 
@@ -1143,7 +1177,7 @@ em {
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--label);
     margin-bottom: 24px;
 }
 
