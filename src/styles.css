@@ -526,92 +526,18 @@ mark {
     gap: 16px;
 }
 
-/* MOCKUP: three counter styles for Ron to pick from. */
-.work-stage-count--a.eyebrow {
-    margin-bottom: 0;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-}
-
-.work-stage-count--b {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--faint);
-}
-
-.work-stage-count--b .work-stage-count-num {
-    font-family: var(--serif);
-    font-size: 22px;
-    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
-}
-
-/* MOCKUP: bold variations of B. */
-.work-stage-count--b1,
-.work-stage-count--b2,
-.work-stage-count--b3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted);
-}
-
-.work-stage-count--b1 .work-stage-count-num,
-.work-stage-count--b2 .work-stage-count-num,
-.work-stage-count--b3 .work-stage-count-num {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 400;
-    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
-}
-
-.work-stage-count--b2 .work-stage-count-num {
-    font-weight: 700;
-}
-
-.work-stage-count--b3 {
-    color: var(--heading);
-}
-
-.work-stage-count--b3 .work-stage-count-num {
-    font-weight: 700;
-}
-
-.work-stage-count--b4 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted);
-}
-
-.work-stage-count--b4 .work-stage-count-num {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--terracotta-ink);
-}
-
-/* MOCKUP: B4 in Instrument Serif. a: all serif; b: numbers serif, "of" Geist. */
-.work-stage-count--b4a,
-.work-stage-count--b4b {
+/* Counter (Ron): all Instrument Serif, bold synthesized (the face has one
+   weight). The current number is larger and Terracotta. */
+.work-stage-count {
     font-family: var(--serif);
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--muted);
 }
 
-.work-stage-count--b4a .work-stage-count-num,
-.work-stage-count--b4b .work-stage-count-num {
+.work-stage-count-num {
     font-size: 26px;
-    color: var(--terracotta-ink);
-}
-
-.work-stage-count--b4b .work-stage-count-of {
-    font-family: var(--font);
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.work-stage-count--c.tag {
-    align-self: center;
-    font-variant-numeric: tabular-nums;
+    color: var(--label);
 }
 
 /* One step below .section-title so a card still fits on a 768px-tall laptop. */

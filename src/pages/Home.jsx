@@ -303,15 +303,8 @@ function WorkStage({ sectionRef, highlightsRef }) {
                         <p className="eyebrow">Selected work</p>
                         <div className="work-stage-row">
                             <h2 className="work-stage-title">Case studies from Walmart</h2>
-                            <p
-                                className="work-stage-count work-stage-count--b"
-                                style={{ '--accent': projects[active].accent }}
-                                aria-live="polite"
-                                aria-atomic="true"
-                            >
-                                <span className="work-stage-count-num">{active + 1}</span>{' '}
-                                <span className="work-stage-count-of">of</span>{' '}
-                                <span className="work-stage-count-total">{count}</span>
+                            <p className="work-stage-count" aria-live="polite" aria-atomic="true">
+                                <span className="work-stage-count-num">{active + 1}</span> of {count}
                             </p>
                         </div>
                     </div>
