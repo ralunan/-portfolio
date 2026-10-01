@@ -37,7 +37,8 @@
     --label: var(--terracotta-ink);
     --link: var(--kyoto-dusk);
     --link-hover: var(--terracotta-ink);
-    --highlight: var(--terracotta-ink);
+    /* Emphasis: every <em> is Instrument Serif italic with this gradient. */
+    --emphasis: linear-gradient(120deg, var(--kyoto-dusk), var(--roasted-terracotta));
     --highlight-bg: var(--vanilla-foam);
     --positive: var(--matcha-ink);
     --vanilla-wash: #f8ecd8;
@@ -53,7 +54,6 @@
     --cotton-blush: #f6dcea;
     --orb-a: #f1dcba;
     --orb-b: #cbd8cd;
-    --hero-em-b: #da6b51;
 
     /* Neutrals, tints and overlays. */
     --white: #fff;
@@ -83,8 +83,9 @@
     --max: 1200px;
     --gutter: clamp(16px, 4vw, 40px);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+    /* Brand typeface (2026-10-01): Geist for display and body. */
+    --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --display: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
 }
 
@@ -132,6 +133,13 @@ em {
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0;
+    background: var(--emphasis);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-right: 0.08em;
 }
 
 h1,
@@ -142,11 +150,6 @@ h2 {
 h3,
 h4 {
     color: var(--subheading);
-}
-
-.page-title em,
-.section-title em {
-    color: var(--highlight);
 }
 
 mark {
@@ -419,14 +422,6 @@ mark {
 .hero-word {
     display: inline-block;
     white-space: pre;
-}
-
-.hero-title em {
-    background: linear-gradient(120deg, var(--ink-accent), var(--hero-em-b));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    padding-right: 0.08em;
 }
 
 .hero-sub {
@@ -1368,6 +1363,11 @@ mark {
     body {
         background: #fff;
         color: #111;
+    }
+
+    em {
+        background: none;
+        color: inherit;
     }
 
     .nav,
