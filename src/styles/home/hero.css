@@ -142,6 +142,9 @@
 .hero-highlight {
     position: relative;
     isolation: isolate;
+    /* Matches the box's left overhang below, so the box sits flush
+       with the headline's left edge instead of hanging outside it. */
+    margin-left: 0.2em;
 }
 
 .hero-highlight::before {
