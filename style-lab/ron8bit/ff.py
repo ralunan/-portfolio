@@ -248,3 +248,25 @@ SIDE_STEP[:10] = _SIDE8
 for _rows in (SIDE, SIDE_STEP):
     _rows[9] = "..OSOSSSSHsHHOHO"
     _rows[10] = ".OSSSSSSSHHHHOO."
+
+# Draft 9 (Ron): side walk cycle = stand, step A, stand, step B. Step A: near arm and leg
+# forward, far arm and leg back; step B the opposite. Far limbs use a darker trouser shade.
+PAL['j'] = '#3f3940'  # far trouser leg: Charcoal Brew 70% over --charcoal-deep
+SIDE_A = SIDE[:17] + [
+"...OPrprprpO....",
+"..OPOPLPPPpOO...",
+"..OSOJJJJJJOSO..",
+"....OJJJJJO.....",
+"...OJJOOjjO.....",
+"..OGGGO.OGGO....",
+"..OOOOO.OOOO....",
+]
+SIDE_B = SIDE[:17] + [
+"....OrprprpOPO..",
+"..OpOPLPPPpOPO..",
+"..OSOJJJJJJOSO..",
+"....OJJJJJO.....",
+"...OjjOOJJO.....",
+"..OGGGO.OGGO....",
+"..OOOOO.OOOO....",
+]

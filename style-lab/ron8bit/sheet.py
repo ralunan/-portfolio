@@ -26,7 +26,7 @@ SWATCHES = [
     ('s', 'Skin shade', 'Terracotta 35% on Vanilla'), ('n', 'Mouth', 'Terracotta ink'),
     ('P', 'Flannel', 'Kyoto Dusk'), ('L', 'Flannel light', 'Kyoto Dusk 70% on white'),
     ('p', 'Flannel shade', 'Kyoto Dusk 60% on charcoal'), ('r', 'Flannel check', 'Roasted Terracotta'),
-    ('W', 'Tee', 'White'), ('G', 'Sneakers', 'Matcha Cream'),
+    ('W', 'Tee', 'White'), ('j', 'Far trouser leg', 'Charcoal Brew 70% on charcoal'), ('G', 'Sneakers', 'Matcha Cream'),
 ]
 swatches = ''.join(
     f'<li><span class="chip" style="background:{ff.PAL[k]}"></span><b>{use}</b><small>{src} · {ff.PAL[k]}</small></li>'
@@ -72,7 +72,7 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
 .notes {{ font-size:14px; color:var(--muted); line-height:1.65; margin:0; padding-left:18px; }}
 </style></head><body><div class="sheet">
 <header>
-  <div><p class="eyebrow">Character sheet · draft 8</p><h1>Ron, the <em>pixel</em> persona</h1></div>
+  <div><p class="eyebrow">Character sheet · draft 9</p><h1>Ron, the <em>pixel</em> persona</h1></div>
   <div class="meta">16 × 24 px sprite, Final Fantasy III / VI scale<br>Japanese palette only · shown at 8× and 12×</div>
 </header>
 <div class="grid">
@@ -80,8 +80,8 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
     <div class="hero">{cell(ff.FRONT, 'Front · 12×', 12)}{cell(ff.FRONT, '1× actual size', 1)}{cell(ff.FRONT, '3×', 3)}{cell(ff.FRONT, '6×', 6)}</div></section>
   <section class="panel wide"><h2>Turnaround</h2><p>Front, side and back, the four directions a walking sprite needs.</p>
     <div class="row">{cell(ff.FRONT,'Front')}{cell(ff.SIDE,'Left')}{cell(ff.BACK,'Back')}{cell(ff.SIDE,'Right',flip=True)}</div></section>
-  <section class="panel wide"><h2>Walk cycle</h2><p>Step frames for walking toward the viewer and sideways.</p>
-    <div class="row">{cell(ff.WALK_L,'Step 1')}{cell(ff.FRONT,'Stand')}{cell(ff.WALK_R,'Step 2')}{cell(ff.SIDE_STEP,'Side step')}</div></section>
+  <section class="panel wide"><h2>Walk cycle</h2><p>Step frames for walking toward the viewer, and a four-frame side cycle: stand, step A, stand, step B.</p>
+    <div class="row">{cell(ff.WALK_L,'Step 1')}{cell(ff.FRONT,'Stand')}{cell(ff.WALK_R,'Step 2')}</div><div class="row" style="margin-top:28px">{cell(ff.SIDE,'Side stand')}{cell(ff.SIDE_A,'Side step A')}{cell(ff.SIDE,'Side stand')}{cell(ff.SIDE_B,'Side step B')}</div></section>
   <section class="panel"><h2>Expressions</h2><p>Face swaps on the same body, for idle blinks and reactions.</p>
     <div class="row">{cell(ff.FRONT,'Neutral')}{cell(ff.BLINK,'Blink')}{cell(ff.HAPPY,'Happy')}</div></section>
   <section class="panel"><h2>Talk pose</h2><p>Hand raised, ready for a project note in a chat bubble.</p>{bubble}</section>
