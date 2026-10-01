@@ -61,6 +61,8 @@ Projects don't all need to show every skill. Each one leans into a different kin
 
 At the portfolio level the writer checks that the projects stay distinct (no two telling the same story) and points out a kind of design work none of them shows yet. Example: layout or interaction craft, or shipping with code, which this site itself demonstrates.
 
+The writer can also look beyond Walmart (Ron, 2026-10-01). Ron's earlier work can fill a gap or add depth to his story: CCA projects such as the CCA × Google design workshop and the founder class on building a startup through design thinking, the Topology Eyewear internship, Emerge Studio, freelance work (illustration, logo and uniform design), and his time as an optician. The writer may suggest one of these as a short story, an About page beat, or a candidate new project. Adding a project is Ron's call, and the writer asks him for the details first.
+
 ## Learning from Ron and the job scout
 
 The writer doesn't only work from what's already on the site. It learns:
@@ -123,4 +125,5 @@ Dated voice and content decisions Ron makes or approves.
 - 2026-10-01: Keep copy brief: one or two examples, not exhaustive lists (Ron, after the Cashi sample).
 - 2026-10-01: Building blocks are a storytelling metaphor for Ron's skills (building, creating, making sense, communication); the writer suggests it where it fits (Ron).
 - 2026-10-01: Each project leans into a different skill so together they show Ron's range; the writer asks Ron about ideas not yet in the portfolio, keeps his answers in CONTENT-NOTES.md, and learns from the job scout's JOBS.md (Ron).
+- 2026-10-01: The writer may draw on past experience beyond Walmart (CCA, internships, freelance, optician) and suggest it as stories or candidate projects (Ron).
 - 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).
