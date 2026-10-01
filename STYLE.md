@@ -6,6 +6,8 @@ The playbook for the `style-agent` (`.claude/agents/style-agent.md`): the visual
 
 **Also in scope (Ron, 2026-10-01):** the home hero's animated springy blocks, which Ron and the agent will tune together for visual appeal (colors, shapes, sizes, bounce, rhythm), and the Cotton Candy theme, which Ron may or may not use when he revises the project pages.
 
+**What the blocks mean (Ron, 2026-10-01):** the animated blocks are metaphors for building. Each block can stand for one of Ron's skills: building, creating, making sense of design, and communication. Today they appear only in the hero, but Ron may bring them into his storytelling as the portfolio grows. Any block idea the agent proposes should keep this meaning: blocks are skills, and arranging them is building.
+
 ## How it works
 
 1. **Ron prompts.** The agent works only on what Ron asks for: a section, a page, a mood ("make the About teaser feel warmer"). It does not go looking for places to decorate.
@@ -62,4 +64,5 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 Dated style decisions Ron makes or approves.
 
 - **2026-10-01** Style agent created (Ron): flair and visual creativity unique to Ron, using only his design-system colors, prompted by him, tracking and creating video, images and animations. Never layout or design system changes.
+- **2026-10-01** Blocks as a metaphor (Ron): the animated blocks stand for building, each block a skill (building, creating, making sense of design, communication). Only in the hero for now; may join the storytelling later.
 - **2026-10-01** Scope widened (Ron): includes the animated springy blocks, to tweak together for visual appeal, and the Cotton Candy theme, which Ron may or may not use on the project pages.
