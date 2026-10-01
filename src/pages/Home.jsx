@@ -1,6 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion';
 import Reveal from '../components/Reveal.jsx';
 import useHeroHandoff from '../components/useHeroHandoff.js';
 import { projects } from '../content.js';
@@ -218,57 +218,75 @@ function Highlights({ ref }) {
 // Scroll distance (in viewport heights) that each project holds the stage.
 const STAGE_STEP = 80;
 
-// Cards alternate the side they enter from: the first from the left, the
-// second from the right, the third from the left again. An incoming card
-// slides in tilted 5 degrees and springs level with a small overshoot; the
-// outgoing card lifts away behind the highlights and fades. Scrolling back up
-// plays it in reverse. Motion runs at half the original speed so each change
-// is easy to follow. Fades use the site easing (--ease).
-// `custom` is { index, dir }: the new card's index, and 1 when scrolling
-// down or -1 when scrolling back up.
-const sideOf = (index) => (index % 2 === 0 ? -1 : 1);
+// Every project card is always rendered in one of four positions, set by its
+// place relative to the active card:
+// - active: centered under the heading;
+// - next: peeking from the bottom edge of the window (top 5% visible),
+//   shifted 75px off center and tilted 10 degrees: right for the second
+//   project, left for the third;
+// - later: hidden at the same spot until it becomes next;
+// - passed: lifted up behind the highlights and faded out.
+// Scrolling moves cards between positions, so the next card travels
+// diagonally up into the center and straightens with a small bounce, and
+// scrolling back up plays it in reverse. Motion runs at half the original
+// speed so each change reads clearly. Fades use the site easing (--ease).
+const PEEK_SHIFT = 75;
+const PEEK_TILT = 10;
+const PEEK_VISIBLE = 0.05;
+const sideOf = (index) => (index % 2 === 1 ? 1 : -1);
 const STAGE_SPRING = { type: 'spring', stiffness: 42, damping: 7, mass: 1 };
 const STAGE_EASE = [0.22, 1, 0.36, 1];
+const stageTransition = { x: STAGE_SPRING, y: STAGE_SPRING, rotate: STAGE_SPRING, opacity: { duration: 0.7, ease: STAGE_EASE } };
 
-const stageCard = {
-    enter: ({ index, dir }) =>
-        dir > 0
-            ? { x: sideOf(index) * 280, y: 0, rotate: sideOf(index) * 5, opacity: 0 }
-            : { x: 0, y: -180, rotate: -5, opacity: 0 },
-    center: {
-        x: 0,
-        y: 0,
-        rotate: 0,
-        opacity: 1,
-        transition: {
-            x: STAGE_SPRING,
-            y: STAGE_SPRING,
-            rotate: STAGE_SPRING,
-            opacity: { duration: 0.7, ease: STAGE_EASE },
-        },
-    },
-    exit: ({ index, dir }) => ({
-        ...(dir > 0
-            ? { x: 0, y: -180, rotate: -5 }
-            : { x: sideOf(index + 1) * 280, y: 0, rotate: sideOf(index + 1) * 5 }),
-        opacity: 0,
-        transition: { duration: 0.9, ease: STAGE_EASE },
-    }),
-};
+function stagePose(i, active, peekY) {
+    const side = sideOf(i);
+    if (i === active) return { x: 0, y: 0, rotate: 0, opacity: 1 };
+    if (i < active) return { x: 0, y: -180, rotate: -5, opacity: 0 };
+    return { x: side * PEEK_SHIFT, y: peekY, rotate: side * PEEK_TILT, opacity: i === active + 1 ? 1 : 0 };
+}
 
 // Laptop/desktop Selected Work: the highlights stay pinned at the top while
 // scrolling swaps one project card at a time underneath them.
 function WorkStage({ sectionRef, highlightsRef }) {
-    const [state, setState] = useState({ index: 0, dir: 1 });
+    const [active, setActive] = useState(0);
+    const [peekY, setPeekY] = useState(0);
+    const slotRef = useRef(null);
     const count = projects.length;
     const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
 
     useMotionValueEvent(scrollYProgress, 'change', (p) => {
-        const next = Math.min(count - 1, Math.max(0, Math.round(p * (count - 1))));
-        setState((prev) => (prev.index === next ? prev : { index: next, dir: next > prev.index ? 1 : -1 }));
+        setActive(Math.min(count - 1, Math.max(0, Math.round(p * (count - 1)))));
     });
 
-    const project = projects[state.index];
+    // The peek position depends on where the card sits in the window, so
+    // measure the slot: the distance from the card's resting top to the
+    // window's bottom edge, minus the 5% of the card that should show. The
+    // 10 degree tilt lifts one top corner, so the card drops by that much
+    // more and only its leading corner shows, without covering the card above.
+    useLayoutEffect(() => {
+        const slot = slotRef.current;
+        if (!slot) return undefined;
+        const measure = () => {
+            const wrapper = slot.querySelector('.work-stage-card');
+            const card = wrapper?.querySelector('.project-card-link');
+            const cardTop = wrapper ? wrapper.offsetTop : 0;
+            const toBottom = slot.offsetParent.clientHeight - slot.offsetTop;
+            const cardH = card ? card.offsetHeight : 0;
+            const cardW = card ? card.offsetWidth : 0;
+            const tilt = (PEEK_TILT * Math.PI) / 180;
+            const cornerLift = (cardW / 2) * Math.sin(tilt) - (cardH / 2) * (1 - Math.cos(tilt));
+            slot.style.setProperty('--to-bottom', `${toBottom}px`);
+            setPeekY(Math.round(toBottom - cardTop - cardH * PEEK_VISIBLE + cornerLift));
+        };
+        measure();
+        const observer = new ResizeObserver(measure);
+        observer.observe(slot);
+        window.addEventListener('resize', measure);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', measure);
+        };
+    }, []);
 
     return (
         <section
@@ -285,20 +303,22 @@ function WorkStage({ sectionRef, highlightsRef }) {
                         <h2 className="work-stage-title">Case studies from Walmart</h2>
                     </div>
                 </div>
-                <div className="work-stage-slot">
-                    <AnimatePresence initial={false} custom={state}>
-                        <motion.div
-                            key={project.slug}
-                            className="container work-stage-card"
-                            custom={state}
-                            variants={stageCard}
-                            initial="enter"
-                            animate="center"
-                            exit="exit"
-                        >
-                            <ProjectCardLink project={project} index={state.index} />
-                        </motion.div>
-                    </AnimatePresence>
+                <div className="work-stage-slot" ref={slotRef}>
+                    <div className="work-stage-layer">
+                        {projects.map((project, i) => (
+                            <motion.div
+                                key={project.slug}
+                                className="container work-stage-card"
+                                initial={false}
+                                animate={stagePose(i, active, peekY)}
+                                transition={stageTransition}
+                                style={{ zIndex: i === active ? 2 : 1 }}
+                                inert={i !== active}
+                            >
+                                <ProjectCardLink project={project} index={i} />
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
