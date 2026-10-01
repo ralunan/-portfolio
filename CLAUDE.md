@@ -10,7 +10,7 @@ Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site
 
 - `npm install` once, then `npm run dev` for a local preview with hot reload.
 - `npm run build` outputs the static site to `dist/`. `npm run preview` serves that build.
-- No lint or test setup exists.
+- `npm run design:check` lists styling values that bypass the design tokens (`-- --strict` exits non-zero). No lint or test setup exists.
 
 ## Deploy
 
@@ -22,7 +22,7 @@ Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site
 - `src/App.jsx` declares routes (`/`, `/work/:slug`, `/about`, `/resume`) inside `AnimatePresence`; every route is wrapped in `components/Page.jsx`, the one shared fly-in/fly-out transition for the whole site. Don't add one-off route transitions.
 - `components/Reveal.jsx` is the shared scroll-into-view animation. Reuse it rather than adding new motion patterns.
 - `components/Lightbox.jsx` provides click-to-enlarge (`useLightbox()`), showing images at native width with scroll because many boards are dense Figma flows.
-- Styling is one stylesheet, `src/styles.css`, with tokens on `:root`. Each project sets `--accent` from its registry entry, which tints its card, case-study hero, chapter numbers and outcome cards.
+- Styling is one stylesheet, `src/styles.css`, with tokens on `:root` (documented in `DESIGN.md`). Each project sets `--accent` from its registry entry, which tints its card, case-study hero, chapter numbers and outcome cards.
 
 ## Content is data, never duplicated into JS
 
@@ -40,3 +40,11 @@ Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site
 - The `cover` image appears on the home card and the case-study hero, and is skipped in its own chapter's gallery.
 
 Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, numbered images, and one entry in `PROJECTS`.
+
+## Design system (read before any visual change)
+
+`DESIGN.md` holds the tokens, scales, component rules and a dated decisions log. Every session that changes how the site looks must:
+- use existing tokens and scales (no raw colors outside `:root`, font sizes and spacing on the scale, radii via `--radius-*`), and reuse existing components before adding new ones;
+- run `npm run design:check` and not add new findings; fix pre-existing ones on the page being revised, not in bulk;
+- add a dated line to the DESIGN.md decisions log for any design decision Ron makes or approves (a new color, a size change, a dropped element), with the reason;
+- before opening a PR that touches styles, components or pages, run the `design-steward` agent (`.claude/agents/design-steward.md`) and address what it reports.

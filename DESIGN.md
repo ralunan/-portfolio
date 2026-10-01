@@ -1,0 +1,104 @@
+# Design system
+
+The single source of truth for how the portfolio looks. Values live as CSS custom properties on `:root` in `src/styles.css`; this file explains them and records why they were chosen. `npm run design:check` flags any styling value that bypasses them.
+
+## Rules
+
+1. **Colors are tokens.** Outside `:root`, CSS uses `var(--…)`, never a raw hex, `rgb()` or `rgba()`. A new color is added to `:root` first, with a comment, and logged below. JS/JSX may only use hex values that already exist as tokens (the shader gradient and springy boxes need literal strings). The one exception is the per-project `accent` in `src/projects.js`, which feeds `--accent`.
+2. **Type sizes come from the scale.** Fixed sizes use the px scale below. Fluid display sizes use a `--fs-*` token; add one rather than writing a new `clamp()`.
+3. **Spacing comes from the scale.** Padding, margin and gap use the px steps below (fluid `clamp()` spacing is fine for section rhythm).
+4. **Radii are tokens.** `var(--radius-*)`, or `50%` for circles.
+5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
+6. **Light theme, dark type, everywhere.** No reversed (light-on-dark) text sections. The dark `--canvas` exists only behind work images.
+7. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
+
+## Color
+
+The site theme is Ron's Japanese palette (since 2026-10-01): **Kyoto Dusk** #5B5F8D, **Matcha Cream** #9BB29E, **Roasted Terracotta** #DA6B51, **Vanilla Foam** #F1DCBA, **Charcoal Brew** #484149. Each has a token (`--kyoto-dusk`, `--matcha-cream`, `--roasted-terracotta`, `--vanilla-foam`, `--charcoal-brew`), plus `--charcoal-deep` #2b262c for the darkest surfaces and pale washes (`--vanilla-wash`, `--matcha-wash`, `--dusk-wash`) for soft card backgrounds.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--bg` | #fbf7f0 | Page background, a light Vanilla Foam wash |
+| `--surface` / `--surface-2` | #ffffff / #f6eee1 | Cards, raised areas |
+| `--text` | Charcoal Brew #484149 | Headings, primary type, primary button |
+| `--body` | #554e56 | Long-form paragraphs |
+| `--muted` / `--faint` | #6f6770 / #958d93 | Secondary and tertiary type |
+| `--line` / `--line-strong` / `--line-hover` | Charcoal at 10% / 20% / 30% | Borders |
+| `--ink-accent` | Kyoto Dusk | Links, focus, hero italic gradient start |
+| `--hero-em-b` | Roasted Terracotta | Hero italic gradient end |
+| `--brand-a` / `--brand-b` | Kyoto Dusk / Roasted Terracotta | Nav monogram, About photo glow |
+| `--accent` | per project | Set from `projects.js`; tints cards, chapter numbers, outcomes |
+| `--canvas` | `--charcoal-deep` | Behind work images only (transparent boards with white labels) |
+| `--orb-a` / `--orb-b` | Vanilla Foam / pale Matcha | Ambient background orbs |
+| `--success` | deep Matcha #7fa184 | Availability dot |
+
+**Project accents** use the palette: Walmart UX Research = Matcha Cream, Cashi = Kyoto Dusk, Fashion = Roasted Terracotta. A new project picks one of the five, or Ron adds a new palette color first.
+
+**Accent as text.** Matcha and Terracotta are too light for small text on white, so accent-colored text (tags, chapter and card numbers, eyebrows) always uses `color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep))`, which passes 4.5:1 for all three accents. Fills, borders and glows can use the raw accent.
+
+**Cotton Candy pastels** (`--cotton-*`) are reserved for the home hero's shader gradient.
+
+**Utility**: `--white`, `--glass`, `--nav-glass`, `--tint-hover`, `--tint-active`, `--scrim`, `--overlay`, `--on-dark-*` (lightbox), `--success-ring`.
+
+## Text colors
+
+Every piece of text uses a role token, never a palette color directly. Contrast is measured on the page background `--bg` #fbf7f0 (WCAG AA needs 4.5:1 for body-size text, 3:1 for large text).
+
+| Role | Token | Color | Contrast | Where it's used |
+| --- | --- | --- | --- | --- |
+| Headings (h1, h2) | `--heading` | Charcoal Brew #484149 | 9.2:1 | Page, section and chapter titles |
+| Subheadings (h3, h4) | `--subheading` | Kyoto Dusk #5B5F8D | 5.7:1 | Card titles, job titles, timeline places, sub-blocks |
+| Body | `--body` | #554e56 (Charcoal, lighter) | 7.5:1 | Paragraphs, lists |
+| Secondary | `--muted` | #6f6770 | 5.1:1 | Taglines, intros, meta values, nav links |
+| Caption | `--faint` | #756d74 | 4.7:1 | Meta labels, footer, image captions |
+| Labels / eyebrows | `--label` | Terracotta ink #a65646 | 4.9:1 | Uppercase section labels ("SELECTED WORK", "EXPERIENCE") |
+| Links | `--link`, `--link-hover` | Kyoto Dusk, then Terracotta ink | 5.7 / 4.9:1 | Inline links in running text |
+| Highlight (words) | `--highlight` | Terracotta ink #a65646 | 4.9:1 | Italic serif `<em>` in page and section titles |
+| Highlight (marker) | `--highlight-bg` | Vanilla Foam behind Charcoal type | 7.4:1 | `<mark>` for key phrases and metrics |
+| Positive | `--positive` | Matcha ink #69736b | 4.6:1 | Results, "available" status text |
+| Project accent text | `color-mix(accent 55%, --charcoal-deep)` | per project | 4.5:1+ | Tags, chapter and card numbers on case studies |
+
+Rules:
+- Raw Matcha Cream, Roasted Terracotta and Vanilla Foam are too light for text (2.1 to 3.2:1). Use them for fills, borders, glows and markers; for text use `--terracotta-ink` and `--matcha-ink`.
+- One highlight per heading at most. The home hero's italic word is the one place with a gradient (Kyoto Dusk into Terracotta).
+- Primary buttons are Charcoal Brew with white type (9.9:1).
+
+## Type
+
+Fonts: **Inter** (UI and body, 400/500/600), **Inter Tight** (`--display`, headings), **Instrument Serif** italic (`--serif`, used for `<em>` accents in headings).
+
+- Body: 17px / 1.65.
+- Fixed scale (px): **12, 13, 14, 15, 16, 17, 18, 21, 22, 26**. Labels and eyebrows 12–13 (eyebrows uppercase, 0.12em tracking); UI and buttons 14–15; body 16–18; small headings 21–26.
+- Fluid display tokens: `--fs-hero` clamp(44px, 8vw, 104px), `--fs-page` clamp(40px, 6vw, 72px), `--fs-section` clamp(32px, 4.5vw, 52px).
+- Headings: weight 600, tracking −0.03em (−0.045em at hero size), line-height ~1.08.
+
+## Spacing
+
+Scale (px): **2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96, 120, 140, 160**. Page gutter is `--gutter` (16–40px fluid); max content width `--max` 1200px.
+
+## Radius and depth
+
+`--radius-xs` 8px (focus rings, small chips) · `--radius-sm` 12px (thumbnails) · `--radius` 20px (cards) · `--radius-lg` 28px (large cards, heroes) · `--radius-pill` 999px (buttons, tags, nav links) · `50%` circles. One shadow: `--shadow`.
+
+## Motion
+
+Easing `--ease` cubic-bezier(0.22, 1, 0.36, 1). Route changes go through `Page`; scroll-ins through `Reveal`. Motion respects `prefers-reduced-motion` via `MotionConfig`.
+
+## Known inconsistencies (to fix page by page)
+
+Run `npm run design:check` for the live list. At the time this file was written it reported 36 items, mainly: 11 one-off fluid font sizes that should collapse into a few `--fs-*` tokens, a 19px body size, off-scale spacing (13/22px button padding, 14px nav links, 128px, 88px), and radii of 10/14/36/2px. The hero section's own values are left for the homepage work. Fix these as each page is revised rather than in one sweep, so every change can be checked visually.
+
+## Decisions log
+
+Newest first. Format: date, decision, why.
+
+- **2026-10-01** Text color roles defined (Ron asked): Charcoal Brew headings, Kyoto Dusk subheadings, Terracotta-ink labels and highlights, Vanilla Foam marker, Matcha-ink positive. All roles pass WCAG AA on the page background.
+- **2026-10-01** Japanese palette becomes the site-wide color theme (Ron): Charcoal Brew type, Vanilla Foam background, Kyoto Dusk links and accent, palette colors as project accents. Cotton Candy kept for the home hero gradient only. Charcoal Brew stays out of the springy boxes.
+- **2026-10-01** Design system and consistency check introduced. Raw colors in `styles.css` replaced with tokens (no visual change).
+- **2026-10-01** Charcoal Brew #484149 removed from the springy boxes. Too dark against the light hero (Ron).
+- **2026-10-01** Hero text left-anchored at 1200px+, boxes on the right and slightly cropped off the edge.
+- **2026-10-01** Home hero: Shader Gradient "09 Cotton Candy" plus springy boxes reshuffling every 6s, desktop only.
+- **2026-10-01** Japanese box palette: Kyoto Dusk, Matcha Cream, Roasted Terracotta, Vanilla Foam.
+- **2026-10-01** Light theme with dark type across the whole site (Ron). Work images keep a dark canvas because some boards are transparent PNGs with white labels.
+- **2026-10-01** v2 moved from v1's full-screen screens to scrolling, product-focused case studies with one shared route transition.
+- **2026-10-01** Work order: global theme, then homepage, then each case study one at a time, all on the shared theme (Ron).

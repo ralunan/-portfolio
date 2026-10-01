@@ -1,25 +1,85 @@
 /* ---------- tokens ---------- */
 
 :root {
-    --bg: #f7f6fb;
+    --bg: #fbf7f0; /* Vanilla Foam wash */
     --surface: #ffffff;
-    --surface-2: #f1f0f7;
-    --line: rgba(22, 23, 29, 0.08);
-    --line-strong: rgba(22, 23, 29, 0.16);
-    --text: #16171d;
-    --body: #3d414c;
-    --muted: #5a5f6e;
-    --faint: #868b98;
-    --ink-accent: #5a5ce6;
+    --surface-2: #f6eee1;
+    --line: rgba(72, 65, 73, 0.1);
+    --line-strong: rgba(72, 65, 73, 0.2);
+    --text: #484149; /* Charcoal Brew */
+    --body: #554e56;
+    --muted: #6f6770;
+    --faint: #756d74;
+    --ink-accent: #5b5f8d; /* Kyoto Dusk */
     /* Dark "Figma canvas" behind work images: several boards are transparent
        PNGs with white labels that disappear on a light background. */
-    --canvas: #1d1e25;
-    --shadow: 0 1px 2px rgba(22, 23, 29, 0.04), 0 12px 32px -12px rgba(22, 23, 29, 0.12);
-    --brand-a: #667eea;
-    --brand-b: #764ba2;
-    --accent: #6b5cf0;
+    --canvas: var(--charcoal-deep);
+    --shadow: 0 1px 2px rgba(72, 65, 73, 0.05), 0 12px 32px -12px rgba(72, 65, 73, 0.16);
+    --brand-a: #5b5f8d;
+    --brand-b: #da6b51;
+    --accent: #5b5f8d;
+
+    /* Japanese palette: the site theme (2026-10-01). The springy boxes use the
+       first four; Charcoal Brew is too dark for the boxes but sets the type. */
+    --kyoto-dusk: #5b5f8d;
+    --matcha-cream: #9bb29e;
+    --roasted-terracotta: #da6b51;
+    --vanilla-foam: #f1dcba;
+    --charcoal-brew: #484149;
+    --charcoal-deep: #2b262c;
+    /* Text-safe versions of the light palette colors (4.5:1+ on --bg). */
+    --terracotta-ink: #a65646;
+    --matcha-ink: #69736b;
+
+    /* Text roles. Pick a role, not a palette color. See DESIGN.md "Text colors". */
+    --heading: var(--charcoal-brew);
+    --subheading: var(--kyoto-dusk);
+    --label: var(--terracotta-ink);
+    --link: var(--kyoto-dusk);
+    --link-hover: var(--terracotta-ink);
+    --highlight: var(--terracotta-ink);
+    --highlight-bg: var(--vanilla-foam);
+    --positive: var(--matcha-ink);
+    --vanilla-wash: #f8ecd8;
+    --matcha-wash: #e3ebe4;
+    --dusk-wash: #e6e7f0;
+
+    /* Cotton Candy pastels: home hero gradient only. */
+    --cotton-lilac: #ebedff;
+    --cotton-mist: #f3f2f8;
+    --cotton-sky: #dbf8ff;
+    --cotton-pink: #f6eefc;
+    --cotton-aqua: #e3f6fb;
+    --cotton-blush: #f6dcea;
+    --orb-a: #f1dcba;
+    --orb-b: #cbd8cd;
+    --hero-em-b: #da6b51;
+
+    /* Neutrals, tints and overlays. */
+    --white: #fff;
+    --glass: rgba(255, 255, 255, 0.7);
+    --nav-glass: rgba(251, 247, 240, 0.8);
+    --tint-hover: rgba(72, 65, 73, 0.05);
+    --tint-active: rgba(72, 65, 73, 0.07);
+    --line-hover: rgba(72, 65, 73, 0.3);
+    --scrim: rgba(43, 38, 44, 0.78);
+    --overlay: rgba(30, 27, 31, 0.92);
+    --on-dark-muted: rgba(255, 255, 255, 0.7);
+    --on-dark-fill: rgba(255, 255, 255, 0.12);
+    --on-dark-line: rgba(255, 255, 255, 0.25);
+    --success: #7fa184;
+    --success-ring: rgba(155, 178, 158, 0.3);
+
+    /* Type scale. Fixed UI sizes in px; display sizes are fluid. See DESIGN.md. */
+    --fs-hero: clamp(44px, 8vw, 104px);
+    --fs-page: clamp(40px, 6vw, 72px);
+    --fs-section: clamp(32px, 4.5vw, 52px);
+
+    --radius-xs: 8px;
+    --radius-sm: 12px;
     --radius: 20px;
     --radius-lg: 28px;
+    --radius-pill: 999px;
     --max: 1200px;
     --gutter: clamp(16px, 4vw, 40px);
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -74,15 +134,36 @@ em {
     letter-spacing: 0;
 }
 
+h1,
+h2 {
+    color: var(--heading);
+}
+
+h3,
+h4 {
+    color: var(--subheading);
+}
+
+.page-title em,
+.section-title em {
+    color: var(--highlight);
+}
+
+mark {
+    background: var(--highlight-bg);
+    color: var(--heading);
+    padding: 0 0.15em;
+}
+
 ::selection {
     background: var(--accent);
-    color: #fff;
+    color: var(--white);
 }
 
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 8px;
+    border-radius: var(--radius-xs);
 }
 
 .container {
@@ -109,7 +190,7 @@ em {
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--label);
     margin-bottom: 16px;
 }
 
@@ -126,12 +207,12 @@ em {
 }
 
 .section-title {
-    font-size: clamp(32px, 4.5vw, 52px);
+    font-size: var(--fs-section);
     max-width: 18ch;
 }
 
 .page-title {
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: var(--fs-page);
     margin-bottom: 20px;
 }
 
@@ -158,7 +239,7 @@ em {
     height: 46vw;
     top: -18vw;
     right: -10vw;
-    background: #d6dcff;
+    background: var(--orb-a);
 }
 
 .orb--b {
@@ -166,7 +247,7 @@ em {
     height: 38vw;
     top: 30vh;
     left: -16vw;
-    background: #f7d9ec;
+    background: var(--orb-b);
     animation-delay: -11s;
 }
 
@@ -183,11 +264,11 @@ em {
     align-items: center;
     gap: 8px;
     padding: 13px 22px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-weight: 600;
     font-size: 15px;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--glass);
     border: 1px solid var(--line-strong);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -195,20 +276,20 @@ em {
 }
 
 .button:hover {
-    background: #fff;
-    border-color: rgba(22, 23, 29, 0.28);
+    background: var(--white);
+    border-color: var(--line-hover);
     transform: translateY(-2px);
 }
 
 .button--primary {
     background: var(--text);
-    color: #fff;
+    color: var(--white);
     border-color: var(--text);
 }
 
 .button--primary:hover {
-    background: #000;
-    border-color: #000;
+    background: var(--charcoal-deep);
+    border-color: var(--charcoal-deep);
 }
 
 .tags {
@@ -221,7 +302,7 @@ em {
     font-size: 12px;
     font-weight: 500;
     padding: 5px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--line-strong);
     color: var(--muted);
 }
@@ -244,7 +325,7 @@ em {
 }
 
 .nav--scrolled {
-    background: rgba(247, 246, 251, 0.78);
+    background: var(--nav-glass);
     backdrop-filter: blur(16px) saturate(140%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     border-color: var(--line);
@@ -268,7 +349,7 @@ em {
     border-radius: 50%;
     font-family: var(--display);
     font-size: 14px;
-    color: #fff;
+    color: var(--white);
     background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
 }
 
@@ -280,7 +361,7 @@ em {
 
 .nav-links a {
     padding: 8px 14px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
@@ -294,7 +375,7 @@ em {
 }
 
 .nav-links a.active {
-    background: rgba(22, 23, 29, 0.06);
+    background: var(--tint-active);
 }
 
 .nav-links .nav-cta {
@@ -304,7 +385,7 @@ em {
 }
 
 .nav-links .nav-cta:hover {
-    background: rgba(22, 23, 29, 0.05);
+    background: var(--tint-hover);
 }
 
 /* ---------- home ---------- */
@@ -321,14 +402,14 @@ em {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #3ddc97;
-    box-shadow: 0 0 0 4px rgba(61, 220, 151, 0.18);
+    background: var(--success);
+    box-shadow: 0 0 0 4px var(--success-ring);
 }
 
 .hero-title {
     font-family: var(--display);
     font-weight: 600;
-    font-size: clamp(44px, 8vw, 104px);
+    font-size: var(--fs-hero);
     line-height: 1;
     letter-spacing: -0.045em;
     max-width: 13ch;
@@ -341,7 +422,7 @@ em {
 }
 
 .hero-title em {
-    background: linear-gradient(120deg, #5a5ce6, #a04fd6);
+    background: linear-gradient(120deg, var(--ink-accent), var(--hero-em-b));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -465,7 +546,7 @@ em {
 .project-card-num {
     font-family: var(--serif);
     font-size: 22px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .project-card-title {
@@ -546,7 +627,7 @@ em {
     align-items: center;
     padding: clamp(28px, 4vw, 56px);
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, #ebedff, #f6eefc 60%, #e3f6fb);
+    background: linear-gradient(135deg, var(--vanilla-wash), var(--surface) 55%, var(--matcha-wash));
     border: 1px solid var(--line);
 }
 
@@ -604,7 +685,7 @@ em {
 
 .case-hero .tag {
     border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-    color: color-mix(in srgb, var(--accent) 75%, black);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .case-title {
@@ -672,7 +753,7 @@ em {
 }
 
 .frame--hero img {
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     max-height: 78vh;
     object-fit: contain;
 }
@@ -700,7 +781,7 @@ em {
     display: block;
     font-family: var(--serif);
     font-size: 22px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
     margin-bottom: 24px;
 }
 
@@ -733,7 +814,7 @@ em {
     display: block;
     font-family: var(--serif);
     font-size: 26px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
     margin-bottom: 8px;
 }
 
@@ -776,7 +857,7 @@ em {
 }
 
 .problem .eyebrow {
-    color: color-mix(in srgb, var(--accent) 80%, black);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .problem p {
@@ -846,11 +927,11 @@ em {
     right: 12px;
     bottom: 12px;
     padding: 6px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 12px;
     font-weight: 600;
-    color: #fff;
-    background: rgba(22, 23, 29, 0.75);
+    color: var(--white);
+    background: var(--scrim);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     opacity: 0;
@@ -919,7 +1000,7 @@ em {
     gap: 16px;
     padding: 64px 24px 32px;
     overflow: auto;
-    background: rgba(16, 17, 24, 0.9);
+    background: var(--overlay);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     cursor: zoom-out;
@@ -934,7 +1015,7 @@ em {
 }
 
 .lightbox-caption {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--on-dark-muted);
     font-size: 14px;
 }
 
@@ -947,9 +1028,9 @@ em {
     border-radius: 50%;
     font-size: 26px;
     line-height: 1;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    background: var(--on-dark-fill);
+    border: 1px solid var(--on-dark-line);
 }
 
 /* ---------- about ---------- */
@@ -1096,7 +1177,7 @@ em {
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--label);
     margin-bottom: 24px;
 }
 
