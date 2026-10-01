@@ -57,7 +57,8 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v9.html` | Ron's 8-bit persona | proposed | Draft 9 (Ron): side view approved; side walk is now four frames (stand, step A, stand, step B) with arms and legs swinging at 0.5 s per frame (Ron: slower, twice), preview `style-lab/previews/2026-10-01-ron8bit-side-walk.gif`. Replaces draft 8. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v10.html` | Ron's 8-bit persona | proposed | Draft 10 (Ron): walking bounce, body 1 px higher on step frames (feet stay grounded), back down when standing; side walk preview at 1 s per frame. Replaces draft 9. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v9.html` | Ron's 8-bit persona | dropped | Draft 9 (Ron): side view approved; side walk is now four frames (stand, step A, stand, step B) with arms and legs swinging at 0.5 s per frame (Ron: slower, twice), preview `style-lab/previews/2026-10-01-ron8bit-side-walk.gif`. Replaces draft 8. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v8.html` | Ron's 8-bit persona | dropped | Draft 8 (Ron): front hair from draft 7 approved. Side view gets lower, rounder hair and a small ponytail with a Terracotta tie (side only). Replaces draft 7. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v7.html` | Ron's 8-bit persona | dropped | Draft 7 (Ron): right side curves out 1 px instead of a straight edge; its point sits lower than the center crest. Front approved; replaced by draft 8. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v6.html` | Ron's 8-bit persona | dropped | Draft 6 (Ron): dark tuft on the top right trimmed into a pointed tip with Kyoto Dusk highlights. Replaced by draft 7. |

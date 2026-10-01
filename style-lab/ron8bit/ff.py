@@ -270,3 +270,11 @@ SIDE_B = SIDE[:17] + [
 "..OGGGO.OGGO....",
 "..OOOOO.OOOO....",
 ]
+
+# Draft 10 (Ron): walking bounce. Step frames lift the body 1 px (feet stay on the ground,
+# the trousers gain a row); stand frames sit back down.
+def _lift(rows):
+    assert rows[0].strip('.') == ''
+    return rows[1:21] + [rows[20]] + rows[21:]
+SIDE_A = _lift(SIDE_A)
+SIDE_B = _lift(SIDE_B)
