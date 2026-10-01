@@ -57,7 +57,8 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v5.html` | Ron's 8-bit persona | proposed | Draft 5 (Ron): right side of the hair tapered in 1 px toward the ear. Replaces draft 4. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v6.html` | Ron's 8-bit persona | proposed | Draft 6 (Ron): dark tuft on the top right trimmed into a pointed tip with Kyoto Dusk highlights. Replaces draft 5. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v5.html` | Ron's 8-bit persona | dropped | Draft 5 (Ron): right side of the hair tapered in 1 px toward the ear. Replaced by draft 6. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v4.html` | Ron's 8-bit persona | dropped | Draft 4 (Ron): fringe covers more forehead and the top of the left eye; trousers rise 1 px into the torso. Replaced by draft 5. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v3.html` | Ron's 8-bit persona | dropped | Draft 3 (Ron): legs 2 px shorter; hair 2 px taller, swept up and right with curl tips and waves. Replaced by draft 4. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v2.html` | Ron's 8-bit persona | dropped | Draft 2 (Ron): lighter trimmed beard, bigger curly and wavy hair, his identity. Replaces draft 1; replaced by draft 3. |

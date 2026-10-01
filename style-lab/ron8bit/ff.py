@@ -202,3 +202,15 @@ for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
 FRONT[7] = WALK_L[7] = WALK_R[7] = BLINK[7] = HAPPY[7] = "OHOHHHHHSSSHHHO."
 BACK[7] = "OHOHHHOOBBHHHHO."
 for _y in (5, 6, 7): TALK[_y] = FRONT[_y] + "...."
+
+# Draft 6 (Ron): dark tuft on the top right trimmed into a pointed tip with Kyoto Dusk highlights.
+_TOP6 = [
+"........OO...O..",
+".....OOOBBO.OBO.",
+"...OOBBHHHHOBHO.",
+"..OBHHHOOBBHHBO.",
+".OBHHOOBBHHHOBO.",
+]
+for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
+    _rows[:5] = _TOP6
+TALK[:5] = [r + "...." for r in _TOP6]
