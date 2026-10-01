@@ -38,6 +38,17 @@ passionate, seamless, leverage, utilize, delightful, robust, cutting-edge, innov
 
 Unexplained jargon: terms like *touchpoint*, *happy path*, *account states*, *use case*, *source of truth*, *component library*, *handoff* or *design system* can appear, but only with a plain-language explanation nearby the first time on a page.
 
+## Storytelling thread: building blocks
+
+The springy blocks in the home hero are Ron's signature metaphor (Ron, 2026-10-01). They stand for building, and each block can represent a skill:
+
+- **Building**: turning ideas into real, shippable product.
+- **Creating**: exploring many directions and new ideas.
+- **Making sense**: organizing complexity so design decisions are clear.
+- **Communication**: bringing partners and stakeholders along.
+
+Use it where it genuinely fits, such as a section intro, a chapter that shows one of these skills, or the About story. A light touch is better than forcing it into every page. The blocks are on the hero only for now; Ron may add them to more pages as the portfolio grows, so copy that uses the metaphor should still read well without the visuals.
+
 ## Honesty rules
 
 - **Never invent facts, numbers, names or outcomes.** Every claim must trace to `resume.txt`, `aboutme.txt`, a project `.txt` file, `src/projects.js`, or something Ron said.
@@ -90,4 +101,5 @@ Dated voice and content decisions Ron makes or approves.
 - 2026-10-01: Voice set to senior UX / product designer, written for hiring managers looking for creativity and collaboration (Ron).
 - 2026-10-01: Voice is professional but approachable, matching the site's fun, animated personality. Avoid unexplained jargon; introduce complex topics, then simplify them as the reader goes. The writer may also suggest improvements to voice and communication (Ron).
 - 2026-10-01: Keep copy brief: one or two examples, not exhaustive lists (Ron, after the Cashi sample).
+- 2026-10-01: Building blocks are a storytelling metaphor for Ron's skills (building, creating, making sense, communication); the writer suggests it where it fits (Ron).
 - 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).
