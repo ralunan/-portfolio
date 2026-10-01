@@ -2,9 +2,13 @@
    (components/home/SelectedWork.jsx, WorkStage.jsx). The card itself is
    in project-card.css. */
 
+/* Every row is as tall as the tallest card (grid-auto-rows: 1fr), so if a
+   label ever needs a 4th line, all the cards grow together and stay one
+   height, in every layout (4, 2 or 1 per row). */
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
     gap: 16px;
     margin-bottom: 160px;
 }
