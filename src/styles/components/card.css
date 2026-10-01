@@ -12,3 +12,14 @@
     border: 1px solid var(--line);
     box-shadow: var(--shadow);
 }
+
+/* Stacked card (.card--stacked): a solid back card in --card-back peeks out
+   8px down and to the right, with the same rounded corners, so the card
+   looks like it sits on a second card (Ron, 2026-10-01). The solid back
+   card replaces the hairline stroke. Drawn as a hard-edged shadow, so it
+   doesn't change the layout. */
+.card--stacked {
+    --card-back: var(--kyoto-dusk);
+    border-color: transparent;
+    box-shadow: 8px 8px 0 var(--card-back), var(--shadow);
+}

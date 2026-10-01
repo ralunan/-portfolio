@@ -12,7 +12,8 @@
 /* Each highlight is a .card (components/card.css). Its content is
    centered and starts at the top, so the numbers line up across the row,
    and every label sits in the same size text box (three lines tall), so
-   each card has the same spacing around its content. */
+   each card has the same spacing around its content. The number is
+   centered; the label text inside its box is left-aligned (Ron). */
 .stat {
     display: flex;
     flex-direction: column;
@@ -23,6 +24,7 @@
 
 .stat-value {
     font-family: var(--display);
+    color: var(--subheading);
     font-size: var(--fs-section);
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -33,6 +35,7 @@
     width: 22ch;
     max-width: 100%;
     min-height: calc(3 * 1.5em);
+    text-align: left;
     font-size: 14px;
     color: var(--muted);
     line-height: 1.5;

@@ -14,7 +14,7 @@ export default function Highlights({ ref }) {
     return (
         <div className="stats" role="region" aria-label="Highlights" id="highlights" ref={ref}>
             {STATS.map(([value, label], i) => (
-                <Reveal key={value} className="stat card" delay={i * 0.08}>
+                <Reveal key={value} className="stat card card--stacked" delay={i * 0.08}>
                     <span className="stat-value">{value}</span>
                     <span className="stat-label">{label}</span>
                 </Reveal>
