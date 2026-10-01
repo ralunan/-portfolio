@@ -377,16 +377,11 @@ mark {
     transition: color 0.2s ease, transform 0.3s var(--ease);
 }
 
-/* The current page reads as emphasis: the same italic and gradient as <em>. */
+/* Current page: a plain pill. Emphasis italic was tried here and was too hard to read. */
 .nav-links a.active {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 18px;
-    background: var(--emphasis);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text);
+    background: var(--tint-active);
+    border-radius: var(--radius-pill);
 }
 
 .nav-links .nav-cta {
@@ -587,19 +582,25 @@ mark {
     font-size: 1.2em;
 }
 
-/* Link hover: grow slightly and turn Matcha (positive), emphasis included. */
+/* Link hover and keyboard focus: grow slightly and turn Matcha (positive), emphasis included. */
 .text-cta:hover,
+.text-cta:focus-visible,
 .project-card-link:hover .text-cta,
+.project-card-link:focus-visible .text-cta,
 .next-card:hover .text-cta,
-.nav-links a:hover {
+.next-card:focus-visible .text-cta,
+.nav-links a:hover,
+.nav-links a:focus-visible {
     color: var(--positive);
     transform: scale(1.04);
 }
 
 .text-cta:hover em,
+.text-cta:focus-visible em,
 .project-card-link:hover .text-cta em,
+.project-card-link:focus-visible .text-cta em,
 .next-card:hover .text-cta em,
-.nav-links a.active:hover {
+.next-card:focus-visible .text-cta em {
     background: var(--positive);
     -webkit-background-clip: text;
     background-clip: text;
