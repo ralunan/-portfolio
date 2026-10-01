@@ -75,3 +75,10 @@ Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, nu
 - run `npm run design:check` and not add new findings; fix pre-existing ones on the page being revised, not in bulk;
 - add a dated line to the DESIGN.md decisions log for any design decision Ron makes or approves (a new color, a size change, a dropped element), with the reason;
 - before opening a PR that touches styles, components or pages, run the `design-steward` agent (`.claude/agents/design-steward.md`) and address what it reports.
+
+## Content and voice (read before any copy change)
+
+`CONTENT.md` holds the voice (senior UX / product designer, written for hiring managers), honesty rules, lengths for each piece of copy and where each lives. Every session that changes copy must:
+- follow `CONTENT.md`, and never invent facts, numbers or outcomes;
+- keep the `.txt` formatting rules above (no renaming or reordering `##` chapters without Ron's approval, since images are numbered by chapter);
+- before opening a PR that touches copy (`*.txt`, text in `src/projects.js`, components or pages), run the `content-writer` agent (`.claude/agents/content-writer.md`) and show Ron its before/after proposals; apply only what he approves.
