@@ -127,10 +127,6 @@ export default function Home() {
                         <button type="button" className="text-cta text-cta--lg" onClick={goToWork}>
                             See selected <em>work</em> <span aria-hidden="true">↓</span>
                         </button>
-                        {/* Quick read of the highlights; the About and Resume pages are a later step. */}
-                        <a className="text-cta" href="#/highlights" onClick={(e) => { e.preventDefault(); goToHighlights(); }}>
-                            About me <span aria-hidden="true">→</span>
-                        </a>
                     </motion.div>
                 </motion.div>
                 <button type="button" className="scroll-cue" onClick={goToWork} aria-label="Scroll to selected work">
@@ -139,6 +135,15 @@ export default function Home() {
             </section>
 
             <section className="work container" ref={workRef} id="work">
+                {/* Highlights come first so the work below reads in context. */}
+                <div className="stats" role="region" aria-label="Highlights" id="highlights" ref={highlightsRef}>
+                    {STATS.map(([value, label], i) => (
+                        <Reveal key={value} className="stat" delay={i * 0.08}>
+                            <span className="stat-value">{value}</span>
+                            <span className="stat-label">{label}</span>
+                        </Reveal>
+                    ))}
+                </div>
                 <Reveal className="section-head">
                     <p className="eyebrow">Selected work</p>
                     <h2 className="section-title">Case studies from Walmart</h2>
@@ -148,15 +153,6 @@ export default function Home() {
                         <ProjectCard key={project.slug} project={project} index={i} />
                     ))}
                 </div>
-            </section>
-
-            <section className="stats container" aria-label="Highlights" id="highlights" ref={highlightsRef}>
-                {STATS.map(([value, label], i) => (
-                    <Reveal key={value} className="stat" delay={i * 0.08}>
-                        <span className="stat-value">{value}</span>
-                        <span className="stat-label">{label}</span>
-                    </Reveal>
-                ))}
             </section>
 
             <section className="approach container">

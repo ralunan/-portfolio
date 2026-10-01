@@ -107,6 +107,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Hero "About me" link removed so the hero has one clear action; About stays in the header (Ron). Highlights stats moved to the top of Selected work so visitors get a snapshot of his experience before the case studies (Ron). Spacing to be tuned in a later pass.
 - **2026-10-01** Hero "About me" loses its pill and becomes a text link with an arrow (Ron).
 - **2026-10-01** Header pill removed too; the current page is marked by darker text only (Ron).
 - **2026-10-01** Header current page reverted to the plain pill; the italic hurt legibility there (Ron). Keyboard focus gets the same Matcha state as hover.
