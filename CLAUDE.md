@@ -4,50 +4,39 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Ronald Alunan's UX design portfolio — a static site (no build step, no framework, no npm) hosted on GitHub Pages at `github.com/ralunan/-portfolio`. The full product spec lives in `context-website.txt` at repo root; re-read it before any structural change since it's the source of truth and may be edited directly.
+Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site hosted on GitHub Pages at `ralunan.github.io/-portfolio/`. v1 (plain HTML/CSS/JS, full-screen non-scrolling screens) is preserved on the `v1-backup` branch. `context-website.txt` holds the original v1 product spec; v2 deliberately moved to scrolling, product-focused case studies, but keeps v1's content conventions below.
 
-## Running locally
+## Commands
 
-There is no Node.js or Python installed in this environment (only the Windows Store app-execution-alias stubs, which are not functional runtimes). `js/main.js` uses `fetch()` to load content `.txt` files and images at runtime, which the browser blocks under `file://` — the site **must** be served over `http://`, not opened directly.
+- `npm install` once, then `npm run dev` for a local preview with hot reload.
+- `npm run build` outputs the static site to `dist/`. `npm run preview` serves that build.
+- No lint or test setup exists.
 
-To preview locally, start a minimal static file server (PowerShell's `System.Net.HttpListener` works with nothing extra installed) rooted at the repo, then open `http://localhost:<port>/` in a browser. GitHub Pages serves the site correctly with no extra steps once pushed — the local-server requirement is a dev-only workaround.
+## Deploy
 
-No lint/build/test commands exist for this project.
+`.github/workflows/deploy.yml` builds and deploys to GitHub Pages on every push to `main`. The repo's Pages source must be set to "GitHub Actions" (Settings → Pages). `vite.config.js` uses `base: './'` and the app uses `HashRouter` (`#/work/cashi`), so nothing hard-codes the repo path and no server rewrites are needed.
 
 ## Architecture
 
-**Single-page app, hash-routed, no build step.** `index.html` contains one `<section class="screen">` per top-level view (home, resume, about, projects, project), all stacked and toggled by `js/main.js`. Routes: `#/`, `#/resume`, `#/about`, `#/projects`, `#/projects/<slug>/<page>`. `js/main.js` is the only script and is loaded as an ES module (`import`/`export` between it and `js/projects.js`).
+- `src/main.jsx` mounts the app inside `HashRouter` and `MotionConfig reducedMotion="user"`.
+- `src/App.jsx` declares routes (`/`, `/work/:slug`, `/about`, `/resume`) inside `AnimatePresence`; every route is wrapped in `components/Page.jsx`, the one shared fly-in/fly-out transition for the whole site. Don't add one-off route transitions.
+- `components/Reveal.jsx` is the shared scroll-into-view animation. Reuse it rather than adding new motion patterns.
+- `components/Lightbox.jsx` provides click-to-enlarge (`useLightbox()`), showing images at native width with scroll because many boards are dense Figma flows.
+- Styling is one stylesheet, `src/styles.css`, with tokens on `:root`. Each project sets `--accent` from its registry entry, which tints its card, case-study hero, chapter numbers and outcome cards.
 
-**Full-screen, non-scrolling, transition-driven** (per `context-website.txt`): the site is not a scrolling page. Every navigation runs through `showScreen()` in `js/main.js`, which drives a state machine — exit the current screen (`.screen--exiting`, fly-out keyframe), render the next screen's content, enter it (`.screen--entering`, fly-in keyframe), settle to `.screen--active`. This animation pattern is meant to stay consistent across the whole site; don't add one-off transitions without reason.
+## Content is data, never duplicated into JS
 
-**Content is data, not markup — fetched live from `.txt` files, never duplicated into JS.** Resume (`resume.txt`), About Me (`aboutme.txt`), and each project's text file are all plain text authored with a `## Heading` convention and parsed at runtime by the shared `parseSectionedText()` in `js/main.js`. A line starting with `## ` marks a section; everything until the next `## ` (or EOF) is that section's body. Text before the first `## ` is the "preamble" (used for the resume's name/contact block).
+`resume.txt`, `aboutme.txt` and each project's text file are imported raw at build time and parsed in `src/content.js`:
+- A line starting with `## ` opens a section; text before the first one is the preamble (the resume's name / title / email).
+- Inside a section, a line starting with a single `#` is a sub-heading grouping the following paragraphs (used in "Methods Used").
+- Resume: "Experience" and "Experience (cont.)" merge into one list. In each blank-line-separated chunk, line 1 is the organization, line 2 the title and dates, further lines are description; a chunk that is a single long line is a bullet of the previous role.
 
-Project text files support a second-level `#Sub-heading` (single hash) inside a section's body, parsed by `renderBlockBody()` — used e.g. in "Methods Used" to break one section into labeled sub-blocks without creating new pages.
+## Projects
 
-**Project page-building rule:** within a project's text file, the `Context` and `Problem statement` sections always merge into page 1; every other `##` section becomes its own subsequent page, in file order (`buildProjectPages()` in `js/main.js`). A `##` section with an empty body (nothing before the next `##`) renders **no text at all** for that page — just the eyebrow and its images — for pages meant to be image-only with description headers above the images (see `Item Tiles`/`Accounts` in `Projects/Fashion/fashion-context.txt` for the pattern).
+`src/projects.js` registers each project with metadata only (title, tagline, tags, meta rows, outcomes, accent, cover, images). The case study text comes from `Projects/<folder>/<file>`.
+- Chapter 1 is always `## Context` + `## Problem statement` (the problem statement renders as a highlighted card). Every other `##` section becomes the next chapter, in file order. A section with an empty body renders as heading + images only.
+- Image filenames start with their chapter number (`1_x.png`, `2_x.png`); `src/content.js` matches them by that prefix. Entries can be `{ file, caption }`.
+- `gridPages` lists chapters whose images are tall/portrait and sit side by side; other chapters stack images full width (two images sit in two columns).
+- The `cover` image appears on the home card and the case-study hero, and is skipped in its own chapter's gallery.
 
-**Project registry (`js/projects.js`)** — since static hosting can't list directories, each project is manually registered with metadata only (never content). `images` is a list where each entry is either a plain filename or an object with:
-- `caption`: a title rendered above that image.
-- `column: 'left'`: renders the image in the left text column instead of the default right image column (e.g. to pair one image per column at an even scale, or to fill a column that has no body text).
-- `width`: caps that image at N px instead of the default 500 — used to shrink several stacked/floated images so a page fits without scrolling.
-- `hint: true`: explicitly makes this image the one carrying the floating "Click images to enlarge!" hint, overriding the automatic default (middle image for a filmstrip row, first uncaptioned image otherwise — captioned images are skipped by default so the hint doesn't collide with the caption).
-
-Each filename is prefixed with the page number it belongs to (`1_foo.png`, `2_bar.svg`, per `context-website.txt`'s numbering convention); the renderer matches images to pages by this prefix, independently for images bound for the left vs. right column.
-
-Two more project-level fields, both explicit rather than inferred, since the right call depends on image *content* (dense screenshot vs. illustration vs. wide diagram), not just count or page number:
-- `enlargeablePages`: page numbers where images get click-to-enlarge (lightbox + cursor + the hint).
-- `filmstripPages`: page numbers where images float inline (top-aligned, right to left) instead of stacking full-width — applies independently to the left and right column of that page, each sized to fit however many images share that specific column (`filmstripWidth()` in `renderProjectDetail`). If omitted for a project, this falls back to "3+ images in the right column" per page.
-
-Adding a new project = one folder under `Projects/`, one `## `-formatted `.txt` file, optional numbered images, and one entry in `PROJECTS`.
-
-**Established visual system** (`css/main.css`), reused across resume/about/project pages — match these rather than introducing new values:
-- Two-column layouts use `500px 500px` (or a `fit-content`/computed variant) grid columns with `justify-content: center` and `40px` gaps.
-- Image groups use `16px` gaps.
-- Buttons and the persistent nav/commit-counter/add-project-modal-CTA all share one "glass pill" style: `border-radius: 999px`, `rgba(255,255,255,0.15)` background, `1px solid rgba(255,255,255,0.3)` border, `backdrop-filter: blur(12px)`.
-- The project page's eyebrow (project title + "Page X of Y") sits *above* `.project-page-grid`, not inside either column — it needs to be outside both so the two columns' actual content (text/images) starts at the same top position regardless of caption/heading differences between them.
-- `#screen-project` uses `align-items: flex-start` (top-anchored) instead of the `center` every other screen uses, so the eyebrow stays at a fixed vertical position across pages of wildly different content height — don't remove this without expecting the eyebrow to jump around page to page.
-
-**Global widgets, outside `#app`, persisting across route changes** (the router only swaps `.screen` contents inside `#app`):
-- `#lightbox` (`setupLightbox()`) — click-to-enlarge overlay for any `.project-page-image--enlargeable`, native resolution with scroll (not shrunk to fit) via `safe center` alignment.
-- `#add-project-modal` (`setupAddProjectModal()`) — opened by the dashed "+" placeholder tile on the Projects index.
-- `#commit-counter` (`updateCommitCounter()`) — fetches the real commit count from the GitHub REST API (`api.github.com/repos/ralunan/-portfolio/commits`, using the `Link` header's `rel="last"` page number rather than paginating). Not a manually maintained value.
+Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, numbered images, and one entry in `PROJECTS`.

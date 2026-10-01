@@ -3,58 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Alunan - UX Design Portfolio</title>
-    <link rel="stylesheet" href="css/main.css">
+    <title>Ronald Alunan · Product Designer</title>
+    <meta name="description" content="Ronald Alunan is a San Francisco product designer with five years designing eCommerce experiences at Walmart International.">
+    <meta name="theme-color" content="#0b0c10">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 </head>
-<body data-route="home">
-    <nav id="site-nav"><a href="#/">RA &mdash; Home</a></nav>
-    <div id="commit-counter">Total Commits &mdash;</div>
-
-    <div id="app">
-        <section id="screen-home" class="screen" data-screen="home">
-            <div class="screen-content">
-                <h1 class="home-title">Hi, I'm <strong>Ronald Alunan</strong>.<br>UX portfolio</h1>
-                <nav class="home-nav">
-                    <a href="#/resume">Resume</a>
-                    <a href="#/about">About Me</a>
-                    <a href="#/projects">Projects</a>
-                </nav>
-            </div>
-        </section>
-
-        <section id="screen-resume" class="screen" data-screen="resume">
-            <div class="screen-content screen-content--wide"></div>
-        </section>
-
-        <section id="screen-about" class="screen" data-screen="about">
-            <div class="screen-content screen-content--about"></div>
-        </section>
-
-        <section id="screen-projects" class="screen" data-screen="projects">
-            <div class="screen-content screen-content--wide">
-                <h1 class="projects-heading">Walmart Projects</h1>
-                <div id="projects-list" class="project-card-list"></div>
-            </div>
-        </section>
-
-        <section id="screen-project" class="screen" data-screen="project">
-            <div class="screen-content screen-content--project"></div>
-        </section>
-    </div>
-
-    <div id="lightbox" class="lightbox">
-        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
-        <img class="lightbox-img" src="" alt="">
-    </div>
-
-    <div id="add-project-modal" class="modal">
-        <div class="modal-content">
-            <button type="button" class="modal-close" aria-label="Close">&times;</button>
-            <p class="modal-text">Design is always needed! If you want to collaborate together on my next project, please contact me through LinkedIn or my contact info.</p>
-            <a class="modal-cta" href="#/resume">View Resume</a>
-        </div>
-    </div>
-
-    <script type="module" src="js/main.js"></script>
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
