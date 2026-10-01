@@ -432,3 +432,19 @@ PASS_A[17:20] = [
     "...sOJJJJSSO....",
     "....OJJJJOOO....",
 ]
+
+# Draft 19 (Ron): front walk. Step 1: his right leg forward (screen left) with the bigger foot,
+# left leg back with a smaller far-shade foot; his left hand forward and bigger, right hand small.
+# Step 2 mirrors the legs and hands. Both steps are 25 rows: legs 1 px longer, so the body
+# rides 1 px higher than STAND_PAD (the stand frame with a blank top row).
+_STEP1_LEGS = [
+    "..OsOJJJJJJOSSO.",
+    "...OOJJJJJJOSSO.",
+    "....OJJJOjjOOOO.",
+    "....OJJJOGGO....",
+    "...OGGGGOOO.....",
+    "...OOOOOO.......",
+]
+WALK_L = FRONT[:19] + _STEP1_LEGS
+WALK_R = FRONT[:19] + [r[::-1] for r in _STEP1_LEGS]
+STAND_PAD = ["." * 16] + FRONT
