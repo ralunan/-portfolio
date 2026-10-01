@@ -392,3 +392,23 @@ PASS_B[17:24] = [
     "...OGGOOGGO.....",
     "...OOOOOOOO.....",
 ]
+
+# Draft 16 (Ron): hands only. Pass A: front (far) hand half visible, back (near) hand closer
+# to the body. Step B: far hand 1 px higher. Pass B: a sliver of the far hand behind the body.
+PASS_A[17:20] = [
+    "..OsOPLPPPpSSO..",
+    "..OsOJJJJJJSSO..",
+    "..OOOJJJJJJOOO..",
+]
+SIDE_B[15:20] = [
+    ".OOOOOWPPPO.....",
+    ".OssOPLPPPpO....",
+    ".OssOrpppppOPO..",
+    "..OOOPLPPPpOSSO.",
+    "....OJJJJJJOSSO.",
+]
+PASS_B[17:20] = [
+    "...OSSPPPPpOsO..",
+    "...OSSOJJJJOsO..",
+    "...OOOOJJJJOOO..",
+]

@@ -72,7 +72,7 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
 .notes {{ font-size:14px; color:var(--muted); line-height:1.65; margin:0; padding-left:18px; }}
 </style></head><body><div class="sheet">
 <header>
-  <div><p class="eyebrow">Character sheet · draft 15</p><h1>Ron, the <em>pixel</em> persona</h1></div>
+  <div><p class="eyebrow">Character sheet · draft 16</p><h1>Ron, the <em>pixel</em> persona</h1></div>
   <div class="meta">16 × 24 px sprite, Final Fantasy III / VI scale<br>Japanese palette only · shown at 8× and 12×</div>
 </header>
 <div class="grid">
