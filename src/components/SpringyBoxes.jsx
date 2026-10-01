@@ -5,8 +5,14 @@ import { MathUtils } from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSprings, a } from '@react-spring/three';
 
-// Box colors. Swap these to retint the whole animation.
-const COLORS = ['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff', 'lightpink', 'lightblue'];
+// Box colors (Ron's Japanese palette). Swap these to retint the animation.
+const COLORS = [
+    '#5B5F8D', // Kyoto Dusk
+    '#9BB29E', // Matcha Cream
+    '#DA6B51', // Roasted Terracotta
+    '#F1DCBA', // Vanilla Foam
+    '#484149', // Charcoal Brew
+];
 const COUNT = 35;
 // Seconds between reshuffles (the original demo used 3).
 const SHUFFLE_EVERY = 6;
@@ -18,9 +24,10 @@ const boxes = Array.from({ length: COUNT }, () => [0.1 + Math.random() * 9, 0.1 
 function random(i) {
     const r = Math.random();
     return {
-        position: [100 - Math.random() * 200, 100 - Math.random() * 200, i * 1.5],
+        // Kept mostly to the right so the boxes don't sit behind the intro text.
+        position: [105 - Math.random() * 110, 80 - Math.random() * 160, i * 1.5],
         color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-        scale: [1 + r * 14, 1 + r * 14, 1],
+        scale: [1 + r * 5, 1 + r * 5, 1],
         rotation: [0, 0, MathUtils.degToRad(Math.round(Math.random()) * 45)],
     };
 }
