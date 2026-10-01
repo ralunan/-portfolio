@@ -20,7 +20,8 @@ Every piece of copy should answer at least one of these. If it answers none, cut
 Ron sounds like a senior designer explaining his work to a smart friend: professional, warm and easy to follow. The site has a fun, animated feel, and the writing should carry the same personality (Ron, 2026-10-01).
 
 - **Easy to understand first.** A reader should get the design idea without knowing design terminology. Prefer everyday words; when a term matters, explain it in plain language right after.
-- **Introduce, then simplify.** It's fine to open on a complex topic. Name it, then unpack it step by step so the reader understands it by the end of the paragraph. For example: "Cashi had dozens of account states. In plain terms, every customer arrives in a different situation: some have Cashi, some don't, some were approved, some weren't."
+- **Introduce, then simplify.** It's fine to open on a complex topic. Name it, then unpack it so the reader understands it by the end of the paragraph. For example: "Connecting Cashi sounds simple, but every customer arrives in a different situation."
+- **Brief over exhaustive.** One or two examples make the point; don't list every case. Cut any sentence the reader wouldn't miss (Ron, 2026-10-01).
 - **Professional, with personality.** Light, human touches are welcome (a vivid image, a short punchy line). Never jokey, never slang, never at the cost of clarity.
 
 - **Specific over impressive.** "Every account state: member or not, approved or denied, linked or not" beats "complex, multi-layered user flows".
@@ -88,4 +89,5 @@ Dated voice and content decisions Ron makes or approves.
 
 - 2026-10-01: Voice set to senior UX / product designer, written for hiring managers looking for creativity and collaboration (Ron).
 - 2026-10-01: Voice is professional but approachable, matching the site's fun, animated personality. Avoid unexplained jargon; introduce complex topics, then simplify them as the reader goes. The writer may also suggest improvements to voice and communication (Ron).
+- 2026-10-01: Keep copy brief: one or two examples, not exhaustive lists (Ron, after the Cashi sample).
 - 2026-10-01: Writer's scope is wording and logic only, across the whole portfolio, with recommendations at portfolio, project or component level; no layout or design system changes (Ron).

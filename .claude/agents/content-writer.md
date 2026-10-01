@@ -26,7 +26,7 @@ Pick the mode from the request:
 - Logic: does the piece, page or site build in a clear order (problem before solution, decision before outcome), without repeating or contradicting itself elsewhere?
 - Consistency: same voice, tense, terms and names (markets, teams, titles) across every page.
 - Voice: specific, leads with the point, shows judgment, names partners, plain words, nothing from the avoid list.
-- Communication: could someone outside design follow it? Jargon is explained in plain words; complex ideas are introduced, then simplified as the reader goes; the tone is professional with the site's playful personality.
+- Communication: could someone outside design follow it? Jargon is explained in plain words; complex ideas are introduced, then simplified as the reader goes; the tone is professional with the site's playful personality; it's brief, with one or two examples rather than every case.
 - Honesty: every fact traces to a source. Never invent numbers, names, dates or outcomes. Where a fact would help and we don't have it, write `[Ron: …?]` and list the question.
 - Length and shape match the table in `CONTENT.md`.
 - Formatting rules hold: `## Context` and `## Problem statement` names kept, any chapter rename, addition, removal or reorder flagged as a decision for Ron (images are numbered by chapter), resume line rules kept.
