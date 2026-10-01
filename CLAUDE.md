@@ -22,7 +22,34 @@ Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site
 - `src/App.jsx` declares routes (`/`, `/work/:slug`, `/about`, `/resume`) inside `AnimatePresence`; every route is wrapped in `components/Page.jsx`, the one shared fly-in/fly-out transition for the whole site. Don't add one-off route transitions.
 - `components/Reveal.jsx` is the shared scroll-into-view animation. Reuse it rather than adding new motion patterns.
 - `components/Lightbox.jsx` provides click-to-enlarge (`useLightbox()`), showing images at native width with scroll because many boards are dense Figma flows.
-- Styling is one stylesheet, `src/styles.css`, with tokens on `:root` (documented in `DESIGN.md`). Each project sets `--accent` from its registry entry, which tints its card, case-study hero, chapter numbers and outcome cards.
+- Styles live in `src/styles/`, one file per area, loaded in a fixed order by `src/styles/index.css` (see the file map below). Tokens are on `:root` in `tokens.css` (documented in `DESIGN.md`). Each project sets `--accent` from its registry entry, which tints its card, case-study hero, chapter numbers and outcome cards.
+
+## File map: where to change what
+
+Each component's phone overrides (`@media (max-width: 960px)` / `640px`) sit at the bottom of that component's CSS file, not in a shared responsive block.
+
+| To change | Component | Styles |
+| --- | --- | --- |
+| Colors, fonts, radii, fluid sizes | | `src/styles/tokens.css` |
+| Body type, headings, `<em>` emphasis, `.eyebrow`, `.section-title`, `.container`, background orbs | | `src/styles/base.css` |
+| Top nav | `components/Nav.jsx` | `styles/components/nav.css` |
+| Buttons, tags | | `styles/components/buttons.css` |
+| Text CTAs and the shared Matcha link hover | | `styles/components/text-cta.css` |
+| Footer | `components/Footer.jsx` | `styles/components/footer.css` |
+| Lightbox | `components/Lightbox.jsx` | `styles/components/lightbox.css` |
+| Home page order, hero-to-work scroll hand-off, `#/highlights` deep link | `pages/Home.jsx` | |
+| Home hero (headline, gradient, springy boxes, scroll cue) | `components/home/Hero.jsx`, `HeroGradient.jsx`, `SpringyBoxes.jsx`, `useHeroHandoff.js` | `styles/home/hero.css` |
+| Highlights (stat tiles) | `components/home/Highlights.jsx` | `.stats` in `styles/home/work.css` |
+| Selected Work: stage vs. stacked list switch | `components/home/SelectedWork.jsx` | `styles/home/work.css` |
+| Pinned work stage (card swap, peek, tilt, counter) | `components/home/WorkStage.jsx` | `.work-stage*` in `styles/home/work.css` |
+| Project card | `components/home/ProjectCard.jsx` | `styles/home/project-card.css` (stage sizing in `work.css`) |
+| How I work | `components/home/Approach.jsx` | `styles/home/approach.css` |
+| About teaser | `components/home/AboutTeaser.jsx` | `styles/home/about-teaser.css` |
+| Case studies | `pages/CaseStudy.jsx` | `styles/pages/case-study.css` |
+| About, Resume, 404 | `pages/About.jsx`, `Resume.jsx`, `NotFound.jsx` | `styles/pages/about.css`, `resume.css`, `not-found.css` |
+| Resume "Save as PDF" | | `styles/print.css` (keep it last in `index.css`) |
+
+A new stylesheet gets an `@import` in `src/styles/index.css` next to its area; `npm run design:check` scans every file in `src/styles/`.
 
 ## Content is data, never duplicated into JS
 

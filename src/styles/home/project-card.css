@@ -1,0 +1,91 @@
+/* Project card (components/home/ProjectCard.jsx): stacked list on
+   phones, and inside the work stage on laptop/desktop (overrides for the
+   stage are in work.css under .work-stage-card). */
+
+.project-card-link {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    box-shadow: var(--shadow);
+}
+
+.project-card:nth-child(even) .project-card-link {
+    grid-template-columns: 1fr 1.25fr;
+}
+
+.project-card:nth-child(even) .project-card-media {
+    order: 2;
+}
+
+.project-card-link:hover {
+    border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 80px -30px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.project-card-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--accent) 35%, var(--canvas)), var(--canvas) 70%);
+}
+
+.project-card-media img {
+    position: absolute;
+    inset: -6% 0;
+    width: 100%;
+    height: 112%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.8s var(--ease);
+}
+
+.project-card-link:hover .project-card-media img {
+    transform: scale(1.04);
+}
+
+.project-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: clamp(28px, 4vw, 52px);
+}
+
+.project-card-num {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
+}
+
+.project-card-title {
+    font-family: var(--display);
+    font-size: var(--fs-title-sm);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+}
+
+.project-card-tagline {
+    color: var(--muted);
+}
+
+.project-card-cta {
+    margin-top: 8px;
+}
+
+@media (max-width: 960px) {
+    .project-card-link,
+    .project-card:nth-child(even) .project-card-link {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card:nth-child(even) .project-card-media {
+        order: 0;
+    }
+}

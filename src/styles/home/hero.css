@@ -1,0 +1,173 @@
+/* Home screen 1: the hero (components/home/Hero.jsx), its Cotton Candy
+   shader gradient and springy boxes canvases, and the scroll cue. */
+
+.hero {
+    min-height: calc(100vh - 96px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 64px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 0 4px var(--success-ring);
+}
+
+.hero-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: var(--fs-hero);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    max-width: 13ch;
+    margin-bottom: 32px;
+}
+
+.hero-word {
+    display: inline-block;
+    white-space: pre;
+}
+
+.hero-sub {
+    max-width: 560px;
+    font-size: clamp(17px, 1.6vw, 20px);
+    color: var(--muted);
+    margin-bottom: 40px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px 32px;
+}
+
+.hero-light {
+    position: relative;
+    margin-top: -96px;
+    padding-top: 96px;
+    min-height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Static fallback in the preset's colors; the live canvas paints over it. */
+.hero-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(60% 70% at 80% 20%, #dbf8ff 0%, transparent 70%),
+        radial-gradient(70% 80% at 15% 85%, #f6dcea 0%, transparent 70%),
+        linear-gradient(160deg, #f3f2f8, #ebedff);
+}
+
+.hero-gradient-canvas,
+.hero-boxes-canvas {
+    position: absolute !important;
+    inset: 0;
+    animation: gradient-in 1.2s var(--ease) both;
+}
+
+.hero-boxes-canvas {
+    pointer-events: none;
+}
+
+@keyframes gradient-in {
+    from {
+        opacity: 0;
+    }
+}
+
+/* Blend the gradient into the page background below. */
+.hero-light::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 160px;
+    z-index: -1;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+}
+
+.hero-light .hero {
+    min-height: calc(100vh - 96px);
+    padding-bottom: 88px;
+}
+
+/* On desktop widths, anchor the hero text to the left edge of the screen
+   instead of the centered 1200px column, so it clears the boxes on the right. */
+@media (min-width: 1200px) {
+    .hero-light .hero {
+        max-width: none;
+        margin: 0;
+        padding-left: clamp(84px, 10.5vw, 202px);
+        padding-right: 0;
+    }
+}
+
+/* Keep the whole hero inside one screen on shorter laptop displays. */
+.hero-light .hero-title {
+    font-size: min(var(--fs-hero), 9vh);
+    max-width: 16ch;
+    margin-bottom: min(32px, 3vh);
+}
+
+.hero-light .hero-sub {
+    max-width: 640px;
+    margin-bottom: min(40px, 4vh);
+}
+
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    width: 26px;
+    height: 42px;
+    margin-left: -13px;
+    border-radius: 999px;
+    border: 2px solid rgba(22, 23, 29, 0.35);
+    transition: border-color 0.2s ease;
+}
+
+.scroll-cue:hover {
+    border-color: rgba(22, 23, 29, 0.7);
+}
+
+.scroll-cue span {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: rgba(22, 23, 29, 0.6);
+    animation: scroll-cue 1.8s var(--ease) infinite;
+}
+
+@keyframes scroll-cue {
+    0% {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-cue span {
+        animation: none;
+    }
+}

@@ -1,0 +1,44 @@
+/* Print (the resume's "Save as PDF"). Must stay last. */
+
+@media print {
+    body {
+        background: #fff;
+        color: #111;
+    }
+
+    em {
+        background: none;
+        color: inherit;
+    }
+
+    .nav,
+    .footer,
+    .backdrop,
+    .resume-head .button {
+        display: none;
+    }
+
+    .page {
+        padding-top: 0;
+    }
+
+    .job,
+    .resume-list li {
+        background: none;
+        border-color: #ddd;
+        color: #222;
+    }
+
+    .job ul,
+    .job-role,
+    .muted,
+    .resume-heading {
+        color: #444;
+    }
+
+    * {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+}

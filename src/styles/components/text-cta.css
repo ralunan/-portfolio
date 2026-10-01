@@ -1,0 +1,67 @@
+/* Text CTAs: editorial links to the work (.text-cta), and the shared
+   Matcha hover/focus for links, nav links and card CTAs. */
+
+.text-cta {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+    transform-origin: left center;
+    transition: color 0.2s ease, transform 0.3s var(--ease);
+}
+
+.text-cta--lg {
+    font-size: 22px;
+    margin-right: 16px;
+}
+
+.text-cta em {
+    font-size: 1.2em;
+}
+
+/* Link hover and keyboard focus: grow slightly and turn Matcha (positive), emphasis included. */
+.text-cta:hover,
+.text-cta:focus-visible,
+.project-card-link:hover .text-cta,
+.project-card-link:focus-visible .text-cta,
+.next-card:hover .text-cta,
+.next-card:focus-visible .text-cta,
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    color: var(--positive);
+    transform: scale(1.04);
+}
+
+.text-cta:hover em,
+.text-cta:focus-visible em,
+.project-card-link:hover .text-cta em,
+.project-card-link:focus-visible .text-cta em,
+.next-card:hover .text-cta em,
+.next-card:focus-visible .text-cta em {
+    background: var(--positive);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text-cta:hover,
+    .project-card-link:hover .text-cta,
+    .next-card:hover .text-cta,
+    .nav-links a:hover {
+        transform: none;
+    }
+}
+
+.project-card-cta span {
+    transition: transform 0.3s var(--ease);
+}
+
+.project-card-link:hover .project-card-cta span,
+.next-card:hover .project-card-cta span {
+    transform: translateX(6px);
+}

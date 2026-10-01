@@ -1,0 +1,29 @@
+/* Stylesheet entry (imported once by main.jsx). Order matters: later files
+   win ties, so shared pieces load before the pages that use them and print
+   stays last. Each file keeps its own phone overrides (max-width 960px /
+   640px) at its bottom. */
+
+@import './tokens.css';
+@import './base.css';
+
+/* Shared components */
+@import './components/buttons.css';
+@import './components/nav.css';
+@import './components/text-cta.css';
+@import './components/lightbox.css';
+@import './components/footer.css';
+
+/* Home page, top to bottom */
+@import './home/hero.css';
+@import './home/work.css';
+@import './home/project-card.css';
+@import './home/approach.css';
+@import './home/about-teaser.css';
+
+/* Other pages */
+@import './pages/case-study.css';
+@import './pages/about.css';
+@import './pages/resume.css';
+@import './pages/not-found.css';
+
+@import './print.css';
