@@ -17,7 +17,7 @@ html {
 
 body {
     font-family: var(--font);
-    font-size: 17px;
+    font-size: var(--fs-body);
     line-height: 1.65;
     color: var(--text);
     background: var(--bg);
@@ -180,8 +180,3 @@ mark {
     }
 }
 
-@media (max-width: 640px) {
-    body {
-        font-size: 16px;
-    }
-}

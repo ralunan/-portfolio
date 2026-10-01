@@ -80,6 +80,10 @@
     --fs-section: clamp(28px, 3.2vw, 40px);
     --fs-title: clamp(24px, 2.6vw, 32px);
     --fs-title-sm: clamp(22px, 2.2vw, 28px);
+    /* Body text (Ron, 2026-10-01): 16px everywhere; the home hero's intro
+       line is the one larger exception at 18px. */
+    --fs-body: 16px;
+    --fs-hero-intro: 18px;
 
     --radius-xs: 8px;
     --radius-sm: 12px;
