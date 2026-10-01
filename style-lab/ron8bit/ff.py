@@ -227,3 +227,24 @@ _TOP7 = [
 for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
     _rows[:5] = _TOP7
 TALK[:5] = [r + "...." for r in _TOP7]
+
+# Draft 8 (Ron): front locked. Side view gets lower, rounder hair pulled back into a small
+# ponytail with a Terracotta hair tie (side view only).
+_SIDE8 = [
+"................",
+".......OOO......",
+".....OOBBHOO....",
+"....OBHHOOBHO...",
+"...OBHOBBHHHHO..",
+"..OBHOBHHHOHHHO.",
+"..OHOBHHHOHHHOO.",
+"...OSSSHOBHHHrBO",
+"..OSOSSSHHsHHOHO",
+"..OSOSSSSHsHHOO.",
+]
+SIDE[:10] = _SIDE8
+SIDE_STEP[:10] = _SIDE8
+# ponytail one pixel longer so it reads at small sizes
+for _rows in (SIDE, SIDE_STEP):
+    _rows[9] = "..OSOSSSSHsHHOHO"
+    _rows[10] = ".OSSSSSSSHHHHOO."
