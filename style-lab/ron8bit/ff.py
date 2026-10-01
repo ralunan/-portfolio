@@ -214,3 +214,16 @@ _TOP6 = [
 for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
     _rows[:5] = _TOP6
 TALK[:5] = [r + "...." for r in _TOP6]
+
+# Draft 7 (Ron): right side curves out 1 px instead of a straight edge; its point sits
+# lower than the center crest.
+_TOP7 = [
+"........OO......",
+".....OOOBBOOO...",
+"...OOBBHHHHHBBOO",
+"..OBHHHOOBBHHHBO",
+".OBHHOOBBHHHOBHO",
+]
+for _rows in (FRONT, BACK, WALK_L, WALK_R, BLINK, HAPPY):
+    _rows[:5] = _TOP7
+TALK[:5] = [r + "...." for r in _TOP7]
