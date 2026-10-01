@@ -57,7 +57,8 @@ Newest first. Status: **proposed**, **approved**, **applied**, **dropped**.
 
 | Date | Artifact | For | Status | Notes |
 | --- | --- | --- | --- | --- |
-| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v16.html` | Ron's 8-bit persona | proposed | Draft 16 (Ron): hands only. Pass A front hand half visible, back hand closer to the body; Step B far hand 1 px higher; Pass B a sliver of the far hand behind the body. Replaces draft 15. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v17.html` | Ron's 8-bit persona | proposed | Draft 17 (Ron): Pass A near hand centered, leaning back; Pass B near hand centered, leaning forward, far hand one unoutlined pixel. Replaces draft 16. |
+| 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v16.html` | Ron's 8-bit persona | dropped | Draft 16 (Ron): hands only. Pass A front hand half visible, back hand closer to the body; Step B far hand 1 px higher; Pass B a sliver of the far hand behind the body. Replaces draft 15. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v15.html` | Ron's 8-bit persona | dropped | Draft 15 (Ron): Pass A front hand 2x2 and a sliver of the back foot; Pass B hand further forward, back foot in front, other foot 1 px right. Replaces draft 14. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v14.html` | Ron's 8-bit persona | dropped | Draft 14 (Ron): Step A approved as is. Pass A legs together, near hand swung back, far hand peeking in front; Step B far hand forward and higher, far leg forward, near leg back with heel lifted; Pass B legs together. Replaces draft 13. |
 | 2026-10-01 | `style-lab/assets/2026-10-01-ron8bit-character-sheet-v13.html` | Ron's 8-bit persona | dropped | Draft 13 (Ron): pass frames open into a small V with both shoes grounded, front leg 1 px further left, back leg 1 px further right. Replaces draft 12. |

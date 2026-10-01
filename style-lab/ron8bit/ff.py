@@ -412,3 +412,16 @@ PASS_B[17:20] = [
     "...OSSOJJJJOsO..",
     "...OOOOJJJJOOO..",
 ]
+
+# Draft 17 (Ron): Pass A near hand centered on the body, leaning back (right); Pass B near hand
+# centered, leaning forward (left), far hand reduced to one unoutlined pixel behind the body.
+PASS_A[17:20] = [
+    "..OsOPLPPSSO....",
+    "..OsOJJJJSSO....",
+    "..OOOJJJJOOO....",
+]
+PASS_B[17:20] = [
+    "....OPSSPPpO....",
+    "....OJSSJJJOs...",
+    "....OJOOJJJO....",
+]
