@@ -2,24 +2,33 @@
    (components/home/SelectedWork.jsx, WorkStage.jsx). The card itself is
    in project-card.css. */
 
+/* Every row is as tall as the tallest card (grid-auto-rows: 1fr), so if a
+   label ever needs a 4th line, all the cards grow together and stay one
+   height, in every layout (4, 2 or 1 per row). */
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
+    grid-auto-rows: 1fr;
+    gap: 16px;
     margin-bottom: 160px;
-    border-top: 1px solid var(--line);
-    padding-top: 32px;
 }
 
+/* Each highlight is a .card (components/card.css). Its content is
+   centered and starts at the top, so the numbers line up across the row,
+   and every label sits in the same size text box (three lines tall), so
+   each card has the same spacing around its content. The number is
+   centered; the label text inside its box is left-aligned (Ron). */
 .stat {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 8px;
-    padding-right: 24px;
+    text-align: center;
 }
 
 .stat-value {
     font-family: var(--display);
+    color: var(--subheading);
     font-size: var(--fs-section);
     font-weight: 600;
     letter-spacing: -0.03em;
@@ -27,9 +36,12 @@
 }
 
 .stat-label {
+    width: 22ch;
+    max-width: 100%;
+    min-height: calc(3 * 1.5em);
+    text-align: left;
     font-size: 14px;
     color: var(--muted);
-    max-width: 22ch;
     line-height: 1.5;
 }
 
@@ -73,12 +85,11 @@
     margin-bottom: 28px;
 }
 
-/* Desktop (taller than a typical laptop): the highlights get about 20% more
-   height as padding around the stats. Type sizes stay the same. */
+/* Desktop (taller than a typical laptop): the highlight cards get more
+   padding, still equal on all sides. Type sizes stay the same. */
 @media (min-height: 901px) {
-    .work-stage-head .stats {
-        padding-top: 48px;
-        padding-bottom: 16px;
+    .work-stage-head .stat {
+        --card-pad: 32px;
     }
 }
 
@@ -178,7 +189,6 @@
 @media (max-width: 960px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
-        row-gap: 32px;
     }
 }
 
