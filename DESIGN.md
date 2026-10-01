@@ -14,26 +14,31 @@ The single source of truth for how the portfolio looks. Values live as CSS custo
 
 ## Color
 
+The site theme is Ron's Japanese palette (since 2026-10-01): **Kyoto Dusk** #5B5F8D, **Matcha Cream** #9BB29E, **Roasted Terracotta** #DA6B51, **Vanilla Foam** #F1DCBA, **Charcoal Brew** #484149. Each has a token (`--kyoto-dusk`, `--matcha-cream`, `--roasted-terracotta`, `--vanilla-foam`, `--charcoal-brew`), plus `--charcoal-deep` #2b262c for the darkest surfaces and pale washes (`--vanilla-wash`, `--matcha-wash`, `--dusk-wash`) for soft card backgrounds.
+
 | Token | Value | Use |
 | --- | --- | --- |
-| `--bg` | #f7f6fb | Page background |
-| `--surface` / `--surface-2` | #ffffff / #f1f0f7 | Cards, raised areas |
-| `--text` | #16171d | Headings, primary type |
-| `--body` | #3d414c | Long-form paragraphs |
-| `--muted` / `--faint` | #5a5f6e / #868b98 | Secondary and tertiary type |
-| `--line` / `--line-strong` / `--line-hover` | 8% / 16% / 28% ink | Borders |
-| `--ink-accent` | #5a5ce6 | Links, hero italic gradient start |
+| `--bg` | #fbf7f0 | Page background, a light Vanilla Foam wash |
+| `--surface` / `--surface-2` | #ffffff / #f6eee1 | Cards, raised areas |
+| `--text` | Charcoal Brew #484149 | Headings, primary type, primary button |
+| `--body` | #554e56 | Long-form paragraphs |
+| `--muted` / `--faint` | #6f6770 / #958d93 | Secondary and tertiary type |
+| `--line` / `--line-strong` / `--line-hover` | Charcoal at 10% / 20% / 30% | Borders |
+| `--ink-accent` | Kyoto Dusk | Links, focus, hero italic gradient start |
+| `--hero-em-b` | Roasted Terracotta | Hero italic gradient end |
+| `--brand-a` / `--brand-b` | Kyoto Dusk / Roasted Terracotta | Nav monogram, About photo glow |
 | `--accent` | per project | Set from `projects.js`; tints cards, chapter numbers, outcomes |
-| `--canvas` | #1d1e25 | Behind work images only (transparent boards with white labels) |
-| `--brand-a` / `--brand-b` | #667eea / #764ba2 | Nav monogram, About photo glow (nod to v1) |
+| `--canvas` | `--charcoal-deep` | Behind work images only (transparent boards with white labels) |
+| `--orb-a` / `--orb-b` | Vanilla Foam / pale Matcha | Ambient background orbs |
+| `--success` | deep Matcha #7fa184 | Availability dot |
 
-**Japanese palette** (springy boxes): `--kyoto-dusk` #5B5F8D, `--matcha-cream` #9BB29E, `--roasted-terracotta` #DA6B51, `--vanilla-foam` #F1DCBA.
+**Project accents** use the palette: Walmart UX Research = Matcha Cream, Cashi = Kyoto Dusk, Fashion = Roasted Terracotta. A new project picks one of the five, or Ron adds a new palette color first.
 
-**Cotton Candy pastels** (hero gradient, orbs, soft cards): `--cotton-lilac`, `--cotton-mist`, `--cotton-sky`, `--cotton-pink`, `--cotton-aqua`, `--cotton-blush`, `--orb-a`, `--orb-b`, `--hero-em-b`.
+**Accent as text.** Matcha and Terracotta are too light for small text on white, so accent-colored text (tags, chapter and card numbers, eyebrows) always uses `color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep))`, which passes 4.5:1 for all three accents. Fills, borders and glows can use the raw accent.
 
-**Utility**: `--white`, `--black`, `--glass`, `--nav-glass`, `--tint-hover`, `--tint-active`, `--scrim`, `--overlay`, `--on-dark-*` (lightbox), `--success` / `--success-ring` (availability dot).
+**Cotton Candy pastels** (`--cotton-*`) are reserved for the home hero's shader gradient.
 
-Project accents: Walmart UX Research #0e9fb5, Cashi #6b5cf0, Fashion #e8643a.
+**Utility**: `--white`, `--glass`, `--nav-glass`, `--tint-hover`, `--tint-active`, `--scrim`, `--overlay`, `--on-dark-*` (lightbox), `--success-ring`.
 
 ## Type
 
@@ -64,6 +69,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-01** Japanese palette becomes the site-wide color theme (Ron): Charcoal Brew type, Vanilla Foam background, Kyoto Dusk links and accent, palette colors as project accents. Cotton Candy kept for the home hero gradient only. Charcoal Brew stays out of the springy boxes.
 - **2026-10-01** Design system and consistency check introduced. Raw colors in `styles.css` replaced with tokens (no visual change).
 - **2026-10-01** Charcoal Brew #484149 removed from the springy boxes. Too dark against the light hero (Ron).
 - **2026-10-01** Hero text left-anchored at 1200px+, boxes on the right and slightly cropped off the edge.

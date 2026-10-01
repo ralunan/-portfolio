@@ -1,56 +1,61 @@
 /* ---------- tokens ---------- */
 
 :root {
-    --bg: #f7f6fb;
+    --bg: #fbf7f0; /* Vanilla Foam wash */
     --surface: #ffffff;
-    --surface-2: #f1f0f7;
-    --line: rgba(22, 23, 29, 0.08);
-    --line-strong: rgba(22, 23, 29, 0.16);
-    --text: #16171d;
-    --body: #3d414c;
-    --muted: #5a5f6e;
-    --faint: #868b98;
-    --ink-accent: #5a5ce6;
+    --surface-2: #f6eee1;
+    --line: rgba(72, 65, 73, 0.1);
+    --line-strong: rgba(72, 65, 73, 0.2);
+    --text: #484149; /* Charcoal Brew */
+    --body: #554e56;
+    --muted: #6f6770;
+    --faint: #958d93;
+    --ink-accent: #5b5f8d; /* Kyoto Dusk */
     /* Dark "Figma canvas" behind work images: several boards are transparent
        PNGs with white labels that disappear on a light background. */
-    --canvas: #1d1e25;
-    --shadow: 0 1px 2px rgba(22, 23, 29, 0.04), 0 12px 32px -12px rgba(22, 23, 29, 0.12);
-    --brand-a: #667eea;
-    --brand-b: #764ba2;
-    --accent: #6b5cf0;
+    --canvas: var(--charcoal-deep);
+    --shadow: 0 1px 2px rgba(72, 65, 73, 0.05), 0 12px 32px -12px rgba(72, 65, 73, 0.16);
+    --brand-a: #5b5f8d;
+    --brand-b: #da6b51;
+    --accent: #5b5f8d;
 
-    /* Japanese palette (springy boxes). Charcoal Brew #484149 retired. */
+    /* Japanese palette: the site theme (2026-10-01). The springy boxes use the
+       first four; Charcoal Brew is too dark for the boxes but sets the type. */
     --kyoto-dusk: #5b5f8d;
     --matcha-cream: #9bb29e;
     --roasted-terracotta: #da6b51;
     --vanilla-foam: #f1dcba;
+    --charcoal-brew: #484149;
+    --charcoal-deep: #2b262c;
+    --vanilla-wash: #f8ecd8;
+    --matcha-wash: #e3ebe4;
+    --dusk-wash: #e6e7f0;
 
-    /* Cotton Candy pastels: hero gradient, ambient orbs, soft cards. */
+    /* Cotton Candy pastels: home hero gradient only. */
     --cotton-lilac: #ebedff;
     --cotton-mist: #f3f2f8;
     --cotton-sky: #dbf8ff;
     --cotton-pink: #f6eefc;
     --cotton-aqua: #e3f6fb;
     --cotton-blush: #f6dcea;
-    --orb-a: #d6dcff;
-    --orb-b: #f7d9ec;
-    --hero-em-b: #a04fd6;
+    --orb-a: #f1dcba;
+    --orb-b: #cbd8cd;
+    --hero-em-b: #da6b51;
 
     /* Neutrals, tints and overlays. */
     --white: #fff;
-    --black: #000;
     --glass: rgba(255, 255, 255, 0.7);
-    --nav-glass: rgba(247, 246, 251, 0.78);
-    --tint-hover: rgba(22, 23, 29, 0.05);
-    --tint-active: rgba(22, 23, 29, 0.06);
-    --line-hover: rgba(22, 23, 29, 0.28);
-    --scrim: rgba(22, 23, 29, 0.75);
-    --overlay: rgba(16, 17, 24, 0.9);
+    --nav-glass: rgba(251, 247, 240, 0.8);
+    --tint-hover: rgba(72, 65, 73, 0.05);
+    --tint-active: rgba(72, 65, 73, 0.07);
+    --line-hover: rgba(72, 65, 73, 0.3);
+    --scrim: rgba(43, 38, 44, 0.78);
+    --overlay: rgba(30, 27, 31, 0.92);
     --on-dark-muted: rgba(255, 255, 255, 0.7);
     --on-dark-fill: rgba(255, 255, 255, 0.12);
     --on-dark-line: rgba(255, 255, 255, 0.25);
-    --success: #3ddc97;
-    --success-ring: rgba(61, 220, 151, 0.18);
+    --success: #7fa184;
+    --success-ring: rgba(155, 178, 158, 0.3);
 
     /* Type scale. Fixed UI sizes in px; display sizes are fluid. See DESIGN.md. */
     --fs-hero: clamp(44px, 8vw, 104px);
@@ -249,8 +254,8 @@ em {
 }
 
 .button--primary:hover {
-    background: var(--black);
-    border-color: var(--black);
+    background: var(--charcoal-deep);
+    border-color: var(--charcoal-deep);
 }
 
 .tags {
@@ -507,7 +512,7 @@ em {
 .project-card-num {
     font-family: var(--serif);
     font-size: 22px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .project-card-title {
@@ -588,7 +593,7 @@ em {
     align-items: center;
     padding: clamp(28px, 4vw, 56px);
     border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, var(--cotton-lilac), var(--cotton-pink) 60%, var(--cotton-aqua));
+    background: linear-gradient(135deg, var(--vanilla-wash), var(--surface) 55%, var(--matcha-wash));
     border: 1px solid var(--line);
 }
 
@@ -646,7 +651,7 @@ em {
 
 .case-hero .tag {
     border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-    color: color-mix(in srgb, var(--accent) 75%, black);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .case-title {
@@ -742,7 +747,7 @@ em {
     display: block;
     font-family: var(--serif);
     font-size: 22px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
     margin-bottom: 24px;
 }
 
@@ -775,7 +780,7 @@ em {
     display: block;
     font-family: var(--serif);
     font-size: 26px;
-    color: var(--accent);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
     margin-bottom: 8px;
 }
 
@@ -818,7 +823,7 @@ em {
 }
 
 .problem .eyebrow {
-    color: color-mix(in srgb, var(--accent) 80%, black);
+    color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .problem p {
