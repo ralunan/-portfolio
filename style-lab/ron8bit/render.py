@@ -1,6 +1,5 @@
-import sys, importlib
-sys.path.insert(0,'.')
-import sprite
+import sys
+sprite = None  # set to the module holding PAL before calling svg()
 def svg(rows, scale=12, bg=None):
     h=len(rows); w=len(rows[0])
     out=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w*scale}" height="{h*scale}" shape-rendering="crispEdges">']
@@ -16,6 +15,3 @@ def svg(rows, scale=12, bg=None):
             out.append(f'<rect x="{x}" y="{y}" width="{x2-x}" height="1" fill="{sprite.PAL[c]}"/>')
             x=x2
     out.append('</svg>'); return '\n'.join(out)
-if __name__=='__main__':
-    name=sys.argv[1]
-    open(f'/tmp/claude-0/-home-claude--portfolio/d0cc78a5-b510-53f8-b41c-bb49d816c162/scratchpad/{name}.svg','w').write(svg(getattr(sprite,name),12,'#fbf7f0'))

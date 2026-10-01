@@ -2,7 +2,8 @@
 # Shades are opacity mixes of palette colors, flattened so the sprite stays pixel-crisp.
 PAL = {
  'O': '#2b262c',  # outline, eyes: --charcoal-deep
- 'H': '#484149',  # hair, beard: Charcoal Brew
+ 'H': '#484149',  # hair, mustache: Charcoal Brew
+ 'b': '#837771',  # trimmed beard: Charcoal Brew 65% over Vanilla Foam
  'B': '#5b5f8d',  # hair sheen: Kyoto Dusk
  'S': '#f1dcba',  # skin: Vanilla Foam
  's': '#e9b495',  # skin shade: Roasted Terracotta 35% over Vanilla Foam
@@ -17,19 +18,19 @@ PAL = {
  'g': '#557a5c',  # sneaker shade: --matcha-ink
 }
 FRONT = [
-"......OO.OOO....",
-"....OOHHOHBHOO..",
-"...OHHBBHHHBHHO.",
-"..OHHBHHHBBHHHO.",
-"..OHBHHHHHHHHHO.",
-"..OHHHHHSSSSHO..",
+"..OOO.OOOO.OOO..",
+".OBBHOBBHHOBBHO.",
+"OBHHHOHHHHOHHHHO",
+"OHHOBBHOOBBHOOHO",
+"OHOBHHHOBHHHOBHO",
+"OHOHHHHSSSSHOHHO",
 ".OsHSOSSSSOSHsO.",
 ".OsHSOSSSSOSHsO.",
 "..OHSSSssSSsHO..",
-"..OHSHHHHHHSHO..",
-"..OHHHHnnHHHHO..",
-"...OHHHHHHHHO...",
-"....OOHHHHOO....",
+"..OHSbHHHHbSHO..",
+"..OHSSSnnSSSHO..",
+"...OHbbbbbbHO...",
+"....OOOOOOOO....",
 "...OPPOWWOPPO...",
 "..OLPpPPPPpPpO..",
 "..OprprpprprpO..",
@@ -51,12 +52,12 @@ BODY_BACK = [
 "..OSOpPPPPpOSO..",
 ]
 BACK = [
-"......OO.OOO....",
-"....OOHHOHBHOO..",
-"...OHHBBHHHBHHO.",
-"..OHHBHHHBBHHHO.",
-"..OHBHHHHHHHBHO.",
-"..OHHHBHHHBHHO..",
+"..OOO.OOOO.OOO..",
+".OBBHOBBHHOBBHO.",
+"OBHHHOHHHHOHHHHO",
+"OHHOBBHOOBBHOOHO",
+"OHOBHHHOBHHHOBHO",
+"OHOHHHHOHHHHOHHO",
 ".OsHHHHHHHHHHsO.",
 ".OsHHBHHHHBHHsO.",
 "..OHHHHHHHHHHO..",
@@ -67,19 +68,19 @@ BACK = [
 ] + BODY_BACK + FRONT[18:]
 
 SIDE = [
-".......OO.OO....",
-".....OOHHOBHOO..",
-"....OHHBBHHHBHO.",
-"...OHBHHHBBHHHO.",
-"...OHHHHHHHBHHO.",
-"...OSSSHHHHHHHO.",
+".....OOO.OOOO...",
+"....OBBHOBBHHO..",
+"...OBHHHOHHHHOO.",
+"..OHHOBBHOOBBHHO",
+"..OHOBHHHOBHHHHO",
+"...OSSSHOHHHOHO.",
 "..OSOSSSHHsHHO..",
 "..OSOSSSSHsHHO..",
 ".OSSSSSSSHHHHO..",
-"..OsHHHHHHHHO...",
-"..OHnHHHHHHHO...",
-"...OHHHHHHHO....",
-"....OOOHHHOO....",
+"..OsHHSSSSHHO...",
+"..OHnSSSSHHO....",
+"...OHbbbbHO.....",
+"....OOOOOHOO....",
 ".....OWPPPO.....",
 "....OPLPPPpO....",
 "....OrprprpO....",

@@ -21,7 +21,7 @@ def cell(rows, label, scale=8, flip=False):
     return f'<figure class="cell">{sprite(rows, scale, flip)}<figcaption>{label}</figcaption></figure>'
 
 SWATCHES = [
-    ('O', 'Outline, eyes', 'Charcoal deep'), ('H', 'Hair, beard', 'Charcoal Brew'),
+    ('O', 'Outline, eyes', 'Charcoal deep'), ('H', 'Hair, mustache', 'Charcoal Brew'), ('b', 'Trimmed beard', 'Charcoal Brew 45% on Vanilla'),
     ('B', 'Hair sheen', 'Kyoto Dusk'), ('S', 'Skin', 'Vanilla Foam'),
     ('s', 'Skin shade', 'Terracotta 35% on Vanilla'), ('n', 'Mouth', 'Terracotta ink'),
     ('P', 'Flannel', 'Kyoto Dusk'), ('L', 'Flannel light', 'Kyoto Dusk 70% on white'),
@@ -64,7 +64,7 @@ figcaption {{ font-size:13px; color:var(--muted); }}
 .bubble::after {{ content:''; position:absolute; right:-10px; bottom:18px; width:14px; height:14px; background:#fff;
                   border:4px solid #2b262c; border-left:0; border-bottom:0; transform:rotate(45deg); }}
 .hero {{ display:flex; gap:48px; align-items:center; }}
-ul.palette {{ list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(4,1fr); gap:14px 20px; }}
+ul.palette {{ list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(5,1fr); gap:14px 20px; }}
 ul.palette li {{ display:grid; grid-template-columns:32px 1fr; column-gap:10px; align-items:center; }}
 .chip {{ grid-row:span 2; width:32px; height:32px; border-radius:8px; border:1px solid var(--line); }}
 ul.palette b {{ font-size:14px; font-weight:500; }}
@@ -72,11 +72,11 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
 .notes {{ font-size:14px; color:var(--muted); line-height:1.65; margin:0; padding-left:18px; }}
 </style></head><body><div class="sheet">
 <header>
-  <div><p class="eyebrow">Character sheet · draft 1</p><h1>Ron, the <em>pixel</em> persona</h1></div>
+  <div><p class="eyebrow">Character sheet · draft 2</p><h1>Ron, the <em>pixel</em> persona</h1></div>
   <div class="meta">16 × 24 px sprite, Final Fantasy III / VI scale<br>Japanese palette only · shown at 8× and 12×</div>
 </header>
 <div class="grid">
-  <section class="panel wide"><h2>Hero sprite</h2><p>The base pose, drawn from your profile photo: swept-up black hair, full beard, flannel over a white tee.</p>
+  <section class="panel wide"><h2>Hero sprite</h2><p>The base pose, drawn from your profile photo: wild, curly black hair, trimmed beard, flannel over a white tee.</p>
     <div class="hero">{cell(ff.FRONT, 'Front · 12×', 12)}{cell(ff.FRONT, '1× actual size', 1)}{cell(ff.FRONT, '3×', 3)}{cell(ff.FRONT, '6×', 6)}</div></section>
   <section class="panel wide"><h2>Turnaround</h2><p>Front, side and back, the four directions a walking sprite needs.</p>
     <div class="row">{cell(ff.FRONT,'Front')}{cell(ff.SIDE,'Left')}{cell(ff.BACK,'Back')}{cell(ff.SIDE,'Right',flip=True)}</div></section>
