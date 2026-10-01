@@ -425,3 +425,10 @@ PASS_B[17:20] = [
     "....OJSSJJJOs...",
     "....OJOOJJJO....",
 ]
+
+# Draft 18 (Ron): Pass A front hand loses its dark outline, like the Pass B back hand.
+PASS_A[17:20] = [
+    "...sOPLPPSSO....",
+    "...sOJJJJSSO....",
+    "....OJJJJOOO....",
+]
