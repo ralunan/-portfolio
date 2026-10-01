@@ -20,7 +20,7 @@ export const PROJECTS = [
         folder: 'UX Research',
         file: 'Context-research.txt',
         cover: '1_user-research-overview.svg',
-        accent: '#4fd6e8',
+        accent: '#0e9fb5',
         tags: ['Research', 'Strategy', 'Cross-market'],
         meta: [
             ['Role', 'Initiated and led the research'],
@@ -54,7 +54,7 @@ export const PROJECTS = [
         folder: 'Cashi',
         file: 'context-cashi.txt',
         cover: '1_cashi.png',
-        accent: '#8b7bff',
+        accent: '#6b5cf0',
         tags: ['Fintech', 'Checkout', 'Design systems'],
         meta: [
             ['Role', 'Product designer, Phase 2'],
@@ -83,7 +83,7 @@ export const PROJECTS = [
         folder: 'Fashion',
         file: 'fashion-context.txt',
         cover: '1_fashion-entrypoint.png',
-        accent: '#ff8a5c',
+        accent: '#e8643a',
         tags: ['AI prototyping', 'Visual design', 'Concepting'],
         meta: [
             ['Role', 'Product designer'],
