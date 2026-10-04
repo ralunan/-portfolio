@@ -75,3 +75,7 @@ Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, nu
 - run `npm run design:check` and not add new findings; fix pre-existing ones on the page being revised, not in bulk;
 - add a dated line to the DESIGN.md decisions log for any design decision Ron makes or approves (a new color, a size change, a dropped element), with the reason;
 - before opening a PR that touches styles, components or pages, run the `design-steward` agent (`.claude/agents/design-steward.md`) and address what it reports.
+
+## Job market signals
+
+`JOBS.md` tracks what hiring teams for senior UX / product designer roles keep asking for, a log of real postings, and how the portfolio answers each signal. The `job-scout` agent (`.claude/agents/job-scout.md`) keeps it current from public job listings and posts Ron pastes in (it never logs into or scrapes LinkedIn), and edits only `JOBS.md`. While the portfolio is in progress it is in a learning phase (tracks what is being built); once Ron says the portfolio is finished it advises on strengthening projects. Copy work can read `JOBS.md` for emphasis and wording, but `CONTENT.md`'s voice and honesty rules still win: a keyword goes into copy only when Ron's real work backs it up.
