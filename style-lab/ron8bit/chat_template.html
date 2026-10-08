@@ -16,6 +16,8 @@
   --rise-ms: 420ms;
   /* chat text (Ron, 2026-10-08): 24 phones, 28 tablets, 44 laptops (1280+), 46 at 1600+, 50 at 1920+, 54 at 2200+ */
   --chat-fs: 28px;
+  /* NEXT/CLOSE: chat text size below laptops, a fixed 40px from 1280 up (Ron). Its line height keeps the text's half-leading so the frame stays even. */
+  --next-fs: var(--chat-fs);
   color-scheme: light;
 }
 html, body { height: 100%; }
@@ -58,7 +60,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   letter-spacing: .02em; text-shadow: 2px 2px 0 var(--win-edge); max-width: none; }
 .controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--font-game); }
 .count { font-size: 13px; color: var(--win-dim); font-variant-numeric: tabular-nums; }
-.next { font: 600 var(--chat-fs) / 1.8 var(--font-game); letter-spacing: .08em; color: var(--win-text); background: transparent; border: 0;
+.next { font: 600 var(--next-fs) / calc(var(--next-fs) + var(--chat-fs) * .8) var(--font-game); letter-spacing: .08em; color: var(--win-text); background: transparent; border: 0;
   padding: 0 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-shadow: 2px 2px 0 var(--win-edge); visibility: hidden; }
 .next.is-ready { visibility: visible; }
 .next .cursor { display: inline-block; animation: nudge 600ms steps(2) infinite; }
@@ -79,7 +81,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak input { grid-column: 1 / -1; width: 100%; accent-color: var(--kyoto); }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
-@media (min-width: 1280px) { :root { --chat-fs: 44px; } .dialogue { height: calc(max(25vh, calc(var(--chat-fs) * 3.6 + 72px)) + 50px); } }
+@media (min-width: 1280px) { :root { --chat-fs: 44px; --next-fs: 40px; } .dialogue { height: calc(max(25vh, calc(var(--chat-fs) * 3.6 + 72px)) + 50px); } }
 @media (min-width: 1600px) { :root { --chat-fs: 46px; } }
 @media (min-width: 1920px) { :root { --chat-fs: 50px; } }
 @media (min-width: 2200px) { :root { --chat-fs: 54px; } }
