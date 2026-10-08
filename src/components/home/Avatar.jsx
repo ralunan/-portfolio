@@ -5,11 +5,10 @@ import { AVATAR_FRAMES, AVATAR_PALETTE } from './avatarSprites.js';
 // Ron's 8-bit avatar on the home hero. Styles: styles/home/avatar.css.
 // Discovery: after a reading delay he walks in from past the right edge with the
 // side walk (Step A, Pass A, Step B, Pass B; the pass frames carry the 1px bounce),
-// stops in the talk pose and shows the invite bubble. Clicking him opens the
-// approved RPG chat box (style-lab avatar chat prototype, Ron 2026-10-08).
+// stops in the talk pose and, after a fixed pause, shows the invite bubble. Clicking
+// him opens the approved RPG chat box (style-lab avatar chat prototype, Ron 2026-10-08).
+// Size and timing live in avatar.css (--avatar-px, --avatar-walk-delay, ...).
 
-const READING_DELAY_MS = 6000;
-const WALK_FRAME_MS = 250;
 const STEP_PX = 3; // sprite pixels moved per walk frame, so the feet don't slide
 const WALK = ['walk0', 'walk1', 'walk2', 'walk3'];
 const TYPE_MS = 18; // per letter
@@ -77,6 +76,7 @@ export default function Avatar() {
     const nextRef = useRef(null);
     const [stage, setStage] = useState('offstage'); // offstage | walking | ready
     const [frame, setFrame] = useState('walk0');
+    const [invite, setInvite] = useState(false);
     const [open, setOpen] = useState(false);
     const [pages, setPages] = useState([]);
     const [page, setPage] = useState(0);
@@ -87,10 +87,20 @@ export default function Avatar() {
     useEffect(() => {
         const el = avatarRef.current;
         let raf = 0;
+        let inviteTimer = 0;
+        const css = getComputedStyle(el);
+        const ms = (name) => {
+            const v = css.getPropertyValue(name).trim();
+            return v.endsWith('ms') ? parseFloat(v) : parseFloat(v) * 1000;
+        };
+        const walkDelay = ms('--avatar-walk-delay');
+        const frameMs = ms('--avatar-walk-frame');
+        const inviteDelay = ms('--avatar-invite-delay');
         const arrive = () => {
             el.style.transform = '';
             setFrame('talk');
             setStage('ready');
+            inviteTimer = setTimeout(() => setInvite(true), reduce ? 0 : inviteDelay);
         };
         const timer = setTimeout(() => {
             setStage('walking');
@@ -98,19 +108,19 @@ export default function Avatar() {
             const px = parseFloat(getComputedStyle(el).getPropertyValue('--avatar-px'));
             const right = parseFloat(getComputedStyle(el).right);
             const start = el.querySelector('.avatar-sprite').getBoundingClientRect().width + right + 8;
-            const speed = (STEP_PX * px) / WALK_FRAME_MS;
+            const speed = (STEP_PX * px) / frameMs;
             const t0 = performance.now();
             const step = (now) => {
                 const t = now - t0;
                 const x = Math.max(0, start - speed * t);
                 el.style.transform = `translateX(${x}px)`;
-                setFrame(WALK[Math.floor(t / WALK_FRAME_MS) % WALK.length]);
+                setFrame(WALK[Math.floor(t / frameMs) % WALK.length]);
                 if (x > 0) raf = requestAnimationFrame(step); else arrive();
             };
             el.style.transform = `translateX(${start}px)`;
             raf = requestAnimationFrame(step);
-        }, READING_DELAY_MS);
-        return () => { clearTimeout(timer); cancelAnimationFrame(raf); };
+        }, walkDelay);
+        return () => { clearTimeout(timer); clearTimeout(inviteTimer); cancelAnimationFrame(raf); };
     }, [reduce]);
 
     // Typing: one letter every TYPE_MS until the page is shown in full.
@@ -166,7 +176,7 @@ export default function Avatar() {
             <button
                 ref={avatarRef}
                 type="button"
-                className={`avatar avatar--${stage}${open ? ' is-talking' : ''}`}
+                className={`avatar avatar--${stage}${invite ? ' has-invite' : ''}${open ? ' is-talking' : ''}`}
                 tabIndex={ready ? 0 : -1}
                 aria-haspopup="dialog"
                 aria-expanded={open}
