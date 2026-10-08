@@ -528,3 +528,26 @@ def _yay_shoulder():
             put(y, x, c)
     return [''.join(r) for r in rows]
 YAY_SHOULDER = _yay_shoulder()
+
+# Draft 23 (Ron, 2026-10-08): shoulders 1 px closer to the body. The whole arm moves in 1 px;
+# the now-empty outer columns are trimmed, so the sprite is 22 wide.
+def _yay_in():
+    rows = [list(r) for r in YAY_SHOULDER]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][23 - x] = c
+    for y in range(10, 17):
+        for x in range(18, 24):
+            put(y, x, '.')
+    arm = {10: {20: 'O', 21: 'O'},
+           11: {19: 'O', 20: 'S', 21: 'S', 22: 'O'},
+           12: {19: 'O', 20: 'S', 21: 'S', 22: 'O'},
+           13: {18: 'O', 19: 'p', 20: 'p', 21: 'O'},
+           14: {17: 'O', 18: 'p', 19: 'p', 20: 'O'},
+           15: {16: 'O', 17: 'p', 18: 'p', 19: 'O'},
+           16: {17: 'O', 18: 'O'}}
+    for y, px in arm.items():
+        for x, c in px.items():
+            put(y, x, c)
+    return [''.join(r[1:-1]) for r in rows]
+YAY_IN = _yay_in()

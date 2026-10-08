@@ -72,7 +72,7 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
 .notes {{ font-size:14px; color:var(--muted); line-height:1.65; margin:0; padding-left:18px; }}
 </style></head><body><div class="sheet">
 <header>
-  <div><p class="eyebrow">Character sheet · draft 22</p><h1>Ron, the <em>pixel</em> persona</h1></div>
+  <div><p class="eyebrow">Character sheet · draft 23</p><h1>Ron, the <em>pixel</em> persona</h1></div>
   <div class="meta">16 × 24 px sprite, Final Fantasy III / VI scale<br>Japanese palette only · shown at 8× and 12×</div>
 </header>
 <div class="grid">
@@ -84,7 +84,7 @@ ul.palette small {{ font-size:12px; color:var(--muted); }}
     <div class="row">{cell(ff.WALK_L,'Step 1')}{cell(ff.STAND_PAD,'Stand')}{cell(ff.WALK_R,'Step 2')}</div><div class="row" style="margin-top:28px">{cell(ff.SIDE_A,'Step A')}{cell(ff.PASS_A,'Pass A')}{cell(ff.SIDE_B,'Step B')}{cell(ff.PASS_B,'Pass B')}{cell(ff.SIDE,'Side rest')}</div></section>
   <section class="panel"><h2>Expressions</h2><p>Face swaps on the same body, for idle blinks and reactions. Happy \u201cyay\u201d with both hands raised, two options (option B: arms at 45°, joined at the shoulders).</p>
     <div class="row">{cell(ff.FRONT,'Neutral')}{cell(ff.BLINK,'Blink')}{cell(ff.HAPPY,'Happy')}</div>
-    <div class="row" style="margin-top:28px">{cell(ff.YAY,'Yay A · hands at head height')}{cell(ff.YAY_SHOULDER,'Yay B · arms at 45° from the shoulders')}</div></section>
+    <div class="row" style="margin-top:28px">{cell(ff.YAY,'Yay A · hands at head height')}{cell(ff.YAY_IN,'Yay B · arms at 45° from the shoulders')}</div></section>
   <section class="panel"><h2>Talk pose</h2><p>Hand raised, ready for a project note in a chat bubble.</p>{bubble}</section>
   <section class="panel wide"><h2>Palette</h2><p>Every pixel uses your design-system colors. Shades are a palette color laid over another, flattened so the pixels stay crisp.</p>
     <ul class="palette">{swatches}</ul></section>
