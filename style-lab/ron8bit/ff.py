@@ -584,3 +584,12 @@ SURPRISE_C = _stamp(_pad(_swap(YAY_IN, {**_GASP, **_WIDE}, dx=3), top=8), _BANG,
 WORRY_A = _swap(FRONT, {**_GLANCE, **_WAVY})                            # nervous glance, wavy mouth
 WORRY_B = _stamp(_pad(_swap(FRONT, _GRIMACE), right=4), _DROP, 4, 16)   # eek: grimace + sweat drop
 WORRY_C = _stamp(_swap(TALK, _BROWS), _DROP, 4, 16)                     # uh-oh: worried brows, hand at cheek
+
+# Draft 25 (Ron, 2026-10-08): W1's sideways glance with a sweat drop, the drop flat like
+# S3's "!" (outline + one fill, no highlight) and sitting high above the head where the "!" is.
+# A: drop 2 px bigger (6 wide, 7 tall). B: drop at 2x (8 wide, 10 tall).
+_DROP_FLAT = ["..OO..", "..OO..", ".OLLO.", "OLLLLO", "OLLLLO", ".OLLO.", "..OO.."]
+_DROP_2X = ["...OO...", "...OO...", "..OLLO..", ".OLLLLO.", "OLLLLLLO",
+            "OLLLLLLO", "OLLLLLLO", "OLLLLLLO", ".OLLLLO.", "..OOOO.."]
+WORRY_D = _stamp(_pad(WORRY_A, top=8, right=4), _DROP_FLAT, 0, 13)
+WORRY_E = _stamp(_pad(WORRY_A, top=11, right=6), _DROP_2X, 0, 13)

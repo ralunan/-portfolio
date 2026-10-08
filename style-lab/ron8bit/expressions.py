@@ -27,6 +27,12 @@ worried = ''.join([
 ])
 neutral = render.svg(ff.FRONT, 10)
 
+draft25 = ''.join([
+    cell('W1', ff.WORRY_A, 'Nervous', 'Draft 24, for comparison.'),
+    cell('W4', ff.WORRY_D, 'Nervous + drop', 'Flat sweat drop, 2 px bigger, high above his head like the "!".'),
+    cell('W5', ff.WORRY_E, 'Nervous + big drop', 'Same, with the drop at 2x.'),
+])
+
 html = f'''<!doctype html><html><head><meta charset="utf-8"><title>Ron 8-bit expressions</title>
 <style>
 {font_css}
@@ -43,8 +49,9 @@ h2 {{ font-size:21px; font-weight:600; margin:0 0 20px; color:#5b5f8d; }}
 figcaption {{ display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.5; color:#6f6770; }}
 figcaption b {{ color:#484149; font-weight:600; font-size:16px; }}
 </style></head><body><div class="sheet">
-<p class="eyebrow">Character sheet · draft 24 · expression ideas</p>
+<p class="eyebrow">Character sheet · draft 25 · expression ideas</p>
 <h1>Surprised and worried</h1>
+<section class="panel"><h2>Worried, draft 25</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{draft25}</div></section>
 <section class="panel"><h2>Surprised</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{surprised}</div></section>
 <section class="panel"><h2>Worried</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{worried}</div></section>
 </div></body></html>'''
