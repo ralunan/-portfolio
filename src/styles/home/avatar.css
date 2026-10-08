@@ -7,9 +7,9 @@
    reading delay ends, then walks in and stands in the talk pose. */
 .avatar {
     /* Size: screen px per sprite pixel (whole numbers keep pixels crisp).
-       The sprite is 24 sprite px tall, so 6px draws him 144px tall. Steps
+       The sprite is 24 sprite px tall, so 4px draws him 96px tall. Steps
        with width at the bottom of this file. */
-    --avatar-px: 6px;
+    --avatar-px: 4px;
     /* Invite bubble text size, also stepped with width. */
     --invite-fs: 16px;
     /* Timing (read by Avatar.jsx): reading delay before he walks in, time per
@@ -286,31 +286,33 @@
 }
 
 /* Avatar and bubble sizes by width (Ron, 2026-10-08: draw him at each
-   breakpoint). Same breakpoints as the chat text. Starting values to tune
-   with the sizing dial. */
+   breakpoint). Same breakpoints as the chat text. Avatar scale set by Ron
+   with the sizing dial: 3x phones and tablets, 4x laptops, 5x at 1600 and
+   1920, 6x at 2200. Bubble text sizes are still starting values. */
 @media (min-width: 1600px) {
     .avatar {
+        --avatar-px: 5px;
         --invite-fs: 18px;
     }
 }
 
 @media (min-width: 1920px) {
     .avatar {
-        --avatar-px: 7px;
+        --avatar-px: 5px;
         --invite-fs: 20px;
     }
 }
 
 @media (min-width: 2200px) {
     .avatar {
-        --avatar-px: 8px;
+        --avatar-px: 6px;
         --invite-fs: 22px;
     }
 }
 
 @media (max-width: 1279px) {
     .avatar {
-        --avatar-px: 5px;
+        --avatar-px: 3px;
         --invite-fs: 15px;
     }
 }
@@ -318,7 +320,7 @@
 /* Phones: smaller avatar; the bubble shows here too (Ron, 2026-10-08). */
 @media (max-width: 640px) {
     .avatar {
-        --avatar-px: 4px;
+        --avatar-px: 3px;
         --invite-fs: 14px;
     }
 
