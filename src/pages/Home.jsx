@@ -16,8 +16,10 @@ export default function Home() {
     const { goToWork, goTo } = useHeroHandoff(workRef);
     const goToHighlights = () => {
         const el = highlightsRef.current;
-        // Land just below the fixed nav.
-        if (el) goTo(() => Math.round(el.getBoundingClientRect().top + window.scrollY) - 96);
+        // Land the shared header gap below the fixed nav (--page-top, read from .page).
+        const page = el?.closest('.page');
+        const offset = page ? parseFloat(getComputedStyle(page).paddingTop) : 96;
+        if (el) goTo(() => Math.round(el.getBoundingClientRect().top + window.scrollY) - offset);
     };
 
     useEffect(() => {

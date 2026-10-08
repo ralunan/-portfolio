@@ -87,3 +87,10 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 640px) {
+    /* First content sits --header-gap below the header (DESIGN.md rule). */
+    .resume-head {
+        padding-top: 0;
+    }
+}

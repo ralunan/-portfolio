@@ -121,6 +121,11 @@
 }
 
 @media (max-width: 640px) {
+    /* First content sits --header-gap below the header (DESIGN.md rule). */
+    .about-hero {
+        padding-top: 0;
+    }
+
     .timeline li {
         grid-template-columns: 1fr;
         gap: 4px;
