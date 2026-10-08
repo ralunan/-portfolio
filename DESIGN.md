@@ -111,7 +111,8 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
-- **2026-10-08** Avatar bubble (Ron): stays 4s (was 3s). Whenever it hides it plays the pop-in in reverse, shrinking back into its tail in the same steps.
+- **2026-10-08** Avatar bubble text by width (Ron approved, with the avatar sizes): 14px phones, 15px tablets, 16px at 1280+, 18px at 1600+, 20px at 1920+, 22px at 2200+ (`--invite-fs`). Part of the RPG exception to the type scale.
+- **2026-10-08** Avatar bubble (Ron): stays 4s (was 3s). Whenever it hides it plays the pop-in in reverse, shrinking back into its tail in the same steps. When the pointer leaves him, the bubble stays the same 4s before hiding, as when it first appears.
 - **2026-10-08** Avatar bubble (Ron): the invite bubble hides 3s after it appears and he goes back to the idle front walk. Hovering him (or keyboard focus) brings the bubble back with a short stepped pop-in from the tail, and he switches to the talk pose while it shows.
 - **2026-10-08** Avatar timing (Ron): reading delay before he walks in is 3s (was 6s). When he isn't annotating he idles with the approved front walk in place (Step 1, Stand, Step 2, Stand at 1s per frame); he switches to the talk pose while the bubble or chat is up.
 - **2026-10-08** Avatar size by width (Ron, set with the sizing dial): 3x the 16x24 sprite on phones and tablets (72px tall), 4x on laptops 1280+ (96px), 5x at 1600+ and 1920+ (120px), 6x at 2200+ (144px). Whole-number scales keep the pixels crisp. `--avatar-px` in `styles/home/avatar.css`.

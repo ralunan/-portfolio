@@ -7,7 +7,8 @@ import { AVATAR_FRAMES, AVATAR_PALETTE } from './avatarSprites.js';
 // side walk (Step A, Pass A, Step B, Pass B; the pass frames carry the 1px bounce),
 // stops and idles (front walk in place), then after a fixed pause switches to the
 // talk pose with the invite bubble. The bubble hides after a few seconds and he
-// goes back to idling; hovering (or focusing) him brings the bubble back. Clicking
+// goes back to idling; hovering (or focusing) him brings the bubble back, and it
+// stays for the same hold after the pointer leaves. Clicking
 // him opens the approved RPG chat box (style-lab avatar chat prototype, Ron 2026-10-08).
 // Size and timing live in avatar.css (--avatar-px, --avatar-walk-delay, ...).
 
@@ -84,6 +85,17 @@ export default function Avatar() {
     const [frame, setFrame] = useState('walk0');
     const [invite, setInvite] = useState(false);
     const [hover, setHover] = useState(false);
+    const holdRef = useRef(0);
+
+    // Shows the bubble for the hold time (--avatar-invite-hold), then hides it.
+    // Used when it first appears and each time the pointer leaves him (Ron, 2026-10-08).
+    const holdInvite = () => {
+        clearTimeout(holdRef.current);
+        setInvite(true);
+        const v = getComputedStyle(avatarRef.current).getPropertyValue('--avatar-invite-hold').trim();
+        const holdMs = v.endsWith('ms') ? parseFloat(v) : parseFloat(v) * 1000;
+        holdRef.current = setTimeout(() => setInvite(false), holdMs);
+    };
     const [open, setOpen] = useState(false);
     const [pages, setPages] = useState([]);
     const [page, setPage] = useState(0);
@@ -103,16 +115,12 @@ export default function Avatar() {
         const walkDelay = ms('--avatar-walk-delay');
         const frameMs = ms('--avatar-walk-frame');
         const inviteDelay = ms('--avatar-invite-delay');
-        const inviteHold = ms('--avatar-invite-hold');
         const arrive = () => {
             el.style.transform = '';
             setStage('ready');
             // The bubble shows once, then hides after a fixed hold (Ron, 2026-10-08);
             // hovering him brings it back.
-            inviteTimer = setTimeout(() => {
-                setInvite(true);
-                inviteTimer = setTimeout(() => setInvite(false), inviteHold);
-            }, reduce ? 0 : inviteDelay);
+            inviteTimer = setTimeout(holdInvite, reduce ? 0 : inviteDelay);
         };
         const timer = setTimeout(() => {
             setStage('walking');
@@ -132,7 +140,8 @@ export default function Avatar() {
             el.style.transform = `translateX(${start}px)`;
             raf = requestAnimationFrame(step);
         }, walkDelay);
-        return () => { clearTimeout(timer); clearTimeout(inviteTimer); cancelAnimationFrame(raf); };
+        return () => { clearTimeout(timer); clearTimeout(inviteTimer); clearTimeout(holdRef.current); cancelAnimationFrame(raf); };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [reduce]);
 
     // Talk pose while the bubble or chat is up; otherwise the idle front walk.
@@ -173,6 +182,7 @@ export default function Avatar() {
 
     const closeChat = useCallback(() => {
         setOpen(false);
+        clearTimeout(holdRef.current);
         setInvite(false); // done annotating: back to idle; hover shows the bubble again
         avatarRef.current?.focus({ preventScroll: true });
     }, []);
@@ -195,6 +205,11 @@ export default function Avatar() {
         return () => { document.removeEventListener('keydown', onKey); window.removeEventListener('resize', onResize); };
     }, [open, advance, closeChat]);
 
+    // Hover or focus shows the bubble; leaving keeps it up for the hold time
+    // before it hides, as when it first appears.
+    const enter = () => { clearTimeout(holdRef.current); setHover(true); };
+    const leave = () => { setHover(false); if (stage === 'ready' && !open) holdInvite(); };
+
     const last = page === pages.length - 1;
     const ready = stage === 'ready';
     const done = pages.length > 0 && shown >= full.length;
@@ -211,10 +226,10 @@ export default function Avatar() {
                 aria-controls="avatar-chat"
                 aria-label="Open Ron's aside"
                 onClick={() => { if (ready) (open ? closeChat() : openChat()); }}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
-                onFocus={() => setHover(true)}
-                onBlur={() => setHover(false)}
+                onMouseEnter={enter}
+                onMouseLeave={leave}
+                onFocus={(e) => { if (e.currentTarget.matches(':focus-visible')) enter(); }}
+                onBlur={() => { if (hover) leave(); }}
             >
                 <span className="avatar-invite">{INVITE}</span>
                 <span className="avatar-sprite">

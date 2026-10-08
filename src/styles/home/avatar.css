@@ -322,7 +322,7 @@
 /* Avatar and bubble sizes by width (Ron, 2026-10-08: draw him at each
    breakpoint). Same breakpoints as the chat text. Avatar scale set by Ron
    with the sizing dial: 3x phones and tablets, 4x laptops, 5x at 1600 and
-   1920, 6x at 2200. Bubble text sizes are still starting values. */
+   1920, 6x at 2200. Bubble text 14/15/16/18/20/22px (Ron approved both). */
 @media (min-width: 1600px) {
     .avatar {
         --avatar-px: 5px;
