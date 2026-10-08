@@ -68,7 +68,7 @@
   --font-game: 'Pixelify Sans', 'Courier New', monospace;
   /* tweakable motion (prototype) */
   --rise-ms: 420ms;
-  /* chat text (Ron, 2026-10-08): 24 phones, 28 tablets, 44 laptops (1280+), 50 at 1600+, 54 at 1920+, 58 at 2200+ */
+  /* chat text (Ron, 2026-10-08): 24 phones, 28 tablets, 44 laptops (1280+), 46 at 1600+, 50 at 1920+, 54 at 2200+ */
   --chat-fs: 28px;
   color-scheme: light;
 }
@@ -134,9 +134,9 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
 @media (min-width: 1280px) { :root { --chat-fs: 44px; } .dialogue { height: max(25vh, calc(var(--chat-fs) * 3.6 + 72px)); } }
-@media (min-width: 1600px) { :root { --chat-fs: 50px; } }
-@media (min-width: 1920px) { :root { --chat-fs: 54px; } }
-@media (min-width: 2200px) { :root { --chat-fs: 58px; } }
+@media (min-width: 1600px) { :root { --chat-fs: 46px; } }
+@media (min-width: 1920px) { :root { --chat-fs: 50px; } }
+@media (min-width: 2200px) { :root { --chat-fs: 54px; } }
 @media (max-width: 640px) {
   .page { padding-block: 72px 200px; }
   .invite { display: none; }
@@ -566,9 +566,9 @@ p { margin: 0 0 16px; max-width: 65ch; }
     { label: 'Phones · to 640', min: 0, max: 640, fs: 24 },
     { label: 'Tablets · 641+', min: 641, max: 1279, fs: 28 },
     { label: 'Laptops · 1280+', min: 1280, max: 1599, fs: 44 },
-    { label: '1600+', min: 1600, max: 1919, fs: 50 },
-    { label: '1920+', min: 1920, max: 2199, fs: 54 },
-    { label: '2200+', min: 2200, max: Infinity, fs: 58 },
+    { label: '1600+', min: 1600, max: 1919, fs: 46 },
+    { label: '1920+', min: 1920, max: 2199, fs: 50 },
+    { label: '2200+', min: 2200, max: Infinity, fs: 54 },
   ];
   const bpList = $('bpList'), bpNow = $('bpNow');
   bpList.innerHTML = BPS.map(b => `<li><span>${b.label}</span><span>${b.fs} px</span></li>`).join('');
