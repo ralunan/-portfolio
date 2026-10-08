@@ -1,0 +1,295 @@
+/* Ron's 8-bit avatar on the home hero (components/home/Avatar.jsx) and its
+   RPG chat box. The chat box and invite bubble are an approved exception to
+   the site style (Ron, 2026-10-08): pixel font, large "game ratio" type and a
+   dark dialogue window, carried over from the style-lab prototype unchanged. */
+
+/* Avatar: bottom-right of the hero. Hidden past the right edge until the
+   reading delay ends, then walks in and stands in the talk pose. */
+.avatar {
+    --avatar-px: 6px; /* screen px per sprite pixel: talk pose 120 x 144 */
+    position: absolute;
+    right: 24px;
+    bottom: 16px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    will-change: transform;
+}
+
+.avatar--offstage {
+    visibility: hidden;
+}
+
+.avatar--walking {
+    cursor: default;
+    pointer-events: none;
+}
+
+.avatar:focus-visible {
+    outline: 3px solid var(--ink-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-xs);
+}
+
+/* Sized to the talk pose (20 sprite px wide). The walk frames (16 wide) sit
+   at its left edge so the body doesn't jump when he turns to talk. */
+.avatar-sprite {
+    position: relative;
+    display: block;
+    width: calc(20 * var(--avatar-px));
+    height: calc(24 * var(--avatar-px));
+    transition: transform 160ms steps(2);
+}
+
+.avatar-frame {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+    width: calc(var(--cols) * var(--avatar-px));
+    height: calc(24 * var(--avatar-px));
+}
+
+.avatar-frame.is-on {
+    display: block;
+}
+
+.avatar--ready:hover .avatar-sprite {
+    transform: translateY(-4px);
+}
+
+/* Invite bubble: appears once he stops in the talk pose. */
+.avatar-invite {
+    position: relative;
+    max-width: 200px;
+    margin-bottom: 96px;
+    padding: 8px 12px;
+    background: var(--white);
+    border: 4px solid var(--charcoal-deep);
+    border-radius: var(--radius-xs);
+    box-shadow: 4px 4px 0 var(--vanilla-foam);
+    font-family: var(--font-game);
+    font-size: 15px;
+    line-height: 1.35;
+    text-align: left;
+    color: var(--text);
+    visibility: hidden;
+}
+
+.avatar-invite::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    bottom: 16px;
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border: 4px solid var(--charcoal-deep);
+    border-left: 0;
+    border-bottom: 0;
+    transform: rotate(45deg);
+}
+
+.avatar--ready .avatar-invite {
+    visibility: visible;
+}
+
+.avatar.is-talking .avatar-invite {
+    visibility: hidden;
+}
+
+/* RPG chat box: full width, rises from the bottom edge. Even frame (Ron):
+   the space under NEXT matches the space above the name and text. */
+.rpg-dialogue {
+    --chat-fs: 28px; /* 24 phones, 28 tablets, 44 at 1280+, 46 at 1600+, 50 at 1920+, 54 at 2200+ */
+    --next-fs: var(--chat-fs); /* chat text size below laptops, 40px from 1280 up */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    width: 100%;
+    height: min(25vh, 220px);
+    min-height: 132px;
+    transform: translateY(calc(100% + 32px));
+    transition: transform 420ms cubic-bezier(0.2, 1.3, 0.4, 1);
+}
+
+.rpg-dialogue.is-open {
+    transform: translateY(0);
+}
+
+.rpg-window {
+    box-sizing: border-box;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 16px;
+    padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(180deg, var(--rpg-top), var(--rpg-bottom));
+    color: var(--rpg-text);
+    border: 4px solid var(--rpg-frame);
+    border-radius: var(--radius-xs);
+    box-shadow: 0 0 0 3px var(--rpg-edge), inset 0 0 0 2px var(--rpg-edge), 6px 6px 0 3px var(--rpg-drop);
+}
+
+.rpg-name {
+    font-family: var(--font-game);
+    font-weight: 600;
+    font-size: var(--chat-fs);
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+    color: var(--vanilla-foam);
+}
+
+.rpg-speech {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rpg-text {
+    flex: 1;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    overflow: hidden;
+    font-family: var(--font-game);
+    font-size: var(--chat-fs);
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    color: var(--rpg-text);
+    text-shadow: 2px 2px 0 var(--rpg-edge);
+}
+
+.rpg-measure {
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.rpg-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-game);
+}
+
+.rpg-count {
+    font-size: 13px;
+    color: var(--rpg-dim);
+    font-variant-numeric: tabular-nums;
+}
+
+.rpg-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border: 0;
+    background: transparent;
+    font: 600 var(--next-fs) / calc(var(--next-fs) + var(--chat-fs) * 0.8) var(--font-game);
+    letter-spacing: 0.08em;
+    color: var(--rpg-text);
+    text-shadow: 2px 2px 0 var(--rpg-edge);
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.rpg-next.is-ready {
+    visibility: visible;
+}
+
+.rpg-cursor {
+    display: inline-block;
+    animation: rpg-nudge 600ms steps(2) infinite;
+}
+
+.rpg-next:hover,
+.rpg-next:focus-visible {
+    color: var(--vanilla-foam);
+    outline: none;
+}
+
+.rpg-next:focus-visible {
+    box-shadow: 0 0 0 2px var(--vanilla-foam);
+    border-radius: var(--radius-xs);
+}
+
+@keyframes rpg-nudge {
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+@media (min-width: 1280px) {
+    .rpg-dialogue {
+        --chat-fs: 44px;
+        --next-fs: 40px;
+        /* a quarter of the screen or enough for 2 lines, whichever is taller, plus 50px */
+        height: calc(max(25vh, calc(var(--chat-fs) * 3.6 + 72px)) + 50px);
+    }
+}
+
+@media (min-width: 1600px) {
+    .rpg-dialogue {
+        --chat-fs: 46px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .rpg-dialogue {
+        --chat-fs: 50px;
+    }
+}
+
+@media (min-width: 2200px) {
+    .rpg-dialogue {
+        --chat-fs: 54px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .rpg-dialogue {
+        transition: none;
+    }
+
+    .rpg-cursor {
+        animation: none;
+    }
+
+    .avatar--ready:hover .avatar-sprite {
+        transform: none;
+    }
+}
+
+/* Phones: smaller avatar and no invite bubble (as in the prototype). */
+@media (max-width: 640px) {
+    .avatar {
+        --avatar-px: 4px;
+    }
+
+    .avatar-invite {
+        display: none;
+    }
+
+    .rpg-dialogue {
+        --chat-fs: 24px;
+    }
+
+    .rpg-window {
+        gap: 12px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+    }
+}

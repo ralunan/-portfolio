@@ -46,6 +46,24 @@
     --matcha-wash: #e3ebe4;
     --dusk-wash: #e6e7f0;
 
+    /* Ron's 8-bit avatar (approved 2026-10-01): shades flattened from the
+       palette, used only by the sprite (components/home/avatarSprites.js). */
+    --avatar-flannel-light: #8c8faf; /* Kyoto Dusk 70% on white */
+    --avatar-flannel-shade: #484866; /* Kyoto Dusk 60% on Charcoal Deep */
+    --avatar-far-leg: #3f3940; /* Charcoal Brew 70% on Charcoal Deep */
+    --avatar-beard: #837771; /* Charcoal Brew 45% on Vanilla Foam */
+    --avatar-skin-shade: #e9b495; /* Terracotta 35% on Vanilla Foam */
+    /* Avatar chat box (Ron, 2026-10-08): an RPG dialogue window, intentionally
+       outside the site style for a game feel. Kyoto Dusk deepening toward
+       charcoal, white pixel frame. */
+    --rpg-top: var(--kyoto-dusk);
+    --rpg-bottom: #3a3a5c;
+    --rpg-frame: var(--white);
+    --rpg-edge: var(--charcoal-deep);
+    --rpg-text: var(--white);
+    --rpg-dim: #c9cbe0;
+    --rpg-drop: rgba(43, 38, 44, 0.35);
+
     /* Cotton Candy pastels: home hero gradient only. */
     --cotton-lilac: #ebedff;
     --cotton-mist: #f3f2f8;
@@ -97,6 +115,8 @@
     --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --display: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
+    /* Avatar chat only: pixel font for the RPG box and invite bubble (Ron, 2026-10-08). */
+    --font-game: 'Pixelify Sans', 'Courier New', monospace;
     /* Space from the fixed header to the first content on every page (Ron,
        2026-10-08): --page-top = header height + --header-gap. Phones get a
        tighter gap that steps down with width; see DESIGN.md. */
