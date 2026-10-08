@@ -68,8 +68,8 @@
   --font-game: 'Pixelify Sans', 'Courier New', monospace;
   /* tweakable motion (prototype) */
   --rise-ms: 420ms;
-  /* chat text (Ron): 20 phones, 18 tablets, 38 laptops (1280+), 42 at 1600+ (38 x 1600/1440), 40 at 1920+, 48 at 2200+ */
-  --chat-fs: 18px;
+  /* chat text (Ron, 2026-10-08): 24 phones, 28 tablets, 44 laptops (1280+), 50 at 1600+, 54 at 1920+, 58 at 2200+ */
+  --chat-fs: 28px;
   color-scheme: light;
 }
 html, body { height: 100%; }
@@ -133,17 +133,17 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak input { grid-column: 1 / -1; width: 100%; accent-color: var(--kyoto); }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
-@media (min-width: 1280px) { :root { --chat-fs: 38px; } .dialogue { height: 25vh; } }
-@media (min-width: 1600px) { :root { --chat-fs: 42px; } }
-@media (min-width: 1920px) { :root { --chat-fs: 40px; } }
-@media (min-width: 2200px) { :root { --chat-fs: 48px; } }
+@media (min-width: 1280px) { :root { --chat-fs: 44px; } .dialogue { height: 25vh; } }
+@media (min-width: 1600px) { :root { --chat-fs: 50px; } }
+@media (min-width: 1920px) { :root { --chat-fs: 54px; } }
+@media (min-width: 2200px) { :root { --chat-fs: 58px; } }
 @media (max-width: 640px) {
   .page { padding-block: 72px 200px; }
   .invite { display: none; }
   .avatar-sprite { width: 80px; height: 96px; }
   .window { gap: 10px; padding: 10px 12px; }
   .portrait svg { width: 40px; height: 38px; }
-  :root { --chat-fs: 20px; }
+  :root { --chat-fs: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .dialogue { transition: none; }
@@ -156,7 +156,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   <ol class="bp-list" id="bpList" aria-label="Chat text breakpoints"></ol>
   <label for="rise">Panel rise <output id="riseOut">420 ms</output><input id="rise" type="range" min="150" max="1200" step="10" value="420"></label>
   <label for="speed">Typing speed <output id="speedOut">32 ms/letter</output><input id="speed" type="range" min="8" max="90" step="2" value="32"></label>
-  <label for="size">Text size <output id="sizeOut">38 px</output><input id="size" type="range" min="14" max="56" step="1" value="38"></label>
+  <label for="size">Text size <output id="sizeOut">44 px</output><input id="size" type="range" min="14" max="72" step="1" value="44"></label>
 </details>
 
 <main class="page">
@@ -563,12 +563,12 @@ p { margin: 0 0 16px; max-width: 65ch; }
 
   // Breakpoints readout: live window width and the active chat-text breakpoint (keep in sync with the CSS).
   const BPS = [
-    { label: 'Phones · to 640', min: 0, max: 640, fs: 20 },
-    { label: 'Tablets · 641+', min: 641, max: 1279, fs: 18 },
-    { label: 'Laptops · 1280+', min: 1280, max: 1599, fs: 38 },
-    { label: '1600+', min: 1600, max: 1919, fs: 42 },
-    { label: '1920+', min: 1920, max: 2199, fs: 40 },
-    { label: '2200+', min: 2200, max: Infinity, fs: 48 },
+    { label: 'Phones · to 640', min: 0, max: 640, fs: 24 },
+    { label: 'Tablets · 641+', min: 641, max: 1279, fs: 28 },
+    { label: 'Laptops · 1280+', min: 1280, max: 1599, fs: 44 },
+    { label: '1600+', min: 1600, max: 1919, fs: 50 },
+    { label: '1920+', min: 1920, max: 2199, fs: 54 },
+    { label: '2200+', min: 2200, max: Infinity, fs: 58 },
   ];
   const bpList = $('bpList'), bpNow = $('bpNow');
   bpList.innerHTML = BPS.map(b => `<li><span>${b.label}</span><span>${b.fs} px</span></li>`).join('');
