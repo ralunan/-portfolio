@@ -68,7 +68,7 @@
   --font-game: 'Pixelify Sans', 'Courier New', monospace;
   /* tweakable motion (prototype) */
   --rise-ms: 420ms;
-  /* chat text (Ron): 20 phones, 18 tablets, 30 laptops (1280+), 36 at 1600+, 40 at 1920+, 48 at 2200+ */
+  /* chat text (Ron): 20 phones, 18 tablets, 38 laptops (1280+), 36 at 1600+, 40 at 1920+, 48 at 2200+ */
   --chat-fs: 18px;
   color-scheme: light;
 }
@@ -129,7 +129,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak input { grid-column: 1 / -1; width: 100%; accent-color: var(--kyoto); }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
-@media (min-width: 1280px) { :root { --chat-fs: 30px; } .dialogue { height: 25vh; } }
+@media (min-width: 1280px) { :root { --chat-fs: 38px; } .dialogue { height: 25vh; } }
 @media (min-width: 1600px) { :root { --chat-fs: 36px; } }
 @media (min-width: 1920px) { :root { --chat-fs: 40px; } }
 @media (min-width: 2200px) { :root { --chat-fs: 48px; } }
@@ -152,7 +152,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   <summary>Tweak animation</summary>
   <label for="rise">Panel rise <output id="riseOut">420 ms</output><input id="rise" type="range" min="150" max="1200" step="10" value="420"></label>
   <label for="speed">Typing speed <output id="speedOut">32 ms/letter</output><input id="speed" type="range" min="8" max="90" step="2" value="32"></label>
-  <label for="size">Text size <output id="sizeOut">30 px</output><input id="size" type="range" min="14" max="56" step="1" value="30"></label>
+  <label for="size">Text size <output id="sizeOut">38 px</output><input id="size" type="range" min="14" max="56" step="1" value="38"></label>
 </details>
 
 <main class="page">
