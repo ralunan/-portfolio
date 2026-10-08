@@ -156,7 +156,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   <summary>Tweak animation <span class="bp-now" id="bpNow"></span></summary>
   <ol class="bp-list" id="bpList" aria-label="Chat text breakpoints"></ol>
   <label for="rise">Panel rise <output id="riseOut">420 ms</output><input id="rise" type="range" min="150" max="1200" step="10" value="420"></label>
-  <label for="speed">Typing speed <output id="speedOut">32 ms/letter</output><input id="speed" type="range" min="8" max="90" step="2" value="32"></label>
+  <label for="speed">Typing speed <output id="speedOut">18 ms/letter</output><input id="speed" type="range" min="8" max="90" step="2" value="18"></label>
   <label for="size">Text size <output id="sizeOut">44 px</output><input id="size" type="range" min="14" max="72" step="1" value="44"></label>
 </details>
 
@@ -379,7 +379,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   const avatar = $('avatar'), dialogue = $('dialogue'), textEl = $('text'), next = $('next');
   const nextLabel = $('nextLabel'), nextIcon = $('nextIcon'), count = $('count');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let speed = 32, pages = [], page = 0, typing = null, shown = 0, open = false;
+  let speed = 18, pages = [], page = 0, typing = null, shown = 0, open = false;
 
   function paginate() {
     const probe = textEl.cloneNode(false);

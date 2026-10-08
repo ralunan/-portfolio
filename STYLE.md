@@ -96,3 +96,4 @@ Dated style decisions Ron makes or approves.
 - **2026-10-08** Chat box spacing (Ron): NEXT/CLOSE uses the chat text size at every breakpoint; on laptops and up the box is 50px taller than its quarter-screen height, so the box is no longer a strict 1/4 there; 4px between the text area and the NEXT row, and 4px from NEXT to the bottom of the box.
 - **2026-10-08** Even chat frame (Ron): the space under NEXT matches the space above the name and text (same top and bottom padding; NEXT uses the text's 1.8 line height). Replaces the 4px bottom gap; the 4px gap between the text area and NEXT stays.
 - **2026-10-08** NEXT size (Ron): a fixed 40px on laptops and up (1280+), 4px under laptop chat text; below laptops it stays at the chat text size. The frame spacing stays even.
+- **2026-10-08** Chat typing speed (Ron): 18 ms per letter.
