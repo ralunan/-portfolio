@@ -5,12 +5,17 @@ import { AVATAR_FRAMES, AVATAR_PALETTE } from './avatarSprites.js';
 // Ron's 8-bit avatar on the home hero. Styles: styles/home/avatar.css.
 // Discovery: after a reading delay he walks in from past the right edge with the
 // side walk (Step A, Pass A, Step B, Pass B; the pass frames carry the 1px bounce),
-// stops in the talk pose and, after a fixed pause, shows the invite bubble. Clicking
+// stops and idles (front walk in place), then after a fixed pause switches to the
+// talk pose with the invite bubble. Clicking
 // him opens the approved RPG chat box (style-lab avatar chat prototype, Ron 2026-10-08).
 // Size and timing live in avatar.css (--avatar-px, --avatar-walk-delay, ...).
 
 const STEP_PX = 3; // sprite pixels moved per walk frame, so the feet don't slide
 const WALK = ['walk0', 'walk1', 'walk2', 'walk3'];
+// Idle when he isn't annotating (Ron, 2026-10-08): the approved front walk in place,
+// Step 1, Stand, Step 2, Stand.
+const IDLE = ['idle0', 'idle1', 'idle2', 'idle1'];
+const FRAMES = [...WALK, 'idle0', 'idle1', 'idle2', 'talk'];
 const TYPE_MS = 18; // per letter
 const MAX_LINES = 3; // a chat page shows at most 3 lines
 const RISE_MS = 420;
@@ -39,7 +44,7 @@ function Sprite({ name, on }) {
         }
     });
     return (
-        <svg className={`avatar-frame${on ? ' is-on' : ''}`} style={{ '--cols': w }} viewBox={`0 0 ${w} ${rows.length}`}
+        <svg className={`avatar-frame${on ? ' is-on' : ''}`} style={{ '--cols': w, '--rows': rows.length }} viewBox={`0 0 ${w} ${rows.length}`}
             shapeRendering="crispEdges" aria-hidden="true">
             {rects}
         </svg>
@@ -98,7 +103,6 @@ export default function Avatar() {
         const inviteDelay = ms('--avatar-invite-delay');
         const arrive = () => {
             el.style.transform = '';
-            setFrame('talk');
             setStage('ready');
             inviteTimer = setTimeout(() => setInvite(true), reduce ? 0 : inviteDelay);
         };
@@ -123,6 +127,20 @@ export default function Avatar() {
         return () => { clearTimeout(timer); clearTimeout(inviteTimer); cancelAnimationFrame(raf); };
     }, [reduce]);
 
+    // Talk pose while the bubble or chat is up; otherwise the idle front walk.
+    const annotating = invite || open;
+    useEffect(() => {
+        if (stage !== 'ready') return undefined;
+        if (annotating) { setFrame('talk'); return undefined; }
+        if (reduce) { setFrame('idle1'); return undefined; }
+        const v = getComputedStyle(avatarRef.current).getPropertyValue('--avatar-idle-frame').trim();
+        const idleMs = v.endsWith('ms') ? parseFloat(v) : parseFloat(v) * 1000;
+        let i = 0;
+        setFrame(IDLE[0]);
+        const id = setInterval(() => { i = (i + 1) % IDLE.length; setFrame(IDLE[i]); }, idleMs);
+        return () => clearInterval(id);
+    }, [stage, annotating, reduce]);
+
     // Typing: one letter every TYPE_MS until the page is shown in full.
     const full = pages[page] ?? '';
     const typing = open && pages.length > 0 && shown < full.length;
@@ -146,6 +164,7 @@ export default function Avatar() {
 
     const closeChat = useCallback(() => {
         setOpen(false);
+        setInvite(false); // done annotating: back to idle; clicking him still reopens the chat
         avatarRef.current?.focus({ preventScroll: true });
     }, []);
 
@@ -186,7 +205,7 @@ export default function Avatar() {
             >
                 <span className="avatar-invite">{INVITE}</span>
                 <span className="avatar-sprite">
-                    {[...WALK, 'talk'].map((name) => <Sprite key={name} name={name} on={frame === name} />)}
+                    {FRAMES.map((name) => <Sprite key={name} name={name} on={frame === name} />)}
                 </span>
             </button>
             {/* The chat box is fixed to the screen, so it renders outside the

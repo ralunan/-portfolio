@@ -13,10 +13,13 @@
     /* Invite bubble text size, also stepped with width. */
     --invite-fs: 16px;
     /* Timing (read by Avatar.jsx): reading delay before he walks in, time per
-       walk frame, and how long he stands in the talk pose before the bubble. */
-    --avatar-walk-delay: 6s;
+       walk frame, how long he idles before the talk pose and bubble, and the
+       idle frame time. Reading delay 3s (Ron, 2026-10-08). */
+    --avatar-walk-delay: 3s;
     --avatar-walk-frame: 250ms;
     --avatar-invite-delay: 1.5s;
+    /* idle front walk in place: 1s per frame, as approved for the persona */
+    --avatar-idle-frame: 1s;
     position: absolute;
     right: 24px;
     bottom: 16px;
@@ -64,7 +67,7 @@
     bottom: 0;
     display: none;
     width: calc(var(--cols) * var(--avatar-px));
-    height: calc(24 * var(--avatar-px));
+    height: calc(var(--rows) * var(--avatar-px));
 }
 
 .avatar-frame.is-on {
