@@ -95,12 +95,13 @@ p { margin: 0 0 16px; max-width: 65ch; }
   border: 4px solid var(--charcoal-deep); border-left: 0; border-bottom: 0; transform: rotate(45deg); }
 .avatar.is-talking .invite { visibility: hidden; }
 
-/* RPG dialogue panel */
+/* RPG dialogue panel. Even frame (Ron): the space under NEXT matches the space above the name and text:
+   same padding top and bottom, and NEXT uses the text's 1.8 line height so its half-leading matches too. */
 .dialogue { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; width: 100%;
   height: min(25vh, 220px); min-height: 132px; transform: translateY(calc(100% + 32px));
   transition: transform var(--rise-ms) cubic-bezier(.2, 1.3, .4, 1); }
 .dialogue.is-open { transform: translateY(0); }
-.window { height: 100%; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr; grid-template-rows: minmax(0, 1fr); gap: 16px; padding: 14px 24px calc(4px + env(safe-area-inset-bottom, 0px));
+.window { height: 100%; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr; grid-template-rows: minmax(0, 1fr); gap: 16px; padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(180deg, var(--win-top), var(--win-bottom)); color: var(--win-text);
   border: 4px solid var(--win-frame); border-radius: 8px;
   box-shadow: 0 0 0 3px var(--win-edge), inset 0 0 0 2px var(--win-edge), 6px 6px 0 3px rgba(43, 38, 44, .35); }
@@ -111,7 +112,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   letter-spacing: .02em; text-shadow: 2px 2px 0 var(--win-edge); max-width: none; }
 .controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--font-game); }
 .count { font-size: 13px; color: var(--win-dim); font-variant-numeric: tabular-nums; }
-.next { font: 600 var(--chat-fs) / 1.2 var(--font-game); letter-spacing: .08em; color: var(--win-text); background: transparent; border: 0;
+.next { font: 600 var(--chat-fs) / 1.8 var(--font-game); letter-spacing: .08em; color: var(--win-text); background: transparent; border: 0;
   padding: 0 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-shadow: 2px 2px 0 var(--win-edge); visibility: hidden; }
 .next.is-ready { visibility: visible; }
 .next .cursor { display: inline-block; animation: nudge 600ms steps(2) infinite; }
@@ -140,7 +141,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
   .page { padding-block: 72px 200px; }
   .invite { display: none; }
   .avatar-sprite { width: 80px; height: 96px; }
-  .window { gap: 10px; padding: 10px 12px calc(4px + env(safe-area-inset-bottom, 0px)); }
+  .window { gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
   :root { --chat-fs: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
