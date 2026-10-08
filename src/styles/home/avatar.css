@@ -18,8 +18,8 @@
     --avatar-walk-delay: 3s;
     --avatar-walk-frame: 250ms;
     --avatar-invite-delay: 1.5s;
-    /* how long the bubble stays before he goes back to idling (Ron: 3s) */
-    --avatar-invite-hold: 3s;
+    /* how long the bubble stays before he goes back to idling (Ron: 4s) */
+    --avatar-invite-hold: 4s;
     /* idle front walk in place: 1s per frame, as approved for the persona */
     --avatar-idle-frame: 1s;
     position: absolute;
@@ -109,6 +109,12 @@
     text-align: left;
     color: var(--text);
     visibility: hidden;
+    opacity: 0;
+    transform: scale(0.4);
+    transform-origin: right bottom;
+    /* Hiding plays the pop-in in reverse (Ron, 2026-10-08): shrinks back
+       into its tail and fades in the same steps, then turns invisible. */
+    transition: opacity 240ms steps(3), transform 240ms steps(3), visibility 0s linear 240ms;
 }
 
 .avatar-invite::after {
@@ -125,22 +131,13 @@
     transform: rotate(45deg);
 }
 
-.avatar.has-invite .avatar-invite {
-    visibility: visible;
-    animation: avatar-invite-pop 240ms steps(3) both;
-}
-
 /* Pop-in when the bubble appears (Ron, 2026-10-08: an effect on hover):
    grows from the tail, in steps so it reads as pixel art. */
-.avatar-invite {
-    transform-origin: right bottom;
-}
-
-@keyframes avatar-invite-pop {
-    from {
-        transform: scale(0.4);
-        opacity: 0;
-    }
+.avatar.has-invite .avatar-invite {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: opacity 240ms steps(3), transform 240ms steps(3), visibility 0s;
 }
 
 .avatar.is-talking .avatar-invite {
@@ -315,8 +312,10 @@
         transform: none;
     }
 
+    .avatar-invite,
     .avatar.has-invite .avatar-invite {
-        animation: none;
+        transform: none;
+        transition: none;
     }
 }
 
