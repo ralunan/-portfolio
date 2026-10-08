@@ -593,3 +593,14 @@ _DROP_2X = ["...OO...", "...OO...", "..OLLO..", ".OLLLLO.", "OLLLLLLO",
             "OLLLLLLO", "OLLLLLLO", "OLLLLLLO", ".OLLLLO.", "..OOOO.."]
 WORRY_D = _stamp(_pad(WORRY_A, top=8, right=4), _DROP_FLAT, 0, 13)
 WORRY_E = _stamp(_pad(WORRY_A, top=11, right=6), _DROP_2X, 0, 13)
+
+# Draft 26 (Ron, 2026-10-08): flat dash eyes, like "- -", on the nervous look with the flat drop.
+# Eyes become horizontal lines on the eye row; mouth stays wavy. A: 3 px dashes. B: 2 px dashes.
+_EYES_3 = {(8, 10): 'S', (9, 4): 'O', (9, 5): 'O', (9, 6): 'O', (9, 9): 'O', (9, 10): 'O', (9, 11): 'O'}
+_EYES_2 = {(8, 10): 'S', (9, 5): 'O', (9, 6): 'O', (9, 10): 'O', (9, 11): 'O'}
+_FLAT3 = _swap(FRONT, {**_EYES_3, **_WAVY})
+_FLAT2 = _swap(FRONT, {**_EYES_2, **_WAVY})
+WORRY_F = _stamp(_pad(_FLAT3, top=8, right=4), _DROP_FLAT, 0, 13)    # 3 px dashes, drop +2 px
+WORRY_G = _stamp(_pad(_FLAT3, top=11, right=6), _DROP_2X, 0, 13)     # 3 px dashes, 2x drop
+WORRY_H = _stamp(_pad(_FLAT2, top=8, right=4), _DROP_FLAT, 0, 13)    # 2 px dashes, drop +2 px
+WORRY_I = _stamp(_pad(_FLAT2, top=11, right=6), _DROP_2X, 0, 13)     # 2 px dashes, 2x drop

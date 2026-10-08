@@ -33,6 +33,13 @@ draft25 = ''.join([
     cell('W5', ff.WORRY_E, 'Nervous + big drop', 'Same, with the drop at 2x.'),
 ])
 
+draft26 = ''.join([
+    cell('W6', ff.WORRY_F, 'Dash eyes, 3 px', 'Drop 2 px bigger.'),
+    cell('W7', ff.WORRY_G, 'Dash eyes, 3 px', 'Drop at 2x.'),
+    cell('W8', ff.WORRY_H, 'Dash eyes, 2 px', 'Drop 2 px bigger.'),
+    cell('W9', ff.WORRY_I, 'Dash eyes, 2 px', 'Drop at 2x.'),
+])
+
 html = f'''<!doctype html><html><head><meta charset="utf-8"><title>Ron 8-bit expressions</title>
 <style>
 {font_css}
@@ -44,13 +51,15 @@ h1 {{ font-size:40px; font-weight:600; letter-spacing:-.03em; margin:0 0 32px; }
 .panel {{ background:#fff; border:1px solid rgba(72,65,73,.1); border-radius:20px; padding:24px 28px; margin-bottom:24px; }}
 h2 {{ font-size:21px; font-weight:600; margin:0 0 20px; color:#5b5f8d; }}
 .row {{ display:grid; grid-template-columns:160px repeat(3, 1fr); gap:24px; align-items:end; }}
+.row.four {{ grid-template-columns:repeat(4, 1fr); }}
 .cell {{ margin:0; display:flex; flex-direction:column; gap:12px; }}
 .art {{ height:330px; display:flex; align-items:flex-end; }}
 figcaption {{ display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.5; color:#6f6770; }}
 figcaption b {{ color:#484149; font-weight:600; font-size:16px; }}
 </style></head><body><div class="sheet">
-<p class="eyebrow">Character sheet · draft 25 · expression ideas</p>
+<p class="eyebrow">Character sheet · draft 26 · expression ideas</p>
 <h1>Surprised and worried</h1>
+<section class="panel"><h2>Worried, draft 26: flat dash eyes</h2><div class="row four">{draft26}</div></section>
 <section class="panel"><h2>Worried, draft 25</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{draft25}</div></section>
 <section class="panel"><h2>Surprised</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{surprised}</div></section>
 <section class="panel"><h2>Worried</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{worried}</div></section>
