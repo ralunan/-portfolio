@@ -448,3 +448,36 @@ _STEP1_LEGS = [
 WALK_L = FRONT[:19] + _STEP1_LEGS
 WALK_R = FRONT[:19] + [r[::-1] for r in _STEP1_LEGS]
 STAND_PAD = ["." * 16] + FRONT
+
+# Draft 20 (Ron, 2026-10-08): "yay" expression. Happy face, both hands raised: the talk
+# pose's raised arm mirrored onto the other side (and its hanging hand removed). 22 wide.
+def _yay():
+    talk = [list(r) for r in TALK]
+    talk[9][:16] = list(HAPPY[9])                        # happy eyes
+    happy = [r + '....' for r in HAPPY]
+    rows = [['.', '.'] + r for r in talk]                # 2 px left so the mirrored arm fits
+    for y in range(10, 24):
+        for x in range(20):
+            if talk[y][x] != happy[y][x]:
+                rows[y][15 - x + 2] = talk[y][x]
+    return [''.join(r) for r in rows]
+YAY = _yay()
+
+# Draft 20 option B: same, with the arms straight up so the hands sit beside the top of the
+# hair (a bigger "yay"). Built from YAY: arms cleared, right arm redrawn, then mirrored.
+def _yay_up():
+    rows = [list('..' + r) for r in YAY]                 # 2 more px left for the mirrored hand
+    for y in range(10, 17):                              # clear option A's arms (body outline stays)
+        for x in list(range(0, 6)) + list(range(18, 24)):
+            if not (y == 16 and x in (5, 17)):
+                rows[y][x] = '.'
+    arm = {6: {20: 'O', 21: 'O'}, 7: {19: 'O', 20: 'S', 21: 'S', 22: 'O'}, 8: {19: 'O', 20: 'S', 21: 'S', 22: 'O'},
+           9: {19: 'O', 20: 'p', 21: 'O', 22: 'O'}, 10: {19: 'O', 20: 'p', 21: 'O'}, 11: {19: 'O', 20: 'p', 21: 'O'},
+           12: {18: 'O', 19: 'p', 20: 'O'}, 13: {18: 'O', 19: 'p', 20: 'O'}, 14: {18: 'O', 19: 'p', 20: 'O'},
+           15: {18: 'O', 19: 'p', 20: 'O'}, 16: {18: 'O', 19: 'p', 20: 'O'}}
+    for y, px in arm.items():
+        for x, c in px.items():
+            rows[y][x] = c
+            rows[y][23 - x] = c                          # body axis sits between columns 11 and 12
+    return [''.join(r) for r in rows]
+YAY_UP = _yay_up()
