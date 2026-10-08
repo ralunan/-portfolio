@@ -502,3 +502,29 @@ def _yay_45():
             rows[y][23 - x] = c
     return [''.join(r) for r in rows]
 YAY_45 = _yay_45()
+
+# Draft 22 (Ron, 2026-10-08): the arms join the body at the shoulders, not the armpits.
+# YAY_45's arms move up 1 row, and the old sleeve-to-body pixels become the torso's side.
+def _yay_shoulder():
+    rows = [list(r) for r in YAY_45]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][23 - x] = c
+    for y in range(10, 18):                              # clear both arms
+        for x in range(18, 24):
+            put(y, x, '.')
+    put(16, 17, 'O')
+    put(17, 17, 'O')                                     # torso side where the old sleeve joined
+    put(18, 18, '.')                                     # keep the side straight below it
+    arm = {10: {21: 'O', 22: 'O'},
+           11: {20: 'O', 21: 'S', 22: 'S', 23: 'O'},
+           12: {20: 'O', 21: 'S', 22: 'S', 23: 'O'},
+           13: {19: 'O', 20: 'p', 21: 'p', 22: 'O'},
+           14: {18: 'O', 19: 'p', 20: 'p', 21: 'O'},
+           15: {17: 'O', 18: 'p', 19: 'p', 20: 'O'},
+           16: {18: 'O', 19: 'O'}}
+    for y, px in arm.items():
+        for x, c in px.items():
+            put(y, x, c)
+    return [''.join(r) for r in rows]
+YAY_SHOULDER = _yay_shoulder()
