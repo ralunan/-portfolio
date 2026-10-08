@@ -551,3 +551,36 @@ def _yay_in():
             put(y, x, c)
     return [''.join(r[1:-1]) for r in rows]
 YAY_IN = _yay_in()
+
+# Draft 24 (Ron, 2026-10-08): surprised and worried looks, three ideas each. Face edits are
+# (row, col) pixel swaps on the front face; bodies reuse approved poses.
+def _swap(base, pts, dx=0):
+    rows = [list(r) for r in base]
+    for (y, x), c in pts.items():
+        rows[y][x + dx] = c
+    return [''.join(r) for r in rows]
+def _pad(rows, top=0, right=0):
+    w = len(rows[0]) + right
+    return ['.' * w] * top + [r + '.' * right for r in rows]
+def _stamp(rows, art, y0, x0):
+    rows = [list(r) for r in rows]
+    for y, line in enumerate(art):
+        for x, c in enumerate(line):
+            if c != '.':
+                rows[y0 + y][x0 + x] = c
+    return [''.join(r) for r in rows]
+_BANG = ["OOO", "OrO", "OrO", "OrO", "OOO", "OrO", "OOO"]          # "!" emote, Terracotta
+_DROP = ["..O.", ".OLO", "OLLO", "OLWO", ".OO."]                     # sweat drop, Kyoto Dusk light
+_GASP = {(12, 7): 'O', (12, 8): 'O', (13, 7): 'n', (13, 8): 'n'}     # open mouth
+_WIDE = {(8, 10): 'W', (9, 10): 'O', (8, 6): 'W', (9, 5): 'O'}       # eye whites above the pupils
+_GLANCE = {(8, 10): 'S', (9, 5): 'S', (9, 6): 'O', (9, 10): 'S', (9, 11): 'O'}  # eyes slide sideways
+_WAVY = {(12, 6): 'n', (12, 7): 'S', (12, 8): 'n', (12, 9): 'S', (12, 10): 'n'}
+_GRIMACE = {(8, 10): 'S', (12, 6): 'n', (12, 7): 'n', (12, 8): 'n', (12, 9): 'n'}
+_BROWS = {(8, 10): 'S', (8, 6): 'H', (8, 9): 'H', (13, 6): 'n', (13, 9): 'n'}   # brows up in the middle, frown
+
+SURPRISE_A = _swap(FRONT, _GASP)                                        # gasp: open mouth
+SURPRISE_B = _stamp(_pad(_swap(FRONT, {**_GASP, **_WIDE}), top=8, right=2), _BANG, 0, 13)  # wide eyes + "!"
+SURPRISE_C = _stamp(_pad(_swap(YAY_IN, {**_GASP, **_WIDE}, dx=3), top=8), _BANG, 0, 17)    # startled, hands up + "!"
+WORRY_A = _swap(FRONT, {**_GLANCE, **_WAVY})                            # nervous glance, wavy mouth
+WORRY_B = _stamp(_pad(_swap(FRONT, _GRIMACE), right=4), _DROP, 4, 16)   # eek: grimace + sweat drop
+WORRY_C = _stamp(_swap(TALK, _BROWS), _DROP, 4, 16)                     # uh-oh: worried brows, hand at cheek
