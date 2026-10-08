@@ -79,7 +79,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak input { grid-column: 1 / -1; width: 100%; accent-color: var(--kyoto); }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
-@media (min-width: 1280px) { :root { --chat-fs: 44px; } .dialogue { height: 25vh; } }
+@media (min-width: 1280px) { :root { --chat-fs: 44px; } .dialogue { height: max(25vh, calc(var(--chat-fs) * 3.6 + 72px)); } }
 @media (min-width: 1600px) { :root { --chat-fs: 50px; } }
 @media (min-width: 1920px) { :root { --chat-fs: 54px; } }
 @media (min-width: 2200px) { :root { --chat-fs: 58px; } }
