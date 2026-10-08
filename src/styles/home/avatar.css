@@ -18,6 +18,8 @@
     --avatar-walk-delay: 3s;
     --avatar-walk-frame: 250ms;
     --avatar-invite-delay: 1.5s;
+    /* how long the bubble stays before he goes back to idling (Ron: 3s) */
+    --avatar-invite-hold: 3s;
     /* idle front walk in place: 1s per frame, as approved for the persona */
     --avatar-idle-frame: 1s;
     position: absolute;
@@ -34,6 +36,18 @@
     font: inherit;
     cursor: pointer;
     will-change: transform;
+    /* Only Ron and the visible bubble react to the pointer, not the empty
+       space the hidden bubble leaves beside him. */
+    pointer-events: none;
+}
+
+.avatar-sprite,
+.avatar.has-invite .avatar-invite {
+    pointer-events: auto;
+}
+
+.avatar--walking .avatar-sprite {
+    pointer-events: none;
 }
 
 .avatar--offstage {
@@ -113,6 +127,20 @@
 
 .avatar.has-invite .avatar-invite {
     visibility: visible;
+    animation: avatar-invite-pop 240ms steps(3) both;
+}
+
+/* Pop-in when the bubble appears (Ron, 2026-10-08: an effect on hover):
+   grows from the tail, in steps so it reads as pixel art. */
+.avatar-invite {
+    transform-origin: right bottom;
+}
+
+@keyframes avatar-invite-pop {
+    from {
+        transform: scale(0.4);
+        opacity: 0;
+    }
 }
 
 .avatar.is-talking .avatar-invite {
@@ -285,6 +313,10 @@
 
     .avatar--ready:hover .avatar-sprite {
         transform: none;
+    }
+
+    .avatar.has-invite .avatar-invite {
+        animation: none;
     }
 }
 
