@@ -481,3 +481,24 @@ def _yay_up():
             rows[y][23 - x] = c                          # body axis sits between columns 11 and 12
     return [''.join(r) for r in rows]
 YAY_UP = _yay_up()
+
+# Draft 21 (Ron, 2026-10-08): Yay B arms at 45 degrees. Option B read as stretchy arms, so the
+# arms are normal length and angle up and out from the shoulders, hands beside the cheeks.
+def _yay_45():
+    rows = [list('..' + r) for r in YAY]
+    for y in range(10, 17):                              # clear option A's arms (body outline stays)
+        for x in list(range(0, 6)) + list(range(18, 24)):
+            if not (y == 16 and x in (5, 17)):
+                rows[y][x] = '.'
+    arm = {11: {21: 'O', 22: 'O'},
+           12: {20: 'O', 21: 'S', 22: 'S', 23: 'O'},
+           13: {20: 'O', 21: 'S', 22: 'S', 23: 'O'},
+           14: {19: 'O', 20: 'p', 21: 'p', 22: 'O'},
+           15: {18: 'O', 19: 'p', 20: 'p', 21: 'O'},
+           16: {17: 'O', 18: 'p', 19: 'p', 20: 'O'}}
+    for y, px in arm.items():
+        for x, c in px.items():
+            rows[y][x] = c
+            rows[y][23 - x] = c
+    return [''.join(r) for r in rows]
+YAY_45 = _yay_45()
