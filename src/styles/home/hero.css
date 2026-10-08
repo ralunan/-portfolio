@@ -2,7 +2,7 @@
    shader gradient and springy boxes canvases, and the scroll cue. */
 
 .hero {
-    min-height: calc(100vh - 96px);
+    min-height: calc(100vh - var(--page-top));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,8 +48,8 @@
 
 .hero-light {
     position: relative;
-    margin-top: -96px;
-    padding-top: 96px;
+    margin-top: calc(-1 * var(--page-top));
+    padding-top: var(--page-top);
     min-height: 100vh;
     overflow: hidden;
     isolation: isolate;
@@ -97,7 +97,7 @@
 }
 
 .hero-light .hero {
-    min-height: calc(100vh - 96px);
+    min-height: calc(100vh - var(--page-top));
     padding-bottom: 88px;
 }
 
@@ -242,5 +242,13 @@
 @media (prefers-reduced-motion: reduce) {
     .scroll-cue span {
         animation: none;
+    }
+}
+
+/* Phones: the hero starts right under the header (the shared --header-gap)
+   instead of centering in the screen. */
+@media (max-width: 640px) {
+    .hero-light .hero {
+        justify-content: flex-start;
     }
 }

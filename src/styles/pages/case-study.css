@@ -361,6 +361,11 @@
 }
 
 @media (max-width: 640px) {
+    /* First content sits --header-gap below the header (DESIGN.md rule). */
+    .case-hero {
+        padding-top: 0;
+    }
+
     .case-meta {
         grid-template-columns: 1fr;
     }

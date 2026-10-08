@@ -11,7 +11,8 @@ The single source of truth for how the portfolio looks. Values live as CSS custo
 5. **Reuse components before adding new ones**: `.button` / `.button--primary`, `.tags`, `.card` (card surface), `.eyebrow`, `.section-title`, `.page-title`, `.container`, `Reveal` (scroll-in motion), `Page` (route transition), `Lightbox` (click to enlarge).
 6. **Light theme, dark type, everywhere.** No reversed (light-on-dark) text sections. The dark `--canvas` exists only behind work images.
 7. **Body text is 16px (`--fs-body`).** Paragraphs inherit it from `body`; don't set another paragraph size. The only exception is the home hero's intro line at 18px (`--fs-hero-intro`). A new exception needs Ron's approval and a log line (Ron, 2026-10-01).
-8. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
+8. **First content sits a set gap below the header.** Every page starts its first content `--page-top` from the top: the header height plus `--header-gap`. The gap is 24px on desktop and phones 400px and wider, 20px from 376 to 399px, and 16px at 375px and narrower (Ron, 2026-10-08). Phones top-align the first content rather than centering it. Pages don't add their own extra top padding on phones.
+9. **Log decisions.** Any change to a token, a scale or a rule above gets a dated line in the decisions log, with the reason.
 
 ## Color
 
@@ -110,6 +111,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-08** Header gap rule (Ron): on phones the first content of every page sits 16px below the header at 375px and narrower, 20px from 376 to 399px, and 24px from 400px (desktop unchanged at 24px). Tokens `--nav-height`, `--header-gap`, `--page-top`. The home hero top-aligns on phones instead of centering (it was 1px from the header on an iPhone SE and 95–152px on larger phones). About, Resume and case studies drop their extra 40px top padding on phones. At 375px and narrower the header links wrap to two lines, so `--nav-height` is 95px there.
 - **2026-10-01** Spacing rule: every padding, margin and gap is a multiple of 4px, so there is no odd spacing (Ron). 36 and 44 join the scale; 2, 6 and 10 leave it. Home hero headline-to-intro gap now steps with width: 24px (phones and below 1280), 28px (1280+), 36px (1440+), 44px (1920+) for page balance on large screens (Ron asked for 30/38/44; rounded to the 4px rule).
 - **2026-10-01** Body text drops to 16px site-wide (was 17px, 16px on phones), and the home hero's intro line to 18px (was 17–20px fluid) (Ron). Both are now tokens (`--fs-body`, `--fs-hero-intro`) and rule 7 makes 16px body a standing rule. Older paragraphs that still set their own size (About story 18px, case-study outcome cards 19px) are exceptions to fix page by page.
 - **2026-10-01** Card text rule (Ron): card body text stays within 3 lines. If copy can't be cut and runs to 4, all cards in the group grow to the same height so they stay uniform.

@@ -97,4 +97,24 @@
     --font: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --display: 'Geist', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
+    /* Space from the fixed header to the first content on every page (Ron,
+       2026-10-08): --page-top = header height + --header-gap. Phones get a
+       tighter gap that steps down with width; see DESIGN.md. */
+    --nav-height: 72px;
+    --header-gap: 24px;
+    --page-top: calc(var(--nav-height) + var(--header-gap));
+}
+
+@media (max-width: 399px) {
+    :root {
+        --header-gap: 20px;
+    }
+}
+
+/* At 375px and narrower the header links wrap to two lines. */
+@media (max-width: 375px) {
+    :root {
+        --nav-height: 95px;
+        --header-gap: 16px;
+    }
 }
