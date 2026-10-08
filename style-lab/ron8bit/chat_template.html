@@ -14,7 +14,7 @@
   --font-game: 'Pixelify Sans', 'Courier New', monospace;
   /* tweakable motion (prototype) */
   --rise-ms: 420ms;
-  /* chat text (Ron): 20 phones, 18 tablets, 38 laptops (1280+), 36 at 1600+, 40 at 1920+, 48 at 2200+ */
+  /* chat text (Ron): 20 phones, 18 tablets, 38 laptops (1280+), 42 at 1600+ (38 x 1600/1440), 40 at 1920+, 48 at 2200+ */
   --chat-fs: 18px;
   color-scheme: light;
 }
@@ -76,7 +76,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 .tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
 
 @media (min-width: 1280px) { :root { --chat-fs: 38px; } .dialogue { height: 25vh; } }
-@media (min-width: 1600px) { :root { --chat-fs: 36px; } }
+@media (min-width: 1600px) { :root { --chat-fs: 42px; } }
 @media (min-width: 1920px) { :root { --chat-fs: 40px; } }
 @media (min-width: 2200px) { :root { --chat-fs: 48px; } }
 @media (max-width: 640px) {
@@ -134,6 +134,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 (() => {
   // Sample aside: one long message, split into mini-pages that fit the panel.
   // Each message starts on a fresh page; long ones split further to fit the box.
+  const MAX_LINES = 3;
   const MESSAGES = [
     "Honestly? This one humbled me. My first three checkout concepts looked great in Figma and fell apart in the very first round of testing. Watching one shopper hunt for the promo code field for forty seconds changed how I think about clutter. So I cut everything that wasn't helping someone pay, and that single screen is the version you see here.",
     "I still think about that shopper. Next time, I'd put a rough prototype in front of real people in week one, not week four. Being wrong early is cheap, and it's the fastest way I know to get to something people actually trust."
@@ -150,7 +151,9 @@ p { margin: 0 0 16px; max-width: 65ch; }
     probe.removeAttribute('id'); probe.classList.add('measure');
     probe.style.width = textEl.clientWidth + 'px'; probe.style.height = 'auto';
     textEl.parentNode.appendChild(probe);
-    const max = textEl.clientHeight, out = [];
+    // Rule (Ron): a chat page shows at most 3 lines.
+    const lh = parseFloat(getComputedStyle(textEl).lineHeight);
+    const max = Math.min(textEl.clientHeight, Math.ceil(lh * MAX_LINES) + 1), out = [];
     for (const msg of MESSAGES) {
       let cur = '';
       for (const w of msg.split(' ')) {
