@@ -92,3 +92,4 @@ Dated style decisions Ron makes or approves.
 - **2026-10-08** Chat page length (Ron): a chat page shows at most 3 lines; longer text continues on the next page with NEXT.
 - **2026-10-08** Chat text sizes revised (Ron): 24px phones (640 and below), 28px tablets, 44px laptops (1280+), 50px at 1600+, 54px at 1920+, 58px at 2200+. Replaces the earlier sizes above.
 - **2026-10-08** Chat text above laptops trimmed 4px (Ron): 46px at 1600+, 50px at 1920+, 54px at 2200+. Phones 24, tablets 28, laptops 44 unchanged.
+- **2026-10-08** Chat speaker label (Ron): no portrait in the dialogue box; just the name "Ron" in the same pixel style (Vanilla, bold), at the same size as the chat text at every breakpoint.

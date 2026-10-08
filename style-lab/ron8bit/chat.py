@@ -16,9 +16,8 @@ def inline(block):
 font_css = '\n'.join(inline(b) for b in blocks)
 
 talk = render.svg(ff.TALK, 6).replace('<svg ', '<svg class="avatar-sprite" aria-hidden="true" ', 1)
-portrait = render.svg(ff.FRONT[:15], 4).replace('<svg ', '<svg aria-hidden="true" ', 1)
 tpl = open('chat_template.html').read()
 tpl = re.sub(r'<link [^>]*fonts\.g[^>]*>\n', '', tpl)
-out = tpl.replace('<style>\n', '<style>\n' + font_css + '\n', 1).replace('{{TALK}}', talk).replace('{{PORTRAIT}}', portrait)
+out = tpl.replace('<style>\n', '<style>\n' + font_css + '\n', 1).replace('{{TALK}}', talk)
 open(out_path, 'w').write(out)
 print(len(blocks), 'font faces inlined')

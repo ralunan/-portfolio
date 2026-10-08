@@ -50,9 +50,8 @@ p { margin: 0 0 16px; max-width: 65ch; }
   background: linear-gradient(180deg, var(--win-top), var(--win-bottom)); color: var(--win-text);
   border: 4px solid var(--win-frame); border-radius: 8px;
   box-shadow: 0 0 0 3px var(--win-edge), inset 0 0 0 2px var(--win-edge), 6px 6px 0 3px rgba(43, 38, 44, .35); }
-.portrait { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.portrait svg { display: block; background: var(--win-bottom); border: 3px solid var(--win-frame); border-radius: 4px; image-rendering: pixelated; }
-.name { font-family: var(--font-game); font-weight: 600; font-size: 14px; letter-spacing: .1em; color: var(--vanilla); }
+.portrait { display: flex; flex-direction: column; align-items: flex-start; }
+.name { font-family: var(--font-game); font-weight: 600; font-size: var(--chat-fs); line-height: 1.8; letter-spacing: .1em; color: var(--vanilla); }
 .speech { min-width: 0; min-height: 0; display: flex; flex-direction: column; }
 .text { flex: 1; min-height: 0; overflow: hidden; margin: 0; font-family: var(--font-game); font-size: var(--chat-fs); line-height: 1.8;
   letter-spacing: .02em; text-shadow: 2px 2px 0 var(--win-edge); max-width: none; }
@@ -88,7 +87,6 @@ p { margin: 0 0 16px; max-width: 65ch; }
   .invite { display: none; }
   .avatar-sprite { width: 80px; height: 96px; }
   .window { gap: 10px; padding: 10px 12px; }
-  .portrait svg { width: 40px; height: 38px; }
   :root { --chat-fs: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -123,7 +121,7 @@ p { margin: 0 0 16px; max-width: 65ch; }
 
 <section class="dialogue" id="dialogue" role="dialog" aria-label="Ron's aside" aria-hidden="true">
   <div class="window">
-    <div class="portrait">{{PORTRAIT}}<span class="name">RON</span></div>
+    <div class="portrait"><span class="name">Ron</span></div>
     <div class="speech">
       <p class="text" id="text" aria-live="polite"></p>
       <div class="controls">
