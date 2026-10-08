@@ -93,3 +93,4 @@ Dated style decisions Ron makes or approves.
 - **2026-10-08** Chat text sizes revised (Ron): 24px phones (640 and below), 28px tablets, 44px laptops (1280+), 50px at 1600+, 54px at 1920+, 58px at 2200+. Replaces the earlier sizes above.
 - **2026-10-08** Chat text above laptops trimmed 4px (Ron): 46px at 1600+, 50px at 1920+, 54px at 2200+. Phones 24, tablets 28, laptops 44 unchanged.
 - **2026-10-08** Chat speaker label (Ron): no portrait in the dialogue box; just the name "Ron" in the same pixel style (Vanilla, bold), at the same size as the chat text at every breakpoint.
+- **2026-10-08** Chat box spacing (Ron): NEXT/CLOSE uses the chat text size at every breakpoint; on laptops and up the box is 50px taller than its quarter-screen height, so the box is no longer a strict 1/4 there; 4px between the text area and the NEXT row, and 4px from NEXT to the bottom of the box.
