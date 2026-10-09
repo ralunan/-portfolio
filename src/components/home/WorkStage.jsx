@@ -101,12 +101,7 @@ export default function WorkStage({ sectionRef, highlightsRef }) {
                     <Highlights ref={highlightsRef} />
                     <div className="work-stage-label">
                         <p className="eyebrow">Selected work</p>
-                        <div className="work-stage-row">
-                            <h2 className="work-stage-title">Case studies from Walmart</h2>
-                            <p className="work-stage-count" aria-live="polite" aria-atomic="true">
-                                <span className="work-stage-count-num">{active + 1}</span> of {count}
-                            </p>
-                        </div>
+                        <h2 className="work-stage-title">Case studies from Walmart</h2>
                     </div>
                 </div>
                 <div className="work-stage-slot" ref={slotRef}>

@@ -175,13 +175,13 @@
 
 @media (min-width: 1600px) {
     :root {
-        --fs-card-skill: 28px;
+        --fs-card-skill: 24px;
         --fs-card-stat-label: 18px;
-        --fs-card-num: 40px;
-        --fs-card-tag: 16px;
-        --fs-card-title: 36px;
-        --fs-card-tagline: 20px;
-        --fs-card-cta: 24px;
+        --fs-card-num: 36px;
+        --fs-card-tag: 14px;
+        --fs-card-title: 32px;
+        --fs-card-tagline: 16px;
+        --fs-card-cta: 20px;
     }
 }
 
