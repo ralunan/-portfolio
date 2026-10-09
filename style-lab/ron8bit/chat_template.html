@@ -1,0 +1,256 @@
+<title>Ron Avatar Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: a sample case-study page; Ron's avatar stands bottom right, and its dialogue panel rises from the bottom edge (max 25% of the screen). */
+:root {
+  /* Japanese palette (Ron's design system) */
+  --vanilla: #f1dcba; --page: #fbf7f0; --charcoal: #484149; --charcoal-deep: #2b262c;
+  --kyoto: #5b5f8d; --kyoto-light: #8c8faf; --terracotta: #da6b51; --terracotta-ink: #a65646; --white: #ffffff;
+  /* RPG window: Kyoto Dusk deepening toward charcoal, white pixel frame */
+  --win-top: #5b5f8d; --win-bottom: #3a3a5c; --win-frame: #ffffff; --win-edge: #2b262c; --win-text: #ffffff; --win-dim: #c9cbe0;
+  --font-body: 'Geist', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-game: 'Pixelify Sans', 'Courier New', monospace;
+  /* tweakable motion (prototype) */
+  --rise-ms: 420ms;
+  /* chat text (Ron, 2026-10-08): 24 phones, 28 tablets, 44 laptops (1280+), 46 at 1600+, 50 at 1920+, 54 at 2200+ */
+  --chat-fs: 28px;
+  /* NEXT/CLOSE: chat text size below laptops, a fixed 40px from 1280 up (Ron). Its line height keeps the text's half-leading so the frame stays even. */
+  --next-fs: var(--chat-fs);
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body { background: var(--page); color: var(--charcoal); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.page { max-width: 720px; margin: 0 auto; padding-block: 64px 160px; padding-inline: 24px; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--terracotta-ink); font-weight: 500; margin: 0 0 8px; }
+h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; margin: 0 0 24px; text-wrap: balance; }
+h1 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--terracotta-ink); }
+h2 { font-size: 21px; font-weight: 600; color: var(--kyoto); margin: 40px 0 8px; }
+p { margin: 0 0 16px; max-width: 65ch; }
+.proto-note { font-size: 13px; color: var(--kyoto); border: 1px dashed var(--kyoto-light); border-radius: 8px; padding: 8px 12px; display: inline-block; margin-bottom: 32px; }
+
+/* Avatar on screen: talk pose + invite bubble */
+.avatar { position: fixed; right: 24px; bottom: 16px; display: flex; align-items: flex-end; gap: 8px; z-index: 5;
+  background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+.avatar:focus-visible { outline: 3px solid var(--terracotta); outline-offset: 6px; border-radius: 8px; }
+.avatar-sprite { display: block; image-rendering: pixelated; transition: transform 160ms steps(2); }
+.avatar:hover .avatar-sprite { transform: translateY(-6px); }
+.invite { position: relative; max-width: 200px; background: var(--white); border: 4px solid var(--charcoal-deep); border-radius: 6px;
+  padding: 8px 12px; font-family: var(--font-game); font-size: 15px; line-height: 1.35; text-align: left; margin-bottom: 96px;
+  box-shadow: 4px 4px 0 var(--vanilla); }
+.invite::after { content: ''; position: absolute; right: -10px; bottom: 16px; width: 12px; height: 12px; background: var(--white);
+  border: 4px solid var(--charcoal-deep); border-left: 0; border-bottom: 0; transform: rotate(45deg); }
+.avatar.is-talking .invite { visibility: hidden; }
+
+/* RPG dialogue panel. Even frame (Ron): the space under NEXT matches the space above the name and text:
+   same padding top and bottom, and NEXT uses the text's 1.8 line height so its half-leading matches too. */
+.dialogue { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; width: 100%;
+  height: min(25vh, 220px); min-height: 132px; transform: translateY(calc(100% + 32px));
+  transition: transform var(--rise-ms) cubic-bezier(.2, 1.3, .4, 1); }
+.dialogue.is-open { transform: translateY(0); }
+.window { height: 100%; box-sizing: border-box; display: grid; grid-template-columns: auto 1fr; grid-template-rows: minmax(0, 1fr); gap: 16px; padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, var(--win-top), var(--win-bottom)); color: var(--win-text);
+  border: 4px solid var(--win-frame); border-radius: 8px;
+  box-shadow: 0 0 0 3px var(--win-edge), inset 0 0 0 2px var(--win-edge), 6px 6px 0 3px rgba(43, 38, 44, .35); }
+.portrait { display: flex; flex-direction: column; align-items: flex-start; }
+.name { font-family: var(--font-game); font-weight: 600; font-size: var(--chat-fs); line-height: 1.8; letter-spacing: .1em; color: var(--vanilla); }
+.speech { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 4px; }
+.text { flex: 1; min-height: 0; overflow: hidden; margin: 0; font-family: var(--font-game); font-size: var(--chat-fs); line-height: 1.8;
+  letter-spacing: .02em; text-shadow: 2px 2px 0 var(--win-edge); max-width: none; }
+.controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: var(--font-game); }
+.count { font-size: 13px; color: var(--win-dim); font-variant-numeric: tabular-nums; }
+.next { font: 600 var(--next-fs) / calc(var(--next-fs) + var(--chat-fs) * .8) var(--font-game); letter-spacing: .08em; color: var(--win-text); background: transparent; border: 0;
+  padding: 0 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-shadow: 2px 2px 0 var(--win-edge); visibility: hidden; }
+.next.is-ready { visibility: visible; }
+.next .cursor { display: inline-block; animation: nudge 600ms steps(2) infinite; }
+.next:hover, .next:focus-visible { color: var(--vanilla); outline: none; }
+.next:focus-visible { box-shadow: 0 0 0 2px var(--vanilla); border-radius: 4px; }
+@keyframes nudge { 50% { transform: translateX(4px); } }
+.measure { position: absolute; visibility: hidden; pointer-events: none; }
+
+/* Prototype tweak panel */
+.tweak { position: fixed; top: 16px; right: 16px; z-index: 20; background: var(--white); border: 1px solid rgba(72,65,73,.15);
+  border-radius: 12px; padding: 8px 12px; font-size: 13px; width: min(264px, calc(100vw - 32px)); }
+.tweak summary { cursor: pointer; font-weight: 500; color: var(--kyoto); }
+.bp-now { font-weight: 400; color: var(--terracotta-ink); font-variant-numeric: tabular-nums; }
+.bp-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.bp-list li { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 2px 8px; border-radius: 6px; color: var(--charcoal); }
+.bp-list li.is-active { background: var(--vanilla); font-weight: 500; }
+.tweak label { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; margin-top: 8px; }
+.tweak input { grid-column: 1 / -1; width: 100%; accent-color: var(--kyoto); }
+.tweak output { font-variant-numeric: tabular-nums; color: var(--charcoal); }
+
+@media (min-width: 1280px) { :root { --chat-fs: 44px; --next-fs: 40px; } .dialogue { height: calc(max(25vh, calc(var(--chat-fs) * 3.6 + 72px)) + 50px); } }
+@media (min-width: 1600px) { :root { --chat-fs: 46px; } }
+@media (min-width: 1920px) { :root { --chat-fs: 50px; } }
+@media (min-width: 2200px) { :root { --chat-fs: 54px; } }
+@media (max-width: 640px) {
+  .page { padding-block: 72px 200px; }
+  .invite { display: none; }
+  .avatar-sprite { width: 80px; height: 96px; }
+  .window { gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); }
+  :root { --chat-fs: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dialogue { transition: none; }
+  .next .cursor { animation: none; }
+}
+</style>
+
+<details class="tweak" id="tweak">
+  <summary>Tweak animation <span class="bp-now" id="bpNow"></span></summary>
+  <ol class="bp-list" id="bpList" aria-label="Chat text breakpoints"></ol>
+  <label for="rise">Panel rise <output id="riseOut">420 ms</output><input id="rise" type="range" min="150" max="1200" step="10" value="420"></label>
+  <label for="speed">Typing speed <output id="speedOut">18 ms/letter</output><input id="speed" type="range" min="8" max="90" step="2" value="18"></label>
+  <label for="size">Text size <output id="sizeOut">44 px</output><input id="size" type="range" min="14" max="72" step="1" value="44"></label>
+</details>
+
+<main class="page">
+  <p class="eyebrow">Case study · sample page</p>
+  <h1>Rebuilding checkout for <em>first-time</em> shoppers</h1>
+  <p class="proto-note">Prototype: click Ron's avatar in the corner to open his aside.</p>
+  <h2>Context</h2>
+  <p>New shoppers were abandoning the cart at the payment step. Session recordings showed people scrolling up and down the page, looking for the total and the promo code field before committing.</p>
+  <h2>What we changed</h2>
+  <p>We moved the order summary next to the payment form, collapsed optional fields, and reduced checkout to a single screen. Completion rose in the first two weeks after launch.</p>
+  <p>The content above is placeholder copy for testing the avatar chat. The aside you open from the avatar is where Ron adds how the work felt, beyond what the case study says.</p>
+</main>
+
+<button class="avatar" id="avatar" type="button" aria-haspopup="dialog" aria-controls="dialogue" aria-label="Open Ron's aside">
+  <span class="invite">Psst. Want the story behind this one?</span>
+  {{TALK}}
+</button>
+
+<section class="dialogue" id="dialogue" role="dialog" aria-label="Ron's aside" aria-hidden="true">
+  <div class="window">
+    <div class="portrait"><span class="name">Ron</span></div>
+    <div class="speech">
+      <p class="text" id="text" aria-live="polite"></p>
+      <div class="controls">
+        <span class="count" id="count"></span>
+        <button class="next" id="next" type="button"><span id="nextLabel">NEXT</span><span class="cursor" id="nextIcon">▶</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  // Sample aside: one long message, split into mini-pages that fit the panel.
+  // Each message starts on a fresh page; long ones split further to fit the box.
+  const MAX_LINES = 3;
+  const MESSAGES = [
+    "Honestly? This one humbled me. My first three checkout concepts looked great in Figma and fell apart in the very first round of testing. Watching one shopper hunt for the promo code field for forty seconds changed how I think about clutter. So I cut everything that wasn't helping someone pay, and that single screen is the version you see here.",
+    "I still think about that shopper. Next time, I'd put a rough prototype in front of real people in week one, not week four. Being wrong early is cheap, and it's the fastest way I know to get to something people actually trust."
+  ];
+
+  const $ = id => document.getElementById(id);
+  const avatar = $('avatar'), dialogue = $('dialogue'), textEl = $('text'), next = $('next');
+  const nextLabel = $('nextLabel'), nextIcon = $('nextIcon'), count = $('count');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let speed = 18, pages = [], page = 0, typing = null, shown = 0, open = false;
+
+  function paginate() {
+    const probe = textEl.cloneNode(false);
+    probe.removeAttribute('id'); probe.classList.add('measure');
+    probe.style.width = textEl.clientWidth + 'px'; probe.style.height = 'auto';
+    textEl.parentNode.appendChild(probe);
+    // Rule (Ron): a chat page shows at most 3 lines.
+    const lh = parseFloat(getComputedStyle(textEl).lineHeight);
+    const max = Math.min(textEl.clientHeight, Math.ceil(lh * MAX_LINES) + 1), out = [];
+    for (const msg of MESSAGES) {
+      let cur = '';
+      for (const w of msg.split(' ')) {
+        const trial = cur ? cur + ' ' + w : w;
+        probe.textContent = trial;
+        if (probe.scrollHeight > max && cur) { out.push(cur); cur = w; } else cur = trial;
+      }
+      if (cur) out.push(cur);
+    }
+    probe.remove();
+    return out;
+  }
+
+  function finishPage() {
+    clearInterval(typing); typing = null;
+    textEl.textContent = pages[page]; shown = pages[page].length;
+    const last = page === pages.length - 1;
+    nextLabel.textContent = last ? 'CLOSE' : 'NEXT';
+    nextIcon.textContent = last ? '✕' : '▶';
+    next.classList.add('is-ready');
+  }
+
+  function typePage() {
+    next.classList.remove('is-ready');
+    count.textContent = pages.length > 1 ? (page + 1) + ' / ' + pages.length : '';
+    const full = pages[page]; shown = 0; textEl.textContent = '';
+    if (reduce) return finishPage();
+    clearInterval(typing);
+    typing = setInterval(() => {
+      shown++; textEl.textContent = full.slice(0, shown);
+      if (shown >= full.length) finishPage();
+    }, speed);
+  }
+
+  function openChat() {
+    if (open) return;
+    open = true;
+    avatar.classList.add('is-talking'); avatar.setAttribute('aria-expanded', 'true');
+    dialogue.setAttribute('aria-hidden', 'false'); dialogue.classList.add('is-open');
+    pages = paginate(); page = 0;
+    const delay = reduce ? 0 : parseInt(getComputedStyle(document.documentElement).getPropertyValue('--rise-ms')) * .6;
+    setTimeout(() => { typePage(); next.focus({ preventScroll: true }); }, delay);
+  }
+
+  function closeChat() {
+    if (!open) return;
+    open = false; clearInterval(typing);
+    dialogue.classList.remove('is-open'); dialogue.setAttribute('aria-hidden', 'true');
+    avatar.classList.remove('is-talking'); avatar.setAttribute('aria-expanded', 'false');
+    setTimeout(() => { textEl.textContent = ''; next.classList.remove('is-ready'); }, 300);
+    avatar.focus({ preventScroll: true });
+  }
+
+  function advance() {
+    if (!open) return;
+    if (typing) return finishPage();           // first press completes the page, like an RPG
+    if (page < pages.length - 1) { page++; typePage(); } else closeChat();
+  }
+
+  avatar.addEventListener('click', () => open ? closeChat() : openChat());
+  next.addEventListener('click', e => { e.stopPropagation(); advance(); });
+  dialogue.addEventListener('click', advance);
+  document.addEventListener('keydown', e => {
+    if (!open) return;
+    if (e.key === 'Escape') closeChat();
+    else if ((e.key === 'Enter' || e.key === ' ') && document.activeElement !== next) { e.preventDefault(); advance(); }
+  });
+  addEventListener('resize', () => { if (open) { pages = paginate(); page = Math.min(page, pages.length - 1); finishPage(); count.textContent = pages.length > 1 ? (page + 1) + ' / ' + pages.length : ''; } });
+
+  // Breakpoints readout: live window width and the active chat-text breakpoint (keep in sync with the CSS).
+  const BPS = [
+    { label: 'Phones · to 640', min: 0, max: 640, fs: 24 },
+    { label: 'Tablets · 641+', min: 641, max: 1279, fs: 28 },
+    { label: 'Laptops · 1280+', min: 1280, max: 1599, fs: 44 },
+    { label: '1600+', min: 1600, max: 1919, fs: 46 },
+    { label: '1920+', min: 1920, max: 2199, fs: 50 },
+    { label: '2200+', min: 2200, max: Infinity, fs: 54 },
+  ];
+  const bpList = $('bpList'), bpNow = $('bpNow');
+  bpList.innerHTML = BPS.map(b => `<li><span>${b.label}</span><span>${b.fs} px</span></li>`).join('');
+  function showBreakpoint() {
+    const w = innerWidth, i = BPS.findIndex(b => w >= b.min && w <= b.max);
+    [...bpList.children].forEach((li, j) => li.classList.toggle('is-active', j === i));
+    bpNow.textContent = '· ' + w + 'px · ' + BPS[i].fs + 'px text';
+  }
+  showBreakpoint(); addEventListener('resize', showBreakpoint);
+
+  // Tweak panel (text size starts at this screen's size)
+  const fs0 = parseInt(getComputedStyle(textEl).fontSize); $('size').value = fs0; $('sizeOut').textContent = fs0 + ' px';
+  const bind = (id, fmt, apply) => { const el = $(id), o = $(id + 'Out'); el.addEventListener('input', () => { o.textContent = fmt(el.value); apply(+el.value); }); };
+  bind('rise', v => v + ' ms', v => document.documentElement.style.setProperty('--rise-ms', v + 'ms'));
+  bind('speed', v => v + ' ms/letter', v => { speed = v; });
+  bind('size', v => v + ' px', v => { document.documentElement.style.setProperty('--chat-fs', v + 'px'); if (open) { pages = paginate(); page = 0; typePage(); } });
+})();
+</script>

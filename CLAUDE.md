@@ -75,3 +75,7 @@ Adding a project = a folder under `Projects/`, a `## `-formatted `.txt` file, nu
 - run `npm run design:check` and not add new findings; fix pre-existing ones on the page being revised, not in bulk;
 - add a dated line to the DESIGN.md decisions log for any design decision Ron makes or approves (a new color, a size change, a dropped element), with the reason;
 - before opening a PR that touches styles, components or pages, run the `design-steward` agent (`.claude/agents/design-steward.md`) and address what it reports.
+
+## Style and visual flair
+
+`STYLE.md` holds the rules and the artifact log for visual flair (illustrations, textures, images, video, animation). When Ron asks for flair, use the `style-agent` (`.claude/agents/style-agent.md`): it proposes artifacts in `style-lab/` using only palette colors and logs them, and never edits `src/`. Placing an approved artifact on a page is a normal one-component change: follow the design system rules above, run `design-steward`, and update the artifact's status in `STYLE.md` to applied.
