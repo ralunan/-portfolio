@@ -10,6 +10,7 @@ Ronald Alunan's UX/product design portfolio, v2: a React + Vite single-page site
 
 - `npm install` once, then `npm run dev` for a local preview with hot reload.
 - `npm run build` outputs the static site to `dist/`. `npm run preview` serves that build.
+- `tools/sizing-dial/` builds a slider dial (on a copy of the real site) for tuning sizes per breakpoint from a short config; see its README.
 - `npm run design:check` lists styling values that bypass the design tokens (`-- --strict` exits non-zero). No lint or test setup exists.
 
 ## Deploy
