@@ -694,3 +694,11 @@ WORRY_HANDS = _worry_hands()
 
 # Draft 33 (Ron, 2026-10-09): worried pose without the single outline pixel above each red sleeve pixel.
 WORRY_HANDS = _swap(WORRY_HANDS, {(22, 3): '.', (22, 14): '.'})
+
+# Draft 34 (Ron, 2026-10-09): worried legs spread into a V, with background between them.
+WORRY_HANDS = WORRY_HANDS[:28] + [
+    ".....OJJOOJJO........",
+    "....OJJO..OJJO.......",
+    "...OGGGO..OGGGO......",
+    "...OOOOO..OOOOO......",
+]
