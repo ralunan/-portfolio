@@ -46,12 +46,12 @@ export default function SelectedWork({ sectionRef, highlightsRef }) {
 
     return (
         <section className="work container" ref={sectionRef} id="work">
-            {/* Highlights come first so the work below reads in context. */}
-            <Highlights ref={highlightsRef} />
-            <Reveal className="section-head">
-                <p className="eyebrow">Selected work</p>
-                <h2 className="section-title">Case studies from Walmart</h2>
+            {/* Label first, then the skill cards and the work (Ron, 2026-10-09). */}
+            <Reveal className="section-head" ref={highlightsRef}>
+                <p className="eyebrow">Project highlights</p>
+                <h2 className="section-title">Skills I built along the way</h2>
             </Reveal>
+            <Highlights />
             <div className="work-list">
                 {projects.map((project, i) => (
                     <ProjectCard key={project.slug} project={project} index={i} />

@@ -13,7 +13,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: 16px;
-    margin-bottom: 160px;
+    margin-bottom: 48px;
 }
 
 /* Each highlight is a .card (components/card.css). Its content is
@@ -27,6 +27,40 @@
     align-items: center;
     gap: 8px;
     text-align: center;
+}
+
+/* Card number (Ron, 2026-10-09): numbers the skill cards to match the
+   project cards below, in the project number's style (Instrument Serif,
+   muted Kyoto Dusk) at the skill heading's size. */
+.stat-num {
+    font-family: var(--serif);
+    font-size: var(--fs-card-skill);
+    line-height: 1;
+    color: color-mix(in srgb, var(--kyoto-dusk) 55%, var(--charcoal-deep));
+}
+
+/* Selected card (Ron, 2026-10-09): while a project is in view on the work
+   stage, its matching skill card's back card turns Roasted Terracotta and
+   the card grows 10%, while the other cards shrink 10%. Uses the `scale`
+   property so it doesn't fight Reveal's transform. The stacked list has no
+   selection, so its cards stay at full size. */
+.stat.card--stacked {
+    transition: box-shadow 0.4s var(--ease), scale 0.4s var(--ease);
+}
+
+.stats--selecting .stat {
+    scale: 0.9;
+}
+
+.stats--selecting .stat.is-selected {
+    --card-back: var(--roasted-terracotta);
+    scale: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stat.card--stacked {
+        transition: none;
+    }
 }
 
 .stat-value {
@@ -143,16 +177,21 @@
     max-width: var(--stage-max);
 }
 
-.work-stage-head .stats {
-    margin-bottom: 28px;
+/* "Project highlights" label sits above the skill cards (Ron, 2026-10-09),
+   with the gap Ron set between them: 24px on laptops and under, 40px from
+   1600px up. The cards' back card then takes 8px before the project slot,
+   which adds its own 32px. */
+.work-stage-head .work-stage-label {
+    margin-bottom: 24px;
 }
 
-/* Desktops and up (Ron, 2026-10-09): about 40px of open space from the
-   highlights' back card to the Selected Work eyebrow, up from about 24px
-   (the back card takes 8px of the margin). Laptops and under keep 24px. */
+.work-stage-head .stats {
+    margin-bottom: 8px;
+}
+
 @media (min-width: 1600px) {
-    .work-stage-head .stats {
-        margin-bottom: 44px;
+    .work-stage-head .work-stage-label {
+        margin-bottom: 40px;
     }
 }
 
