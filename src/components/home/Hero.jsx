@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Avatar from './Avatar.jsx';
 
 // three.js is heavy, so the live gradient loads in its own chunk after the
 // page renders. Phones and reduced-motion visitors keep the static CSS
@@ -99,6 +100,7 @@ export default function Hero({ onSeeWork }) {
             <button type="button" className="scroll-cue" onClick={onSeeWork} aria-label="Scroll to selected work">
                 <span />
             </button>
+            <Avatar />
         </section>
     );
 }

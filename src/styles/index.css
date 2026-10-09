@@ -16,6 +16,7 @@
 
 /* Home page, top to bottom */
 @import './home/hero.css';
+@import './home/avatar.css';
 @import './home/work.css';
 @import './home/project-card.css';
 @import './home/approach.css';
