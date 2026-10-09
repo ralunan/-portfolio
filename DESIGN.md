@@ -93,7 +93,7 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 
 | Token | Role | ≤640 | 641–960 | 961–1279 | 1280–1599 | 1600–1999 | 2000–2199 | 2200+ |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `--fs-card-stat` | Highlight number | 28 | 36 | 40 | 46 | 50 | 56 | 64 |
+| `--fs-card-skill` | Highlight skill heading | 24 | 30 | 20 | 24 | 28 | 36 | 44 |
 | `--fs-card-stat-label` | Highlight label | 14 | 16 | 16 | 16 | 18 | 20 | 22 |
 | `--fs-card-num` | Project number (01) | 24 | 28 | 32 | 36 | 40 | 44 | 52 |
 | `--fs-card-tag` | Project tags | 12 | 12 | 12 | 14 | 16 | 16 | 18 |
@@ -101,7 +101,7 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 | `--fs-card-tagline` | Project tagline | 16 | 16 | 16 | 16 | 20 | 20 | 24 |
 | `--fs-card-cta` | Project "Read the case study" | 18 | 18 | 18 | 20 | 24 | 26 | 30 |
 
-Ron set 641–1999 and phones by eye; 2000+ continue his 1280→1600 step (he couldn't view those widths). Tablets list one card per row, so their title runs larger than on small laptops. To retune, rebuild the dial from `tools/sizing-dial/` (PR #24).
+Ron set 641–1999 and phones by eye; 2000+ continue his 1280→1600 step (he couldn't view those widths). Tablets list one card per row, so their title runs larger than on small laptops. Highlight skill headings are the largest size where "Communication" fits on one line in a card at every width. To retune, rebuild the dial from `tools/sizing-dial/` (PR #24).
 
 ## Spacing
 
@@ -141,7 +141,7 @@ Newest first. Format: date, decision, why.
 - **2026-10-09** Selected Work floating shapes (Ron): four palette boxes, two near each edge in the lower part of the screen, each floating slowly around its own spot (14–24s loops, slight tilt) rather than reshuffling like the hero. Squares and rectangles only, in clearly different sizes; plus and minus signs were tried and dropped. Same four colors as the hero boxes (Charcoal Brew stays out).
 - **2026-10-09** Project card text starts at the top (Ron): on the laptop/desktop work stage the card's text column is top-aligned instead of vertically centered, with top padding matching the highlights-to-"Selected work" gap: 24px up to 1599px, 40px from 1600px. Sides and bottom stay 40px.
 - **2026-10-09** Larger project cards (Ron): from 2000px up (cards 688px+ tall), 20px more space between the card text and its "Read the case study" link (40px instead of 20px), to fill the taller card. Not at 1600px: there the card is often too short and the link ran into the bottom padding.
-- **2026-10-09** Highlight cards follow the building blocks (Ron): the four highlights no longer repeat the hero. In order: Making sense ("Insights"), Building ("12–32%"), Communication ("3" design-led projects), Creating ("AI"). Making sense comes first because it lines up with the first project shown below. Labels kept to 3 lines from 1280px up; at about 1024px all four grow to 4 lines together, per the uniform label box rule.
+- **2026-10-09** Highlight cards follow the building blocks (Ron): each card names a skill and previews the work behind it, instead of listing an achievement or repeating the hero. In order: Making sense (research), Building (Cashi), Communication (product and design collaboration), Creating (prototyping, physical to digital with AI). Making sense comes first because it lines up with the first project below. The skill word is a heading, `--fs-card-skill` (24/30/20/24/28/36/44px by width), replacing the highlight number size (`--fs-card-stat`, 28–64px), which didn't fit "Communication". Labels stay within 3 lines from 1280px up; around 1024px they run to 4 lines and all cards grow together (Ron: 4 lines is acceptable).
 - **2026-10-09** Avatar stays fixed in the bottom-right corner across the homepage (Ron): he no longer scrolls away with the hero, so he stays in place through the hero-to-Selected Work hand-off. The transition itself is unchanged. He sits above the page and below the nav and chat box.
 - **2026-10-01** Spacing rule: every padding, margin and gap is a multiple of 4px, so there is no odd spacing (Ron). 36 and 44 join the scale; 2, 6 and 10 leave it. Home hero headline-to-intro gap now steps with width: 24px (phones and below 1280), 28px (1280+), 36px (1440+), 44px (1920+) for page balance on large screens (Ron asked for 30/38/44; rounded to the 4px rule).
 - **2026-10-01** Body text drops to 16px site-wide (was 17px, 16px on phones), and the home hero's intro line to 18px (was 17–20px fluid) (Ron). Both are now tokens (`--fs-body`, `--fs-hero-intro`) and rule 7 makes 16px body a standing rule. Older paragraphs that still set their own size (About story 18px, case-study outcome cards 19px) are exceptions to fix page by page.
