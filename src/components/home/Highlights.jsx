@@ -1,10 +1,14 @@
 import Reveal from '../Reveal.jsx';
 
+// One card per building block (Ron, 2026-10-09), so they don't repeat the
+// hero: Making sense, Building, Communication, Creating. Making sense comes
+// first because it lines up with the first project shown below.
+// Sources: CONTENT-NOTES.md (Home highlights).
 const STATS = [
-    ['5 yrs', 'designing eCommerce at Walmart International'],
-    ['3', 'markets served: Canada, Mexico and Chile'],
-    ['1st', 'structured customer-insight program for the international org'],
-    ['AI', 'assisted prototyping with Claude and Framer'],
+    ['Insights', 'from research that improved marketplace products'],
+    ['12–32%', 'more successful deliveries in Canada, and +3% marketplace sales'],
+    ['3', 'design-led projects I led end to end, from discovery to launch'],
+    ['AI', 'prototyping, from hands-on builds at CCA to Claude and Framer'],
 ];
 
 // The four stat tiles at the top of Selected Work (#/highlights lands here).
