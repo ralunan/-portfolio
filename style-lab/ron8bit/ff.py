@@ -612,3 +612,6 @@ _W8 = lambda face: _stamp(_pad(face, top=8, right=4), _DROP_FLAT, 0, 13)
 WORRY_J = _W8(_swap(_FLAT2, {(8, 7): 'O', (8, 9): 'O'}))
 WORRY_K = _W8(_swap(_FLAT2, {(8, 7): 'b', (8, 9): 'b'}))
 WORRY_L = _W8(_swap(_FLAT2, {(8, 6): 'O', (7, 9): 'O', (8, 10): 'O'}))
+
+# Draft 28 (Ron, 2026-10-09): W8 with W3 "uh-oh"'s brows (hair-colored pixels above the eyes).
+WORRY_M = _W8(_swap(_FLAT2, {(8, 6): 'H', (8, 9): 'H'}))
