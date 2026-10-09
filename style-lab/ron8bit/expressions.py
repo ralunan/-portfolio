@@ -64,6 +64,11 @@ draft30 = ''.join([
     cell('W15', ff.WORRY_O, 'Nervous, arms out and up', 'W14 with the arms raised 2 px.'),
 ])
 
+draft31 = ''.join([
+    cell('W15', ff.WORRY_O, 'Nervous, arms out and up', 'Draft 30.'),
+    cell('W16', ff.WORRY_P, 'Slimmer', 'Background gap back between the hands and the body.'),
+])
+
 html = f'''<!doctype html><html><head><meta charset="utf-8"><title>Ron 8-bit expressions</title>
 <style>
 {font_css}
@@ -81,8 +86,9 @@ h2 {{ font-size:21px; font-weight:600; margin:0 0 20px; color:#5b5f8d; }}
 figcaption {{ display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.5; color:#6f6770; }}
 figcaption b {{ color:#484149; font-weight:600; font-size:16px; }}
 </style></head><body><div class="sheet">
-<p class="eyebrow">Character sheet · draft 30 · expression ideas</p>
+<p class="eyebrow">Character sheet · draft 31 · expression ideas</p>
 <h1>Surprised and worried</h1>
+<section class="panel"><h2>Worried, draft 31: gap between arms and body</h2><div class="row four">{draft31}</div></section>
 <section class="panel"><h2>Worried, draft 30: arms raised 2 px</h2><div class="row four">{draft30}</div></section>
 <section class="panel"><h2>Worried, draft 29: arms out</h2><div class="row four">{draft29}</div></section>
 <section class="panel"><h2>Worried, draft 28: uh-oh brows</h2><div class="row four">{draft28}</div></section>

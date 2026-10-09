@@ -648,3 +648,16 @@ def _arms_out_high(base):
     put(29, 3, '.')
     return [''.join(r) for r in rows]
 WORRY_O = _arms_out_high(WORRY_H)
+
+# Draft 31 (Ron, 2026-10-09): W15 read heavier, so the background gap comes back between the arms
+# and the body. Beside the hands the torso's side moves in to the trousers' edge, leaving a 1 px gap.
+def _arms_gap(base):
+    rows = [list(r) for r in base]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][15 - x] = c
+    for y in (25, 26):
+        put(y, 3, '.'); put(y, 4, 'O')
+    put(27, 3, '.')
+    return [''.join(r) for r in rows]
+WORRY_P = _arms_gap(WORRY_O)
