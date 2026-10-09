@@ -98,11 +98,12 @@ export default function WorkStage({ sectionRef, highlightsRef }) {
                     </Suspense>
                 </div>
                 <div className="container work-stage-head">
-                    <Highlights ref={highlightsRef} selected={active} />
-                    <div className="work-stage-label">
-                        <p className="eyebrow">Selected work</p>
+                    {/* Label first, then the skill cards (Ron, 2026-10-09). */}
+                    <div className="work-stage-label" ref={highlightsRef}>
+                        <p className="eyebrow">Skill highlights</p>
                         <h2 className="work-stage-title">Case studies from Walmart</h2>
                     </div>
+                    <Highlights selected={active} />
                 </div>
                 <div className="work-stage-slot" ref={slotRef}>
                     <div className="work-stage-layer">

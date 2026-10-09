@@ -13,7 +13,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: 16px;
-    margin-bottom: 160px;
+    margin-bottom: 48px;
 }
 
 /* Each highlight is a .card (components/card.css). Its content is
@@ -177,16 +177,21 @@
     max-width: var(--stage-max);
 }
 
-.work-stage-head .stats {
-    margin-bottom: 28px;
+/* "Skill highlights" label sits above the skill cards (Ron, 2026-10-09),
+   with the gap Ron set between them: 24px on laptops and under, 40px from
+   1600px up. The cards' back card then takes 8px before the project slot,
+   which adds its own 32px. */
+.work-stage-head .work-stage-label {
+    margin-bottom: 24px;
 }
 
-/* Desktops and up (Ron, 2026-10-09): about 40px of open space from the
-   highlights' back card to the Selected Work eyebrow, up from about 24px
-   (the back card takes 8px of the margin). Laptops and under keep 24px. */
+.work-stage-head .stats {
+    margin-bottom: 8px;
+}
+
 @media (min-width: 1600px) {
-    .work-stage-head .stats {
-        margin-bottom: 44px;
+    .work-stage-head .work-stage-label {
+        margin-bottom: 40px;
     }
 }
 
