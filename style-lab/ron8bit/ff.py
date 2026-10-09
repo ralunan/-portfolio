@@ -691,3 +691,6 @@ def _worry_hands():
     put(27, 0, 'O'); put(27, 1, 'O')
     return [''.join(r) for r in rows]
 WORRY_HANDS = _worry_hands()
+
+# Draft 33 (Ron, 2026-10-09): worried pose without the single outline pixel above each red sleeve pixel.
+WORRY_HANDS = _swap(WORRY_HANDS, {(22, 3): '.', (22, 14): '.'})
