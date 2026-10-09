@@ -216,9 +216,19 @@
     height: 100%;
 }
 
+/* Card text starts at the top, not centered (Ron, 2026-10-09). Its top
+   padding matches the space above "Selected work": 24px on laptops and
+   under, 40px from 1600px up. Sides and bottom stay 40px. */
 .work-stage-card .project-card-body {
+    justify-content: flex-start;
     gap: 12px;
-    padding: 40px;
+    padding: 24px 40px 40px;
+}
+
+@media (min-width: 1600px) {
+    .work-stage-card .project-card-body {
+        padding-top: 40px;
+    }
 }
 
 .work-list {
