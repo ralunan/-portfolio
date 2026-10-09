@@ -4,10 +4,13 @@
 
 /* Every row is as tall as the tallest card (grid-auto-rows: 1fr), so if a
    label ever needs a 4th line, all the cards grow together and stay one
-   height, in every layout (4, 2 or 1 per row). */
+   height, in every layout (4, 2 or 1 per row). Columns are minmax(0, 1fr)
+   so the cards always fit the page width: when the type is larger than
+   the card, the label wraps to more lines instead of pushing a card off
+   the page. */
 .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: 16px;
     margin-bottom: 160px;
@@ -217,12 +220,12 @@
 
 @media (max-width: 960px) {
     .stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 640px) {
     .stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
