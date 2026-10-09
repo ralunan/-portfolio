@@ -84,10 +84,24 @@ Don't add other font families. Ron rejected serif headings and wider sans faces 
 | `--fs-hero` | 64px | Home hero headline |
 | `--fs-display` | 56px | Case study titles, footer headline |
 | `--fs-page` | 48px | Page titles (About, Resume) |
-| `--fs-section` | 40px | Section titles, stat numbers |
+| `--fs-section` | 40px | Section titles |
 | `--fs-title` | 32px | Next-project title, About teaser title |
-| `--fs-title-sm` | 28px | Chapter titles, project card titles |
+| `--fs-title-sm` | 28px | Chapter titles |
 - Headings: weight 600, tracking −0.03em (−0.045em at hero size), line-height ~1.08.
+
+**Card type by breakpoint** (Ron, 2026-10-09, set with the Card Type Dial). Cards don't use the fluid display scale: each text role has a `--fs-card-*` token that steps up at fixed widths (in `tokens.css`). Used by the home highlight cards and project cards; reuse these tokens for cards on case-study pages so they match. Sizes in px:
+
+| Token | Role | ≤640 | 641–960 | 961–1279 | 1280–1599 | 1600–1999 | 2000–2199 | 2200+ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `--fs-card-stat` | Highlight number | 28 | 36 | 40 | 46 | 50 | 56 | 64 |
+| `--fs-card-stat-label` | Highlight label | 14 | 16 | 16 | 16 | 18 | 20 | 22 |
+| `--fs-card-num` | Project number (01) | 24 | 28 | 32 | 36 | 40 | 44 | 52 |
+| `--fs-card-tag` | Project tags | 12 | 12 | 12 | 14 | 16 | 16 | 18 |
+| `--fs-card-title` | Project title | 24 | 30 | 26 | 32 | 36 | 40 | 48 |
+| `--fs-card-tagline` | Project tagline | 16 | 16 | 16 | 16 | 20 | 20 | 24 |
+| `--fs-card-cta` | Project "Read the case study" | 18 | 18 | 18 | 20 | 24 | 26 | 30 |
+
+Ron set 641–1999 and phones by eye; 2000+ continue his 1280→1600 step (he couldn't view those widths). Tablets list one card per row, so their title runs larger than on small laptops. To retune, rebuild the dial from `tools/sizing-dial/` (PR #24).
 
 ## Spacing
 
@@ -121,6 +135,7 @@ Newest first. Format: date, decision, why.
 - **2026-10-09** Project card size by width (Ron): on big screens the Selected Work stage widens and the card grows with the same proportions, so it fills the window. Below 1600px unchanged (1200px wide, card up to 492px tall); 1600+: 1400px / 576px; 2000+: 1680px / 688px; 2200+: 2080px / 896px (breakpoints shared with the hero and avatar). The card still shrinks on shorter windows. Card type and the rest of the home page width are unchanged for now.
 - **2026-10-09** Rule 8 now applies to home Selected Work (Ron): the highlights start `--header-gap` below the compact scrolled header (16/20/24px on phones, 24px from tablet up), replacing a fixed 128px top padding on phones and tablets (62–64px gap) and the centered group on laptops and desktops (30px on laptops, 95px at 1920, 275px at 2560). On tall screens the group stays at the top and the spare space goes below the project card. Reason: the same spacing below the header as every other page.
 - **2026-10-09** Highlight cards always fit the page width (Ron): below about 1280px the label box narrows below 22 characters and labels wrap to more lines, instead of the fourth card running off the right edge (it overflowed by up to about 160px at 1024px). All cards still grow together.
+- **2026-10-09** Card type by breakpoint (Ron): highlight and project card text gets its own `--fs-card-*` tokens stepping up at 641/961/1280/1600/2000/2200px, set by Ron in the Card Type Dial (2000+ extrapolated from his 1280→1600 step, his OK). Replaces `--fs-section` for highlight numbers, `--fs-title-sm` for project titles and fixed 14/22/18px for labels, numbers and CTAs on the home cards. Reason: type that fits each card size on every screen, ready to reuse on the project pages.
 - **2026-10-09** Avatar stays fixed in the bottom-right corner across the homepage (Ron): he no longer scrolls away with the hero, so he stays in place through the hero-to-Selected Work hand-off. The transition itself is unchanged. He sits above the page and below the nav and chat box.
 - **2026-10-01** Spacing rule: every padding, margin and gap is a multiple of 4px, so there is no odd spacing (Ron). 36 and 44 join the scale; 2, 6 and 10 leave it. Home hero headline-to-intro gap now steps with width: 24px (phones and below 1280), 28px (1280+), 36px (1440+), 44px (1920+) for page balance on large screens (Ron asked for 30/38/44; rounded to the 4px rule).
 - **2026-10-01** Body text drops to 16px site-wide (was 17px, 16px on phones), and the home hero's intro line to 18px (was 17–20px fluid) (Ron). Both are now tokens (`--fs-body`, `--fs-hero-intro`) and rule 7 makes 16px body a standing rule. Older paragraphs that still set their own size (About story 18px, case-study outcome cards 19px) are exceptions to fix page by page.
