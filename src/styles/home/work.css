@@ -48,9 +48,12 @@
 /* Selected Work is the home page's second full screen: the hero hands off
    to its top edge (see useHeroHandoff), so it fills the viewport and clears
    the fixed nav itself. */
+/* The first highlight card sits --header-gap below the (scrolled) header,
+   per DESIGN.md rule 8. --header-live is the header's measured height, set
+   in SelectedWork.jsx; 64px is its scrolled height on phones. */
 .work {
     min-height: 100vh;
-    padding-top: 128px;
+    padding-top: calc(var(--header-live, 64px) + var(--header-gap));
     margin-bottom: 120px;
 }
 
@@ -63,22 +66,17 @@
     padding-top: 0;
 }
 
-/* Below the fixed nav (64px), the highlights, heading and card form one
-   group. On laptops it fills the window exactly; on taller windows the
-   group stays together and centers, splitting the spare height above and
-   below. */
+/* The highlights, heading and card form one group that starts
+   --header-gap below the header at every size (Ron, 2026-10-09). On taller
+   windows the spare height sits below the card. */
 .work-stage {
     position: sticky;
     top: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-top: 64px;
-}
-
-.work-stage-head {
-    padding-top: 32px;
+    justify-content: flex-start;
+    padding-top: calc(var(--header-live, 64px) + var(--header-gap));
 }
 
 .work-stage-head .stats {
