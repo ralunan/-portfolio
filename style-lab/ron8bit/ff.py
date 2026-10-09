@@ -661,3 +661,33 @@ def _arms_gap(base):
     put(27, 3, '.')
     return [''.join(r) for r in rows]
 WORRY_P = _arms_gap(WORRY_O)
+
+# Draft 32 (Ron, 2026-10-09): yay arms 1 px shorter (the hand moves 1 px down and in along the
+# 45-degree arm, dropping one sleeve row); worried hands 2x2 (out from the body, keeping the gap).
+def _yay_short():
+    rows = [list(r) for r in YAY_IN]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][21 - x] = c                              # body axis sits between columns 10 and 11
+    for y in range(10, 15):                              # clear the old hand and upper sleeve
+        for x in range(0, 6):
+            if rows[y][x] in 'OSp' and not (y >= 10 and x == 5 and y in (10, 11, 12)):
+                put(y, x, '.')
+    put(11, 2, 'O'); put(11, 3, 'O')                     # hand, 2x2
+    for y in (12, 13):
+        put(y, 1, 'O'); put(y, 2, 'S'); put(y, 3, 'S'); put(y, 4, 'O')
+    put(14, 2, 'O'); put(14, 3, 'p'); put(14, 4, 'p'); put(14, 5, 'O')
+    return [''.join(r) for r in rows]
+YAY_SHORT = _yay_short()
+
+def _worry_hands():
+    rows = [list('.' + r) for r in WORRY_P]              # 1 px more room on the left
+    def put(y, x, c):                                    # x in WORRY_P columns
+        rows[y][x + 1] = c
+        rows[y][16 - x] = c                              # axis between WORRY_P columns 7 and 8
+    put(24, 0, 'O')
+    for y in (25, 26):
+        put(y, -1, 'O'); put(y, 0, 'S'); put(y, 1, 'S'); put(y, 2, 'O')
+    put(27, 0, 'O'); put(27, 1, 'O')
+    return [''.join(r) for r in rows]
+WORRY_HANDS = _worry_hands()
