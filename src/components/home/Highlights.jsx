@@ -1,15 +1,15 @@
 import Reveal from '../Reveal.jsx';
 
-// One card per building block (Ron, 2026-10-09): each names a skill and
-// previews the work behind it, rather than listing an achievement. Cards are
-// numbered and ordered to match the projects below (01 research, 02 Cashi,
-// 03 Fashion); Communication is 04, for the onboarding project to come.
+// One card per skill Ron built along the way (Ron, 2026-10-09): each names
+// a concrete skill and previews the project behind it. Cards are numbered
+// and ordered to match the projects below (01 UX research, 02 Cashi,
+// 03 Fashion); Collaboration is 04, for the onboarding project to come.
 // Sources: CONTENT-NOTES.md (Home highlights).
 const STATS = [
-    ['Making sense', 'Research that turned customer insight into roadmap decisions'],
-    ['Building', 'Linking Cashi wallets to Walmart checkout in Mexico'],
-    ['Creating', 'Prototyping from physical builds at CCA to digital experiences with AI'],
-    ['Communication', 'Partnering with product teams to take new ideas from pitch to launch'],
+    ['UX research', 'Research that turned customer insight into roadmap decisions'],
+    ['Fintech UX', 'Linking Cashi wallets to Walmart checkout in Mexico'],
+    ['AI prototyping', 'Prototyping from physical builds at CCA to digital experiences with AI'],
+    ['Collaboration', 'Partnering with product teams to take new ideas from pitch to launch'],
 ];
 
 // The four skill cards at the top of Selected Work (#/highlights lands here).
