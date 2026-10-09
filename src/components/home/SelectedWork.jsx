@@ -19,10 +19,28 @@ function useWorkStage() {
     return enabled;
 }
 
+// The highlights start --header-gap below the header (DESIGN.md rule 8).
+// By the time visitors reach this screen the header has shrunk to its
+// scrolled height, which also changes with width, so measure it and hand
+// it to the CSS as --header-live on the section.
+function useHeaderHeight(sectionRef, layout) {
+    useEffect(() => {
+        const header = document.querySelector('header.nav');
+        const section = sectionRef.current;
+        if (!header || !section) return undefined;
+        const update = () => section.style.setProperty('--header-live', `${header.getBoundingClientRect().height}px`);
+        update();
+        const observer = new ResizeObserver(update);
+        observer.observe(header, { box: 'border-box' });
+        return () => observer.disconnect();
+    }, [sectionRef, layout]);
+}
+
 // Home screen 2: highlights + Selected Work. Picks the pinned stage
 // (WorkStage.jsx) or the stacked list below. Styles: styles/home/work.css.
 export default function SelectedWork({ sectionRef, highlightsRef }) {
     const workStage = useWorkStage();
+    useHeaderHeight(sectionRef, workStage);
 
     if (workStage) return <WorkStage sectionRef={sectionRef} highlightsRef={highlightsRef} />;
 

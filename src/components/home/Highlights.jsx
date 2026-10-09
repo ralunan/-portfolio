@@ -1,13 +1,17 @@
 import Reveal from '../Reveal.jsx';
 
+// One card per building block (Ron, 2026-10-09): each names a skill and
+// previews the work behind it, rather than listing an achievement. Making
+// sense comes first because it lines up with the first project shown below.
+// Sources: CONTENT-NOTES.md (Home highlights).
 const STATS = [
-    ['5 yrs', 'designing eCommerce at Walmart International'],
-    ['3', 'markets served: Canada, Mexico and Chile'],
-    ['1st', 'structured customer-insight program for the international org'],
-    ['AI', 'assisted prototyping with Claude and Framer'],
+    ['Making sense', 'Research that turned customer insight into roadmap decisions'],
+    ['Building', 'Linking Cashi wallets to Walmart checkout in Mexico'],
+    ['Communication', 'Partnering with product teams to take new ideas from pitch to launch'],
+    ['Creating', 'Prototyping from physical builds at CCA to digital experiences with AI'],
 ];
 
-// The four stat tiles at the top of Selected Work (#/highlights lands here).
+// The four skill cards at the top of Selected Work (#/highlights lands here).
 // Styles: .stats in styles/home/work.css; the card surface is .card in
 // styles/components/card.css.
 export default function Highlights({ ref }) {

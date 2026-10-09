@@ -98,6 +98,16 @@
     --fs-section: clamp(28px, 3.2vw, 40px);
     --fs-title: clamp(24px, 2.6vw, 32px);
     --fs-title-sm: clamp(22px, 2.2vw, 28px);
+    /* Card type (Ron, 2026-10-09): set per breakpoint with the Card Type
+       Dial; steps up at 641/961/1280/1600/2000/2200px below. Highlight
+       cards (skill heading + label) and project cards. See DESIGN.md. */
+    --fs-card-skill: 24px;
+    --fs-card-stat-label: 14px;
+    --fs-card-num: 24px;
+    --fs-card-tag: 12px;
+    --fs-card-title: 24px;
+    --fs-card-tagline: 16px;
+    --fs-card-cta: 18px;
     /* Body text (Ron, 2026-10-01): 16px everywhere; the home hero's intro
        line is the one larger exception at 18px. */
     --fs-body: 16px;
@@ -123,6 +133,79 @@
     --nav-height: 72px;
     --header-gap: 24px;
     --page-top: calc(var(--nav-height) + var(--header-gap));
+}
+
+/* Card type per breakpoint (see --fs-card-* above). */
+@media (min-width: 641px) {
+    :root {
+        --fs-card-skill: 30px;
+        --fs-card-stat-label: 16px;
+        --fs-card-num: 28px;
+        --fs-card-tag: 12px;
+        --fs-card-title: 30px;
+        --fs-card-tagline: 16px;
+        --fs-card-cta: 18px;
+    }
+}
+
+@media (min-width: 961px) {
+    :root {
+        --fs-card-skill: 20px;
+        --fs-card-stat-label: 16px;
+        --fs-card-num: 32px;
+        --fs-card-tag: 12px;
+        --fs-card-title: 26px;
+        --fs-card-tagline: 16px;
+        --fs-card-cta: 18px;
+    }
+}
+
+@media (min-width: 1280px) {
+    :root {
+        --fs-card-skill: 24px;
+        --fs-card-stat-label: 16px;
+        --fs-card-num: 36px;
+        --fs-card-tag: 14px;
+        --fs-card-title: 32px;
+        --fs-card-tagline: 16px;
+        --fs-card-cta: 20px;
+    }
+}
+
+@media (min-width: 1600px) {
+    :root {
+        --fs-card-skill: 28px;
+        --fs-card-stat-label: 18px;
+        --fs-card-num: 40px;
+        --fs-card-tag: 16px;
+        --fs-card-title: 36px;
+        --fs-card-tagline: 20px;
+        --fs-card-cta: 24px;
+    }
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --fs-card-skill: 36px;
+        --fs-card-stat-label: 20px;
+        --fs-card-num: 44px;
+        --fs-card-tag: 16px;
+        --fs-card-title: 40px;
+        --fs-card-tagline: 20px;
+        --fs-card-cta: 26px;
+    }
+}
+
+@media (min-width: 2200px) {
+    :root {
+        --fs-card-skill: 44px;
+        --fs-card-stat-label: 22px;
+        --fs-card-num: 52px;
+        --fs-card-tag: 18px;
+        --fs-card-title: 48px;
+        --fs-card-tagline: 24px;
+        --fs-card-cta: 30px;
+    }
 }
 
 @media (max-width: 399px) {

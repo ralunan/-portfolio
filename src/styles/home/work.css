@@ -4,19 +4,22 @@
 
 /* Every row is as tall as the tallest card (grid-auto-rows: 1fr), so if a
    label ever needs a 4th line, all the cards grow together and stay one
-   height, in every layout (4, 2 or 1 per row). */
+   height, in every layout (4, 2 or 1 per row). Columns are minmax(0, 1fr)
+   so the cards always fit the page width: when the type is larger than
+   the card, the label wraps to more lines instead of pushing a card off
+   the page. */
 .stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-rows: 1fr;
     gap: 16px;
     margin-bottom: 160px;
 }
 
 /* Each highlight is a .card (components/card.css). Its content is
-   centered and starts at the top, so the numbers line up across the row,
+   centered and starts at the top, so the skill headings line up across the row,
    and every label sits in the same size text box (three lines tall), so
-   each card has the same spacing around its content. The number is
+   each card has the same spacing around its content. The heading is
    centered; the label text inside its box is left-aligned (Ron). */
 .stat {
     display: flex;
@@ -29,7 +32,7 @@
 .stat-value {
     font-family: var(--display);
     color: var(--subheading);
-    font-size: var(--fs-section);
+    font-size: var(--fs-card-skill);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -40,7 +43,7 @@
     max-width: 100%;
     min-height: calc(3 * 1.5em);
     text-align: left;
-    font-size: 14px;
+    font-size: var(--fs-card-stat-label);
     color: var(--muted);
     line-height: 1.5;
 }
@@ -48,9 +51,12 @@
 /* Selected Work is the home page's second full screen: the hero hands off
    to its top edge (see useHeroHandoff), so it fills the viewport and clears
    the fixed nav itself. */
+/* The first highlight card sits --header-gap below the (scrolled) header,
+   per DESIGN.md rule 8. --header-live is the header's measured height, set
+   in SelectedWork.jsx; 64px is its scrolled height on phones. */
 .work {
     min-height: 100vh;
-    padding-top: 128px;
+    padding-top: calc(var(--header-live, 64px) + var(--header-gap));
     margin-bottom: 120px;
 }
 
@@ -63,26 +69,61 @@
     padding-top: 0;
 }
 
-/* Below the fixed nav (64px), the highlights, heading and card form one
-   group. On laptops it fills the window exactly; on taller windows the
-   group stays together and centers, splitting the spare height above and
-   below. */
+/* The highlights, heading and card form one group that starts
+   --header-gap below the header at every size (Ron, 2026-10-09). On taller
+   windows the spare height sits below the card. */
 .work-stage {
     position: sticky;
     top: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-top: 64px;
+    justify-content: flex-start;
+    padding-top: calc(var(--header-live, 64px) + var(--header-gap));
+    --stage-max: var(--max);
+    --stage-card-max: 492px;
 }
 
-.work-stage-head {
-    padding-top: 32px;
+/* Card size per breakpoint (Ron, 2026-10-09): on big screens the stage
+   (highlights, heading and project card) widens and the card grows taller,
+   keeping the same proportions (height about 41% of width), so it fills the
+   window instead of leaving empty space below. Below 1600px nothing changes. */
+@media (min-width: 1600px) {
+    .work-stage {
+        --stage-max: 1400px;
+        --stage-card-max: 576px;
+    }
+}
+
+@media (min-width: 2000px) {
+    .work-stage {
+        --stage-max: 1680px;
+        --stage-card-max: 688px;
+    }
+}
+
+@media (min-width: 2200px) {
+    .work-stage {
+        --stage-max: 2080px;
+        --stage-card-max: 896px;
+    }
+}
+
+.work-stage .container {
+    max-width: var(--stage-max);
 }
 
 .work-stage-head .stats {
     margin-bottom: 28px;
+}
+
+/* Desktops and up (Ron, 2026-10-09): about 40px of open space from the
+   highlights' back card to the Selected Work eyebrow, up from about 24px
+   (the back card takes 8px of the margin). Laptops and under keep 24px. */
+@media (min-width: 1600px) {
+    .work-stage-head .stats {
+        margin-bottom: 44px;
+    }
 }
 
 /* Desktop (taller than a typical laptop): the highlight cards get more
@@ -129,11 +170,11 @@
     letter-spacing: -0.025em;
 }
 
-/* The slot is the card's full height (492px) plus its 32px gap under the
+/* The slot is the card's full height (--stage-card-max) plus its 32px gap under the
    heading and 40px below, and shrinks on shorter windows. */
 .work-stage-slot {
     position: relative;
-    flex: 0 1 564px;
+    flex: 0 1 calc(var(--stage-card-max) + 72px);
     min-height: 0;
     overflow-x: clip;
 }
@@ -157,12 +198,12 @@
 }
 
 /* The card sits 32px under the heading at every size. Its height follows
-   the window up to 492px, 25% taller than on a 1280x800 laptop (about
-   394px), so it doesn't grow huge on large monitors. */
+   the window up to --stage-card-max (492px below 1600px wide, 576px from
+   1600, 688px from 2000, 896px from 2200), so it doesn't grow huge on large monitors. */
 .work-stage-card .project-card-link {
     width: 100%;
     height: 100%;
-    max-height: 492px;
+    max-height: var(--stage-card-max);
 }
 
 .work-stage-card .project-card-media {
@@ -175,9 +216,29 @@
     height: 100%;
 }
 
+/* Card text starts at the top, not centered (Ron, 2026-10-09). Its top
+   padding matches the space above "Selected work": 24px on laptops and
+   under, 40px from 1600px up. Sides and bottom stay 40px. */
 .work-stage-card .project-card-body {
+    justify-content: flex-start;
     gap: 12px;
-    padding: 40px;
+    padding: 24px 40px 40px;
+}
+
+@media (min-width: 1600px) {
+    .work-stage-card .project-card-body {
+        padding-top: 40px;
+    }
+}
+
+/* Larger cards (Ron, 2026-10-09): from 2000px up the card is 688px+ tall,
+   so the CTA link gets 20px more space above it, 40px in all (12px gap +
+   28px). At 1600px the card is often too short for it on laptop-height
+   windows. */
+@media (min-width: 2000px) {
+    .work-stage-card .project-card-cta {
+        margin-top: 28px;
+    }
 }
 
 .work-list {
@@ -188,12 +249,12 @@
 
 @media (max-width: 960px) {
     .stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 640px) {
     .stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }

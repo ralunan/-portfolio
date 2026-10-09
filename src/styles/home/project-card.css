@@ -59,24 +59,35 @@
 
 .project-card-num {
     font-family: var(--serif);
-    font-size: 22px;
+    font-size: var(--fs-card-num);
     color: color-mix(in srgb, var(--accent) 55%, var(--charcoal-deep));
 }
 
 .project-card-title {
     font-family: var(--display);
-    font-size: var(--fs-title-sm);
+    font-size: var(--fs-card-title);
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.025em;
 }
 
 .project-card-tagline {
+    font-size: var(--fs-card-tagline);
     color: var(--muted);
 }
 
+.project-card-link .tag {
+    font-size: var(--fs-card-tag);
+}
+
+/* .text-cta sets 18px; home card CTAs follow the card type scale instead
+   (the case study's next-project card keeps 18px). */
 .project-card-cta {
     margin-top: 8px;
+}
+
+.project-card-link .project-card-cta {
+    font-size: var(--fs-card-cta);
 }
 
 @media (max-width: 960px) {
