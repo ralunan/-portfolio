@@ -615,3 +615,18 @@ WORRY_L = _W8(_swap(_FLAT2, {(8, 6): 'O', (7, 9): 'O', (8, 10): 'O'}))
 
 # Draft 28 (Ron, 2026-10-09): W8 with W3 "uh-oh"'s brows (hair-colored pixels above the eyes).
 WORRY_M = _W8(_swap(_FLAT2, {(8, 6): 'H', (8, 9): 'H'}))
+
+# Draft 29 (Ron, 2026-10-09): W8 (no brows) with the arms angled slightly out from the body, hands
+# 2 px away from the hips: the opposite of the yay pose. Arm pixels drawn on the left and mirrored.
+def _arms_out(base):
+    rows = [list(r) for r in base]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][15 - x] = c                              # body axis sits between columns 7 and 8
+    put(25, 1, 'O'); put(25, 2, 'r'); put(25, 3, 'O')   # sleeve leaves the torso
+    put(26, 1, 'O'); put(26, 2, 'L'); put(26, 3, 'O')
+    for y in (27, 28):                                  # hand, 2 px out from the hip
+        put(y, 0, 'O'); put(y, 1, 'S'); put(y, 2, 'O'); put(y, 3, '.')
+    put(29, 1, 'O'); put(29, 3, '.')
+    return [''.join(r) for r in rows]
+WORRY_N = _arms_out(WORRY_H)
