@@ -16,10 +16,11 @@ const STATS = [
 // Styles: .stats in styles/home/work.css; the card surface is .card in
 // styles/components/card.css.
 // `selected` is the index of the project in view on the pinned work stage;
-// that card's back card turns Terracotta. The stacked list passes none.
+// that card's back card turns Terracotta and it grows while the others
+// shrink. The stacked list passes none.
 export default function Highlights({ ref, selected }) {
     return (
-        <div className="stats" role="region" aria-label="Highlights" id="highlights" ref={ref}>
+        <div className={`stats${selected != null ? ' stats--selecting' : ''}`} role="region" aria-label="Highlights" id="highlights" ref={ref}>
             {STATS.map(([value, label], i) => (
                 <Reveal
                     key={value}

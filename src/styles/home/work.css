@@ -40,13 +40,27 @@
 }
 
 /* Selected card (Ron, 2026-10-09): while a project is in view on the work
-   stage, its matching skill card's back card turns Roasted Terracotta. */
+   stage, its matching skill card's back card turns Roasted Terracotta and
+   the card grows 10%, while the other cards shrink 10%. Uses the `scale`
+   property so it doesn't fight Reveal's transform. The stacked list has no
+   selection, so its cards stay at full size. */
 .stat.card--stacked {
-    transition: box-shadow 0.4s var(--ease);
+    transition: box-shadow 0.4s var(--ease), scale 0.4s var(--ease);
 }
 
-.stat.is-selected {
+.stats--selecting .stat {
+    scale: 0.9;
+}
+
+.stats--selecting .stat.is-selected {
     --card-back: var(--roasted-terracotta);
+    scale: 1.1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stat.card--stacked {
+        transition: none;
+    }
 }
 
 .stat-value {
