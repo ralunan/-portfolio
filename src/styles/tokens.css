@@ -45,6 +45,7 @@
     --vanilla-wash: #f8ecd8;
     --matcha-wash: #e3ebe4;
     --dusk-wash: #e6e7f0;
+    --terracotta-wash: #f8e4df; /* Roasted Terracotta ~18% on white */
 
     /* Ron's 8-bit avatar (approved 2026-10-01): shades flattened from the
        palette, used only by the sprite (components/home/avatarSprites.js). */
