@@ -1,5 +1,6 @@
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react';
 import { COTTON_CANDY } from './cottonCandy.js';
+import WorkBoxes from './WorkBoxes.jsx';
 
 // Selected Work background (Ron, 2026-10-09): the hero's Cotton Candy
 // motion, recolored with the Japanese palette washes (Kyoto Dusk, Roasted
@@ -15,8 +16,11 @@ const PALETTE_CANDY = {
 
 export default function WorkGradient() {
     return (
-        <ShaderGradientCanvas className="work-gradient-canvas" pixelDensity={1} fov={45} pointerEvents="none">
-            <ShaderGradient control="props" {...PALETTE_CANDY} />
-        </ShaderGradientCanvas>
+        <>
+            <ShaderGradientCanvas className="work-gradient-canvas" pixelDensity={1} fov={45} pointerEvents="none">
+                <ShaderGradient control="props" {...PALETTE_CANDY} />
+            </ShaderGradientCanvas>
+            <WorkBoxes />
+        </>
     );
 }
