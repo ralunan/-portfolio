@@ -110,14 +110,18 @@
     animation: gradient-in 1.2s var(--ease) both;
 }
 
-/* Card size per breakpoint (Ron, 2026-10-09): on big screens the stage
-   (highlights, heading and project card) widens and the card grows taller,
-   keeping the same proportions (height about 41% of width), so it fills the
-   window instead of leaving empty space below. Below 1600px nothing changes. */
-@media (min-width: 1600px) {
-    .work-stage {
-        --stage-max: 1400px;
-        --stage-card-max: 576px;
+/* Card size per breakpoint (Ron, 2026-10-09): from 1600 to 1999px the
+   stage keeps the laptop size and proportions (1200px wide, card up to
+   492px tall), with more open space around it and 64px below the card
+   (see .work-stage-card). From 2000px the stage widens and the card grows
+   taller, keeping the same proportions (height about 41% of width). */
+@media (min-width: 1600px) and (max-width: 1999px) {
+    .work-stage .work-stage-slot {
+        flex-basis: calc(var(--stage-card-max) + 96px);
+    }
+
+    .work-stage .work-stage-card {
+        bottom: 64px;
     }
 }
 
@@ -197,7 +201,7 @@
 }
 
 /* The slot is the card's full height (--stage-card-max) plus its 32px gap under the
-   heading and 40px below, and shrinks on shorter windows. */
+   heading and 40px below (64px at 1600–1999), and shrinks on shorter windows. */
 .work-stage-slot {
     position: relative;
     flex: 0 1 calc(var(--stage-card-max) + 72px);
@@ -224,8 +228,8 @@
 }
 
 /* The card sits 32px under the heading at every size. Its height follows
-   the window up to --stage-card-max (492px below 1600px wide, 576px from
-   1600, 688px from 2000, 896px from 2200), so it doesn't grow huge on large monitors. */
+   the window up to --stage-card-max (492px below 2000px wide, 688px from
+   2000, 896px from 2200), so it doesn't grow huge on large monitors. */
 .work-stage-card .project-card-link {
     width: 100%;
     height: 100%;
@@ -242,16 +246,16 @@
     height: 100%;
 }
 
-/* Card text starts at the top, not centered (Ron, 2026-10-09). Its top
-   padding matches the space above "Selected work": 24px on laptops and
-   under, 40px from 1600px up. Sides and bottom stay 40px. */
+/* Card text starts at the top, not centered (Ron, 2026-10-09). Top
+   padding is 24px up to 1999px (the laptop-size card) and 40px from 2000px
+   up. Sides and bottom stay 40px. */
 .work-stage-card .project-card-body {
     justify-content: flex-start;
     gap: 12px;
     padding: 24px 40px 40px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 2000px) {
     .work-stage-card .project-card-body {
         padding-top: 40px;
     }
