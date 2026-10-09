@@ -3,8 +3,10 @@
    the site style (Ron, 2026-10-08): pixel font, large "game ratio" type and a
    dark dialogue window, carried over from the style-lab prototype unchanged. */
 
-/* Avatar: bottom-right of the hero. Hidden past the right edge until the
-   reading delay ends, then walks in and stands in the talk pose. */
+/* Avatar: bottom-right corner, fixed to the screen so he stays in place
+   while the homepage scrolls from the hero to Selected Work (Ron,
+   2026-10-09). Hidden past the right edge until the reading delay ends,
+   then walks in. Above the page, below the nav (50) and the chat box (60). */
 .avatar {
     /* Size: screen px per sprite pixel (whole numbers keep pixels crisp).
        The sprite is 24 sprite px tall, so 4px draws him 96px tall. Steps
@@ -22,10 +24,10 @@
     --avatar-invite-hold: 4s;
     /* idle front walk in place: 1s per frame, as approved for the persona */
     --avatar-idle-frame: 1s;
-    position: absolute;
+    position: fixed;
     right: 24px;
     bottom: 16px;
-    z-index: 2;
+    z-index: 40;
     display: flex;
     align-items: flex-end;
     gap: 8px;

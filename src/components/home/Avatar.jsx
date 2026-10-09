@@ -10,6 +10,7 @@ import { AVATAR_FRAMES, AVATAR_PALETTE } from './avatarSprites.js';
 // goes back to idling; hovering (or focusing) him brings the bubble back, and it
 // stays for the same hold after the pointer leaves. Clicking
 // him opens the approved RPG chat box (style-lab avatar chat prototype, Ron 2026-10-08).
+// He stays fixed in the bottom-right corner across the homepage.
 // Size and timing live in avatar.css (--avatar-px, --avatar-walk-delay, ...).
 
 const STEP_PX = 3; // sprite pixels moved per walk frame, so the feet don't slide
@@ -216,7 +217,11 @@ export default function Avatar() {
 
     return (
         <>
-            <button
+            {/* Fixed to the screen so he stays put while the homepage scrolls from
+                the hero to Selected Work (Ron, 2026-10-09). Like the chat box, he
+                renders outside the page's route transition, whose transform would
+                otherwise carry him along. */}
+            {createPortal(<button
                 ref={avatarRef}
                 type="button"
                 className={`avatar avatar--${stage}${bubble ? ' has-invite' : ''}${open ? ' is-talking' : ''}`}
@@ -235,7 +240,7 @@ export default function Avatar() {
                 <span className="avatar-sprite">
                     {FRAMES.map((name) => <Sprite key={name} name={name} on={frame === name} />)}
                 </span>
-            </button>
+            </button>, document.body)}
             {/* The chat box is fixed to the screen, so it renders outside the
                 page's route transition (a transformed parent would move it). */}
             {createPortal(
