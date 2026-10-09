@@ -11,8 +11,9 @@ def _inline(m):
     return 'url(data:font/woff2;base64,' + base64.b64encode(open(f'{FONTS}/{name}.woff2', 'rb').read()).decode() + ')'
 font_css = re.sub(r'url\((https://fonts\.gstatic\.com[^)]*)\)', _inline, css)
 
+SCALE = 10
 def cell(key, rows, label, note):
-    return (f'<figure class="cell"><div class="art">{render.svg(rows, 10)}</div>'
+    return (f'<figure class="cell"><div class="art">{render.svg(rows, SCALE)}</div>'
             f'<figcaption><b>{key} · {label}</b><span>{note}</span></figcaption></figure>')
 
 surprised = ''.join([
@@ -40,6 +41,13 @@ draft26 = ''.join([
     cell('W9', ff.WORRY_I, 'Dash eyes, 2 px', 'Drop at 2x.'),
 ])
 
+draft27 = ''.join([
+    cell('W8', ff.WORRY_H, 'Dash eyes, 2 px', 'Draft 26, for comparison.'),
+    cell('W10', ff.WORRY_J, 'Worried brows, dark', 'A dark pixel above the inner end of each eye.'),
+    cell('W11', ff.WORRY_K, 'Worried brows, soft', 'Same, in the beard grey, so they read lighter.'),
+    cell('W12', ff.WORRY_L, 'Slanted brow', 'A dark brow rising toward the middle over his right eye.'),
+])
+
 html = f'''<!doctype html><html><head><meta charset="utf-8"><title>Ron 8-bit expressions</title>
 <style>
 {font_css}
@@ -57,8 +65,9 @@ h2 {{ font-size:21px; font-weight:600; margin:0 0 20px; color:#5b5f8d; }}
 figcaption {{ display:flex; flex-direction:column; gap:4px; font-size:14px; line-height:1.5; color:#6f6770; }}
 figcaption b {{ color:#484149; font-weight:600; font-size:16px; }}
 </style></head><body><div class="sheet">
-<p class="eyebrow">Character sheet · draft 26 · expression ideas</p>
+<p class="eyebrow">Character sheet · draft 27 · expression ideas</p>
 <h1>Surprised and worried</h1>
+<section class="panel"><h2>Worried, draft 27: raised brows</h2><div class="row four">{draft27}</div></section>
 <section class="panel"><h2>Worried, draft 26: flat dash eyes</h2><div class="row four">{draft26}</div></section>
 <section class="panel"><h2>Worried, draft 25</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{draft25}</div></section>
 <section class="panel"><h2>Surprised</h2><div class="row">{cell('', ff.FRONT, 'Neutral', 'For comparison.').replace('<b> · ', '<b>')}{surprised}</div></section>

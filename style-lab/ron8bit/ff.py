@@ -604,3 +604,11 @@ WORRY_F = _stamp(_pad(_FLAT3, top=8, right=4), _DROP_FLAT, 0, 13)    # 3 px dash
 WORRY_G = _stamp(_pad(_FLAT3, top=11, right=6), _DROP_2X, 0, 13)     # 3 px dashes, 2x drop
 WORRY_H = _stamp(_pad(_FLAT2, top=8, right=4), _DROP_FLAT, 0, 13)    # 2 px dashes, drop +2 px
 WORRY_I = _stamp(_pad(_FLAT2, top=11, right=6), _DROP_2X, 0, 13)     # 2 px dashes, 2x drop
+
+# Draft 27 (Ron, 2026-10-08): W8 plus worried brows, raised in the middle. The fringe covers most
+# of the forehead, so the brows are 1 to 3 pixels. A: dark inner brows just above the inner end of
+# each dash. B: same in the soft beard grey. C: a slanted dark brow over the open eye, rising inward.
+_W8 = lambda face: _stamp(_pad(face, top=8, right=4), _DROP_FLAT, 0, 13)
+WORRY_J = _W8(_swap(_FLAT2, {(8, 7): 'O', (8, 9): 'O'}))
+WORRY_K = _W8(_swap(_FLAT2, {(8, 7): 'b', (8, 9): 'b'}))
+WORRY_L = _W8(_swap(_FLAT2, {(8, 6): 'O', (7, 9): 'O', (8, 10): 'O'}))
