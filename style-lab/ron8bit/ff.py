@@ -630,3 +630,21 @@ def _arms_out(base):
     put(29, 1, 'O'); put(29, 3, '.')
     return [''.join(r) for r in rows]
 WORRY_N = _arms_out(WORRY_H)
+
+# Draft 30 (Ron, 2026-10-09): W14 with the arms raised 2 px. The hands sit 2 px out from the torso
+# at the flannel's hem instead of at the hips; the old hand spots become plain trouser side.
+def _arms_out_high(base):
+    rows = [list(r) for r in base]
+    def put(y, x, c):
+        rows[y][x] = c
+        rows[y][15 - x] = c
+    put(22, 2, 'O'); put(22, 3, 'O')                    # top of the raised sleeve
+    put(23, 1, 'O'); put(23, 2, 'r')                    # sleeve leaves the shoulder
+    put(24, 1, 'O'); put(24, 2, 'L'); put(24, 3, 'O')
+    for y in (25, 26):                                  # hand, 2 px out from the torso
+        put(y, 0, 'O'); put(y, 1, 'S'); put(y, 2, 'O')
+    put(27, 1, 'O'); put(27, 2, '.'); put(27, 3, 'O')   # hand bottom; torso corner
+    put(28, 2, '.'); put(28, 3, '.')
+    put(29, 3, '.')
+    return [''.join(r) for r in rows]
+WORRY_O = _arms_out_high(WORRY_H)
