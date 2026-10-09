@@ -231,6 +231,16 @@
     }
 }
 
+/* Larger cards (Ron, 2026-10-09): from 2000px up the card is 688px+ tall,
+   so the CTA link gets 20px more space above it, 40px in all (12px gap +
+   28px). At 1600px the card is often too short for it on laptop-height
+   windows. */
+@media (min-width: 2000px) {
+    .work-stage-card .project-card-cta {
+        margin-top: 28px;
+    }
+}
+
 .work-list {
     display: flex;
     flex-direction: column;
