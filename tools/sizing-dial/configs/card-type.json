@@ -1,0 +1,28 @@
+{
+  "id": "card-type",
+  "title": "Card type dial",
+  "jumpTo": "#work",
+  "breakpoints": [
+    { "id": "phone", "label": "Phones", "range": "≤640", "min": 0, "max": 640 },
+    { "id": "tablet", "label": "Tablets", "range": "641–960", "min": 641, "max": 960 },
+    { "id": "l961", "label": "Small laptops", "range": "961–1279", "min": 961, "max": 1279 },
+    { "id": "l1280", "label": "Laptops", "range": "1280–1599", "min": 1280, "max": 1599 },
+    { "id": "l1600", "label": "Desktops", "range": "1600–1999", "min": 1600, "max": 1999 },
+    { "id": "l2000", "label": "Large", "range": "2000–2199", "min": 2000, "max": 2199 },
+    { "id": "l2200", "label": "Wide", "range": "2200+", "min": 2200, "max": 99999 }
+  ],
+  "controls": [
+    { "id": "hlNum", "group": "Highlight cards", "label": "Number", "short": "Number", "sel": ".stat-value", "prop": "font-size", "min": 16, "max": 96 },
+    { "id": "hlLabel", "group": "Highlight cards", "label": "Label", "sel": ".stat-label", "prop": "font-size", "min": 10, "max": 32 },
+    { "id": "pcNum", "group": "Project cards", "label": "Number (01)", "sel": ".project-card-num", "prop": "font-size", "min": 12, "max": 64 },
+    { "id": "pcTag", "group": "Project cards", "label": "Tags", "sel": ".project-card-link .tag", "prop": "font-size", "min": 10, "max": 24 },
+    { "id": "pcTitle", "group": "Project cards", "label": "Title", "short": "Title", "sel": ".project-card-title", "prop": "font-size", "min": 16, "max": 80 },
+    { "id": "pcTagline", "group": "Project cards", "label": "Tagline", "sel": ".project-card-tagline", "prop": "font-size", "min": 12, "max": 32 },
+    { "id": "pcCta", "group": "Project cards", "label": "Call to action", "sel": ".project-card-cta", "prop": "font-size", "min": 12, "max": 40 }
+  ],
+  "tableColumns": ["pcTitle", "hlNum"],
+  "measure": [
+    { "label": "Highlight card", "sel": ".stat" },
+    { "label": "project card", "sel": ".work-stage-card .project-card-link, .project-card-link" }
+  ]
+}
