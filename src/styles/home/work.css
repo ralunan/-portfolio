@@ -29,6 +29,26 @@
     text-align: center;
 }
 
+/* Card number (Ron, 2026-10-09): numbers the skill cards to match the
+   project cards below, in the project number's style (Instrument Serif,
+   muted Kyoto Dusk) at the skill heading's size. */
+.stat-num {
+    font-family: var(--serif);
+    font-size: var(--fs-card-skill);
+    line-height: 1;
+    color: color-mix(in srgb, var(--kyoto-dusk) 55%, var(--charcoal-deep));
+}
+
+/* Selected card (Ron, 2026-10-09): while a project is in view on the work
+   stage, its matching skill card's back card turns Roasted Terracotta. */
+.stat.card--stacked {
+    transition: box-shadow 0.4s var(--ease);
+}
+
+.stat.is-selected {
+    --card-back: var(--roasted-terracotta);
+}
+
 .stat-value {
     font-family: var(--display);
     color: var(--subheading);

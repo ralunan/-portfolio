@@ -98,7 +98,7 @@ export default function WorkStage({ sectionRef, highlightsRef }) {
                     </Suspense>
                 </div>
                 <div className="container work-stage-head">
-                    <Highlights ref={highlightsRef} />
+                    <Highlights ref={highlightsRef} selected={active} />
                     <div className="work-stage-label">
                         <p className="eyebrow">Selected work</p>
                         <h2 className="work-stage-title">Case studies from Walmart</h2>
