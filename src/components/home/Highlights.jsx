@@ -8,7 +8,7 @@ import Reveal from '../Reveal.jsx';
 const STATS = [
     ['UX research', 'Research that turned customer insight into roadmap decisions'],
     ['Fintech UX', 'Linking Cashi wallets to Walmart checkout in Mexico'],
-    ['AI prototyping', 'Prototyping from physical builds at CCA to digital experiences with AI'],
+    ['AI prototyping', 'From physical builds at CCA to digital experiences with AI'],
     ['Collaboration', 'Partnering with product teams to take new ideas from pitch to launch'],
 ];
 
