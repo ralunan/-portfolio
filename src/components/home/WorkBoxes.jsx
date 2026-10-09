@@ -14,10 +14,10 @@ const COLORS = [
     '#F1DCBA', // Vanilla Foam
 ];
 // Each edge is split into bands, one shape per band. Uneven on purpose, so
-// the two edges don't mirror: three down the left, and on the right only
-// the lower two of five bands (Ron dropped the top three).
+// the two edges don't mirror: the lower two of three bands on the left and
+// the lower two of five on the right (Ron dropped the top ones).
 const BANDS = {
-    left: { count: 3, used: [0, 1, 2] },
+    left: { count: 3, used: [1, 2] },
     right: { count: 5, used: [3, 4] },
 };
 // How far each shape drifts from its spot (scene units; the window is ~240 tall).
@@ -25,7 +25,7 @@ const DRIFT = 4;
 // Seconds for one slow float loop; each shape gets its own pace in this range.
 const LOOP = [14, 24];
 // The shape set, as [width, height] in scene units, shuffled onto the
-// spots (five of the eight are used): squares from small to large, plus long, tall and wide rectangles,
+// spots (four of the eight are used): squares from small to large, plus long, tall and wide rectangles,
 // so the sizes clearly vary.
 const SHAPES = [
     [28, 28], // large square
