@@ -87,16 +87,17 @@
 
 /* Background (Ron, 2026-10-09): the hero's Cotton Candy motion in the
    palette washes (WorkGradient.jsx). The static gradient underneath shows
-   until the canvas loads. The top fades in from the page background so the
+   until the canvas loads; its washes are mixed half with the page color so
+   label and muted text keep 4.5:1 on it too. The top fades in from the page background so the
    hand-off from the hero has no seam. */
 .work-gradient {
     position: absolute;
     inset: 0;
     z-index: -1;
     background:
-        radial-gradient(60% 70% at 80% 20%, var(--matcha-wash) 0%, transparent 70%),
-        radial-gradient(70% 80% at 15% 85%, var(--terracotta-wash) 0%, transparent 70%),
-        linear-gradient(160deg, var(--bg), var(--dusk-wash));
+        radial-gradient(60% 70% at 80% 20%, color-mix(in srgb, var(--matcha-wash) 50%, transparent) 0%, transparent 70%),
+        radial-gradient(70% 80% at 15% 85%, color-mix(in srgb, var(--terracotta-wash) 50%, transparent) 0%, transparent 70%),
+        linear-gradient(160deg, var(--bg), color-mix(in srgb, var(--dusk-wash) 50%, var(--bg)));
     -webkit-mask-image: linear-gradient(to bottom, transparent, var(--text) 160px);
     mask-image: linear-gradient(to bottom, transparent, var(--text) 160px);
     pointer-events: none;
