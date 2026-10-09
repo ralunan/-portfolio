@@ -177,7 +177,7 @@
     max-width: var(--stage-max);
 }
 
-/* "Skill highlights" label sits above the skill cards (Ron, 2026-10-09),
+/* "Project highlights" label sits above the skill cards (Ron, 2026-10-09),
    with the gap Ron set between them: 24px on laptops and under, 40px from
    1600px up. The cards' back card then takes 8px before the project slot,
    which adds its own 32px. */

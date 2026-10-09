@@ -100,8 +100,8 @@ export default function WorkStage({ sectionRef, highlightsRef }) {
                 <div className="container work-stage-head">
                     {/* Label first, then the skill cards (Ron, 2026-10-09). */}
                     <div className="work-stage-label" ref={highlightsRef}>
-                        <p className="eyebrow">Skill highlights</p>
-                        <h2 className="work-stage-title">What each project taught me to do best</h2>
+                        <p className="eyebrow">Project highlights</p>
+                        <h2 className="work-stage-title">Skills I built along the way</h2>
                     </div>
                     <Highlights selected={active} />
                 </div>

@@ -48,8 +48,8 @@ export default function SelectedWork({ sectionRef, highlightsRef }) {
         <section className="work container" ref={sectionRef} id="work">
             {/* Label first, then the skill cards and the work (Ron, 2026-10-09). */}
             <Reveal className="section-head" ref={highlightsRef}>
-                <p className="eyebrow">Skill highlights</p>
-                <h2 className="section-title">What each project taught me to do best</h2>
+                <p className="eyebrow">Project highlights</p>
+                <h2 className="section-title">Skills I built along the way</h2>
             </Reveal>
             <Highlights />
             <div className="work-list">
