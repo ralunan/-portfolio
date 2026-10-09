@@ -82,6 +82,30 @@
     padding-top: calc(var(--header-live, 64px) + var(--header-gap));
     --stage-max: var(--max);
     --stage-card-max: 492px;
+    isolation: isolate;
+}
+
+/* Background (Ron, 2026-10-09): the hero's Cotton Candy motion in the
+   palette washes (WorkGradient.jsx). The static gradient underneath shows
+   until the canvas loads. The top fades in from the page background so the
+   hand-off from the hero has no seam. */
+.work-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(60% 70% at 80% 20%, var(--matcha-wash) 0%, transparent 70%),
+        radial-gradient(70% 80% at 15% 85%, var(--vanilla-wash) 0%, transparent 70%),
+        linear-gradient(160deg, var(--bg), var(--dusk-wash));
+    -webkit-mask-image: linear-gradient(to bottom, transparent, var(--text) 160px);
+    mask-image: linear-gradient(to bottom, transparent, var(--text) 160px);
+    pointer-events: none;
+}
+
+.work-gradient-canvas {
+    position: absolute !important;
+    inset: 0;
+    animation: gradient-in 1.2s var(--ease) both;
 }
 
 /* Card size per breakpoint (Ron, 2026-10-09): on big screens the stage

@@ -1,8 +1,13 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useLayoutEffect, useRef, useState } from 'react';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import { projects } from '../../content.js';
 import Highlights from './Highlights.jsx';
 import { ProjectCardLink } from './ProjectCard.jsx';
+
+// The palette gradient behind the stage (WorkGradient.jsx) uses three.js,
+// so it loads in its own chunk, like the hero's. The stage only runs on
+// laptops and up with motion allowed, so no extra media check is needed.
+const WorkGradient = lazy(() => import('./WorkGradient.jsx'));
 
 // Scroll distance (in viewport heights) that each project holds the stage.
 const STAGE_STEP = 80;
@@ -87,6 +92,11 @@ export default function WorkStage({ sectionRef, highlightsRef }) {
             style={{ height: `calc(100vh + ${(count - 1) * STAGE_STEP}vh)` }}
         >
             <div className="work-stage">
+                <div className="work-gradient" aria-hidden="true">
+                    <Suspense fallback={null}>
+                        <WorkGradient />
+                    </Suspense>
+                </div>
                 <div className="container work-stage-head">
                     <Highlights ref={highlightsRef} />
                     <div className="work-stage-label">

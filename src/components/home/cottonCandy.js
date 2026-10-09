@@ -1,0 +1,32 @@
+// "Cotton Candy" preset from shadergradient.co. To try another look, design
+// one on shadergradient.co and copy its values here (or pass its share link
+// as `urlString` with `control="query"`).
+export const COTTON_CANDY = {
+    type: 'waterPlane',
+    animate: 'on',
+    uSpeed: 0.3,
+    uStrength: 3,
+    uDensity: 1,
+    uFrequency: 5.5,
+    uAmplitude: 0,
+    uTime: 0.2,
+    color1: '#ebedff',
+    color2: '#f3f2f8',
+    color3: '#dbf8ff',
+    brightness: 1.2,
+    reflection: 0.1,
+    lightType: '3d',
+    envPreset: 'city',
+    grain: 'off',
+    cAzimuthAngle: 180,
+    cPolarAngle: 120,
+    cDistance: 2.9,
+    cameraZoom: 1,
+    positionX: 0,
+    positionY: 1.8,
+    positionZ: 0,
+    rotationX: 0,
+    rotationY: 0,
+    rotationZ: -90,
+    shader: 'defaults',
+};
