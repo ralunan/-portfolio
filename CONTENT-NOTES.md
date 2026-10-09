@@ -20,6 +20,7 @@ Ron said the highlight cards repeat the hero (five years, markets, research) and
 - **Where the delivery numbers came from (follow-up):** separate from onboarding, and not shown in the projects yet. "it was a design when i worked on fullfillment pickup and delivery for walmart canada. I also worked on the order experience where I had made a design that lets customer know to add delivery directions." (12–32% more successful deliveries; +3% marketplace sales with fulfillment delivery.) Candidate for a future case study.
 - **Cards as case-study previews (2026-10-09):** "these cards could be small previews of my case studies, Making sense - research. Building - i could highlight my cashi project. communication - i could talk about my onboarding project (not listed yet). Creating - I could talk about my prototyping skills from physical to digital." Ron prefers the four skill words as the card concept over listing achievements.
 - **Communication framing:** "i could frame communication as buisness speaking , launching design to product mindset."
+  Then refined: "i dont want it to be about speaking buisness, maybe i should frame it more about collaberation between product and design pushing new ideas?"
 
 ## Open questions
 
