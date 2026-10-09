@@ -117,6 +117,15 @@
     margin-bottom: 28px;
 }
 
+/* Desktops and up (Ron, 2026-10-09): about 40px of open space from the
+   highlights' back card to the Selected Work eyebrow, up from about 24px
+   (the back card takes 8px of the margin). Laptops and under keep 24px. */
+@media (min-width: 1600px) {
+    .work-stage-head .stats {
+        margin-bottom: 44px;
+    }
+}
+
 /* Desktop (taller than a typical laptop): the highlight cards get more
    padding, still equal on all sides. Type sizes stay the same. */
 @media (min-height: 901px) {
