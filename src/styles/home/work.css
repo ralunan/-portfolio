@@ -168,29 +168,6 @@
     margin-bottom: 8px;
 }
 
-/* Subhead and project counter share one line; the counter's right edge
-   lines up with the card's. */
-.work-stage-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-}
-
-/* Counter (Ron): all Instrument Serif, bold synthesized (the face has one
-   weight). The current number is larger and Terracotta. */
-.work-stage-count {
-    font-family: var(--serif);
-    font-size: 21px;
-    font-weight: 600;
-    color: var(--muted);
-}
-
-.work-stage-count-num {
-    font-size: var(--fs-title);
-    color: var(--label);
-}
-
 /* One step below .section-title so a card still fits on a 768px-tall laptop. */
 .work-stage-title {
     font-family: var(--display);

@@ -125,6 +125,7 @@ Run `npm run design:check` for the live list. At the time this file was written 
 
 Newest first. Format: date, decision, why.
 
+- **2026-10-09** Work stage project counter removed (Ron): the "1 of 3" next to "Case studies from Walmart" is gone because each project card is already numbered (01, 02, 03), so it only added visual weight. Supersedes the 2026-10-01 counter entry. The heading line is shorter, so the card sits about 20px higher and gets that height back on shorter windows.
 - **2026-10-09** 1600–1999px keeps the laptop card ratio (Ron): the project card felt too big and too wide for its height there, so the work stage stays at the laptop size (1200px wide, card up to 492px tall, card text top padding 24px) and the project card and skill headings use the laptop card type (1280–1599 column). 64px of space below the card instead of 40px. Replaces the 1400px stage / 576px card / larger card type from earlier the same day. Highlight labels stay 18px; 2000px and up unchanged.
 - **2026-10-08** Avatar bubble text by width (Ron approved, with the avatar sizes): 14px phones, 15px tablets, 16px at 1280+, 18px at 1600+, 20px at 1920+, 22px at 2200+ (`--invite-fs`). Part of the RPG exception to the type scale.
 - **2026-10-08** Avatar bubble (Ron): stays 4s (was 3s). Whenever it hides it plays the pop-in in reverse, shrinking back into its tail in the same steps. When the pointer leaves him, the bubble stays the same 4s before hiding, as when it first appears.
