@@ -21,6 +21,7 @@ Ron said the highlight cards repeat the hero (five years, markets, research) and
 - **Cards as case-study previews (2026-10-09):** "these cards could be small previews of my case studies, Making sense - research. Building - i could highlight my cashi project. communication - i could talk about my onboarding project (not listed yet). Creating - I could talk about my prototyping skills from physical to digital." Ron prefers the four skill words as the card concept over listing achievements.
 - **Communication framing:** "i could frame communication as buisness speaking , launching design to product mindset."
   Then refined: "i dont want it to be about speaking buisness, maybe i should frame it more about collaberation between product and design pushing new ideas?"
+- **Portfolio voice: a journey of growing skills (2026-10-09):** "i could have my overall voice in my projects as my journey of developing my skill set, not just what i know." Also, on the Selected Work heading: "Like skills i obtained while working on these projects. it could be something i developed along the way." Each case study should read as how a skill grew through the project, not only as expertise shown. Applies across all project pages when they're revised.
 
 ## Open questions
 
