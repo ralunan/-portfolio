@@ -13,14 +13,19 @@ const COLORS = [
     '#DA6B51', // Roasted Terracotta
     '#F1DCBA', // Vanilla Foam
 ];
-// Shapes per side: uneven on purpose, so the two edges don't mirror.
-const PER_SIDE = { left: 3, right: 5 };
+// Each edge is split into bands, one shape per band. Uneven on purpose, so
+// the two edges don't mirror: three down the left, and on the right only
+// the lower two of five bands (Ron dropped the top three).
+const BANDS = {
+    left: { count: 3, used: [0, 1, 2] },
+    right: { count: 5, used: [3, 4] },
+};
 // How far each shape drifts from its spot (scene units; the window is ~240 tall).
 const DRIFT = 4;
 // Seconds for one slow float loop; each shape gets its own pace in this range.
 const LOOP = [14, 24];
-// The eight shapes, as [width, height] in scene units, shuffled onto the
-// spots: squares from small to large, plus long, tall and wide rectangles,
+// The shape set, as [width, height] in scene units, shuffled onto the
+// spots (five of the eight are used): squares from small to large, plus long, tall and wide rectangles,
 // so the sizes clearly vary.
 const SHAPES = [
     [28, 28], // large square
@@ -40,10 +45,10 @@ const pick = (list) => list[Math.floor(Math.random() * list.length)];
 function makeSpots() {
     const shapes = [...SHAPES].sort(() => Math.random() - 0.5);
     return [
-        [-1, PER_SIDE.left],
-        [1, PER_SIDE.right],
-    ].flatMap(([side, count]) =>
-        Array.from({ length: count }, (_, i) => ({
+        [-1, BANDS.left],
+        [1, BANDS.right],
+    ].flatMap(([side, { count, used }]) =>
+        used.map((i) => ({
             side,
             size: shapes.pop(),
             inset: Math.random() * 20, // extra distance in from the edge
